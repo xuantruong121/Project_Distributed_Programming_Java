@@ -1,35 +1,34 @@
 package DAO;
 
-import Entity.NhanVien;
+import Entity.LoaiVatTu;
 import jakarta.persistence.EntityManager;
 
-import java.io.PrintWriter;
 import java.util.List;
 
-public class NhanVienDAO {
-   private EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
-    public List<NhanVien> getDanhSachNhanVien(){
-        List<NhanVien> list = null;
+public class LoaiVatTuDAO {
+    private EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+    public List<LoaiVatTu> getDanhSachLoaiVatTu() {
+        List<LoaiVatTu> list = null;
         try {
-            list = em.createQuery("SELECT nv FROM NhanVien nv", NhanVien.class).getResultList();
+            list = em.createQuery("SELECT lvt FROM LoaiVatTu lvt", LoaiVatTu.class).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
-    public NhanVien getNhanVien(String ma){
-        NhanVien nv = null;
+    public LoaiVatTu getLoaiVatTu(String ma) {
+        LoaiVatTu lvt = null;
         try {
-            nv = em.find(NhanVien.class, ma);
+            lvt = em.find(LoaiVatTu.class, ma);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return nv;
+        return lvt;
     }
-    public boolean update(NhanVien nv) {
+    public boolean update(LoaiVatTu lvt) {
         try {
             em.getTransaction().begin();
-            em.merge(nv);
+            em.merge(lvt);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -38,10 +37,10 @@ public class NhanVienDAO {
             return false;
         }
     }
-    public boolean add(NhanVien nv) {
+    public boolean add(LoaiVatTu lvt) {
         try {
             em.getTransaction().begin();
-            em.persist(nv);
+            em.persist(lvt);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -50,10 +49,10 @@ public class NhanVienDAO {
             return false;
         }
     }
-    public boolean delete(NhanVien nv) {
+    public boolean delete(LoaiVatTu lvt) {
         try {
             em.getTransaction().begin();
-            em.remove(nv);
+            em.remove(lvt);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
