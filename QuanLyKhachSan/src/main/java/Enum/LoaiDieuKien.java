@@ -1,4 +1,4 @@
-package Entity;
+package Enum;
 
 public enum LoaiDieuKien {
     PHONG("Phòng"),

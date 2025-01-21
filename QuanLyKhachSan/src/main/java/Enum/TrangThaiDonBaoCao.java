@@ -1,4 +1,4 @@
-package Entity;
+package Enum;
 
 public enum TrangThaiDonBaoCao {
     DANG_XU_LY("Đang xử lý"),

@@ -1,4 +1,4 @@
-package Entity;
+package Enum;
 
 public enum LoaiKhuyenMai {
     THEO_PHAN_TRAM("Theo phần trăm"),

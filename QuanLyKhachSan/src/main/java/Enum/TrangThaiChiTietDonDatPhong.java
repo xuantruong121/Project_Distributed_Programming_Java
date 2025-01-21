@@ -1,4 +1,4 @@
-package Entity;
+package Enum;
 
 public enum TrangThaiChiTietDonDatPhong {
     DAT_TRUOC("Đặt trước"),
