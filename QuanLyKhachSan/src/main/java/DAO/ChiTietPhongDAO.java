@@ -1,35 +1,34 @@
 package DAO;
 
-import Entity.NhanVien;
+import Entity.ChiTietPhong;
 import jakarta.persistence.EntityManager;
 
-import java.io.PrintWriter;
 import java.util.List;
 
-public class NhanVienDAO {
-   private EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
-    public List<NhanVien> getDanhSachNhanVien(){
-        List<NhanVien> list = null;
+public class ChiTietPhongDAO {
+    private EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+    public List<ChiTietPhong> getDanhSachChiTietPhong() {
+        List<ChiTietPhong> list = null;
         try {
-            list = em.createQuery("SELECT nv FROM NhanVien nv", NhanVien.class).getResultList();
+            list = em.createQuery("SELECT ctp FROM ChiTietPhong ctp", ChiTietPhong.class).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
-    public NhanVien getNhanVien(String ma){
-        NhanVien nv = null;
+    public ChiTietPhong getChiTietPhong(String ma) {
+        ChiTietPhong ctp = null;
         try {
-            nv = em.find(NhanVien.class, ma);
+            ctp = em.find(ChiTietPhong.class, ma);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return nv;
+        return ctp;
     }
-    public boolean update(NhanVien nv) {
+    public boolean update(ChiTietPhong ctp) {
         try {
             em.getTransaction().begin();
-            em.merge(nv);
+            em.merge(ctp);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -38,10 +37,10 @@ public class NhanVienDAO {
             return false;
         }
     }
-    public boolean add(NhanVien nv) {
+    public boolean add(ChiTietPhong ctp) {
         try {
             em.getTransaction().begin();
-            em.persist(nv);
+            em.persist(ctp);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -50,10 +49,10 @@ public class NhanVienDAO {
             return false;
         }
     }
-    public boolean delete(NhanVien nv) {
+    public boolean delete(ChiTietPhong ctp) {
         try {
             em.getTransaction().begin();
-            em.remove(nv);
+            em.remove(ctp);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {

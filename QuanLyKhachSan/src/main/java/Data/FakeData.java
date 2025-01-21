@@ -816,6 +816,23 @@ public class FakeData{
                 }
                 donDatPhong.setTrangThai(listTrangThaiDonDatPhong.get(random.nextInt(listTrangThaiDonDatPhong.size())));
                 donDatPhong.setGhiChu(faker.lorem().sentence());
+
+                // Tạo factory để tạo validator
+                ValidatorFactory factory = Validation.byDefaultProvider()
+                        .configure()
+                        .messageInterpolator(new ParameterMessageInterpolator())
+                        .buildValidatorFactory();
+                Validator validator = factory.getValidator();
+
+                // Kiểm tra validation
+                Set<ConstraintViolation<DonDatPhong>> violations = validator.validate(donDatPhong);
+                if (!violations.isEmpty()) {
+                    for (ConstraintViolation<DonDatPhong> violation : violations) {
+                        System.out.println(violation.getMessage());
+                    }
+                    // Nếu có vi phạm, không persist vào DB
+                    return;
+                }
                 em.getTransaction().begin();
                 em.persist(donDatPhong);
                 em.getTransaction().commit();

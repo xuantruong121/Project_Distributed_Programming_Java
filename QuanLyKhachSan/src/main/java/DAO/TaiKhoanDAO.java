@@ -1,16 +1,25 @@
 package DAO;
 
-import Entity.Phong;
+import Entity.TaiKhoan;
 import jakarta.persistence.EntityManager;
 
-import java.util.List;
-
-public class PhongDAO {
+public class TaiKhoanDAO {
     private EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
-    public boolean add(Phong p){
+    public boolean checkLogin(String username, String password) {
+        try {
+            TaiKhoan tk = em.find(TaiKhoan.class, username);
+            if (tk != null && tk.getMatKhau().equals(password)) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean update(TaiKhoan tk) {
         try {
             em.getTransaction().begin();
-            em.persist(p);
+            em.merge(tk);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -19,10 +28,10 @@ public class PhongDAO {
             return false;
         }
     }
-    public boolean update(Phong p) {
+    public boolean add(TaiKhoan tk) {
         try {
             em.getTransaction().begin();
-            em.merge(p);
+            em.persist(tk);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -31,10 +40,10 @@ public class PhongDAO {
             return false;
         }
     }
-    public boolean delete(Phong p) {
+    public boolean delete(TaiKhoan tk) {
         try {
             em.getTransaction().begin();
-            em.remove(p);
+            em.remove(tk);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -42,25 +51,6 @@ public class PhongDAO {
             e.printStackTrace();
             return false;
         }
-    }
-    public  List<Phong> getDanhSachPhong(){
-
-        List<Phong> list = null;
-        try {
-            list = em.createQuery("SELECT p FROM Phong p", Phong.class).getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-    public  Phong getPhong(String ma) {
-        Phong p = null;
-        try {
-            p = em.find(Phong.class, ma);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return p;
     }
 
 }

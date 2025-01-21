@@ -1,66 +1,65 @@
 package DAO;
 
-import Entity.Phong;
+import Entity.TaiLieuChungCu;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
-public class PhongDAO {
+public class TaiLieuChungCuDAO {
     private EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
-    public boolean add(Phong p){
+    public List<TaiLieuChungCu> getDanhSachTaiLieuChungCu() {
+        List<TaiLieuChungCu> list = null;
         try {
-            em.getTransaction().begin();
-            em.persist(p);
-            em.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            e.printStackTrace();
-            return false;
-        }
-    }
-    public boolean update(Phong p) {
-        try {
-            em.getTransaction().begin();
-            em.merge(p);
-            em.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            e.printStackTrace();
-            return false;
-        }
-    }
-    public boolean delete(Phong p) {
-        try {
-            em.getTransaction().begin();
-            em.remove(p);
-            em.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            e.printStackTrace();
-            return false;
-        }
-    }
-    public  List<Phong> getDanhSachPhong(){
-
-        List<Phong> list = null;
-        try {
-            list = em.createQuery("SELECT p FROM Phong p", Phong.class).getResultList();
+            list = em.createQuery("SELECT tlcc FROM TaiLieuChungCu tlcc", TaiLieuChungCu.class).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
-    public  Phong getPhong(String ma) {
-        Phong p = null;
+    public boolean add(TaiLieuChungCu tlcc) {
         try {
-            p = em.find(Phong.class, ma);
+            em.getTransaction().begin();
+            em.persist(tlcc);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean delete(TaiLieuChungCu tlcc) {
+        try {
+            em.getTransaction().begin();
+            em.remove(tlcc);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public TaiLieuChungCu getTaiLieuChungCu(String ma) {
+        TaiLieuChungCu tlcc = null;
+        try {
+            tlcc = em.find(TaiLieuChungCu.class, ma);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return p;
+        return tlcc;
+    }
+    public boolean update(TaiLieuChungCu tlcc) {
+        try {
+            em.getTransaction().begin();
+            em.merge(tlcc);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

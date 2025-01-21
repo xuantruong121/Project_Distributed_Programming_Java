@@ -1,35 +1,34 @@
 package DAO;
 
-import Entity.NhanVien;
+import Entity.HoaDon;
 import jakarta.persistence.EntityManager;
 
-import java.io.PrintWriter;
 import java.util.List;
 
-public class NhanVienDAO {
-   private EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
-    public List<NhanVien> getDanhSachNhanVien(){
-        List<NhanVien> list = null;
+public class HoaDonDAO {
+    private EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+    public List<HoaDon> getDanhSachHoaDon() {
+        List<HoaDon> list = null;
         try {
-            list = em.createQuery("SELECT nv FROM NhanVien nv", NhanVien.class).getResultList();
+            list = em.createQuery("SELECT hd FROM HoaDon hd", HoaDon.class).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
-    public NhanVien getNhanVien(String ma){
-        NhanVien nv = null;
+    public HoaDon getHoaDon(String ma) {
+        HoaDon hd = null;
         try {
-            nv = em.find(NhanVien.class, ma);
+            hd = em.find(HoaDon.class, ma);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return nv;
+        return hd;
     }
-    public boolean update(NhanVien nv) {
+    public boolean update(HoaDon hd) {
         try {
             em.getTransaction().begin();
-            em.merge(nv);
+            em.merge(hd);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -38,10 +37,10 @@ public class NhanVienDAO {
             return false;
         }
     }
-    public boolean add(NhanVien nv) {
+    public boolean add(HoaDon hd) {
         try {
             em.getTransaction().begin();
-            em.persist(nv);
+            em.persist(hd);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -50,10 +49,10 @@ public class NhanVienDAO {
             return false;
         }
     }
-    public boolean delete(NhanVien nv) {
+    public boolean delete(HoaDon hd) {
         try {
             em.getTransaction().begin();
-            em.remove(nv);
+            em.remove(hd);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {

@@ -1,35 +1,34 @@
 package DAO;
 
-import Entity.NhanVien;
+import Entity.LoaiDichVu;
 import jakarta.persistence.EntityManager;
 
-import java.io.PrintWriter;
 import java.util.List;
 
-public class NhanVienDAO {
-   private EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
-    public List<NhanVien> getDanhSachNhanVien(){
-        List<NhanVien> list = null;
+public class LoaiDichVuDAO {
+    private EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+    public List<LoaiDichVu> getDanhSachLoaiDichVu() {
+        List<LoaiDichVu> list = null;
         try {
-            list = em.createQuery("SELECT nv FROM NhanVien nv", NhanVien.class).getResultList();
+            list = em.createQuery("SELECT ldv FROM LoaiDichVu ldv", LoaiDichVu.class).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
-    public NhanVien getNhanVien(String ma){
-        NhanVien nv = null;
+    public LoaiDichVu getLoaiDichVu(String ma) {
+        LoaiDichVu ldv = null;
         try {
-            nv = em.find(NhanVien.class, ma);
+            ldv = em.find(LoaiDichVu.class, ma);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return nv;
+        return ldv;
     }
-    public boolean update(NhanVien nv) {
+    public boolean update(LoaiDichVu ldv) {
         try {
             em.getTransaction().begin();
-            em.merge(nv);
+            em.merge(ldv);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -38,10 +37,10 @@ public class NhanVienDAO {
             return false;
         }
     }
-    public boolean add(NhanVien nv) {
+    public boolean add(LoaiDichVu ldv) {
         try {
             em.getTransaction().begin();
-            em.persist(nv);
+            em.persist(ldv);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -50,10 +49,10 @@ public class NhanVienDAO {
             return false;
         }
     }
-    public boolean delete(NhanVien nv) {
+    public boolean delete(LoaiDichVu ldv) {
         try {
             em.getTransaction().begin();
-            em.remove(nv);
+            em.remove(ldv);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -62,4 +61,5 @@ public class NhanVienDAO {
             return false;
         }
     }
+
 }
