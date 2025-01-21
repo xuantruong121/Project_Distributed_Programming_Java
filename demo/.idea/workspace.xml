@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1703d94f-4e34-4392-9da3-b14c71c97048" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Constraints/DonDatPhongConstraints.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Constraints/DonDatPhongValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Constraints/KhachHangConstraints.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Constraints/KhachHangValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Constraints/NhanVienConstraints.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Constraints/NhanVienValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Constraints/PhongConstraints.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Constraints/PhongValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/BangPhanCongCaLam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/CaLamViec.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/ChiTietDichVu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/ChiTietDonBaoCao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/ChiTietDonDatPhong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/ChiTietPhong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/ChuongTrinhKhuyenMai.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/DichVu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/DieuKienApDung.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/DoiTuongApDungKhuyenMai.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/DonBaoCao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/DonDatPhong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/HoaDon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/KhachHang.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/Kho.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/LichSuVatTuTrongKho.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/LoaiDichVu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/LoaiDieuKien.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/LoaiKhuyenMai.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/LoaiNhanVien.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/LoaiPhong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/LoaiPhuThu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/LoaiVatTu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/MucDoThietHai.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/NhanVien.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/Phong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/PhuThu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/TaiKhoan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/TaiLieuChungCu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/TrangThaiBangPhanCongCaLam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/TrangThaiChiTietDonDatPhong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/TrangThaiDonBaoCao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/TrangThaiDonDatPhong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/TrangThaiPhong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/TrangThaiVatTu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/VatTu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/Entity/VatTuTrongKho.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuanLyKhachSan/src/main/java/test/testRegex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "truong965"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Kennguyen121/Project_Distributed_Programming_Java.git",
+    "accountId": "0768dc87-ca57-455b-8869-1ea910b672e8"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2rqmqke6e1HXVUl6wVQVSMsUzZg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="sortByType" value="true" />
+    <option name="sortKey" value="BY_TYPE" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.387" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.387" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1703d94f-4e34-4392-9da3-b14c71c97048" name="Changes" comment="" />
+      <created>1737295172140</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1737295172140</updated>
+      <workItem from="1737295173322" duration="43000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
