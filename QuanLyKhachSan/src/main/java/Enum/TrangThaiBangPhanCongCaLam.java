@@ -1,4 +1,4 @@
-package Entity;
+package Enum;
 
 public enum TrangThaiBangPhanCongCaLam {
     DA_lEN_lICH("Đã lên lịch"), HOAN_THANH ("Hoàn thành"), CHUA_HOAN_THANH("Chưa hoàn thành");

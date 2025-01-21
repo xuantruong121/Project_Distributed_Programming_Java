@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import Enum.TrangThaiDonBaoCao;
+
 @Entity
 @Getter
 @Setter

@@ -6,10 +6,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
+import Enum.TrangThaiBangPhanCongCaLam;
 
 @Entity
 @Setter
