@@ -1,6 +1,7 @@
 package Entity;
 
 import DAO.EntityManagerUtil;
+import Enum.MucDoThietHai;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -8,8 +9,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import Enum.MucDoThietHai;
+import java.util.List;
 
 @Entity
 @Getter
@@ -33,7 +33,7 @@ public class ChiTietDonBaoCao {
     @NotNull
     private MucDoThietHai mucDoThietHai;
     @OneToMany(mappedBy = "chiTietDonBaoCao",fetch = FetchType.LAZY)
-    private ArrayList<TaiLieuChungCu> taiLieuChungCu;
+    private List<TaiLieuChungCu> taiLieuChungCu;
     @PrePersist
     public void prePersist(){
         if(this.maChiTiet == null){
