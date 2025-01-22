@@ -1,7 +1,8 @@
 package Data;
-import DAO.EntityManagerUtil;
 
+import DAO.EntityManagerUtil;
 import Entity.*;
+import Enum.*;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
