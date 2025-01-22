@@ -32,7 +32,7 @@ public class KhachHang {
     @Column(columnDefinition = "nvarchar(10)")
     private String soDienThoai;
     @NotBlank(message = "Căn cước công dân không được để trống")
-    @Column(columnDefinition = "nvarchar(12)")
+    @Column(columnDefinition = "nvarchar(12)", unique = true)
     private String canCuocCongDan;
     @NotBlank(message = "Email không được để trống")
     private String email;
