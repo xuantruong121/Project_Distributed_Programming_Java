@@ -2,6 +2,7 @@ package DAO;
 
 import Entity.TaiKhoan;
 import jakarta.persistence.EntityManager;
+import util.EntityManagerUtil;
 
 public class TaiKhoanDAO {
     private EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();

@@ -1,7 +1,7 @@
 package Entity;
 
 import Constraints.DonDatPhongConstraints;
-import DAO.EntityManagerUtil;
+import util.EntityManagerUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -21,12 +21,15 @@ public class DonDatPhong {
     @Id
     @Column(columnDefinition = "nvarchar(9)")
     private String maDonDatPhong;
+
     @ManyToOne
     @JoinColumn(name = "maNhanVien")
     private NhanVien nhanVien;
+
     @ManyToOne
     @JoinColumn(name = "maKhachHang")
     private KhachHang khachHang;
+
     @Column(columnDefinition = "nvarchar(50)")
     private String tenDoan;
     @NotNull
@@ -41,15 +44,19 @@ public class DonDatPhong {
     private int soLuongTreEm;
     @PositiveOrZero
     private double tienDatCoc;
+
     @Enumerated(EnumType.STRING)
     private TrangThaiDonDatPhong trangThai;
+
     private String ghiChu;
+
     @PrePersist
     public void prePersist(){
         if(this.maDonDatPhong == null){
             this.maDonDatPhong = generateMaDonDatPhong();
         }
     }
+
     public String generateMaDonDatPhong(){
         String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyy"));
         String query = "SELECT COUNT(d) FROM DonDatPhong d where d.maDonDatPhong like '" + formatDate + "%'";

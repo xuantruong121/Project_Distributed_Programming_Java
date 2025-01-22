@@ -2,6 +2,7 @@ package DAO;
 
 import Entity.DoiTuongApDungKhuyenMai;
 import jakarta.persistence.EntityManager;
+import util.EntityManagerUtil;
 
 import java.util.List;
 

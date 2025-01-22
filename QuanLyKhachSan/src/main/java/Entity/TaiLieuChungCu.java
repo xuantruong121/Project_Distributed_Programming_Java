@@ -1,6 +1,6 @@
 package Entity;
 
-import DAO.EntityManagerUtil;
+import util.EntityManagerUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -15,13 +15,16 @@ public class TaiLieuChungCu {
     @Column(columnDefinition = "nvarchar(18)")
     @Pattern(regexp = "^\\d{4}-\\d{3}-\\d{3}-\\d{5}$",message = "Mã tài liệu chứng cứ không hợp lệ (MMYY-XXX-ZZZ-KKKKK)")
     private String maTaiLieu;
+
     @ManyToOne
     @JoinColumn(name = "maChiTietDonBaoCao")
     @NotNull
     private ChiTietDonBaoCao chiTietDonBaoCao;
+
     private String hinhAnh;
     private String video;
     private String taiLieu;
+
     @PrePersist
     public void prePersist(){
         if(this.maTaiLieu == null){

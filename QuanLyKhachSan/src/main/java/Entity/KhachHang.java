@@ -1,7 +1,7 @@
 package Entity;
 
 import Constraints.KhachHangConstraints;
-import DAO.EntityManagerUtil;
+import util.EntityManagerUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

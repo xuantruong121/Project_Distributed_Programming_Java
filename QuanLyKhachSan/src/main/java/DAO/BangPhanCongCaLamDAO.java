@@ -2,6 +2,7 @@ package DAO;
 
 import Entity.BangPhanCongCaLam;
 import jakarta.persistence.EntityManager;
+import util.EntityManagerUtil;
 
 import java.util.List;
 
