@@ -1,5 +1,5 @@
 package Runner;
-import DAO.EntityManagerUtil;
+import util.EntityManagerUtil;
 import Data.FakeData;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -35,6 +35,7 @@ public class Runner {
             fakeData.addLichSuVatTuTrongKho();
             fakeData.addDoiTuongApDungKhuyenMai();
             fakeData.addDonDatPhong();
+            fakeData.addHoaDon();
             fakeData.addChiTietDonDatPhong();
             fakeData.addChiTietDichVuThanhToanNgoai();
             fakeData.addDonBaoCao();

@@ -1,6 +1,5 @@
-package DAO;
+package util;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -9,7 +8,8 @@ import org.reflections.Reflections;
 import java.util.Set;
 
 public class EntityManagerUtil {
-    private static EntityManagerFactory emf=null;
+    private static EntityManagerFactory emf = null;
+
     public static EntityManagerFactory getEntityManagerFactory(){
        if(emf == null) {
            emf = createEntityManagerFactory();

@@ -1,6 +1,6 @@
 package Entity;
 
-import DAO.EntityManagerUtil;
+import util.EntityManagerUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 @Entity
 @Getter

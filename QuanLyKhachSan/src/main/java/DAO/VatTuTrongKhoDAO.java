@@ -1,6 +1,7 @@
 package DAO;
 
 import jakarta.persistence.EntityManager;
+import util.EntityManagerUtil;
 
 import java.util.List;
 

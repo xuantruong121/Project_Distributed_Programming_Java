@@ -1,7 +1,7 @@
 package Entity;
 
 import Constraints.NhanVienConstraints;
-import DAO.EntityManagerUtil;
+import util.EntityManagerUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;

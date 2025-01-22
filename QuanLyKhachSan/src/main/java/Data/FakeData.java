@@ -1,5 +1,5 @@
 package Data;
-import DAO.EntityManagerUtil;
+import util.EntityManagerUtil;
 
 import Entity.*;
 import jakarta.persistence.EntityManager;
@@ -17,10 +17,12 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import Enum.*;
 
 public class FakeData{
     private final Locale vietnam = new Locale("vi", "VN");
     private final Faker faker = new Faker(vietnam);
+
     public void addCaLamViec() {
         EntityManager em = EntityManagerUtil.createEntityManagerFactory().createEntityManager();
         try {
@@ -1067,29 +1069,47 @@ public class FakeData{
             em.close();
         }
     }
-//    public void addHoaDon(){
-//        EntityManager em = EntityManagerUtil.createEntityManagerFactory().createEntityManager();
-//        try {
-//            Random random = new Random();
-//            List<DonDatPhong> listDonDatPhong = em.createQuery("SELECT ddp FROM DonDatPhong ddp", DonDatPhong.class).getResultList();
-//            List<ChiTietDichVu> listChiTietDichVu = em.createQuery("SELECT ctdv FROM ChiTietDichVu ctdv where ctdv.trangThai=true", ChiTietDichVu.class).getResultList();
-//            for (DonDatPhong ddp: listDonDatPhong) {
-//                List<ChiTietDonDatPhong> listChiTietDonDatPhong = em.createQuery("SELECT ctdp FROM ChiTietDonDatPhong ctdp where ctdp.donDatPhong.maDonDatPhong = :ma", ChiTietDonDatPhong.class).setParameter("ma",ddp.getMaDonDatPhong()).getResultList();
-//                HoaDon hoaDon = new HoaDon();
-//                Set<ChiTietDonDatPhong> chiTietDonDatPhongSet = new HashSet<>();
-//                chiTietDonDatPhongSet.addAll(listChiTietDonDatPhong);
-//                hoaDon.setChiTietDonDatPhong(chiTietDonDatPhongSet);
-//                hoaDon.setNgayLap(LocalDateTime.now());
-//                hoaDon.setTrangThaiHoaDon(TrangThaiHoaDon.CHUA_THANH_TOAN);
-//                hoaDon.setTongTien(faker.number().numberBetween(1000000, 10000000));
-//                em.getTransaction().begin();
-//                em.persist(hoaDon);
-//                em.getTransaction().commit();
-//            }
-//        } catch (Exception e) {
-//            em.getTransaction().rollback();
-//             System.out.println(e.getMessage());
-//        }
-//    }
+
+    public void addHoaDon() {
+        EntityManager em = EntityManagerUtil.createEntityManagerFactory().createEntityManager();
+        try {
+            //Bat dau giao dich
+            em.getTransaction().begin();
+
+            List<DonDatPhong> listDonDatPhong = em.createQuery("SELECT ddp FROM DonDatPhong ddp", DonDatPhong.class).getResultList();
+
+            for (DonDatPhong ddp : listDonDatPhong) {
+                List<ChiTietDonDatPhong> listChiTietDonDatPhong = em
+                        .createQuery("SELECT ctdp FROM ChiTietDonDatPhong ctdp WHERE ctdp.donDatPhong.maDonDatPhong = :ma", ChiTietDonDatPhong.class)
+                        .setParameter("ma", ddp.getMaDonDatPhong())
+                        .getResultList();
+
+                //Tao hoa don
+                HoaDon hoaDon = new HoaDon();
+                hoaDon.setMaHoaDon(hoaDon.generateMaHoaDon());
+                hoaDon.setKhachHang(ddp.getKhachHang());
+                hoaDon.setChiTietDonDatPhong(new HashSet<>(listChiTietDonDatPhong));
+                hoaDon.setNgayTao(LocalDateTime.now());
+                hoaDon.setTongTien(faker.number().numberBetween(1000000, 10000000));
+                hoaDon.setGhiChu(faker.lorem().sentence());
+
+                //Luu hoa don vao giao dich
+                em.persist(hoaDon);
+            }
+
+            //Ket thuc giao dich va commit du lieu
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            //Neu co loi xay ra, rollback de khong luu du lieu
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.out.println("Lỗi khi thêm hoá đơn: " + e.getMessage());
+        } finally {
+            //Dong entity manager
+            em.close();
+        }
+    }
 
 }
