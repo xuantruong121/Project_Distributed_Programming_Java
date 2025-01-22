@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @Setter
 @NhanVienConstraints
+@ToString
 public class NhanVien {
     @Id
     @Column(columnDefinition = "nvarchar(10)")
@@ -24,7 +26,7 @@ public class NhanVien {
     @Column(columnDefinition = "nvarchar(10)")
     @NotBlank(message = "Số điện thoại không được để trống")
     private String soDienThoai;
-    @Column(columnDefinition = "nvarchar(12)")
+    @Column(columnDefinition = "nvarchar(12)", unique = true)
     @NotBlank(message = "Căn cước công dân không được để trống")
     private String canCuocCongDan;
     @Email
