@@ -40,6 +40,7 @@ public class Runner {
 //            fakeData.addDonBaoCao();
 //            fakeData.addChiTietDonBaoCao();
 
+            fakeData.addHoaDon();
             
         }catch (Exception e) {
             em.getTransaction().rollback();

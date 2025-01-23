@@ -55,6 +55,7 @@ public class ChiTietDonDatPhong {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "maHoaDon")
     private HoaDon hoaDon;
+
     @PrePersist
     public void prePersist(){
         if(this.maChiTietDonDatPhong == null){
