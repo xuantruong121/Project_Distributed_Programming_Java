@@ -1,6 +1,6 @@
 package Entity;
 
-import util.EntityManagerUtil;
+import DAO.EntityManagerUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

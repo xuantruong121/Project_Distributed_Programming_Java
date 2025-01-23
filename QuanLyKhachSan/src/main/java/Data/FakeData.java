@@ -1,5 +1,5 @@
 package Data;
-import util.EntityManagerUtil;
+import DAO.EntityManagerUtil;
 
 import Entity.*;
 import jakarta.persistence.EntityManager;
@@ -801,6 +801,7 @@ public class FakeData{
             List<TrangThaiDonDatPhong> listTrangThaiDonDatPhong = Arrays.asList(TrangThaiDonDatPhong.DA_XAC_NHAN, TrangThaiDonDatPhong.DA_HUY, TrangThaiDonDatPhong.DA_HUY_VA_HOAN_TIEN, TrangThaiDonDatPhong.TAM_HOAN, TrangThaiDonDatPhong.KHONG_DEN);
             for (int i=0;i<5;i++) {
                 DonDatPhong donDatPhong = new DonDatPhong();
+                donDatPhong.setMaDonDatPhong(donDatPhong.generateMaDonDatPhong());
                 donDatPhong.setNhanVien(listNhanVien.get(random.nextInt(listNhanVien.size())));
                 donDatPhong.setKhachHang(listKhachHang.get(random.nextInt(listKhachHang.size())));
                 LocalDateTime minDate = LocalDateTime.now().minusMonths(1);
@@ -841,7 +842,8 @@ public class FakeData{
             }
         } catch (Exception e) {
             em.getTransaction().rollback();
-             System.out.println(e.getMessage());
+//             System.out.println(e.getMessage());
+            e.printStackTrace();
         }finally {
             em.close();
         }

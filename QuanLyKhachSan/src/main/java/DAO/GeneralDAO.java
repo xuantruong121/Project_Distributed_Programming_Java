@@ -22,9 +22,10 @@ public class GeneralDAO {
             return true;
         } catch (Exception e) {
             em.getTransaction().rollback();
-            e.printStackTrace();
+//            e.printStackTrace();
+            throw  e;
         }
-        return false;
+//        return false;
     }
 
     public <T>  boolean updateOb(T ob){
@@ -37,9 +38,10 @@ public class GeneralDAO {
             return true;
         } catch (Exception e) {
             em.getTransaction().rollback();
-            e.printStackTrace();
+//            e.printStackTrace();
+            throw e;
         }
-        return false;
+//        return false;
     }
     public<T> boolean deleteOb(T ob){
         //Xóa một đối tượng trong database
@@ -51,9 +53,10 @@ public class GeneralDAO {
             return true;
         } catch (Exception e) {
             em.getTransaction().rollback();
-            e.printStackTrace();
+//            e.printStackTrace();
+            throw e;
         }
-        return false;
+//        return false;
     }
     public <T> void findOb(Class<T> entityClass, Object ob){
         //Tìm một đối tượng trong database
