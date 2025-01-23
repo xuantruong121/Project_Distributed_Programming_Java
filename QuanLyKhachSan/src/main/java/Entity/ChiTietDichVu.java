@@ -29,6 +29,7 @@ public class ChiTietDichVu {
     private double soLuong;
     @NotNull
     private boolean trangThai;
+
     @ManyToOne
     @JoinColumn(name = "maHoaDon")
     private HoaDon hoaDon;
