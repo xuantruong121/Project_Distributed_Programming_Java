@@ -10,6 +10,7 @@ public class Runner {
         EntityManager em = emf.createEntityManager();
         try{
             FakeData fakeData = new FakeData();
+
 //            fakeData.addLoaiDichVu();
 //            fakeData.addLoaiNhanVien();
 //            fakeData.addLoaiPhong();
@@ -17,7 +18,7 @@ public class Runner {
 //            fakeData.addLoaiVatTu();
 //            fakeData.addKho();
 //            fakeData.addCaLamViec();
-//
+
 //            fakeData.addDichVu();
 //            fakeData.addChuongTrinhKhuyenMai();
 //            fakeData.addDieuKienApDung();
@@ -28,17 +29,18 @@ public class Runner {
 //            fakeData.addPhuThu();
 //            fakeData.addPhong();
 //            fakeData.addTaiKhoan();
-//
-//
+
 //            fakeData.addBangPhanCongCaLam();
 //            fakeData.addChiTietPhong();
 //            fakeData.addLichSuVatTuTrongKho();
 //            fakeData.addDoiTuongApDungKhuyenMai();
-            fakeData.addDonDatPhong();
+//            fakeData.addDonDatPhong();
 //            fakeData.addChiTietDonDatPhong();
 //            fakeData.addChiTietDichVuThanhToanNgoai();
 //            fakeData.addDonBaoCao();
 //            fakeData.addChiTietDonBaoCao();
+
+            
         }catch (Exception e) {
             em.getTransaction().rollback();
            
