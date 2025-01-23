@@ -1,7 +1,7 @@
 package Entity;
 
 import Constraints.DonDatPhongConstraints;
-import util.EntityManagerUtil;
+import DAO.EntityManagerUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

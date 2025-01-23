@@ -1,6 +1,6 @@
 package Entity;
 
-import util.EntityManagerUtil;
+import DAO.EntityManagerUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;

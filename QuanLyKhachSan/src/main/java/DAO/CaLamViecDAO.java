@@ -1,7 +1,6 @@
 package DAO;
 
 import jakarta.persistence.EntityManager;
-import util.EntityManagerUtil;
 
 public class CaLamViecDAO {
     private EntityManager em =null;
