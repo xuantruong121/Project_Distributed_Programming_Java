@@ -23,34 +23,59 @@ public class HoaDon {
     @JoinColumn(name = "maKhachHang",nullable = false)
     private KhachHang khachHang;
 
-    @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 //    @JoinColumn(name = "maChiTietDonDatPhong",nullable = false)
     private Set<ChiTietDonDatPhong> chiTietDonDatPhong;
 
     private LocalDateTime ngayTao;
     private double tongTien;
 
-    @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 //    @JoinColumn(name = "maChiTietDichVu",unique = true)
     private Set<ChiTietDichVu> chiTietDichVu;
 
     private String ghiChu;
 
     @PrePersist
-    public void prePersist(){
-        if(this.maHoaDon == null){
-            this.maHoaDon = generateMaHoaDon();
+    public void prePersist() {
+        // Kiểm tra mã hóa đơn, nếu chưa có thì tự động tạo
+        if (this.maHoaDon == null || this.maHoaDon.isEmpty()) {
+            String loaiHoaDon = ""; // Đặt giá trị mặc định hoặc xác định loại hóa đơn trước
+            if (this.chiTietDonDatPhong != null && !this.chiTietDonDatPhong.isEmpty()) {
+                loaiHoaDon = "DP"; // Hóa đơn đặt phòng
+            } else if (this.chiTietDichVu != null && !this.chiTietDichVu.isEmpty()) {
+                loaiHoaDon = "DV"; // Hóa đơn dịch vụ
+            } else {
+                throw new IllegalArgumentException("Loại hóa đơn không thể xác định!");
+            }
+            this.maHoaDon = generateMaHoaDon(loaiHoaDon);
         }
-        if (this.ngayTao == null){
+
+        // Thiết lập ngày tạo nếu chưa được khởi tạo
+        if (this.ngayTao == null) {
             this.ngayTao = LocalDateTime.now();
         }
     }
 
-    public String generateMaHoaDon(){
-        String maHoaDon = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyy")) + "-";
-        String query = "SELECT COUNT(h) FROM HoaDon h WHERE h.maHoaDon LIKE '" + maHoaDon + "%'";
-        long count = (long) EntityManagerUtil.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
-        return maHoaDon + String.format("%05d",count + 1);
+
+    public String generateMaHoaDon(String loaiHoaDon) { // Thêm tham số loại hóa đơn: "DV" hoặc "DP"
+        String maHoaDon = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyy")) + "-" + loaiHoaDon + "-";
+        String queryStr = "SELECT COUNT(h) FROM HoaDon h WHERE h.maHoaDon LIKE :pattern";
+        EntityManager em = null;
+        long count = 0;
+        try {
+            em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+            Query query = em.createQuery(queryStr);
+            query.setParameter("pattern", maHoaDon + "%");
+            count = (long) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+        return maHoaDon + String.format("%05d", count + 1);
     }
 
 
