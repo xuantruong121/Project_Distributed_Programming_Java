@@ -7,7 +7,9 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import jakarta.persistence.EntityTransaction;
 import net.datafaker.Faker;
+import org.hibernate.Hibernate;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 import util.NameStandardization;
 import util.PasswordHasher;
@@ -1075,63 +1077,39 @@ public class FakeData{
     public void addHoaDon() {
         EntityManager em = EntityManagerUtil.createEntityManagerFactory().createEntityManager();
         try {
-            // Bắt đầu giao dịch
-            em.getTransaction().begin();
 
-            // Lấy danh sách đơn đặt phòng
             List<DonDatPhong> listDonDatPhong = em.createQuery("SELECT ddp FROM DonDatPhong ddp", DonDatPhong.class).getResultList();
-            if (listDonDatPhong.isEmpty()) {
-                System.out.println("Không có đơn đặt phòng nào để tạo hóa đơn.");
-                em.getTransaction().rollback();
-                return;
-            }
 
             for (DonDatPhong ddp : listDonDatPhong) {
-                // Lấy danh sách chi tiết đơn đặt phòng liên quan
-                List<ChiTietDonDatPhong> listChiTietDonDatPhong = em
-                        .createQuery("SELECT ctdp FROM ChiTietDonDatPhong ctdp WHERE ctdp.donDatPhong.maDonDatPhong = :ma", ChiTietDonDatPhong.class)
+                em.clear();
+
+                Set<ChiTietDonDatPhong> setChiTietDonDatPhong = new HashSet<>(em.createQuery(
+                                "SELECT ctdp FROM ChiTietDonDatPhong ctdp WHERE ctdp.donDatPhong.maDonDatPhong = :ma",
+                                ChiTietDonDatPhong.class
+                        )
                         .setParameter("ma", ddp.getMaDonDatPhong())
-                        .getResultList();
+                        .getResultList());
 
-                if (listChiTietDonDatPhong.isEmpty()) {
-                    System.out.println("Đơn đặt phòng " + ddp.getMaDonDatPhong() + " không có chi tiết nào.");
-                    continue; // Bỏ qua đơn đặt phòng này
-                }
-
-                // Tạo hóa đơn
                 HoaDon hoaDon = new HoaDon();
-                hoaDon.setMaHoaDon(hoaDon.generateMaHoaDon());
+
                 hoaDon.setKhachHang(ddp.getKhachHang());
-                hoaDon.setChiTietDonDatPhong(new HashSet<>(listChiTietDonDatPhong));
+                hoaDon.setChiTietDonDatPhong(setChiTietDonDatPhong);
                 hoaDon.setNgayTao(LocalDateTime.now());
-                hoaDon.setTongTien(calculateTotal(listChiTietDonDatPhong)); // Hàm tính tổng tiền từ chi tiết
+                hoaDon.setTongTien(faker.number().numberBetween(1000000, 10000000));
                 hoaDon.setGhiChu(faker.lorem().sentence());
 
-                // Persist hóa đơn
+                em.getTransaction().begin();
                 em.persist(hoaDon);
-                System.out.println("Đã tạo hóa đơn: " + hoaDon.getMaHoaDon());
+                em.getTransaction().commit();
             }
-
-            // Kết thúc giao dịch
-            em.getTransaction().commit();
         } catch (Exception e) {
-            // Rollback nếu xảy ra lỗi
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             e.printStackTrace();
-            System.out.println("Lỗi khi thêm hóa đơn: " + e.getMessage());
         } finally {
-            // Đóng EntityManager
             em.close();
         }
     }
-
-    private double calculateTotal(List<ChiTietDonDatPhong> listChiTietDonDatPhong) {
-        return listChiTietDonDatPhong.stream()
-                .mapToDouble(ctdp -> ctdp.getPhong().getLoaiPhong().getGia())
-                .sum();
-    }
-
 
 }
