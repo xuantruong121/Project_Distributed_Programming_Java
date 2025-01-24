@@ -31,6 +31,10 @@ public class ChiTietDichVu {
     private boolean trangThai;
 
     @ManyToOne
+    @JoinColumn(name = "maChiTietDonDatPhong")
+    private ChiTietDonDatPhong chiTietDonDatPhong;
+
+    @ManyToOne
     @JoinColumn(name = "maHoaDon")
     private HoaDon hoaDon;
 
@@ -40,12 +44,25 @@ public class ChiTietDichVu {
             this.maChiTietDichVu = generateMaChiTietDichVu();
         }
     }
-    public String generateMaChiTietDichVu(){
-        String pattern = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyy"))+"-"+this.dichVu.getMaDichVu().substring(2,4)+"-";
-        String getNumbersOfMaChiTietDichVu = "SELECT COUNT(c) FROM ChiTietDichVu c WHERE c.maChiTietDichVu like '" + pattern + "%'";
-        EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
-        long count = (long)em.createQuery(getNumbersOfMaChiTietDichVu).getSingleResult();
-        em.close();
-        return pattern + String.format("%06d",count + 1);
+    public String generateMaChiTietDichVu() {
+        String pattern = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyy"))
+                + "-" + this.dichVu.getMaDichVu().substring(2, 4) + "-";
+        String queryStr = "SELECT COUNT(c) FROM ChiTietDichVu c WHERE c.maChiTietDichVu LIKE :pattern";
+        EntityManager em = null;
+        long count = 0;
+        try {
+            em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+            Query query = em.createQuery(queryStr);
+            query.setParameter("pattern", pattern + "%");
+            count = (long) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+        return pattern + String.format("%06d", count + 1);
     }
+
 }
