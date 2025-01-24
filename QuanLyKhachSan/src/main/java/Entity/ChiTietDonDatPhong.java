@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 import Enum.TrangThaiChiTietDonDatPhong;
 
@@ -33,6 +34,7 @@ public class ChiTietDonDatPhong {
     private LocalDateTime ngayTra;
     @Enumerated(EnumType.STRING)
     private TrangThaiChiTietDonDatPhong trangThaiChiTietDonDatPhong;
+
     @OneToMany()
     @JoinColumn(name = "maChiTietDonDatPhong")
     private Set<ChiTietDichVu> chiTietDichVu;
@@ -62,12 +64,40 @@ public class ChiTietDonDatPhong {
             this.maChiTietDonDatPhong = generateMaChiTietDonDatPhong();
         }
     }
-    public String generateMaChiTietDonDatPhong(){
-        String pattern = this.donDatPhong.getMaDonDatPhong()+"-";
-        String getNumbersOfMaChiTietDonDatPhong = "SELECT COUNT(c) FROM ChiTietDonDatPhong c where c.maChiTietDonDatPhong like '" + pattern + "%'";
-        EntityManager em =EntityManagerUtil.getEntityManagerFactory().createEntityManager();
-        long numbersOfMaChiTietDonDatPhong = (long)em.createQuery(getNumbersOfMaChiTietDonDatPhong).getSingleResult();
-        em.close();
-        return pattern + String.format("%03d",numbersOfMaChiTietDonDatPhong + 1);
+
+    public String generateMaChiTietDonDatPhong() {
+        String pattern = this.donDatPhong.getMaDonDatPhong() + "-";
+        String queryStr = "SELECT COUNT(c) FROM ChiTietDonDatPhong c WHERE c.maChiTietDonDatPhong LIKE :pattern";
+        EntityManager em = null;
+        long numbersOfMaChiTietDonDatPhong = 0;
+        try {
+            em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+            Query query = em.createQuery(queryStr);
+            query.setParameter("pattern", pattern + "%");
+            numbersOfMaChiTietDonDatPhong = (long) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+        return pattern + String.format("%03d", numbersOfMaChiTietDonDatPhong + 1);
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChiTietDonDatPhong that = (ChiTietDonDatPhong) o;
+        return Objects.equals(maChiTietDonDatPhong, that.maChiTietDonDatPhong); // Sử dụng thuộc tính duy nhất
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(maChiTietDonDatPhong);
+    }
+
+
 }
