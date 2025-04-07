@@ -1,6 +1,6 @@
 package Entity;
 
-import Constraints.NhanVienConstraints;
+import Entity.Constraints.NhanVienConstraints;
 import DAO.EntityManagerUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -43,6 +43,7 @@ public class NhanVien {
     @ManyToOne
     @JoinColumn(name = "maLoaiNhanVien")
     private LoaiNhanVien loaiNhanVien;
+    private String hinhAnh;
     @PrePersist
     public void prePersist() {
         if(this.maNhanVien == null) {
@@ -51,10 +52,10 @@ public class NhanVien {
     }
     public String generateMaNhanVien() {
         String tenLoaiNV = "RAT"; // Room attendant
-        if(tenLoaiNV.equals("Nhân viên quản lý")) {
+        if(loaiNhanVien.getTenLoaiNhanVien().equals("Nhân viên quản lý")) {
             tenLoaiNV="MNG";// Manager
         }
-        else if(tenLoaiNV.equals("Nhân viên lễ tân")){
+        else if(loaiNhanVien.getTenLoaiNhanVien().equals("Nhân viên lễ tân")){
             tenLoaiNV="REC";// Receptionist
         }
         String pattern= tenLoaiNV + "-" + LocalDate.now().format(DateTimeFormatter.ofPattern("yy"));

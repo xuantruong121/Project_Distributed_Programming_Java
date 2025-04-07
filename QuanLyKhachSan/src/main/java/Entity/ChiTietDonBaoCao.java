@@ -1,7 +1,7 @@
 package Entity;
 
 import DAO.EntityManagerUtil;
-import Enum.MucDoThietHai;
+import Entity.Enum.MucDoThietHai;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
