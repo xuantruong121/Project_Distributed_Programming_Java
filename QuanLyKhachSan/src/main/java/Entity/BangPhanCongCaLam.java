@@ -8,7 +8,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import Enum.TrangThaiBangPhanCongCaLam;
+import Entity.Enum.TrangThaiBangPhanCongCaLam;
 
 @Entity
 @Setter

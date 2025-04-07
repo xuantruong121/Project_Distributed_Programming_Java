@@ -2,14 +2,13 @@ package Data;
 import DAO.EntityManagerUtil;
 
 import Entity.*;
+import Entity.Enum.*;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-import jakarta.persistence.EntityTransaction;
 import net.datafaker.Faker;
-import org.hibernate.Hibernate;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 import util.NameStandardization;
 import util.PasswordHasher;
@@ -19,7 +18,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import Enum.*;
 
 public class FakeData{
     private final Locale vietnam = new Locale("vi", "VN");

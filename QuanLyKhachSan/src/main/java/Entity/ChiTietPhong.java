@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
-import Enum.TrangThaiVatTu;
+import Entity.Enum.TrangThaiVatTu;
 
 @Entity
 @Getter

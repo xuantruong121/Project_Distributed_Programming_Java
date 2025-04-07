@@ -1,6 +1,6 @@
 package Entity;
 
-import Constraints.DonDatPhongConstraints;
+import Entity.Constraints.DonDatPhongConstraints;
 import DAO.EntityManagerUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +11,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import Enum.TrangThaiDonDatPhong;
+import Entity.Enum.TrangThaiDonDatPhong;
 
 @Entity
 @Getter

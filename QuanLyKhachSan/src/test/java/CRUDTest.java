@@ -1,6 +1,7 @@
 import DAO.EntityManagerUtil;
 import DAO.GeneralDAO;
 import Entity.*;
+import Entity.Enum.TrangThaiPhong;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.exception.ConstraintViolationException;
@@ -9,7 +10,7 @@ import util.PasswordHasher;
 
 import java.time.LocalDate;
 import java.util.List;
-import Enum.*;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CRUDTest {

@@ -58,16 +58,21 @@ public class GeneralDAO {
         }
 //        return false;
     }
-    public <T> void findOb(Class<T> entityClass, Object ob){
-        //Tìm một đối tượng trong database
-        //Kiểm tra xem đối tượng đã được tìm thấy chưa
-        T results= em.find(entityClass, ob);
-        if(results!=null){
+    public <T> T findOb(Class<T> entityClass, Object ob) {
+        // Tìm một đối tượng trong database
+        T results = em.find(entityClass, ob);
+
+        // Kiểm tra xem đối tượng đã được tìm thấy chưa
+        if (results != null) {
             System.out.println(results.toString());
-        }else{
+        } else {
             System.out.println("Không tìm thấy đối tượng");
         }
+
+        // Trả về kết quả tìm được (có thể null nếu không tìm thấy)
+        return results;
     }
+
     public <T> List<T> findAll(Class<T> entityClass){
         //Tìm tất cả các đối tượng trong database
         //Kiểm tra xem danh sách đối tượng đã được tìm thấy chưa

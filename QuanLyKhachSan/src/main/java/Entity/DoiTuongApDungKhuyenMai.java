@@ -29,6 +29,15 @@ public class DoiTuongApDungKhuyenMai {
     @ManyToOne
     @JoinColumn(name = "maDichVu")
     private DichVu dichVu;
+    @Column(columnDefinition = "boolean default false")
+    private boolean loaiBoKhachHang;
+    @Column(columnDefinition = "boolean default false")
+    private boolean loaiBoPhong;
+    @Column(columnDefinition = "boolean default false")
+    private boolean loaiBoDonDatPhong;
+    @Column(columnDefinition = "boolean default false")
+    private boolean loaiBoDichVu;
+    
     @PrePersist
     public void prePersist(){
         if(this.maDoiTuongApDung == null){
