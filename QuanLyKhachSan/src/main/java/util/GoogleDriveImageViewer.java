@@ -1,6 +1,7 @@
 package util;
 
 import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.auth.oauth2.TokenResponseException;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
@@ -8,6 +9,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
@@ -29,20 +31,52 @@ public class GoogleDriveImageViewer {
     private static final String CREDENTIALS_FILE_PATH = System.getenv("GOOGLE_CREDENTIALS_PATH");
     // Hàm lấy credentials cho Google Drive API
     private static Credential getCredentials() throws IOException, GeneralSecurityException {
-        InputStream in = new FileInputStream(CREDENTIALS_FILE_PATH);
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+        try {
+            InputStream in = new FileInputStream(CREDENTIALS_FILE_PATH);
+            GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-                GoogleNetHttpTransport.newTrustedTransport(), JSON_FACTORY, clientSecrets, Collections.singletonList("https://www.googleapis.com/auth/drive.readonly"))
-                .setDataStoreFactory(new com.google.api.client.util.store.FileDataStoreFactory(new java.io.File(getTokenDirectoryForUser("truongmaiduc18@gmail.com"))))
-                .setAccessType("offline")
-                .build();
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
-        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+            GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                    GoogleNetHttpTransport.newTrustedTransport(),
+                    JSON_FACTORY,
+                    clientSecrets,
+                    Collections.singletonList("https://www.googleapis.com/auth/drive.readonly"))
+                    .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(getTokenDirectoryForUser("truongmaiduc18@gmail.com"))))
+                    .setAccessType("offline")
+                    .build();
+
+            LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+            return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+
+        } catch (TokenResponseException e) {
+            if (e.getDetails() != null && "invalid_grant".equals(e.getDetails().getError())) {
+                System.out.println("Token invalid or expired. Deleting and reauthorizing...");
+
+                // Xóa thư mục token bị lỗi
+                deleteTokenDirectory("truongmaiduc18@gmail.com");
+
+                // Gọi lại chính hàm này để tạo mới
+                return getCredentials();
+            } else {
+                throw e;
+            }
+        }
     }
+
     private static String getTokenDirectoryForUser(String email) {
         return "tokens/" + email;
     }
+    public static void deleteTokenDirectory(String email) {
+        java.io.File tokenDir = new java.io.File(getTokenDirectoryForUser(email));
+
+        if (tokenDir.exists()) {
+            for (java.io.File file : tokenDir.listFiles()) {
+                file.delete();
+            }
+            tokenDir.delete();
+            System.out.println("Deleted old token directory.");
+        }
+    }
+
     public static void main(String[] args) throws IOException, GeneralSecurityException {
         // Tạo Drive service
         Drive service = new Drive.Builder(
@@ -66,6 +100,7 @@ public class GoogleDriveImageViewer {
         InputStream inputStream = service.files().get(file.get(0).getId()).executeMediaAsInputStream();
         displayImage(inputStream);
     }
+
     public  static Image  getImageByFileName(String fileName) throws GeneralSecurityException, IOException {
         // Tạo Drive service
         Drive service = getDriveService();
