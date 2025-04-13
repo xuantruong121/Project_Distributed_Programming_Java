@@ -1,6 +1,6 @@
-package Entity;
+package iuh.fit.qlksfxapp.Enitty;
 
-import DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

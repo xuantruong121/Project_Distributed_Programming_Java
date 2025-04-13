@@ -100,7 +100,6 @@ public class GoogleDriveImageViewer {
         InputStream inputStream = service.files().get(file.get(0).getId()).executeMediaAsInputStream();
         displayImage(inputStream);
     }
-
     public  static Image  getImageByFileName(String fileName) throws GeneralSecurityException, IOException {
         // Tạo Drive service
         Drive service = getDriveService();
