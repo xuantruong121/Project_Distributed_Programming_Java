@@ -25,20 +25,35 @@ public class GoogleDriveImageViewer {
     private static final String APPLICATION_NAME = "Drive API Java Quickstart";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 //    private static final String TOKENS_DIRECTORY_PATH = "tokens/user--token";
-//    private static final String CREDENTIALS_FILE_PATH = "D:\\Gg_API\\client_secret_1046008021894-lspc16jhqj8fnrfpbqj6q0bqm6n073ur.apps.googleusercontent.com.json"; // Cập nhật đúng đường dẫn
+//    private static final String CREDENTIALS_FILE_PATH = "D:\\Gg_API\\client_secret_1046008021894-lspc16jhqj8fnrfpbqj6q0bqm6n073ur.apps.googleusercontent.com.json";
+// Cập nhật đúng đường dẫn
     private static final String CREDENTIALS_FILE_PATH = System.getenv("GOOGLE_CREDENTIALS_PATH");
     // Hàm lấy credentials cho Google Drive API
     private static Credential getCredentials() throws IOException, GeneralSecurityException {
-        InputStream in = new FileInputStream(CREDENTIALS_FILE_PATH);
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+        String credentialsPath = System.getenv("GOOGLE_CREDENTIALS_PATH");
+        if (credentialsPath == null) {
+            throw new FileNotFoundException("GOOGLE_CREDENTIALS_PATH environment variable is not set.");
+        }
 
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-                GoogleNetHttpTransport.newTrustedTransport(), JSON_FACTORY, clientSecrets, Collections.singletonList("https://www.googleapis.com/auth/drive.readonly"))
-                .setDataStoreFactory(new com.google.api.client.util.store.FileDataStoreFactory(new java.io.File(getTokenDirectoryForUser("truongmaiduc18@gmail.com"))))
-                .setAccessType("offline")
-                .build();
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
-        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+        java.io.File credentialsFile = new java.io.File(credentialsPath);
+        if (!credentialsFile.exists()) {
+            throw new FileNotFoundException("Credentials file not found at: " + credentialsPath);
+        }
+
+        try (InputStream in = new FileInputStream(credentialsFile)) {
+            GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+
+            GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                    GoogleNetHttpTransport.newTrustedTransport(), JSON_FACTORY, clientSecrets,
+                    Collections.singletonList("https://www.googleapis.com/auth/drive.readonly"))
+                    .setDataStoreFactory(new com.google.api.client.util.store.FileDataStoreFactory(
+                            new java.io.File(getTokenDirectoryForUser("truongmaiduc18@gmail.com"))))
+                    .setAccessType("offline")
+                    .build();
+
+            LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+            return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+        }
     }
     private static String getTokenDirectoryForUser(String email) {
         return "tokens/" + email;
