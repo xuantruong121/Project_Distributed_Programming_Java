@@ -101,7 +101,8 @@ public class Header extends JPanel {
         rightPanel.add(profilePanel, BorderLayout.CENTER);
 
         // Notification button with custom painting for the red dot
-        BufferedImage notificationImage = ImageResizer.resizeImage(new ImageIcon(Objects.requireNonNull(GoogleDriveImageViewer.getImageByFileName("notification.png"))).getImage(), 50, 50);
+//        BufferedImage notificationImage = ImageResizer.resizeImage(new ImageIcon(Objects.requireNonNull(GoogleDriveImageViewer.getImageByFileName("notification.png"))).getImage(), 50, 50);
+        BufferedImage notificationImage = ImageResizer.resizeImage(new ImageIcon("src/main/resources/pic/icon/bell.svg").getImage(), 50, 50);
         JButton notificationButton = new JButton(new ImageIcon(notificationImage));
 
         notificationButton.setBackground(Color.WHITE);

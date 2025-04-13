@@ -35,7 +35,6 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                 {"Quản lý khuyến mãi"},
                 {"Quản lý đơn báo cáo"},
             };
-
         String icons[] = {
             "dashboard.svg",
             "email.svg",

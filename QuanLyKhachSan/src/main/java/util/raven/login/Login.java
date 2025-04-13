@@ -1,16 +1,13 @@
 package util.raven.login;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+
+import javax.swing.*;
 
 import main.Main;
 import net.miginfocom.swing.MigLayout;
 import main.Main;
+import util.LoadingUtil;
 
 public class Login extends JPanel {
 
@@ -39,11 +36,16 @@ public class Login extends JPanel {
                 + "borderWidth:0;"
                 + "focusWidth:0;"
                 + "innerFocusWidth:0");
-
         cmdLogin.addActionListener((e) -> {
-            //  Do action login here
-            Main.main.showMainForm();
-
+            cmdLogin.setEnabled(false);  // Disable button
+                LoadingUtil.runWithLoading(() -> {
+                    try {
+                        // Giả lập công việc tải dữ liệu
+                        Main.main.showMainForm();
+                    } finally {
+                        SwingUtilities.invokeLater(() -> {cmdLogin.setEnabled(true); });
+                    }
+                }, Main.main);
         });
         txtUsername.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your username or email");
         txtPassword.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your password");
