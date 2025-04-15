@@ -1,6 +1,7 @@
 package main;
 
 import GUI.Header;
+import GUI.TrangChuGUI;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
@@ -26,6 +27,7 @@ public class Main extends javax.swing.JFrame {
     public static main.Main main;
     private Login loginForm;
     private Header header;
+    private javax.swing.JPanel body;
     /**
      * Creates new form Main
      */
@@ -33,7 +35,6 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         init();
     }
-
     private void init() {
         GlassPanePopup.install(this);
         Notifications.getInstance().setJFrame(this);
@@ -58,6 +59,12 @@ public class Main extends javax.swing.JFrame {
     public void showMainForm() {
         WindowsTabbed.getInstance().showTabbed(true);
         WindowsTabbed.getInstance().removeAllTabbed();
+        body.removeAll();
+        JScrollPane scrollPane = new JScrollPane(new TrangChuGUI());
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+
+        body.add(scrollPane, java.awt.BorderLayout.CENTER);
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(header, BorderLayout.NORTH);
         mainPanel.add(body, BorderLayout.CENTER);
@@ -65,7 +72,6 @@ public class Main extends javax.swing.JFrame {
         revalidate();
         repaint();
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -74,12 +80,9 @@ public class Main extends javax.swing.JFrame {
         } catch (GeneralSecurityException | IOException e) {
             throw new RuntimeException(e);
         }
-        body = new javax.swing.JPanel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+        body = new JPanel();
         body.setLayout(new java.awt.BorderLayout());
-
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,6 +110,6 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel body;
+
     // End of variables declaration//GEN-END:variables
 }
