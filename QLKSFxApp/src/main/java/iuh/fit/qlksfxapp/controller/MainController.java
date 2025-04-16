@@ -88,6 +88,7 @@ public class MainController {
 
         // Update greeting based on time of day
         updateGreeting();
+        handleRoomManagementSubMenu();
     }
 
     private void setupSidebarMenu() {
