@@ -39,10 +39,9 @@ public class EntityManagerUtil {
                 .applySetting("hibernate.show_sql", "true")
                 .applySetting("hibernate.format_sql", "true")
                 .build();
-
 //         Add package for entity scanning
         MetadataSources metadataSources = new MetadataSources(registry);
-        Reflections reflections = new Reflections("Entity");
+        Reflections reflections = new Reflections("iuh.fit.qlksfxapp.Entity");
         Set<Class<?>> entityClasses = reflections.getTypesAnnotatedWith(jakarta.persistence.Entity.class);
         for (Class<?> entityClass : entityClasses) {
             metadataSources.addAnnotatedClass(entityClass);

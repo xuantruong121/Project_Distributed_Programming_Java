@@ -2,6 +2,9 @@ package iuh.fit.qlksfxapp.controller;
 
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -9,6 +12,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
 
 public class MainController {
     @FXML
@@ -82,6 +89,17 @@ public class MainController {
             if (node instanceof Button) {
                 String currentStyle = ((Button) node).getStyle();
                 ((Button) node).setStyle(currentStyle + "; -fx-font-size: 14px;");
+                // Thay đổi hành động khi nhấn nút
+                ((Button) node).setOnAction(event -> {
+                    // Xóa nội dung hiện tại
+                    contentPane.getChildren().clear();
+                    // Tải nội dung mới
+                    loadRoomManagementSubMenuForButton(((Button) node).getText());
+                });
+            } else if (node instanceof Label) {
+                // Chỉ cần thay đổi kích thước chữ cho Label
+                String currentStyle = ((Label) node).getStyle();
+                ((Label) node).setStyle(currentStyle + "; -fx-font-size: 14px;");
             }
         }
 
@@ -92,6 +110,7 @@ public class MainController {
             }
         }
     }
+
 
     @FXML
     private void toggleSidebar() {
@@ -285,4 +304,36 @@ public class MainController {
         AnchorPane.setLeftAnchor(pane, 0.0);
         AnchorPane.setRightAnchor(pane, 0.0);
     }
+    private void loadRoomManagementSubMenuForButton(String buttonText) {
+        try {
+            // Giả sử bạn có các FXML tương ứng với từng buttonText
+            String fxmlFile = switch (buttonText) {
+                case "Đơn đặt phòng" -> "/fxml/BookingForm.fxml";
+                case "Bản đồ phòng" -> "/fxml/MapOfRoom.fxml";
+                case "Thông tin loại phòng" -> "/fxml/InfoTypeOfRoom.fxml";
+                default -> null;
+            };
+
+            if (fxmlFile != null) {
+                URL resource = getClass().getResource(fxmlFile);
+                if (resource == null) {
+                    throw new IOException("Cannot find resource: " + fxmlFile);
+                }
+
+                FXMLLoader loader = new FXMLLoader(resource);
+                Parent newContent = loader.load();
+                contentPane.getChildren().setAll(newContent); // Better than clear+add
+                //
+                AnchorPane.setTopAnchor(newContent, 0.0);
+                AnchorPane.setBottomAnchor(newContent, 0.0);
+                AnchorPane.setLeftAnchor(newContent, 0.0);
+                AnchorPane.setRightAnchor(newContent, 0.0);
+            }
+        } catch (IOException e) {
+            System.err.println("Failed to load FXML for: " + buttonText);
+            e.printStackTrace();
+            // Consider showing an alert to the user
+        }
+    }
+
 }

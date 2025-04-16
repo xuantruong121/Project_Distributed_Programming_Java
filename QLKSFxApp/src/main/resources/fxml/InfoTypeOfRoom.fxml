@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.InfoTypeOfRoomController">
+   <children>
+      <SplitPane fx:id="splitPane" dividerPositions="0.5" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <items>
+          <AnchorPane fx:id="leftPane" maxWidth="650">
+               <children>
+                   <ListView fx:id="listView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+          </AnchorPane>
+            <AnchorPane fx:id="rightPane">
+                <children>
+                    <VBox spacing="10">
+                        <!-- Header -->
+                        <VBox spacing="5">
+                            <Label style="-fx-font-weight: bold;" text="Thông tin loại phòng">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Label>
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label fx:id="availabel" style="-fx-text-fill: #555;" text="Số phòng còn trống 10/12" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Label fx:id="roomType"  text="Standard" />
+                            </HBox>
+                        </VBox>
+                        <ImageView fx:id="mainImage" fitWidth="630" preserveRatio="true">
+                            <image>
+                                <Image url="@/images/typeOfRoom/Standard.jpg" />
+                            </image>
+                        </ImageView>
+<!--                        thumbnails-->
+                        <HBox spacing="10">
+                            <StackPane prefHeight="100" prefWidth="200">
+                                <ImageView fx:id="thumb1" fitHeight="100" fitWidth="200" preserveRatio="false" smooth="true">
+                                    <image>
+                                        <Image url="@/images/typeOfRoom/Standard1.jpg" />
+                                    </image>
+                                </ImageView>
+                            </StackPane>
+
+                            <StackPane prefHeight="100" prefWidth="200">
+                                <ImageView fx:id="thumb2" fitHeight="100" fitWidth="200" preserveRatio="false" smooth="true">
+                                    <image>
+                                        <Image url="@/images/typeOfRoom/Standard2.jpg" />
+                                    </image>
+                              <StackPane.margin>
+                                 <Insets />
+                              </StackPane.margin>
+                                </ImageView>
+                            </StackPane>
+
+                            <StackPane prefHeight="100" prefWidth="200">
+                                <ImageView fx:id="thumb3" fitHeight="100" fitWidth="200" preserveRatio="false" smooth="true">
+                                    <image>
+                                        <Image url="@/images/typeOfRoom/Standard3.jpg" />
+                                    </image>
+                                </ImageView>
+                                <Label style="-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 5;" text="Xem thêm" alignment="CENTER"  maxWidth="Infinity" maxHeight="Infinity"/>
+                            </StackPane>
+                        </HBox>
+                        <HBox spacing="20">
+                            <HBox spacing="5">
+                                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/icon/bed.png" />
+                                    </image>
+                                </ImageView>
+
+                                <Label fx:id="bedLabel" text="1 giường" />
+                            </HBox>
+                            <HBox spacing="5">
+                                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/icon/area.png" />
+                                    </image>
+                                </ImageView>
+                                <Label fx:id="areaLabel" text="12 m²" />
+                            </HBox>
+                            <HBox spacing="5">
+                                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/icon/child.png" />
+                                    </image>
+                                </ImageView>
+                                <Label fx:id="childLabel" text="2" />
+                            </HBox>
+                            <HBox spacing="5">
+                                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/icon/adult.png" />
+                                    </image>
+                                </ImageView>
+                                <Label fx:id="adultLabel" text="2" />
+                            </HBox>
+                        </HBox>
+                        <!-- Mô tả -->
+                        <Label fx:id="description" text="Mô tả phòng ngắn gọn ở đây" wrapText="true" />
+                        <Label text="Nội thất" wrapText="true">
+                        <font>
+                           <Font name="System Bold" size="20.0" />
+                        </font></Label>
+                        <HBox spacing="20">
+                            <HBox spacing="5">
+                                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/icon/wifi.png" />
+                                    </image>
+                                </ImageView>
+
+                                <Label text="Wifi-5" />
+                            </HBox>
+                            <HBox spacing="5">
+                                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/icon/fridge.png" />
+                                    </image>
+                                </ImageView>
+                                <Label text="Tủ lạnh" />
+                            </HBox>
+                            <HBox spacing="5">
+                                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/icon/airCon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label text="Điều hòa" />
+                            </HBox>
+                            <HBox spacing="5">
+                                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/icon/tv.png" />
+                                    </image>
+                                </ImageView>
+                                <Label text="TV" />
+                            </HBox>
+                        </HBox>
+                     <opaqueInsets>
+                        <Insets left="10.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                    </VBox>
+                </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
