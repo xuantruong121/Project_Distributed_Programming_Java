@@ -295,7 +295,55 @@ public class QuanLyDichVuController {
         trangThaiComboBox.setValue(dichVu.isTrangThai() ? "Đang hoạt động" : "Ngừng cung cấp");
         loaiDichVuComboBox.setValue(dichVu.getLoaiDichVu());
 
-        // Hiển thị hình ảnh nếu có
+        // Lấy số từ mã dịch vụ (DV01, DV02, ...)
+        String maDV = dichVu.getMaDichVu();
+        if (maDV != null && maDV.startsWith("DV") && maDV.length() >= 4) {
+            try {
+                int soThuTu = Integer.parseInt(maDV.substring(2));
+                if (soThuTu >= 1 && soThuTu <= 8) {
+                    // Nếu mã dịch vụ từ DV01 đến DV08, sử dụng hình ảnh tương ứng
+                    // Định dạng đường dẫn: /images/DV01.jpg, /images/DV02.jpg, ...
+                    String imagePath = "/images/DV" + String.format("%02d", soThuTu) + ".jpg";
+                    try {
+                        // Kiểm tra xem resource có tồn tại không trước khi tạo Image
+                        java.io.InputStream inputStream = getClass().getResourceAsStream(imagePath);
+                        if (inputStream != null) {
+                            Image image = new Image(inputStream);
+                            hinhAnhImageView.setImage(image);
+                            selectedImagePath = imagePath;
+                            return; // Thoát khỏi phương thức nếu đã tìm thấy hình ảnh
+                        } else {
+                            // Nếu không tìm thấy resource, sử dụng placeHolder
+                            java.io.InputStream placeholderStream = getClass().getResourceAsStream("/images/placeHolder.jpg");
+                            if (placeholderStream != null) {
+                                hinhAnhImageView.setImage(new Image(placeholderStream));
+                            } else {
+                                // Nếu cả placeHolder cũng không tìm thấy, đặt image là null
+                                hinhAnhImageView.setImage(null);
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        // Nếu có lỗi, thử sử dụng placeHolder
+                        try {
+                            java.io.InputStream placeholderStream = getClass().getResourceAsStream("/images/placeHolder.jpg");
+                            if (placeholderStream != null) {
+                                hinhAnhImageView.setImage(new Image(placeholderStream));
+                            } else {
+                                hinhAnhImageView.setImage(null);
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            hinhAnhImageView.setImage(null);
+                        }
+                    }
+                }
+            } catch (NumberFormatException e) {
+                // Không làm gì, tiếp tục với các trường hợp khác
+            }
+        }
+
+        // Nếu không phải DV01-DV08, kiểm tra hình ảnh từ đường dẫn
         if (dichVu.getHinhAnh() != null && !dichVu.getHinhAnh().isEmpty()) {
             try {
                 File imageFile = new File(dichVu.getHinhAnh());
@@ -304,15 +352,44 @@ public class QuanLyDichVuController {
                     hinhAnhImageView.setImage(image);
                     selectedImagePath = dichVu.getHinhAnh();
                 } else {
-                    hinhAnhImageView.setImage(null);
+                    // Nếu file không tồn tại, hiển thị ảnh placeHolder
+                    java.io.InputStream placeholderStream = getClass().getResourceAsStream("/images/placeHolder.jpg");
+                    if (placeholderStream != null) {
+                        hinhAnhImageView.setImage(new Image(placeholderStream));
+                    } else {
+                        hinhAnhImageView.setImage(null);
+                    }
                     selectedImagePath = null;
                 }
             } catch (Exception e) {
-                hinhAnhImageView.setImage(null);
+                e.printStackTrace();
+                // Nếu có lỗi, hiển thị ảnh placeHolder
+                try {
+                    java.io.InputStream placeholderStream = getClass().getResourceAsStream("/images/placeHolder.jpg");
+                    if (placeholderStream != null) {
+                        hinhAnhImageView.setImage(new Image(placeholderStream));
+                    } else {
+                        hinhAnhImageView.setImage(null);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    hinhAnhImageView.setImage(null);
+                }
                 selectedImagePath = null;
             }
         } else {
-            hinhAnhImageView.setImage(null);
+            // Nếu không có hình ảnh, hiển thị ảnh placeHolder
+            try {
+                java.io.InputStream placeholderStream = getClass().getResourceAsStream("/images/placeHolder.jpg");
+                if (placeholderStream != null) {
+                    hinhAnhImageView.setImage(new Image(placeholderStream));
+                } else {
+                    hinhAnhImageView.setImage(null);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                hinhAnhImageView.setImage(null);
+            }
             selectedImagePath = null;
         }
     }
@@ -325,7 +402,17 @@ public class QuanLyDichVuController {
         moTaField.clear();
         trangThaiComboBox.setValue("Đang hoạt động");
         loaiDichVuComboBox.setValue(null);
-        hinhAnhImageView.setImage(null);
+        try {
+            java.io.InputStream placeholderStream = getClass().getResourceAsStream("/images/placeHolder.jpg");
+            if (placeholderStream != null) {
+                hinhAnhImageView.setImage(new Image(placeholderStream));
+            } else {
+                hinhAnhImageView.setImage(null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            hinhAnhImageView.setImage(null);
+        }
         selectedImagePath = null;
 
         // Bỏ chọn dòng trong TableView

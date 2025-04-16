@@ -13,23 +13,17 @@ import java.util.Objects;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Main.fxml")));
-        Scene scene = new Scene(root);
+        // Tải SplashScreen trước
+        Parent splashRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/SplashScreen.fxml")));
+        Scene splashScene = new Scene(splashRoot);
 
-        primaryStage.setTitle("QLKS Fx App");
-        primaryStage.setScene(scene);
-
-        // Set window to maximize but keep the frame/title bar
-        primaryStage.setMaximized(true);
-
-        // Add a keyboard shortcut for toggling between maximized and normal
-        scene.setOnKeyPressed(event -> {
-            if (event.isAltDown() && event.getCode() == KeyCode.ENTER) {
-                primaryStage.setMaximized(!primaryStage.isMaximized());
-            }
-        });
-
+        primaryStage.setTitle("Đang khởi động...");
+        primaryStage.setScene(splashScene);
+        primaryStage.setResizable(false);
+        primaryStage.centerOnScreen();
         primaryStage.show();
+
+        // SplashScreenController sẽ tự động chuyển sang giao diện chính sau khi hoàn tất
     }
 
     public static void main(String[] args) {

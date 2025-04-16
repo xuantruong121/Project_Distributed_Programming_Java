@@ -215,7 +215,6 @@
                             -fx-cursor: hand;
                             -fx-background-radius: 5;
                         </style>
-
                         <font>
                             <Font size="16.0"/>
                         </font>
