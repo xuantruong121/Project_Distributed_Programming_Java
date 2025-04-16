@@ -1,17 +1,21 @@
 package iuh.fit.qlksfxapp.controller;
 
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
+
+import java.io.IOException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +31,8 @@ public class MainController {
     @FXML
     private Button toggleButton;
     @FXML
+    private Button homeButton;
+    @FXML
     private Button roomManagementButton;
     @FXML
     private VBox roomManagementSubMenu;
@@ -35,25 +41,97 @@ public class MainController {
     @FXML
     private VBox statisticsSubMenu;
     @FXML
+    private Button promotionsButton;
+    @FXML
+    private Button reportsButton;
+    @FXML
+    private Button serviceManagementButton;
+    @FXML
+    private Button customerManagementButton;
+    @FXML
+    private Button staffManagementButton;
+    @FXML
+    private Button inventoryManagementButton;
+    @FXML
+    private Button discountManagementButton;
+    @FXML
     private ImageView logo;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private ImageView userAvatar;
+    @FXML
+    private Button notificationButton;
+    @FXML
+    private Label greetingLabel;
+    @FXML
+    private Label userNameLabel;
 
     private boolean isSidebarExpanded = true;
-    private final double EXPANDED_WIDTH = 225.0;
-    private final double COLLAPSED_WIDTH = 50.0;
     private boolean isRoomManagementMenuOpen = false;
     private boolean isStatisticsMenuOpen = false;
-    private Button expandButton; // Nút để mở rộng sidebar khi đã thu gọn
+    private Button expandButton; // Button to expand the sidebar when collapsed
+
+    // Track the active menu button for highlighting
+    private Button activeMenuButton;
 
     @FXML
     private void initialize() {
-        // Khởi tạo content pane mặc định
-        showRoomBookingPane();
+        // Initialize default content pane
+        showMainPane();
 
-        // Tăng kích thước chữ cho các nút menu
-        setMenuButtonsFontSize("-fx-font-size: 15px; -fx-font-weight: bold;");
-
-        // Tạo nút để mở rộng sidebar khi đã thu gọn
+        // Create button to expand sidebar when collapsed
         createExpandButton();
+
+        // Set up the sidebar menu with active indicators
+        setupSidebarMenu();
+
+        // Update greeting based on time of day
+        updateGreeting();
+    }
+
+    private void setupSidebarMenu() {
+        // Set home button as default active menu
+        setActiveMenu(homeButton);
+
+        // Add click listeners to all main menu buttons
+        homeButton.setOnMouseClicked(event -> {
+            showMainPane();
+            setActiveMenu(homeButton);
+        });
+
+        // Other button listeners can be added here
+    }
+
+    private void setActiveMenu(Button button) {
+        // Remove active style from previous button
+        if (activeMenuButton != null) {
+            activeMenuButton.setStyle("-fx-background-color: transparent; -fx-text-fill: white; " +
+                    "-fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; " +
+                    "-fx-padding: 5 15 5 15;");
+        }
+
+        // Set active style to current button
+        button.setStyle("-fx-background-color: #1a56db; -fx-text-fill: white; " +
+                "-fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; " +
+                "-fx-padding: 5 15 5 15;");
+
+        activeMenuButton = button;
+    }
+
+    private void updateGreeting() {
+        int hour = java.time.LocalTime.now().getHour();
+        String greeting;
+
+        if (hour >= 5 && hour < 12) {
+            greeting = "Chào buổi sáng";
+        } else if (hour >= 12 && hour < 18) {
+            greeting = "Chào buổi chiều";
+        } else {
+            greeting = "Chào buổi tối";
+        }
+
+        greetingLabel.setText(greeting + " Mai Đức Trường, chúc bạn có một ngày tuyệt vời!");
     }
 
     private void createExpandButton() {
@@ -65,82 +143,40 @@ public class MainController {
         expandButton.setLayoutX(10.0);
         expandButton.setLayoutY(10.0);
         expandButton.setOnAction(event -> toggleSidebar());
-        expandButton.setVisible(false); // Khởi tạo ẩn
-    }
-
-    private void setMenuButtonsFontSize(String style) {
-        // Áp dụng style cho tất cả các nút trong menu
-        for (var node : menuVBox.getChildren()) {
-            if (node instanceof Button) {
-                String currentStyle = ((Button) node).getStyle();
-                ((Button) node).setStyle(currentStyle + "; " + style);
-            } else if (node instanceof VBox) {
-                for (var subNode : ((VBox) node).getChildren()) {
-                    if (subNode instanceof Button) {
-                        String currentStyle = ((Button) subNode).getStyle();
-                        ((Button) subNode).setStyle(currentStyle + "; " + style);
-                    }
-                }
-            }
-        }
-
-        // Áp dụng cho các nút trong submenu
-        for (var node : roomManagementSubMenu.getChildren()) {
-            if (node instanceof Button) {
-                String currentStyle = ((Button) node).getStyle();
-                ((Button) node).setStyle(currentStyle + "; -fx-font-size: 14px;");
-                // Thay đổi hành động khi nhấn nút
-                ((Button) node).setOnAction(event -> {
-                    // Xóa nội dung hiện tại
-                    contentPane.getChildren().clear();
-                    // Tải nội dung mới
-                    loadRoomManagementSubMenuForButton(((Button) node).getText());
-                });
-            } else if (node instanceof Label) {
-                // Chỉ cần thay đổi kích thước chữ cho Label
-                String currentStyle = ((Label) node).getStyle();
-                ((Label) node).setStyle(currentStyle + "; -fx-font-size: 14px;");
-            }
-        }
-
-        for (var node : statisticsSubMenu.getChildren()) {
-            if (node instanceof Button) {
-                String currentStyle = ((Button) node).getStyle();
-                ((Button) node).setStyle(currentStyle + "; -fx-font-size: 14px;");
-            }
-        }
+        expandButton.setVisible(false); // Initially hidden
     }
 
 
     @FXML
     private void toggleSidebar() {
         if (isSidebarExpanded) {
-            // Thu gọn sidebar
+            // Collapse sidebar
             collapseSidebar();
         } else {
-            // Mở rộng sidebar
+            // Expand sidebar
             expandSidebar();
         }
     }
 
     private void collapseSidebar() {
-        // Ẩn các phần tử trong sidebar
+        // Hide sidebar elements
         menuVBox.setVisible(false);
         logo.setVisible(false);
         toggleButton.setVisible(false);
 
-        // Thu gọn sidebar
+        // Collapse sidebar width
+        double COLLAPSED_WIDTH = 50.0;
         menuPane.setPrefWidth(COLLAPSED_WIDTH);
         contentPane.setLayoutX(COLLAPSED_WIDTH);
         contentPane.setPrefWidth(menuPane.getScene().getWindow().getWidth() - COLLAPSED_WIDTH);
 
-        // Hiển thị nút mở rộng
+        // Show expand button
         if (!menuPane.getChildren().contains(expandButton)) {
             menuPane.getChildren().add(expandButton);
         }
         expandButton.setVisible(true);
 
-        // Đóng các submenu nếu đang mở
+        // Close submenus if open
         if (isRoomManagementMenuOpen) {
             toggleRoomManagementMenu();
         }
@@ -152,17 +188,18 @@ public class MainController {
     }
 
     private void expandSidebar() {
-        // Hiển thị lại các phần tử trong sidebar
+        // Show sidebar elements
         menuVBox.setVisible(true);
         logo.setVisible(true);
         toggleButton.setVisible(true);
 
-        // Mở rộng sidebar
+        // Expand sidebar width
+        double EXPANDED_WIDTH = 225.0;
         menuPane.setPrefWidth(EXPANDED_WIDTH);
         contentPane.setLayoutX(EXPANDED_WIDTH);
         contentPane.setPrefWidth(menuPane.getScene().getWindow().getWidth() - EXPANDED_WIDTH);
 
-        // Ẩn nút mở rộng
+        // Hide expand button
         expandButton.setVisible(false);
 
         isSidebarExpanded = true;
@@ -174,6 +211,11 @@ public class MainController {
         roomManagementSubMenu.setVisible(isRoomManagementMenuOpen);
         roomManagementSubMenu.setManaged(isRoomManagementMenuOpen);
         roomManagementButton.setText("QUẢN LÝ ĐẶT PHÒNG " + (isRoomManagementMenuOpen ? "▲" : "▼"));
+
+        // Set active state if opened
+        if (isRoomManagementMenuOpen) {
+            setActiveMenu(roomManagementButton);
+        }
     }
 
     @FXML
@@ -182,120 +224,155 @@ public class MainController {
         statisticsSubMenu.setVisible(isStatisticsMenuOpen);
         statisticsSubMenu.setManaged(isStatisticsMenuOpen);
         statisticsButton.setText("THỐNG KÊ " + (isStatisticsMenuOpen ? "▲" : "▼"));
+
+        // Set active state if opened
+        if (isStatisticsMenuOpen) {
+            setActiveMenu(statisticsButton);
+        }
     }
 
+    // Room Management submenu handlers
     @FXML
     private void showRoomBookingPane() {
-        contentPane.getChildren().clear();
-        Pane pane = new Pane();
-        pane.setStyle("-fx-background-color: lightblue;");
-        Label label = new Label("Đơn đặt phòng");
-        label.setStyle("-fx-font-size: 20px; -fx-padding: 20;");
-        pane.getChildren().add(label);
-        contentPane.getChildren().add(pane);
-        AnchorPane.setTopAnchor(pane, 0.0);
-        AnchorPane.setBottomAnchor(pane, 0.0);
-        AnchorPane.setLeftAnchor(pane, 0.0);
-        AnchorPane.setRightAnchor(pane, 0.0);
+        updateContent("Đơn đặt phòng", "white");
     }
 
-    // Các phương thức khác giữ nguyên
     @FXML
     private void showRoomSalesPane() {
-        contentPane.getChildren().clear();
-        Pane pane = new Pane();
-        pane.setStyle("-fx-background-color: lightgreen;");
-        Label label = new Label("Bán đồ phòng");
-        label.setStyle("-fx-font-size: 20px; -fx-padding: 20;");
-        pane.getChildren().add(label);
-        contentPane.getChildren().add(pane);
-        AnchorPane.setTopAnchor(pane, 0.0);
-        AnchorPane.setBottomAnchor(pane, 0.0);
-        AnchorPane.setLeftAnchor(pane, 0.0);
-        AnchorPane.setRightAnchor(pane, 0.0);
+        updateContent("Bán đồ phòng", "white");
     }
 
     @FXML
     private void showRoomTypePane() {
-        contentPane.getChildren().clear();
-        Pane pane = new Pane();
-        pane.setStyle("-fx-background-color: lightyellow;");
-        Label label = new Label("Thông tin loại phòng");
-        label.setStyle("-fx-font-size: 20px; -fx-padding: 20;");
-        pane.getChildren().add(label);
-        contentPane.getChildren().add(pane);
-        AnchorPane.setTopAnchor(pane, 0.0);
-        AnchorPane.setBottomAnchor(pane, 0.0);
-        AnchorPane.setLeftAnchor(pane, 0.0);
-        AnchorPane.setRightAnchor(pane, 0.0);
+        updateContent("Thông tin loại phòng", "white");
     }
 
+    // Statistics submenu handlers
     @FXML
     private void showRevenueStatsPane() {
-        contentPane.getChildren().clear();
-        Pane pane = new Pane();
-        pane.setStyle("-fx-background-color: lightblue;");
-        Label label = new Label("Thống kê doanh thu");
-        label.setStyle("-fx-font-size: 20px; -fx-padding: 20;");
-        pane.getChildren().add(label);
-        contentPane.getChildren().add(pane);
-        AnchorPane.setTopAnchor(pane, 0.0);
-        AnchorPane.setBottomAnchor(pane, 0.0);
-        AnchorPane.setLeftAnchor(pane, 0.0);
-        AnchorPane.setRightAnchor(pane, 0.0);
+        updateContent("Thống kê doanh thu", "white");
     }
 
     @FXML
     private void showInventoryStatsPane() {
-        contentPane.getChildren().clear();
-        Pane pane = new Pane();
-        pane.setStyle("-fx-background-color: lightgreen;");
-        Label label = new Label("Thống kê kho");
-        label.setStyle("-fx-font-size: 20px; -fx-padding: 20;");
-        pane.getChildren().add(label);
-        contentPane.getChildren().add(pane);
-        AnchorPane.setTopAnchor(pane, 0.0);
-        AnchorPane.setBottomAnchor(pane, 0.0);
-        AnchorPane.setLeftAnchor(pane, 0.0);
-        AnchorPane.setRightAnchor(pane, 0.0);
+        updateContent("Thống kê kho", "white");
     }
 
     @FXML
     private void showCustomerStatsPane() {
-        contentPane.getChildren().clear();
-        Pane pane = new Pane();
-        pane.setStyle("-fx-background-color: lightyellow;");
-        Label label = new Label("Thống kê khách");
-        label.setStyle("-fx-font-size: 20px; -fx-padding: 20;");
-        pane.getChildren().add(label);
-        contentPane.getChildren().add(pane);
-        AnchorPane.setTopAnchor(pane, 0.0);
-        AnchorPane.setBottomAnchor(pane, 0.0);
-        AnchorPane.setLeftAnchor(pane, 0.0);
-        AnchorPane.setRightAnchor(pane, 0.0);
+        updateContent("Thống kê khách", "white");
     }
 
+    // Other menu handlers
     @FXML
     private void showPromotionsPane() {
-        contentPane.getChildren().clear();
-        Pane pane = new Pane();
-        pane.setStyle("-fx-background-color: lightblue;");
-        Label label = new Label("Quản lý khuyến mãi");
-        label.setStyle("-fx-font-size: 20px; -fx-padding: 20;");
-        pane.getChildren().add(label);
-        contentPane.getChildren().add(pane);
-        AnchorPane.setTopAnchor(pane, 0.0);
-        AnchorPane.setBottomAnchor(pane, 0.0);
-        AnchorPane.setLeftAnchor(pane, 0.0);
-        AnchorPane.setRightAnchor(pane, 0.0);
+        updateContent("Quản lý khuyến mãi", "white");
+        setActiveMenu(promotionsButton);
     }
 
     @FXML
     private void showReportsPane() {
+        updateContent("Đơn báo cáo", "white");
+        setActiveMenu(reportsButton);
+    }
+
+    @FXML
+    private void showServiceManagementPane() {
+        updateContent("Quản lý dịch vụ", "white");
+        setActiveMenu(serviceManagementButton);
+    }
+
+    @FXML
+    private void showCustomerManagementPane() {
+        updateContent("Quản lý khách hàng", "white");
+        setActiveMenu(customerManagementButton);
+    }
+
+    @FXML
+    private void showStaffManagementPane() {
+        try {
+            // Load the Staff Management interface from FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/QuanLyNhanVien.fxml"));
+            Parent staffManagementView = loader.load();
+
+            // Clear previous content and add new interface to content pane
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(staffManagementView);
+
+            // Set anchor properties to fill the content pane
+            AnchorPane.setTopAnchor(staffManagementView, 0.0);
+            AnchorPane.setBottomAnchor(staffManagementView, 0.0);
+            AnchorPane.setLeftAnchor(staffManagementView, 0.0);
+            AnchorPane.setRightAnchor(staffManagementView, 0.0);
+
+            // Mark the Staff Management button as active
+            setActiveMenu(staffManagementButton);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Throwable cause = e;
+            while (cause.getCause() != null) {
+                cause = cause.getCause();
+            }
+            System.err.println("Cannot load Staff Management interface: " + e.getMessage());
+
+            // Hiển thị thông báo lỗi
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText("Không thể tải giao diện Quản lý Nhân viên");
+            alert.setContentText("Lỗi: " + cause.getMessage());
+            alert.showAndWait();
+
+            // Hiển thị một giao diện thông báo đơn giản thay thế
+            Pane errorPane = new Pane();
+            errorPane.setStyle("-fx-background-color: white;");
+            Label errorLabel = new Label("Không thể tải giao diện Quản lý Nhân viên. Vui lòng kiểm tra lại cấu hình Hibernate.");
+            errorLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: red; -fx-padding: 20;");
+            errorPane.getChildren().add(errorLabel);
+
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(errorPane);
+            AnchorPane.setTopAnchor(errorPane, 0.0);
+            AnchorPane.setBottomAnchor(errorPane, 0.0);
+            AnchorPane.setLeftAnchor(errorPane, 0.0);
+            AnchorPane.setRightAnchor(errorPane, 0.0);
+
+            // Mark the Staff Management button as active
+            setActiveMenu(staffManagementButton);
+        }
+    }
+
+    @FXML
+    private void showInventoryManagementPane() {
+        updateContent("Quản lý kho", "white");
+        setActiveMenu(inventoryManagementButton);
+    }
+
+    @FXML
+    private void showDiscountManagementPane() {
+        updateContent("Quản lý khuyến mãi", "white");
+        setActiveMenu(discountManagementButton);
+    }
+
+    @FXML
+    public void showMainPane() {
+        updateContent("Trang chủ", "white");
+        loadDashboardContent();
+    }
+
+    private void loadDashboardContent() {
+        // Here you would implement loading the dashboard components
+        // such as room statistics, booking information, etc.
+        System.out.println("Loading dashboard content");
+    }
+
+    private void updateContent(String title, String backgroundColor) {
+        // Update content pane
         contentPane.getChildren().clear();
+
         Pane pane = new Pane();
-        pane.setStyle("-fx-background-color: lightgreen;");
-        Label label = new Label("Đơn báo cáo");
+        pane.setStyle("-fx-background-color: " + backgroundColor + ";");
+        Label label = new Label(title);
         label.setStyle("-fx-font-size: 20px; -fx-padding: 20;");
         pane.getChildren().add(label);
         contentPane.getChildren().add(pane);
@@ -333,6 +410,18 @@ public class MainController {
             System.err.println("Failed to load FXML for: " + buttonText);
             e.printStackTrace();
             // Consider showing an alert to the user
+        }
+    }
+    private void handleRoomManagementSubMenu (){
+        for (var node : roomManagementSubMenu.getChildren()) {
+            if (node instanceof Button) {
+                ((Button) node).setOnAction(event -> {
+                    // Xóa nội dung hiện tại
+                    contentPane.getChildren().clear();
+                    // Tải nội dung mới
+                    loadRoomManagementSubMenuForButton(((Button) node).getText());
+                });
+            }
         }
     }
 

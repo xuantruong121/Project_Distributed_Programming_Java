@@ -5,78 +5,93 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1020.0" prefWidth="1920.0"
-            style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21.0.6"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.MainController">
-    <children>
-        <AnchorPane fx:id="contentPane" layoutX="225.0" prefHeight="1020.0" prefWidth="1695.0"
-              style="-fx-background-color: white;"/>
-        <Pane fx:id="menuPane" prefHeight="1020.0" prefWidth="225.0"
-              style="-fx-background-color: #2E2E2E; -fx-border-color: black;">
-            <children>
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1020.0" prefWidth="1920.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.MainController">
+    <BorderPane prefHeight="1020.0" prefWidth="1920.0">
+        <left>
+            <Pane fx:id="menuPane" prefHeight="1020.0" prefWidth="225.0" style="-fx-background-color: #181e2b;">
                 <!-- Toggle Button -->
-                <Button fx:id="toggleButton" onAction="#toggleSidebar" layoutX="180.0" layoutY="10.0" prefWidth="30.0" prefHeight="30.0"
-                        text="≡" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 20px; -fx-border-color: white; -fx-border-radius: 5;"/>
+                <Button fx:id="toggleButton" layoutX="9.0" layoutY="22.0" onAction="#toggleSidebar" prefHeight="46.0" prefWidth="208.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 20px; -fx-border-color: white; -fx-border-radius: 5;" text="≡" />
                 <!-- Logo -->
-                <ImageView fx:id="logo" fitHeight="100.0" fitWidth="200.0" layoutX="13.0" layoutY="50.0"
-                           pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../images/img.png"/>
-                    </image>
+                <ImageView fx:id="logo" fitHeight="100.0" fitWidth="200.0" layoutX="15.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../images/img.png" />
                 </ImageView>
-                <!-- Menu VBox (Adjusted layoutY to start below logo) -->
-                <VBox fx:id="menuVBox" layoutY="160.0" prefWidth="225.0" spacing="5">
-                    <children>
-                        <!-- Menu Items -->
-                        <Label text="TRANG CHỦ"
-                               style="-fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 15 5 15;"/>
-                        <VBox fx:id="roomManagementMenu">
-                            <children>
-                                <Button fx:id="roomManagementButton" onAction="#toggleRoomManagementMenu"
-                                        text="QUẢN LÝ ĐẶT PHÒNG ▼" prefWidth="225.0"
-                                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;"/>
-                                <VBox fx:id="roomManagementSubMenu" visible="false" managed="false">
-                                    <children>
-                                        <Button text="Đơn đặt phòng" onAction="#showRoomBookingPane" prefWidth="225.0"
-                                                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"/>
-                                        <Button text="Bản đồ phòng" onAction="#showRoomSalesPane" prefWidth="225.0"
-                                                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"/>
-                                        <Button text="Thông tin loại phòng" onAction="#showRoomTypePane"
-                                                prefWidth="225.0"
-                                                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"/>
-                                    </children>
-                                </VBox>
-                            </children>
+                <!-- Menu VBox -->
+                <VBox fx:id="menuVBox" layoutY="180.0" prefWidth="225.0" spacing="2">
+                    <!-- Main Menu Items -->
+                    <Button fx:id="homeButton" onAction="#showMainPane" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;" text="Trang chủ" />
+
+                    <!-- Room Management Menu -->
+                    <VBox spacing="2">
+                        <Button fx:id="roomManagementButton" onAction="#toggleRoomManagementMenu" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;" text="Quản lý đặt phòng ▼" />
+                        <VBox fx:id="roomManagementSubMenu" managed="false" spacing="2" visible="false">
+                            <Button onAction="#showRoomBookingPane" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Đơn đặt phòng" />
+                            <Button onAction="#showRoomSalesPane" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Bán đồ phòng" />
+                            <Button onAction="#showRoomTypePane" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Thông tin loại phòng" />
                         </VBox>
-                        <VBox fx:id="statisticsMenu">
-                            <children>
-                                <Button fx:id="statisticsButton" onAction="#toggleStatisticsMenu" text="THỐNG KÊ ▼"
-                                        prefWidth="225.0"
-                                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;"/>
-                                <VBox fx:id="statisticsSubMenu" visible="false" managed="false">
-                                    <children>
-                                        <Button text="Thống kê doanh thu" onAction="#showRevenueStatsPane"
-                                                prefWidth="225.0"
-                                                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"/>
-                                        <Button text="Thống kê kho" onAction="#showInventoryStatsPane" prefWidth="225.0"
-                                                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"/>
-                                        <Button text="Thống kê khách" onAction="#showCustomerStatsPane"
-                                                prefWidth="225.0"
-                                                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"/>
-                                    </children>
-                                </VBox>
-                            </children>
+                    </VBox>
+
+                    <!-- Statistics Menu -->
+                    <VBox spacing="2">
+                        <Button fx:id="statisticsButton" onAction="#toggleStatisticsMenu" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;" text="Thống kê ▼" />
+                        <VBox fx:id="statisticsSubMenu" managed="false" spacing="2" visible="false">
+                            <Button onAction="#showRevenueStatsPane" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Thống kê doanh thu" />
+                            <Button onAction="#showInventoryStatsPane" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Thống kê kho" />
+                            <Button onAction="#showCustomerStatsPane" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Thống kê khách" />
                         </VBox>
-                        <Button text="QUẢN LÝ KHUYẾN MÃI" onAction="#showPromotionsPane" prefWidth="225.0"
-                                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;"/>
-                        <Button text="ĐƠN BÁO CÁO" onAction="#showReportsPane" prefWidth="225.0"
-                                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;"/>
-                    </children>
+                    </VBox>
+
+                    <!-- Service Management -->
+                    <Button fx:id="serviceManagementButton" onAction="#showServiceManagementPane" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;" text="Quản lý dịch vụ" />
+
+                    <!-- Customer Management -->
+                    <Button fx:id="customerManagementButton" onAction="#showCustomerManagementPane" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;" text="Quản lý khách hàng" />
+
+                    <!-- Staff Management -->
+                    <Button fx:id="staffManagementButton" onAction="#showStaffManagementPane" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;" text="Quản lý nhân viên" />
+
+                    <!-- Inventory Management -->
+                    <Button fx:id="inventoryManagementButton" onAction="#showInventoryManagementPane" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;" text="Quản lý kho" />
+
+                    <!-- Discount Management -->
+                    <Button fx:id="discountManagementButton" onAction="#showDiscountManagementPane" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;" text="Quản lý khuyến mãi" />
+
+                    <!-- Reports -->
+                    <Button fx:id="reportsButton" onAction="#showReportsPane" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;" text="Đơn báo cáo" />
                 </VBox>
-            </children>
-        </Pane>
-    </children>
+            </Pane>
+        </left>
+        <center>
+            <BorderPane prefHeight="1020.0" prefWidth="1695.0" style="-fx-background-color: white;">
+                <top>
+                    <!-- Header Section -->
+                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="1695.0" style="-fx-background-color: white; -fx-border-color: #e9ecef; -fx-border-width: 0 0 1 0;">
+                        <HBox alignment="CENTER_RIGHT" spacing="15" HBox.hgrow="NEVER">
+                            <Label fx:id="greetingLabel" style="-fx-font-size: 14px;" text="Chúc Mai Đức Trường có một ngày tuyệt vời!" />
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;" text="Quản lý" />
+                            <Label fx:id="userNameLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Mai Đức Trường" />
+                            <ImageView fx:id="userAvatar" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../images/avatar.png" />
+                            </ImageView>
+                            <Button fx:id="notificationButton" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: white; -fx-border-color: #dee2e6; -fx-border-radius: 50%; -fx-background-radius: 50%;">
+                                <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                        <Image url="@../images/notification.png" />
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Pane prefWidth="20" />
+                        </HBox>
+                    </HBox>
+                </top>
+                <center>
+                    <Pane fx:id="contentPane" prefHeight="960.0" prefWidth="1695.0" style="-fx-background-color: #f8f9fa;" />
+                </center>
+            </BorderPane>
+        </center>
+    </BorderPane>
 </AnchorPane>

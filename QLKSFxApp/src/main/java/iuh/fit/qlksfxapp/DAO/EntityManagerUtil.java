@@ -1,4 +1,5 @@
 package iuh.fit.qlksfxapp.DAO;
+
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -10,17 +11,19 @@ import java.util.Set;
 public class EntityManagerUtil {
     private static EntityManagerFactory emf = null;
 
-    public static EntityManagerFactory getEntityManagerFactory(){
-       if(emf == null) {
-           emf = createEntityManagerFactory();
-       }
+    public static EntityManagerFactory getEntityManagerFactory() {
+        if (emf == null) {
+            emf = createEntityManagerFactory();
+        }
         return emf;
     }
+
     public static void closeEntityManagerFactory() {
-        if (emf != null) {
+        if (emf != null && emf.isOpen()) {
             emf.close();
         }
     }
+
     public static EntityManagerFactory createEntityManagerFactory() {
 //        Reflections reflections = new Reflections("Entity");
 //

@@ -1,10 +1,16 @@
 package iuh.fit.qlksfxapp.DAO;
 
+import iuh.fit.qlksfxapp.Entity.LoaiNhanVien;
 import jakarta.persistence.EntityManager;
 
-public class LoaiNhanVienDAO {
-    private EntityManager em =null;
+public class LoaiNhanVienDAO extends GeneralDAO {
+    private EntityManager em = null;
+
     public LoaiNhanVienDAO() {
-        em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+        super();
+    }
+
+    public LoaiNhanVien getLoaiNhanVienByMaNV(String maNV) {
+        return findOb(LoaiNhanVien.class, maNV);
     }
 }
