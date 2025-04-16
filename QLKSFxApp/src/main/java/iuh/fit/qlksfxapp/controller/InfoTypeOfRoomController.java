@@ -115,11 +115,11 @@ public class InfoTypeOfRoomController {
     private void initStyle(String tenLoaiPhong){
         roomType.setText(tenLoaiPhong);
         if(tenLoaiPhong.equals("Standard")){
-            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.getFirst(),"#fffff",15,1,23);
+            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.getFirst(),"#ffffff",15,1,23);
         } else if (tenLoaiPhong.equals("Superior")) {
-            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.get(1),"#fffff",15,1,23);
+            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.get(1),"#ffffff",15,1,23);
         } else if (tenLoaiPhong.equals("Deluxe")) {
-            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.get(2),"#fffff",15,1,23);
+            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.get(2),"#ffffff",15,1,23);
         }
     }
 }
