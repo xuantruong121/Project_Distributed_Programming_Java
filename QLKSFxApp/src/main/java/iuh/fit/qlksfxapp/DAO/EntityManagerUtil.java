@@ -53,4 +53,3 @@ public class EntityManagerUtil {
         return metadataSources.buildMetadata().buildSessionFactory();
     }
 }
-
