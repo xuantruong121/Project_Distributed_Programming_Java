@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0d6b83bf-47f6-4cbb-a48b-e46be14bb241" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gradle/8.12/checksums/checksums.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.12/checksums/md5-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.12/checksums/sha1-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.12/executionHistory/executionHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.12/executionHistory/executionHistory.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.12/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.12/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/checksums.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/md5-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/sha1-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.8/dependencies-accessors/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.8/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/8.8/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/workspace-id.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/4d1e5315-daf2-4366-9bc7-4e819c984348.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/4d1e5315-daf2-4366-9bc7-4e819c984348/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/4d1e5315-daf2-4366-9bc7-4e819c984348/storage_v2/_src_/schema/quanlykhachsan.1aGAUA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/QLKSFxApp.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/BangPhanCongCaLamDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/CaLamViecDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/ChiTietDichVuDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/ChiTietDonBaoCaoDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/ChiTietDonDatPhongDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/ChiTietPhongDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/ChuongTrinhKhuyenMaiDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/DichVuDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/DieuKienApDungDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/DoiTuongApDungKhuyenMaiDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/DonBaoCaoDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/DonDatPhongDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/EntityManagerUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/GeneralDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/HoaDonDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/KhachHangDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/KhoDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/LichSuVatTuTrongKhoDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/LoaiDichVuDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/LoaiNhanVienDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/LoaiPhongDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/LoaiPhuThuDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/LoaiVatTuDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/NhanVienDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/PhongDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/PhuThuDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/TaiKhoanDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/TaiLieuChungCuDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/VatTuDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/VatTuTrongKhoDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/BangPhanCongCaLam.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/CaLamViec.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/ChiTietDichVu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/ChiTietDonBaoCao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/ChiTietDonDatPhong.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/ChiTietPhong.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/ChuongTrinhKhuyenMai.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Constraints/DonDatPhongConstraints.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Constraints/DonDatPhongValidator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Constraints/KhachHangConstraints.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Constraints/KhachHangValidator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Constraints/NhanVienConstraints.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Constraints/NhanVienValidator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/DichVu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/DieuKienApDung.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/DoiTuongApDungKhuyenMai.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/DonBaoCao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/DonDatPhong.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Enum/LoaiDieuKien.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Enum/LoaiKhuyenMai.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Enum/MucDoThietHai.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Enum/TrangThaiBangPhanCongCaLam.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Enum/TrangThaiChiTietDonDatPhong.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Enum/TrangThaiDonBaoCao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Enum/TrangThaiDonDatPhong.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Enum/TrangThaiPhong.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Enum/TrangThaiVatTu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/HoaDon.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/KhachHang.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Kho.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/LichSuVatTuTrongKho.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/LoaiDichVu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/LoaiNhanVien.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/LoaiPhong.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/LoaiPhuThu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/LoaiVatTu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/NhanVien.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Phong.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/PhuThu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/TaiKhoan.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/TaiLieuChungCu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/VatTu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/VatTuTrongKho.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/controller/LoginController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/controller/MainController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/controller/QuanLyNhanVienController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/controller/QuanLyNhanVienController$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/controller/QuanLyNhanVienController$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/controller/QuanLyNhanVienController$4.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/controller/QuanLyNhanVienController$5.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/controller/QuanLyNhanVienController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/service/DatPhongService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/service/PhongService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/META-INF/persistence.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/fxml/Main.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/fxml/QuanLyNhanVien.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/images/avatar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/images/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/images/notification.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/QuanLyNhanVienController$1.class.uniqueId0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/QuanLyNhanVienController$2.class.uniqueId4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/QuanLyNhanVienController$3.class.uniqueId3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/QuanLyNhanVienController$4.class.uniqueId1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/QuanLyNhanVienController$5.class.uniqueId2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/QuanLyNhanVienController.class.uniqueId5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/EntityManagerUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/EntityManagerUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyNhanVienController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyNhanVienController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyNhanVien.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyNhanVien.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/../sidebar">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="QLKSFxApp" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="QLKSFxApp" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="QLKSFxApp" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="QLKSFxApp" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="module-info" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2vXgeujwYJWkll9F2dcTY6JEfkE" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Gradle.Build QLKSFxApp.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.HelloApplication.main()].executor": "Run",
+    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.Main.main()].executor": "Run",
+    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.util.UserSession.main()].executor": "Run",
+    "Gradle.QLKSFxApp [build].executor": "Run",
+    "Gradle.QLKSFxApp [classes].executor": "Run",
+    "Gradle.QLKSFxApp [clean].executor": "Run",
+    "Gradle.QLKSFxApp [run].executor": "Run",
+    "JUnit.Whole project.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Merging main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Admin/AppData/Local/SceneBuilder/SceneBuilder.exe",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.30804598",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\lib" />
+      <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\util" />
+      <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\util\" />
+      <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\script" />
+      <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\data" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.QLKSFxApp [run]">
+    <configuration name="QLKSFxApp [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <EXTENSION ID="com.haulmont.jmixstudio.runconfiguration.JmixRunConfigurationExtension" isNew="true" />
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="QLKSFxApp [classes]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="classes" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="QLKSFxApp [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <EXTENSION ID="com.haulmont.jmixstudio.runconfiguration.JmixRunConfigurationExtension" isNew="true" />
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="QLKSFxApp [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--scan" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <EXTENSION ID="com.haulmont.jmixstudio.runconfiguration.JmixRunConfigurationExtension" isNew="true" />
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Whole project" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.QLKSFxApp [classes]" />
+      <item itemvalue="Gradle.QLKSFxApp [run]" />
+      <item itemvalue="Gradle.QLKSFxApp [build]" />
+      <item itemvalue="Gradle.QLKSFxApp [clean]" />
+      <item itemvalue="JUnit.Whole project" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.QLKSFxApp [run]" />
+        <item itemvalue="Gradle.QLKSFxApp [clean]" />
+        <item itemvalue="Gradle.QLKSFxApp [classes]" />
+        <item itemvalue="Gradle.QLKSFxApp [build]" />
+        <item itemvalue="JUnit.Whole project" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0d6b83bf-47f6-4cbb-a48b-e46be14bb241" name="Changes" comment="" />
+      <created>1744296934057</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744296934057</updated>
+      <workItem from="1744296934954" duration="2518000" />
+      <workItem from="1744299900732" duration="957000" />
+      <workItem from="1744389945055" duration="3205000" />
+      <workItem from="1744393206770" duration="3648000" />
+      <workItem from="1744429722371" duration="622000" />
+      <workItem from="1744439234192" duration="12221000" />
+      <workItem from="1744510606177" duration="74000" />
+      <workItem from="1744510696806" duration="2799000" />
+      <workItem from="1744557393505" duration="4876000" />
+      <workItem from="1744599554000" duration="2131000" />
+      <workItem from="1744639943228" duration="9696000" />
+      <workItem from="1744650084110" duration="2039000" />
+      <workItem from="1744683217378" duration="440000" />
+      <workItem from="1744704526394" duration="306000" />
+      <workItem from="1744704854352" duration="2865000" />
+      <workItem from="1744721456685" duration="3476000" />
+      <workItem from="1744774494215" duration="3583000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.bat" />
+  </component>
+</project>
