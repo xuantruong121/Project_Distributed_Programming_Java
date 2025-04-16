@@ -2,6 +2,7 @@ package iuh.fit.qlksfxapp.DAO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
@@ -72,5 +73,35 @@ public class GeneralDAO {
         // Trả về kết quả tìm được (có thể null nếu không tìm thấy)
         return results;
     }
+    public <T> List<T> findAll(Class<T> entityClass) {
+        List<T> results = em.createQuery("from " + entityClass.getName(), entityClass).getResultList();
 
+        if (!results.isEmpty()) {
+            for (T result : results) {
+                System.out.println(result.toString());
+            }
+        } else {
+            System.out.println("Không tìm thấy đối tượng");
+        }
+        return results;
+    }
+
+//    public <T> List<T> findAll(Class<T> entityClass) {
+//        // Create a typed query
+//        TypedQuery<T> query = em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e", entityClass);
+//
+//        // Execute query and get results
+//        List<T> results = query.getResultList();
+//
+//        // Log results (optional)
+//        if (!results.isEmpty()) {
+//            for (T result : results) {
+//                System.out.println(result.toString());
+//            }
+//        } else {
+//            System.out.println("Không tìm thấy đối tượng");
+//        }
+//
+//        return results;
+//    }
 }

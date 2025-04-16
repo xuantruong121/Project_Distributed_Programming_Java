@@ -9,10 +9,10 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1020.0" prefWidth="1920.0"
-            style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23.0.1"
+            style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21.0.6"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.MainController">
     <children>
-        <Pane fx:id="contentPane" layoutX="225.0" prefHeight="1020.0" prefWidth="1695.0"
+        <AnchorPane fx:id="contentPane" layoutX="225.0" prefHeight="1020.0" prefWidth="1695.0"
               style="-fx-background-color: white;"/>
         <Pane fx:id="menuPane" prefHeight="1020.0" prefWidth="225.0"
               style="-fx-background-color: #2E2E2E; -fx-border-color: black;">
@@ -42,7 +42,7 @@
                                     <children>
                                         <Button text="Đơn đặt phòng" onAction="#showRoomBookingPane" prefWidth="225.0"
                                                 style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"/>
-                                        <Button text="Bán đồ phòng" onAction="#showRoomSalesPane" prefWidth="225.0"
+                                        <Button text="Bản đồ phòng" onAction="#showRoomSalesPane" prefWidth="225.0"
                                                 style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 12px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"/>
                                         <Button text="Thông tin loại phòng" onAction="#showRoomTypePane"
                                                 prefWidth="225.0"

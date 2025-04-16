@@ -12,6 +12,7 @@ module iuh.fit.qlksfxapp {
     requires org.reflections;
     requires static lombok;
 
+
     exports iuh.fit.qlksfxapp to javafx.graphics;
     exports iuh.fit.qlksfxapp.controller;
 

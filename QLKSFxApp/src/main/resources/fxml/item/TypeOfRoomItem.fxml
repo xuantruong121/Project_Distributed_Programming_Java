@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox spacing="10.0" style="-fx-padding: 10; -fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;" xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.ItemController.TypeOfRoomItemController" prefWidth="0" maxWidth="Infinity">
+    <styleClass>
+        <String fx:value="list-cell" />
+        <String fx:value="cell" />
+    </styleClass>
+    <!-- Ảnh phòng -->
+    <ImageView fx:id="imgTypeOfRoom" fitHeight="150" fitWidth="200" preserveRatio="true" />
+    <!-- Phần thông tin -->
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+        <!-- Tiêu đề và trạng thái -->
+        <HBox alignment="CENTER" spacing="10">
+            <Label fx:id="availability" alignment="CENTER" style="-fx-text-fill: gray;" text="Trống 10/12" />
+         <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="roomType" style="-fx-font-weight: bold; -fx-font-size: 20px"/>
+        </HBox>
+        <!-- Diện tích, số người, số tre em, so nguoi lon -->
+        <HBox spacing="20">
+            <HBox spacing="5">
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <image>
+                        <Image url="@/images/icon/bed.png" />
+                    </image>
+                </ImageView>
+
+                <Label fx:id="bedLabel" text="1 giường" />
+            </HBox>
+            <HBox spacing="5">
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <image>
+                        <Image url="@/images/icon/area.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="areaLabel" text="12 m²" />
+            </HBox>
+            <HBox spacing="5">
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <image>
+                        <Image url="@/images/icon/child.png" />
+                    </image>
+                </ImageView>
+               <Label fx:id="childLabel" text="2" />
+            </HBox>
+            <HBox spacing="5">
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <image>
+                        <Image url="@/images/icon/adult.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="adultLabel" text="2" />
+            </HBox>
+        </HBox>
+        <!-- Mô tả -->
+        <Label fx:id="description" text="Mô tả phòng ngắn gọn ở đây" wrapText="true" />
+      <Region VBox.vgrow="ALWAYS" />
+      <HBox alignment="TOP_RIGHT" HBox.hgrow="ALWAYS">
+         <children>
+             <Label fx:id="price"
+                    style="-fx-text-fill: #2E8B57; -fx-font-weight: bold; -fx-font-size: 20px;"
+                    text="800.000 VND/Ngày"/>
+         </children>
+      </HBox>
+    </VBox>
+</HBox>
