@@ -11,9 +11,12 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1020.0" prefWidth="1920.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.MainController">
-    <BorderPane prefHeight="1020.0" prefWidth="1920.0">
+    <BorderPane AnchorPane.bottomAnchor="0"
+                AnchorPane.leftAnchor="0"
+                AnchorPane.rightAnchor="0"
+                AnchorPane.topAnchor="0">
         <left>
-            <Pane fx:id="menuPane" prefHeight="1020.0" prefWidth="225.0" style="-fx-background-color: #181e2b;">
+            <Pane fx:id="menuPane"  prefWidth="225.0" style="-fx-background-color: #181e2b;">
                 <!-- Toggle Button -->
                 <Button fx:id="toggleButton" layoutX="9.0" layoutY="22.0" onAction="#toggleSidebar" prefHeight="46.0" prefWidth="208.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 20px; -fx-border-color: white; -fx-border-radius: 5;" text="≡" />
                 <!-- Logo -->
@@ -66,10 +69,10 @@
             </Pane>
         </left>
         <center>
-            <BorderPane prefHeight="1020.0" prefWidth="1695.0" style="-fx-background-color: white;">
+            <BorderPane  style="-fx-background-color: white;">
                 <top>
                     <!-- Header Section -->
-                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="1695.0" style="-fx-background-color: white; -fx-border-color: #e9ecef; -fx-border-width: 0 0 1 0;">
+                    <HBox alignment="CENTER"  style="-fx-background-color: white; -fx-border-color: #e9ecef; -fx-border-width: 0 0 1 0;">
                         <HBox alignment="CENTER_RIGHT" spacing="15" HBox.hgrow="NEVER">
                             <Label fx:id="greetingLabel" style="-fx-font-size: 14px;" text="Chúc Mai Đức Trường có một ngày tuyệt vời!" />
                             <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;" text="Quản lý" />
@@ -89,7 +92,7 @@
                     </HBox>
                 </top>
                 <center>
-                    <Pane fx:id="contentPane" prefHeight="960.0" prefWidth="1695.0" style="-fx-background-color: #f8f9fa;" />
+                    <AnchorPane fx:id="contentPane" style="-fx-background-color: #f8f9fa;" />
                 </center>
             </BorderPane>
         </center>

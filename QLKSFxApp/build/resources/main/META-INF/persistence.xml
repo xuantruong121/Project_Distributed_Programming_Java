@@ -3,12 +3,6 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
-    <persistence-unit name="mariadb" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <!-- Entity classes will be scanned programmatically by EntityManagerUtil -->
-        <properties>
-            <!-- Minimal properties; most are set in EntityManagerUtil -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>
-        </properties>
+    <persistence-unit name="mariadb">
     </persistence-unit>
 </persistence>

@@ -15,32 +15,16 @@ import java.util.Objects;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-//
-//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/fxml/Main.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(),
-//                screenBounds.getWidth(),
-//                screenBounds.getHeight());
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Main.fxml")));
-        Scene scene = new Scene(root);
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/fxml/Main.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(),
+                screenBounds.getWidth(),
+                screenBounds.getHeight());
         primaryStage.setTitle("QLKS Fx App");
         primaryStage.setScene(scene);
-
-        // Set window to maximize but keep the frame/title bar
-        primaryStage.setMaximized(true);
-
-        // Add a keyboard shortcut for toggling between maximized and normal
-        scene.setOnKeyPressed(event -> {
-            if (event.isAltDown() && event.getCode() == KeyCode.ENTER) {
-                primaryStage.setMaximized(!primaryStage.isMaximized());
-            }
-        });
-
         primaryStage.show();
     }
-
-
     public static void main(String[] args) {
         launch();
     }

@@ -77,11 +77,11 @@ public class TypeOfRoomItemController {
     private void initStyle(){
         price.setFont(new Font(20));
         if(loaiPhong.getTenLoaiPhong().equals("Standard")){
-            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.getFirst(),"#fffff",15,1,16);
+            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.getFirst(),"#ffffff",15,1,16);
         } else if (loaiPhong.getTenLoaiPhong().equals("Superior")) {
-            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.get(1),"#fffff",15,1,16);
+            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.get(1),"#ffffff",15,1,16);
         } else if (loaiPhong.getTenLoaiPhong().equals("Deluxe")) {
-            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.get(2),"#fffff",15,1,16);
+            StyleUtil.applyStyleToNode(roomType,StyleUtil.TYPE_OF_ROOM_COLOR.get(2),"#ffffff",15,1,16);
         }
     }
 }
