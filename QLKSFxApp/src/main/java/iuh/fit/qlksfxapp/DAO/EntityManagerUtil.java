@@ -65,7 +65,8 @@ public class EntityManagerUtil {
                 cause = cause.getCause();
                 System.err.println("Caused by: " + cause.getMessage());
             }
-            throw new RuntimeException("Failed to create EntityManagerFactory: " + e.getMessage() + ". Root cause: " + cause.getMessage(), e);
+            throw new RuntimeException("Failed to create EntityManagerFactory: " + e.getMessage() + ". Root cause: "
+                    + cause.getMessage(), e);
         }
     }
 }
