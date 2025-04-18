@@ -1,0 +1,24 @@
+[33m4752316[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: checkout: moving from main to main
+[33m4752316[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{1}: checkout: moving from main to main
+[33m4752316[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{2}: commit: them trang thong tin loai phong
+[33mb1c664e[m HEAD@{3}: commit (merge): Merge remote-tracking branch 'origin/main'
+[33mc0fbe53[m HEAD@{4}: reset: moving to HEAD
+[33mc0fbe53[m HEAD@{5}: checkout: moving from DucTruong to main
+[33mffb6d01[m[33m ([m[1;31morigin/DucTruong[m[33m, [m[1;32mDucTruong[m[33m)[m HEAD@{6}: checkout: moving from main to DucTruong
+[33mc0fbe53[m HEAD@{7}: checkout: moving from DucTruong to main
+[33mffb6d01[m[33m ([m[1;31morigin/DucTruong[m[33m, [m[1;32mDucTruong[m[33m)[m HEAD@{8}: pull: Fast-forward
+[33meac109a[m HEAD@{9}: checkout: moving from main to DucTruong
+[33mc0fbe53[m HEAD@{10}: commit: truong
+[33m9bf88ed[m HEAD@{11}: checkout: moving from main to main
+[33m9bf88ed[m HEAD@{12}: commit: update
+[33m469b684[m HEAD@{13}: pull: Fast-forward
+[33m3876203[m HEAD@{14}: checkout: moving from DucTruong to main
+[33meac109a[m HEAD@{15}: commit: update add DonDatPhong
+[33m9537c31[m HEAD@{16}: commit: them CRUDTest
+[33m3876203[m HEAD@{17}: checkout: moving from main to DucTruong
+[33m3876203[m HEAD@{18}: commit: them testCRUD
+[33m85cb1c8[m HEAD@{19}: pull: Fast-forward
+[33m5dd1acb[m HEAD@{20}: commit: them DAO
+[33m461c5d3[m HEAD@{21}: commit: truong update
+[33me1da8ba[m HEAD@{22}: commit: truong update
+[33m1e9f19b[m HEAD@{23}: clone: from https://github.com/Kennguyen121/Project_Distributed_Programming_Java.git
