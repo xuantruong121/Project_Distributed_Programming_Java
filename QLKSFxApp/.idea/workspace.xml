@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d6b83bf-47f6-4cbb-a48b-e46be14bb241" name="Changes" comment="them .bat">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MapOfRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MapOfRoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MapOfRoom.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MapOfRoom.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="a5b18c3d-bc0b-4d65-b489-23ac00908303" name="Changes" comment="rs cfl" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,6 +82,9 @@
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -97,55 +96,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.HelloApplication.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Gradle.Build QLKSFxApp.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.DAO.DonDatPhongDAO.main()].executor": "Run",
-    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.HelloApplication.main()].executor": "Run",
-    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.Main.main()].executor": "Run",
-    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.util.UserSession.main()].executor": "Run",
-    "Gradle.QLKSFxApp [build].executor": "Run",
-    "Gradle.QLKSFxApp [classes].executor": "Run",
-    "Gradle.QLKSFxApp [clean].executor": "Run",
-    "Gradle.QLKSFxApp [run].executor": "Run",
-    "JUnit.Whole project.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "DucTruong",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Admin/AppData/Local/SceneBuilder/SceneBuilder.exe",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.30804598",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mariadb"
-    ]
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Study\Java phan tan\Project\Project_Distributed_Programming_Java\QLKSFxApp\src\main\resources\images" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\lib" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\util" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\util\" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\script" />
-      <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\HKI-2025-2026\PhanTanJV\git\Project_Distributed_Programming_Java\QLKSFxApp\src\main\resources\fxml\css" />
@@ -261,16 +227,9 @@
         <item itemvalue="Gradle.QLKSFxApp [run]" />
         <item itemvalue="Gradle.QLKSFxApp [clean]" />
         <item itemvalue="Gradle.QLKSFxApp [classes]" />
+        <item itemvalue="Gradle.QLKSFxApp [classes]" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.387" />
-        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.387" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -296,9 +255,27 @@
       <workItem from="1744704526394" duration="306000" />
       <workItem from="1744704854352" duration="2865000" />
       <workItem from="1744721456685" duration="3476000" />
+      <workItem from="1744774494215" duration="20411000" />
       <workItem from="1744774494215" duration="3583000" />
       <workItem from="1744858590171" duration="17000000" />
     </task>
+    <task id="LOCAL-00001" summary="rs cfl">
+      <option name="closed" value="true" />
+      <created>1744990399809</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744990399809</updated>
+    </task>
+    <task id="LOCAL-00002" summary="rs cfl">
+      <option name="closed" value="true" />
+      <created>1744990433963</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744990433963</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,46 +284,29 @@
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.bat" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="them .bat" />
-    <option name="LAST_COMMIT_MESSAGE" value="them .bat" />
+    <MESSAGE value="rs cfl" />
+    <option name="LAST_COMMIT_MESSAGE" value="rs cfl" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java</url>
-          <line>258</line>
-          <properties class="iuh.fit.qlksfxapp.controller.MainController" method="showReportsPane">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/StyleUtil.java</url>
           <line>20</line>
           <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java</url>
-          <line>377</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java</url>
-          <line>376</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java</url>
-          <line>378</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java</url>
-          <line>382</line>
-          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

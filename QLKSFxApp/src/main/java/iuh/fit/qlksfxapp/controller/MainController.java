@@ -232,45 +232,195 @@ public class MainController {
         }
     }
     // Room Management submenu handlers
+    @FXML
+    private void showRoomManagementPane() {
+        try {
+            // Load the Room Management interface from FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/QuanLyPhong.fxml"));
+            Parent roomManagementView = loader.load();
+
+            // Clear previous content and add new interface to content pane
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(roomManagementView);
+
+            // Set anchor properties to fill the content pane
+            AnchorPane.setTopAnchor(roomManagementView, 0.0);
+            AnchorPane.setBottomAnchor(roomManagementView, 0.0);
+            AnchorPane.setLeftAnchor(roomManagementView, 0.0);
+            AnchorPane.setRightAnchor(roomManagementView, 0.0);
+
+            // Mark the Room Management button as active
+            setActiveMenu(roomManagementButton);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Throwable cause = e;
+            while (cause.getCause() != null) {
+                cause = cause.getCause();
+            }
+            System.err.println("Cannot load Room Management interface: " + e.getMessage());
+
+            // Hiển thị thông báo lỗi
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText("Không thể tải giao diện Quản lý Phòng");
+            alert.setContentText("Lỗi: " + cause.getMessage());
+            alert.showAndWait();
+
+            // Hiển thị một giao diện thông báo đơn giản thay thế
+            Pane errorPane = new Pane();
+            errorPane.setStyle("-fx-background-color: white;");
+            Label errorLabel = new Label("Không thể tải giao diện Quản lý Phòng. Vui lòng kiểm tra lại cấu hình Hibernate.");
+            errorLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: red; -fx-padding: 20;");
+            errorPane.getChildren().add(errorLabel);
+
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(errorPane);
+            AnchorPane.setTopAnchor(errorPane, 0.0);
+            AnchorPane.setBottomAnchor(errorPane, 0.0);
+            AnchorPane.setLeftAnchor(errorPane, 0.0);
+            AnchorPane.setRightAnchor(errorPane, 0.0);
+
+            // Mark the Room Management button as active
+            setActiveMenu(roomManagementButton);
+        }
+    }
+
     // Statistics submenu handlers
     @FXML
     private void showRevenueStatsPane() {
-        updateContent("Thống kê doanh thu", "white");
+        updateContent("Thống kê doanh thu");
     }
 
     @FXML
     private void showInventoryStatsPane() {
-        updateContent("Thống kê kho", "white");
+        updateContent("Thống kê kho");
     }
 
     @FXML
     private void showCustomerStatsPane() {
-        updateContent("Thống kê khách", "white");
+        updateContent("Thống kê khách");
     }
 
     // Other menu handlers
     @FXML
     private void showPromotionsPane() {
-        updateContent("Quản lý khuyến mãi", "white");
+        updateContent("Quản lý khuyến mãi");
         setActiveMenu(promotionsButton);
     }
 
     @FXML
     private void showReportsPane() {
-        updateContent("Đơn báo cáo", "white");
+        updateContent("Đơn báo cáo");
         setActiveMenu(reportsButton);
     }
 
     @FXML
     private void showServiceManagementPane() {
-        updateContent("Quản lý dịch vụ", "white");
-        setActiveMenu(serviceManagementButton);
+        try {
+            // Load the Service Management interface from FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/QuanLyDichVu.fxml"));
+            Parent serviceManagementView = loader.load();
+
+            // Clear previous content and add new interface to content pane
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(serviceManagementView);
+
+            // Set anchor properties to fill the content pane
+            AnchorPane.setTopAnchor(serviceManagementView, 0.0);
+            AnchorPane.setBottomAnchor(serviceManagementView, 0.0);
+            AnchorPane.setLeftAnchor(serviceManagementView, 0.0);
+            AnchorPane.setRightAnchor(serviceManagementView, 0.0);
+
+            // Mark the Service Management button as active
+            setActiveMenu(serviceManagementButton);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Throwable cause = e;
+            while (cause.getCause() != null) {
+                cause = cause.getCause();
+            }
+            System.err.println("Cannot load Service Management interface: " + e.getMessage());
+
+            // Hiển thị thông báo lỗi
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText("Không thể tải giao diện Quản lý Dịch vụ");
+            alert.setContentText("Lỗi: " + cause.getMessage());
+            alert.showAndWait();
+
+            // Hiển thị một giao diện thông báo đơn giản thay thế
+            Pane errorPane = new Pane();
+            errorPane.setStyle("-fx-background-color: white;");
+            Label errorLabel = new Label("Không thể tải giao diện Quản lý Dịch vụ. Vui lòng kiểm tra lại cấu hình Hibernate.");
+            errorLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: red; -fx-padding: 20;");
+            errorPane.getChildren().add(errorLabel);
+
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(errorPane);
+            AnchorPane.setTopAnchor(errorPane, 0.0);
+            AnchorPane.setBottomAnchor(errorPane, 0.0);
+            AnchorPane.setLeftAnchor(errorPane, 0.0);
+            AnchorPane.setRightAnchor(errorPane, 0.0);
+
+            // Mark the Service Management button as active
+            setActiveMenu(serviceManagementButton);
+        }
     }
 
     @FXML
     private void showCustomerManagementPane() {
-        updateContent("Quản lý khách hàng", "white");
-        setActiveMenu(customerManagementButton);
+        try {
+            // Load the Customer Management interface from FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/QuanLyKhachHang.fxml"));
+            Parent customerManagementView = loader.load();
+
+            // Clear previous content and add new interface to content pane
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(customerManagementView);
+
+            // Set anchor properties to fill the content pane
+            AnchorPane.setTopAnchor(customerManagementView, 0.0);
+            AnchorPane.setBottomAnchor(customerManagementView, 0.0);
+            AnchorPane.setLeftAnchor(customerManagementView, 0.0);
+            AnchorPane.setRightAnchor(customerManagementView, 0.0);
+
+            // Mark the Customer Management button as active
+            setActiveMenu(customerManagementButton);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Throwable cause = e;
+            while (cause.getCause() != null) {
+                cause = cause.getCause();
+            }
+            System.err.println("Cannot load Customer Management interface: " + e.getMessage());
+
+            // Hiển thị thông báo lỗi
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText("Không thể tải giao diện Quản lý Khách hàng");
+            alert.setContentText("Lỗi: " + cause.getMessage());
+            alert.showAndWait();
+
+            // Hiển thị một giao diện thông báo đơn giản thay thế
+            Pane errorPane = new Pane();
+            errorPane.setStyle("-fx-background-color: white;");
+            Label errorLabel = new Label("Không thể tải giao diện Quản lý Khách hàng. Vui lòng kiểm tra lại cấu hình Hibernate.");
+            errorLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: red; -fx-padding: 20;");
+            errorPane.getChildren().add(errorLabel);
+
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(errorPane);
+            AnchorPane.setTopAnchor(errorPane, 0.0);
+            AnchorPane.setBottomAnchor(errorPane, 0.0);
+            AnchorPane.setLeftAnchor(errorPane, 0.0);
+            AnchorPane.setRightAnchor(errorPane, 0.0);
+
+            // Mark the Customer Management button as active
+            setActiveMenu(customerManagementButton);
+        }
     }
 
     @FXML
@@ -329,19 +479,19 @@ public class MainController {
 
     @FXML
     private void showInventoryManagementPane() {
-        updateContent("Quản lý kho", "white");
+        updateContent("Quản lý kho");
         setActiveMenu(inventoryManagementButton);
     }
 
     @FXML
     private void showDiscountManagementPane() {
-        updateContent("Quản lý khuyến mãi", "white");
+        updateContent("Quản lý khuyến mãi");
         setActiveMenu(discountManagementButton);
     }
 
     @FXML
     public void showMainPane() {
-        updateContent("Trang chủ", "white");
+        updateContent("Trang chủ");
         loadDashboardContent();
     }
 
@@ -351,12 +501,12 @@ public class MainController {
         System.out.println("Loading dashboard content");
     }
 
-    private void updateContent(String title, String backgroundColor) {
+    private void updateContent(String title) {
         // Update content pane
         contentPane.getChildren().clear();
 
         Pane pane = new Pane();
-        pane.setStyle("-fx-background-color: " + backgroundColor + ";");
+        pane.setStyle("-fx-background-color: " + "white" + ";");
         Label label = new Label(title);
         label.setStyle("-fx-font-size: 20px; -fx-padding: 20;");
         pane.getChildren().add(label);
