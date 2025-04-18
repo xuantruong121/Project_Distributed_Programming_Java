@@ -44,17 +44,20 @@ public class KhachHang {
     @NotBlank(message = "Quốc tịch không được để trống")
     @Column(columnDefinition = "nvarchar(50)")
     private String quocTich;
+
     @PrePersist
-    public void prePersist(){
-        if(this.maKhachHang == null){
+    public void prePersist() {
+        if (this.maKhachHang == null) {
             this.maKhachHang = generateMaKhachHang();
         }
     }
-    public String generateMaKhachHang(){
+
+    public String generateMaKhachHang() {
         String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyy"));
         String query = "SELECT COUNT(k) FROM KhachHang k where k.maKhachHang like '" + formatDate + "%'";
-        long count = (long) EntityManagerUtil.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
-        System.out.println(formatDate + String.format("%06d",count + 1));
-        return formatDate + String.format("%06d",count + 1);
+        long count = (long) EntityManagerUtil.getEntityManagerFactory().createEntityManager()
+                .createQuery(query).getSingleResult();
+        System.out.println(formatDate + String.format("%06d", count + 1));
+        return formatDate + String.format("%06d", count + 1);
     }
 }
