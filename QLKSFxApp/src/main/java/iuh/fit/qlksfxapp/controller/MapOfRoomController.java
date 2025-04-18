@@ -14,12 +14,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MapOfRoomController {
@@ -30,7 +33,9 @@ public class MapOfRoomController {
     private int currentPage = 0;
     private final int ITEMS_PER_PAGE = 9; // 3x3 grid
     private GeneralDAO generalDAO;
-    private boolean isLoading = false;
+    @FXML private DatePicker ngayDenInp,ngayDiInp;
+    @FXML private TextField soNguoiLonInp,soTreEmInp,tenDoanInp,gioDenInp,gioDiInp;
+    @FXML private ComboBox<String> loaiPhongCmb,viTriCmb;
 
     @FXML
     public void initialize() {
@@ -43,6 +48,7 @@ public class MapOfRoomController {
                 loadMoreItems();
             }
         });
+        initComboBox();
     }
     private void loadRoomItems() {
         // Xóa constraints cũ nếu có
@@ -118,37 +124,36 @@ public class MapOfRoomController {
     private void handleSearch(ActionEvent actionEvent) {
         System.out.println("Search button clicked");
     }
-    // Thêm biến instance
+    private void initComboBox(){
+        List<String> loaiPhong = allPhong.stream().filter(phong -> phong.getLoaiPhong() != null)
+                .map(phong -> phong.getLoaiPhong().getTenLoaiPhong())
+                .distinct()
+                .toList();
+        List<String> viTri = allPhong.stream().map(Phong::getViTri)
+                .distinct()
+                .toList();
+        loaiPhongCmb.getItems().clear();
+        loaiPhongCmb.getItems().add("--- Tất cả ---");
+        loaiPhongCmb.getItems().addAll(loaiPhong);
+        loaiPhongCmb.setValue("--- Tất cả ---");
 
-    private void setupScrollListener() {
-        scrollPane.vvalueProperty().addListener((obs, oldValue, newValue) -> {
-            // Kiểm tra đã cuộn gần cuối (80%) và không đang load
-            if (newValue.doubleValue() > 0.8 && !isLoading && currentPage * ITEMS_PER_PAGE < allPhong.size()) {
-                isLoading = true;
-                Platform.runLater(() -> {
-                    loadMoreItems();
-                    isLoading = false;
-                });
-            }
-        });
+        viTriCmb.getItems().clear();
+        viTriCmb.getItems().add("--- Tất cả ---");
+        viTriCmb.getItems().addAll(viTri);
+        viTriCmb.setValue("--- Tất cả ---");
+
     }
+    private void handleFilter(){
+        LocalDateTime ngayDen =
+
+
+    }
+    private LocalDateTime handleDayAndTime(LocalDate ngay, String gioVaPhut){
+        if(ngay == null || gioVaPhut == null || gioVaPhut.isEmpty() )
+            return null;
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime localTime = LocalTime.parse(gioVaPhut, timeFormatter);
+        return LocalDateTime.of(ngay, localTime);
+    }
+    // Thêm biến instance
 }
-//       listView.setCellFactory(param -> new ListCell<LoaiPhong>() {
-//@Override
-//protected void updateItem(LoaiPhong item, boolean empty) {
-//    super.updateItem(item, empty);
-//    if (empty || item == null) {
-//        setGraphic(null);
-//    } else {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/item/TypeOfRoomItem.fxml"));
-//            HBox itemUI = loader.load();
-//            TypeOfRoomItemController controller = loader.getController();
-//            controller.setData(item, "Trống 10/12");
-//            setGraphic(itemUI);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//}
-//            });
