@@ -1,0 +1,31 @@
+
+/* room-status.css */
+/* TRONG - Trống */
+.room-status-trong {
+    -fx-text-fill: #17A2B8;
+}
+
+/* DANG_SU_DUNG - Đang sử dụng */
+.room-status-dang-su-dung {
+    -fx-text-fill: #DC3545;
+}
+
+/* DANG_DON_DEP - Đang dọn dẹp */
+.room-status-dang-don-dep {
+    -fx-text-fill: #6C757D;
+}
+
+/* DAT_TRUOC - Đặt trước */
+.room-status-dat-truoc {
+    -fx-text-fill: #FFC107;
+}
+
+/* DANG_SUA_CHUA - Đang sửa chữa */
+.room-status-dang-sua-chua {
+    -fx-text-fill: #FD7E14;
+}
+
+/* KHONG_SU_DUNG - Không sử dụng */
+.room-status-khong-su-dung {
+    -fx-text-fill: #343A40;
+}

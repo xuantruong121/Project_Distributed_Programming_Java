@@ -90,7 +90,6 @@ public class InfoTypeOfRoomController {
         try {
             // Construct the image path
             String imagePath = "/images/typeOfRoom/" + tenLoaiPhong + ".jpg";
-
             // Get the resource URL
             URL imageUrl = getClass().getResource(imagePath);
             System.out.println("Image URL: " + imageUrl);
