@@ -15,6 +15,14 @@ public class StyleUtil {
             "#8cd8fa",// superior
             "#ffd658"// deluxe
     ));
+    public static final List<String> STATUS_COLOR_OF_ROOM = new ArrayList<>(Arrays.asList(
+            "#17A2B8",//            TRONG("Trống"),
+            "#DC3545",//            DANG_SU_DUNG("Đang sử dụng"),
+            "#6C757D",//            DANG_DON_DEP("Đang dọn dẹp"),
+            "#FFC107",//            DAT_TRUOC("Đặt trước"),
+            "#FD7E14",//            DANG_SUA_CHUA("Đang sửa chữa"),
+            "#343A40"//             KHONG_SU_DUNG("Không sử dụng");
+    ));
 
     // Hàm áp dụng style cho bất kỳ Node nào (Label, Button, v.v.)
     public static void applyStyleToNode(Node node, String backgroundColor, String borderColor, double borderRadius, double borderWidth, double fontSize) {

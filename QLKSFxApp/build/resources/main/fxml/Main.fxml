@@ -32,9 +32,9 @@
                     <VBox spacing="2">
                         <Button fx:id="roomManagementButton" onAction="#toggleRoomManagementMenu" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 15 5 15;" text="Quản lý đặt phòng ▼" />
                         <VBox fx:id="roomManagementSubMenu" managed="false" spacing="2" visible="false">
-                            <Button onAction="#showRoomBookingPane" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Đơn đặt phòng" />
-                            <Button onAction="#showRoomSalesPane" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Bán đồ phòng" />
-                            <Button onAction="#showRoomTypePane" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Thông tin loại phòng" />
+                            <Button onAction="#handleSubRoomManager" userData="BOOKING" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Đơn đặt phòng" />
+                            <Button onAction="#handleSubRoomManager" userData="MAP" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Bán đồ phòng" />
+                            <Button onAction="#handleSubRoomManager" userData="TYPE_INFO" prefHeight="35.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px; -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;" text="Thông tin loại phòng" />
                         </VBox>
                     </VBox>
 

@@ -1,5 +1,6 @@
 package iuh.fit.qlksfxapp.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -88,7 +89,6 @@ public class MainController {
 
         // Update greeting based on time of day
         updateGreeting();
-        handleRoomManagementSubMenu();
     }
 
     private void setupSidebarMenu() {
@@ -231,23 +231,7 @@ public class MainController {
             setActiveMenu(statisticsButton);
         }
     }
-
     // Room Management submenu handlers
-    @FXML
-    private void showRoomBookingPane() {
-        updateContent("Đơn đặt phòng", "white");
-    }
-
-    @FXML
-    private void showRoomSalesPane() {
-        updateContent("Bán đồ phòng", "white");
-    }
-
-    @FXML
-    private void showRoomTypePane() {
-        updateContent("Thông tin loại phòng", "white");
-    }
-
     // Statistics submenu handlers
     @FXML
     private void showRevenueStatsPane() {
@@ -382,18 +366,22 @@ public class MainController {
         AnchorPane.setLeftAnchor(pane, 0.0);
         AnchorPane.setRightAnchor(pane, 0.0);
     }
-    private void loadRoomManagementSubMenuForButton(String buttonText) {
+    @FXML
+    public void handleSubRoomManager(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        String buttonType = (String) clickedButton.getUserData();
+
         try {
             // Giả sử bạn có các FXML tương ứng với từng buttonText
-            String fxmlFile = switch (buttonText) {
-                case "Đơn đặt phòng" -> "/fxml/BookingForm.fxml";
-                case "Bản đồ phòng" -> "/fxml/MapOfRoom.fxml";
-                case "Thông tin loại phòng" -> "/fxml/InfoTypeOfRoom.fxml";
+            String fxmlFile = switch (buttonType) {
+                case "BOOKING" -> "/fxml/BookingForm.fxml";
+                case "MAP" -> "/fxml/MapOfRoom.fxml";
+                case "TYPE_INFO" -> "/fxml/InfoTypeOfRoom.fxml";
                 default -> null;
             };
-
             if (fxmlFile != null) {
                 URL resource = getClass().getResource(fxmlFile);
+                System.out.println("Resource URL: " + resource);
                 if (resource == null) {
                     throw new IOException("Cannot find resource: " + fxmlFile);
                 }
@@ -408,22 +396,8 @@ public class MainController {
                 AnchorPane.setRightAnchor(newContent, 0.0);
             }
         } catch (IOException e) {
-            System.err.println("Failed to load FXML for: " + buttonText);
             e.printStackTrace();
             // Consider showing an alert to the user
         }
     }
-    private void handleRoomManagementSubMenu (){
-        for (var node : roomManagementSubMenu.getChildren()) {
-            if (node instanceof Button) {
-                ((Button) node).setOnAction(event -> {
-                    // Xóa nội dung hiện tại
-                    contentPane.getChildren().clear();
-                    // Tải nội dung mới
-                    loadRoomManagementSubMenuForButton(((Button) node).getText());
-                });
-            }
-        }
-    }
-
 }
