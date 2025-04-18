@@ -1,10 +1,39 @@
 package iuh.fit.qlksfxapp.DAO;
 
+import iuh.fit.qlksfxapp.Entity.LoaiDichVu;
 import jakarta.persistence.EntityManager;
 
-public class LoaiDichVuDAO {
-    private EntityManager em =null;
+import java.util.List;
+
+public class LoaiDichVuDAO extends GeneralDAO {
+    private EntityManager em = null;
+
     public LoaiDichVuDAO() {
+        super();
         em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+    }
+
+    // Get all service types
+    public List<LoaiDichVu> getAllLoaiDichVu() {
+        return findAll(LoaiDichVu.class);
+    }
+
+    // Find service type by ID
+    public LoaiDichVu findByMaLoaiDichVu(String maLoaiDichVu) {
+        return findOb(LoaiDichVu.class, maLoaiDichVu);
+    }
+
+    // Find service types by name (partial match)
+    public List<LoaiDichVu> findByTenLoaiDichVu(String tenLoaiDichVu) {
+        EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            return em.createQuery(
+                            "SELECT ldv FROM LoaiDichVu ldv WHERE ldv.tenLoaiDichVu LIKE :tenLoaiDichVu",
+                            LoaiDichVu.class)
+                    .setParameter("tenLoaiDichVu", "%" + tenLoaiDichVu + "%")
+                    .getResultList();
+        } finally {
+            em.close();
+        }
     }
 }

@@ -1,0 +1,104 @@
+/* Styles for buttons */
+.button {
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 1);
+    -fx-transition-duration: 0.2s;
+}
+
+.button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);
+}
+
+/* Search button */
+#searchButton {
+    -fx-background-color: #1a56db;
+}
+
+#searchButton:hover {
+    -fx-background-color: #0e3fa3;
+}
+
+/* Refresh button */
+#refreshButton {
+    -fx-background-color: #6c757d;
+}
+
+#refreshButton:hover {
+    -fx-background-color: #5a6268;
+}
+
+/* Choose image button */
+#chonAnhButton {
+    -fx-background-color: #6c757d;
+}
+
+#chonAnhButton:hover {
+    -fx-background-color: #5a6268;
+}
+
+/* Add button */
+#addButton {
+    -fx-background-color: #28a745;
+}
+
+#addButton:hover {
+    -fx-background-color: #218838;
+}
+
+/* Update button */
+#updateButton {
+    -fx-background-color: #fd7e14;
+}
+
+#updateButton:hover {
+    -fx-background-color: #e8700a;
+}
+
+/* Delete button */
+#deleteButton {
+    -fx-background-color: #dc3545;
+}
+
+#deleteButton:hover {
+    -fx-background-color: #c82333;
+}
+
+/* Table styles */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #e9ecef;
+    -fx-border-radius: 5;
+}
+
+.table-view .column-header {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #e9ecef;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #e2e8f0;
+    -fx-text-fill: black;
+}
+
+.table-view .table-row-cell:selected .text {
+    -fx-fill: black;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #f0f4f8;
+}
+
+/* Text field styles */
+.text-field, .text-area, .combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 4;
+}
+
+.text-field:focused, .text-area:focused, .combo-box:focused {
+    -fx-border-color: #80bdff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,123,255,0.25), 4, 0, 0, 0);
+}

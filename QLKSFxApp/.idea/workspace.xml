@@ -4,7 +4,96 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d6b83bf-47f6-4cbb-a48b-e46be14bb241" name="Changes" comment="rs cfl" />
+    <list default="true" id="a5b18c3d-bc0b-4d65-b489-23ac00908303" name="Changes" comment="rs cfl">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyDichVuController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyKhachHangController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyPhongController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/SplashScreenController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyDichVu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyKhachHang.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyPhong.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/SplashScreen.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/DV01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/DV02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/DV03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/DV04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/DV05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/DV06.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/DV07.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/DV08.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Deluxe.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Deluxe1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Deluxe2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Deluxe3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Deluxe4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Deluxe5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/PT01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/PT02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/PT03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/PT04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Standard.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Standard1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Standard2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Standard3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Standard4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Standard5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Superior.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Superior1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Superior2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Superior3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Superior4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Superior5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/confused.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/happy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/loading2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/loading3.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/love.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/man.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/pexels-dtanpt-1329711.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/pexels-julieaagaard-1374125.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/placeHolder.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/sad.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/woman.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.12/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.12/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.12/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/DichVuDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/DichVuDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/GeneralDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/GeneralDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/LoaiDichVuDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/DAO/LoaiDichVuDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/KhachHang.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/KhachHang.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Phong.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Entity/Phong.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/iuh/fit/qlksfxapp/controller/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/fxml/QuanLyNhanVien.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/fxml/QuanLyNhanVien.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/DichVuDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/DichVuDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/GeneralDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/GeneralDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/LoaiDichVuDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/LoaiDichVuDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/KhachHang.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/KhachHang.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/Phong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/Phong.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyNhanVien.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyNhanVien.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,6 +171,9 @@
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -95,53 +187,20 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.HelloApplication.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Gradle.Build QLKSFxApp.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.DAO.DonDatPhongDAO.main()].executor": "Run",
-    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.HelloApplication.main()].executor": "Run",
-    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.Main.main()].executor": "Run",
-    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.util.UserSession.main()].executor": "Run",
-    "Gradle.QLKSFxApp [build].executor": "Run",
-    "Gradle.QLKSFxApp [classes].executor": "Run",
-    "Gradle.QLKSFxApp [clean].executor": "Run",
-    "Gradle.QLKSFxApp [run].executor": "Run",
-    "JUnit.Whole project.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Admin/AppData/Local/SceneBuilder/SceneBuilder.exe",
+    "git-widget-placeholder": "Merging main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.30804598",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mariadb"
-    ]
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Study\Java phan tan\Project\Project_Distributed_Programming_Java\QLKSFxApp\src\main\resources\images" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\lib" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\util" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\util\" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\script" />
-      <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\HKI-2025-2026\PhanTanJV\git\Project_Distributed_Programming_Java\QLKSFxApp\src\main\resources\fxml\css" />
@@ -257,16 +316,9 @@
         <item itemvalue="Gradle.QLKSFxApp [run]" />
         <item itemvalue="Gradle.QLKSFxApp [clean]" />
         <item itemvalue="Gradle.QLKSFxApp [classes]" />
+        <item itemvalue="Gradle.QLKSFxApp [classes]" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.387" />
-        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.387" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -292,6 +344,7 @@
       <workItem from="1744704526394" duration="306000" />
       <workItem from="1744704854352" duration="2865000" />
       <workItem from="1744721456685" duration="3476000" />
+      <workItem from="1744774494215" duration="20411000" />
       <workItem from="1744774494215" duration="3583000" />
       <workItem from="1744858590171" duration="17000000" />
     </task>
