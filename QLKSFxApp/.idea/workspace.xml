@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d6b83bf-47f6-4cbb-a48b-e46be14bb241" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="0d6b83bf-47f6-4cbb-a48b-e46be14bb241" name="Changes" comment="them .bat" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,7 +101,7 @@
     &quot;git-widget-placeholder&quot;: &quot;XuanTruong&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/AppData/Local/SceneBuilder/SceneBuilder.exe&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Study/Java phan tan/Project/Project_Distributed_Programming_Java/QLKSFxApp/src/main/resources/images&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -123,11 +121,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Study\Java phan tan\Project\Project_Distributed_Programming_Java\QLKSFxApp\src\main\resources\images" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\lib" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\util" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\util\" />
       <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\script" />
-      <recent name="D:\Study\Java phan tan\thuchanh\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\data" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.QLKSFxApp [run]">
@@ -243,8 +241,8 @@
       <list>
         <item itemvalue="Gradle.QLKSFxApp [run]" />
         <item itemvalue="Gradle.QLKSFxApp [clean]" />
-        <item itemvalue="Gradle.QLKSFxApp [classes]" />
         <item itemvalue="Gradle.QLKSFxApp [build]" />
+        <item itemvalue="Gradle.QLKSFxApp [classes]" />
         <item itemvalue="JUnit.Whole project" />
       </list>
     </recent_temporary>
@@ -281,7 +279,7 @@
       <workItem from="1744704526394" duration="306000" />
       <workItem from="1744704854352" duration="2865000" />
       <workItem from="1744721456685" duration="3476000" />
-      <workItem from="1744774494215" duration="3583000" />
+      <workItem from="1744774494215" duration="20411000" />
     </task>
     <servers />
   </component>
@@ -290,5 +288,10 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.bat" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="them .bat" />
+    <MESSAGE value="rs cfl" />
+    <option name="LAST_COMMIT_MESSAGE" value="rs cfl" />
   </component>
 </project>
