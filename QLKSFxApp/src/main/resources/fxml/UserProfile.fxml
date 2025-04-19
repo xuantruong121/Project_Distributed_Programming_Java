@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="1800.0" prefWidth="1000.0" style="-fx-background-color: white;"
+            xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="iuh.fit.qlksfxapp.controller.UserProfileController">
+    <stylesheets>
+        <URL value="@../css/styles.css"/>
+    </stylesheets>
+    <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+        <HBox alignment="CENTER_LEFT" spacing="20.0">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Thông Tin Người Dùng"/>
+        </HBox>
+        <Separator/>
+        <HBox spacing="30.0" VBox.vgrow="NEVER" maxHeight="400.0">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+            </padding>
+
+            <!-- Left side - Profile Image and User Info -->
+            <VBox alignment="TOP_CENTER" prefWidth="200.0" spacing="10.0"
+                  style="-fx-background-color: #f8f9fa; -fx-background-radius: 10;">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                </padding>
+                <ImageView fx:id="profileImageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                    <Image url="@../images/avatar.png"/>
+                </ImageView>
+                <Label fx:id="nameLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;"
+                       text="Hồ Sinh Tăng"/>
+                <Label fx:id="roleLabel" style="-fx-font-size: 16px; -fx-text-fill: #6c757d;"
+                       text="Quản lý"/>
+            </VBox>
+
+            <!-- Middle - Buttons -->
+            <VBox alignment="CENTER" spacing="15.0" prefWidth="200.0">
+                <padding>
+                    <Insets top="30.0"/>
+                </padding>
+                <Button fx:id="changeImageButton" mnemonicParsing="false" onAction="#handleChangeImage"
+                        prefHeight="40.0" prefWidth="200.0" text="Thay Đổi Hình Ảnh">
+                    <styleClass>
+                        <String fx:value="primary-button"/>
+                    </styleClass>
+                </Button>
+                <Button fx:id="changePasswordButton" mnemonicParsing="false"
+                        onAction="#handleChangePassword" prefHeight="40.0" prefWidth="200.0"
+                        text="Đổi Mật Khẩu">
+                    <styleClass>
+                        <String fx:value="secondary-button"/>
+                    </styleClass>
+                </Button>
+                <Button fx:id="editProfileButton" mnemonicParsing="false" onAction="#handleEditProfile"
+                        prefHeight="40.0" prefWidth="200.0" text="Chỉnh Sửa Thông Tin">
+                    <styleClass>
+                        <String fx:value="primary-button"/>
+                    </styleClass>
+                </Button>
+            </VBox>
+
+            <!-- Right side - User Information -->
+            <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                <padding>
+                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                </padding>
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Thông Tin Cá Nhân"/>
+
+                <HBox spacing="20.0">
+                    <VBox prefWidth="300.0" spacing="8.0">
+                        <VBox spacing="5.0">
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;"
+                                   text="Mã nhân viên"/>
+                            <Label fx:id="staffIdLabel"
+                                   style="-fx-font-size: 16px; -fx-font-weight: bold;"
+                                   text="RAT-250002"/>
+                        </VBox>
+                        <VBox spacing="5.0">
+
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;"
+                                   text="Họ và tên"/>
+                            <Label fx:id="fullNameLabel" style="-fx-font-size: 16px;"
+                                   text="Hồ Sinh Tăng"/>
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;"
+                                   text="Số điện thoại"/>
+                            <Label fx:id="phoneLabel" style="-fx-font-size: 16px;"
+                                   text="0919662139"/>
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;"
+                                   text="Email"/>
+                            <Label fx:id="emailLabel" style="-fx-font-size: 16px;"
+                                   text="đang.bui@hotmail.com"/>
+                        </VBox>
+                    </VBox>
+
+                    <VBox prefWidth="300.0" spacing="8.0">
+                        <VBox spacing="5.0">
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;"
+                                   text="Ngày sinh"/>
+                            <Label fx:id="dobLabel" style="-fx-font-size: 16px;"
+                                   text="12/05/1986"/>
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;"
+                                   text="Giới tính"/>
+                            <Label fx:id="genderLabel" style="-fx-font-size: 16px;"
+                                   text="Nam"/>
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;"
+                                   text="Căn cước công dân"/>
+                            <Label fx:id="idCardLabel" style="-fx-font-size: 16px;"
+                                   text="681863220665"/>
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;"
+                                   text="Trạng thái"/>
+                            <Label fx:id="statusLabel" style="-fx-font-size: 16px;"
+                                   text="Nghỉ phép"/>
+                        </VBox>
+                    </VBox>
+                </HBox>
+
+                <VBox spacing="5.0">
+                    <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;" text="Địa chỉ"/>
+                    <Label fx:id="addressLabel" style="-fx-font-size: 16px;"
+                           text="187 Kim Fort, Thừa Thiên Huế, FL KHN8 9JF" wrapText="true"/>
+                </VBox>
+
+                <Separator/>
+
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Thông Tin Công Việc"/>
+
+                <HBox spacing="20.0">
+                    <VBox prefWidth="300.0" spacing="15.0">
+                        <VBox spacing="5.0">
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;"
+                                   text="Loại nhân viên"/>
+                            <Label fx:id="staffTypeLabel" style="-fx-font-size: 16px;"
+                                   text="Quản lý"/>
+                        </VBox>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </HBox>
+
+        <!-- Work Schedule Section -->
+        <VBox spacing="5.0" VBox.vgrow="ALWAYS">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="5.0"/>
+            </padding>
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Ca Làm Việc"/>
+            <Separator/>
+            <TableView fx:id="scheduleTableView" prefHeight="1200.0" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="dateColumn" prefWidth="120.0" text="Ngày"/>
+                    <TableColumn fx:id="shiftColumn" prefWidth="100.0" text="Ca"/>
+                    <TableColumn fx:id="startTimeColumn" prefWidth="120.0" text="Giờ bắt đầu"/>
+                    <TableColumn fx:id="endTimeColumn" prefWidth="120.0" text="Giờ kết thúc"/>
+                    <TableColumn fx:id="locationColumn" prefWidth="150.0" text="Vị trí"/>
+                    <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Trạng thái"/>
+                    <TableColumn fx:id="notesColumn" prefWidth="250.0" text="Ghi chú"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
+</AnchorPane>

@@ -5,9 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -18,9 +15,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 
 public class MainController {
     @FXML
@@ -34,9 +29,9 @@ public class MainController {
     @FXML
     private Button homeButton;
     @FXML
-    private Button roomManagementButton;
+    private Button bookingManagementButton;
     @FXML
-    private VBox roomManagementSubMenu;
+    private VBox bookingManagementSubMenu;
     @FXML
     private Button statisticsButton;
     @FXML
@@ -56,11 +51,15 @@ public class MainController {
     @FXML
     private Button discountManagementButton;
     @FXML
+    private Button roomManagementButton;
+    @FXML
     private ImageView logo;
     @FXML
     private TextField searchField;
     @FXML
     private ImageView userAvatar;
+    @FXML
+    private Button userProfileButton;
     @FXML
     private Button notificationButton;
     @FXML
@@ -132,7 +131,7 @@ public class MainController {
             greeting = "Chào buổi tối";
         }
 
-        greetingLabel.setText(greeting + " Mai Đức Trường, chúc bạn có một ngày tuyệt vời!");
+        greetingLabel.setText(greeting + ", chúc bạn có một ngày tuyệt vời!");
     }
 
     private void createExpandButton() {
@@ -179,7 +178,7 @@ public class MainController {
 
         // Close submenus if open
         if (isRoomManagementMenuOpen) {
-            toggleRoomManagementMenu();
+            toggleBookingManagementMenu();
         }
         if (isStatisticsMenuOpen) {
             toggleStatisticsMenu();
@@ -207,15 +206,15 @@ public class MainController {
     }
 
     @FXML
-    private void toggleRoomManagementMenu() {
+    private void toggleBookingManagementMenu() {
         isRoomManagementMenuOpen = !isRoomManagementMenuOpen;
-        roomManagementSubMenu.setVisible(isRoomManagementMenuOpen);
-        roomManagementSubMenu.setManaged(isRoomManagementMenuOpen);
-        roomManagementButton.setText("QUẢN LÝ ĐẶT PHÒNG " + (isRoomManagementMenuOpen ? "▲" : "▼"));
+        bookingManagementSubMenu.setVisible(isRoomManagementMenuOpen);
+        bookingManagementSubMenu.setManaged(isRoomManagementMenuOpen);
+        bookingManagementButton.setText("QUẢN LÝ ĐẶT PHÒNG " + (isRoomManagementMenuOpen ? "▲" : "▼"));
 
         // Set active state if opened
         if (isRoomManagementMenuOpen) {
-            setActiveMenu(roomManagementButton);
+            setActiveMenu(bookingManagementButton);
         }
     }
 
@@ -235,7 +234,7 @@ public class MainController {
     @FXML
     private void showRoomManagementPane() {
         try {
-            // Load the Room Management interface from FXML
+            // Load the Booking Management interface from FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/QuanLyPhong.fxml"));
             Parent roomManagementView = loader.load();
 
@@ -282,7 +281,7 @@ public class MainController {
             AnchorPane.setRightAnchor(errorPane, 0.0);
 
             // Mark the Room Management button as active
-            setActiveMenu(roomManagementButton);
+            setActiveMenu(bookingManagementButton);
         }
     }
 
@@ -516,8 +515,37 @@ public class MainController {
         AnchorPane.setLeftAnchor(pane, 0.0);
         AnchorPane.setRightAnchor(pane, 0.0);
     }
+
     @FXML
-    public void handleSubRoomManager(ActionEvent event) {
+    public void showUserProfile() {
+        try {
+            // Tạo FXMLLoader để tải UserProfile.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserProfile.fxml"));
+            Parent userProfileView = loader.load();
+
+            // Clear previous content and add new interface to content pane
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(userProfileView);
+
+            // Set anchor properties to fill the content pane
+            AnchorPane.setTopAnchor(userProfileView, 0.0);
+            AnchorPane.setBottomAnchor(userProfileView, 0.0);
+            AnchorPane.setLeftAnchor(userProfileView, 0.0);
+            AnchorPane.setRightAnchor(userProfileView, 0.0);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            // Hiển thị thông báo lỗi
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText("Không thể mở thông tin người dùng");
+            alert.setContentText("Lỗi: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+    @FXML
+    public void handleSubBookingManager(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
         String buttonType = (String) clickedButton.getUserData();
 
