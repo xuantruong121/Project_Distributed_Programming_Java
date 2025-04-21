@@ -1,7 +1,7 @@
 package iuh.fit.qlksfxapp.controller;
 
 import iuh.fit.qlksfxapp.Entity.KhachHang;
-import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -84,7 +84,7 @@ public class QuanLyKhachHangController {
     private final ObservableList<KhachHang> khachHangList = FXCollections.observableArrayList();
 
     // DAO object
-    private final GeneralDAO generalDAO = new GeneralDAO();
+    private final GeneralDAOImpl generalDAOImpl = new GeneralDAOImpl();
 
     @FXML
     private void initialize() {
@@ -217,7 +217,7 @@ public class QuanLyKhachHangController {
             Thread thread = new Thread(() -> {
                 try {
                     // Sử dụng GeneralDAO để lấy danh sách khách hàng
-                    List<KhachHang> result = generalDAO.findAll(KhachHang.class);
+                    List<KhachHang> result = generalDAOImpl.findAll(KhachHang.class);
 
                     // Cập nhật UI trên thread chính
                     javafx.application.Platform.runLater(() -> {
@@ -320,7 +320,7 @@ public class QuanLyKhachHangController {
             setCustomerInfo(newCustomer);
 
             // Lưu vào database sử dụng GeneralDAO
-            generalDAO.addOb(newCustomer);
+            generalDAOImpl.addOb(newCustomer);
 
             // Cập nhật danh sách và làm mới form
             loadKhachHangData();
@@ -349,14 +349,14 @@ public class QuanLyKhachHangController {
 
         try {
             // Tìm khách hàng trong database sử dụng GeneralDAO
-            KhachHang customerToUpdate = generalDAO.findOb(KhachHang.class, selectedCustomer.getMaKhachHang());
+            KhachHang customerToUpdate = generalDAOImpl.findOb(KhachHang.class, selectedCustomer.getMaKhachHang());
 
             if (customerToUpdate != null) {
                 // Cập nhật thông tin
                 setCustomerInfo(customerToUpdate);
 
                 // Sử dụng DAO để cập nhật khách hàng
-                generalDAO.updateOb(customerToUpdate);
+                generalDAOImpl.updateOb(customerToUpdate);
 
                 // Cập nhật danh sách
                 loadKhachHangData();
@@ -390,11 +390,11 @@ public class QuanLyKhachHangController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 // Tìm khách hàng trong database sử dụng GeneralDAO
-                KhachHang customerToDelete = generalDAO.findOb(KhachHang.class, selectedCustomer.getMaKhachHang());
+                KhachHang customerToDelete = generalDAOImpl.findOb(KhachHang.class, selectedCustomer.getMaKhachHang());
 
                 if (customerToDelete != null) {
                     // Sử dụng DAO để xóa khách hàng
-                    generalDAO.deleteOb(customerToDelete);
+                    generalDAOImpl.deleteOb(customerToDelete);
 
                     // Cập nhật danh sách và làm mới form
                     loadKhachHangData();

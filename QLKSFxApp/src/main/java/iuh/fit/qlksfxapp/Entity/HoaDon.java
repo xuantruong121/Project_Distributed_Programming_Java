@@ -1,11 +1,12 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
@@ -13,7 +14,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class HoaDon {
+public class HoaDon implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(15)")
     @Pattern(regexp = "^\\d{6}-(DV|DP)-\\d{5}$",message = "Mã hóa đơn phải có dạng DDMMYY-TT-ZZZZZ ")
@@ -64,7 +67,7 @@ public class HoaDon {
         EntityManager em = null;
         long count = 0;
         try {
-            em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+            em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
             Query query = em.createQuery(queryStr);
             query.setParameter("pattern", maHoaDon + "%");
             count = (long) query.getSingleResult();
@@ -80,3 +83,4 @@ public class HoaDon {
 
 
 }
+

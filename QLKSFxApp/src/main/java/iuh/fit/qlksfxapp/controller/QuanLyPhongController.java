@@ -3,7 +3,7 @@ package iuh.fit.qlksfxapp.controller;
 import iuh.fit.qlksfxapp.Entity.LoaiPhong;
 import iuh.fit.qlksfxapp.Entity.Phong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiPhong;
-import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -83,7 +83,7 @@ public class QuanLyPhongController {
     private final ObservableList<LoaiPhong> loaiPhongList = FXCollections.observableArrayList();
 
     // DAO object
-    private final GeneralDAO generalDAO = new GeneralDAO();
+    private final GeneralDAOImpl generalDAOImpl = new GeneralDAOImpl();
 
     @FXML
     private void initialize() {
@@ -224,7 +224,7 @@ public class QuanLyPhongController {
             Thread thread = new Thread(() -> {
                 try {
                     // Sử dụng GeneralDAO để lấy danh sách loại phòng
-                    List<LoaiPhong> result = generalDAO.findAll(LoaiPhong.class);
+                    List<LoaiPhong> result = generalDAOImpl.findAll(LoaiPhong.class);
 
                     // Cập nhật UI trên thread chính
                     javafx.application.Platform.runLater(() -> {
@@ -279,7 +279,7 @@ public class QuanLyPhongController {
             Thread thread = new Thread(() -> {
                 try {
                     // Sử dụng GeneralDAO để lấy danh sách phòng
-                    List<Phong> result = generalDAO.findAll(Phong.class);
+                    List<Phong> result = generalDAOImpl.findAll(Phong.class);
 
                     // Cập nhật UI trên thread chính
                     javafx.application.Platform.runLater(() -> {
@@ -475,7 +475,7 @@ public class QuanLyPhongController {
             setRoomInfo(newRoom);
 
             // Lưu vào database sử dụng GeneralDAO
-            generalDAO.addOb(newRoom);
+            generalDAOImpl.addOb(newRoom);
 
             // Cập nhật danh sách và làm mới form
             loadPhongData();
@@ -504,14 +504,14 @@ public class QuanLyPhongController {
 
         try {
             // Tìm phòng trong database sử dụng GeneralDAO
-            Phong roomToUpdate = generalDAO.findOb(Phong.class, selectedRoom.getMaPhong());
+            Phong roomToUpdate = generalDAOImpl.findOb(Phong.class, selectedRoom.getMaPhong());
 
             if (roomToUpdate != null) {
                 // Cập nhật thông tin
                 setRoomInfo(roomToUpdate);
 
                 // Sử dụng DAO để cập nhật phòng
-                generalDAO.updateOb(roomToUpdate);
+                generalDAOImpl.updateOb(roomToUpdate);
 
                 // Cập nhật danh sách
                 loadPhongData();
@@ -545,11 +545,11 @@ public class QuanLyPhongController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 // Tìm phòng trong database sử dụng GeneralDAO
-                Phong roomToDelete = generalDAO.findOb(Phong.class, selectedRoom.getMaPhong());
+                Phong roomToDelete = generalDAOImpl.findOb(Phong.class, selectedRoom.getMaPhong());
 
                 if (roomToDelete != null) {
                     // Sử dụng DAO để xóa phòng
-                    generalDAO.deleteOb(roomToDelete);
+                    generalDAOImpl.deleteOb(roomToDelete);
 
                     // Cập nhật danh sách và làm mới form
                     loadPhongData();
@@ -601,9 +601,6 @@ public class QuanLyPhongController {
         phong.setTrangThaiPhong(trangThaiPhongComboBox.getValue());
         phong.setLoaiPhong(loaiPhongComboBox.getValue());
 
-        // Nếu đã chọn hình ảnh mới, sử dụng đường dẫn đó
-        // Nếu chưa chọn hình ảnh, tạo đường dẫn dựa trên mã phòng
-        // Đường dẫn sẽ được tạo theo quy ước: /images/room/[mã phòng].jpg
         phong.setHinhAnh(Objects.requireNonNullElseGet(selectedImagePath, () -> "/images/room/" + maPhong + ".jpg"));
     }
 

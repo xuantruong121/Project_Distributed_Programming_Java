@@ -1,5 +1,6 @@
 package iuh.fit.qlksfxapp.controller;
 
+import iuh.fit.qlksfxapp.service.RMIService;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -8,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -102,6 +105,11 @@ public class SplashScreenController {
                 Platform.runLater(() -> statusLabel.setText("Đang kết nối cơ sở dữ liệu..."));
                 Thread.sleep(800);
 
+                // Khởi tạo RMI Service
+                Platform.runLater(() -> statusLabel.setText("Đang kết nối RMI Server..."));
+                initializeRMIService();
+                Thread.sleep(800);
+
                 // Hoàn tất
                 Platform.runLater(() -> statusLabel.setText("Đang chuẩn bị giao diện..."));
             } catch (InterruptedException e) {
@@ -110,6 +118,18 @@ public class SplashScreenController {
         });
         thread.setDaemon(true);
         thread.start();
+    }
+
+    private void initializeRMIService() {
+        try {
+            // Khởi tạo RMIService
+            RMIService.getInstance();
+            System.out.println("RMIService initialized successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Failed to initialize RMIService: " + e.getMessage());
+            // Không hiển thị alert ở đây vì chưa chuyển sang giao diện chính
+        }
     }
 
     private void openMainWindow() {
@@ -147,6 +167,17 @@ public class SplashScreenController {
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Lỗi khi mở giao diện chính: " + e.getMessage());
+
+            // Hiển thị thông báo lỗi
+            showErrorAlert("Lỗi khởi động", "Không thể mở giao diện chính: " + e.getMessage());
         }
+    }
+
+    private void showErrorAlert(String title, String content) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

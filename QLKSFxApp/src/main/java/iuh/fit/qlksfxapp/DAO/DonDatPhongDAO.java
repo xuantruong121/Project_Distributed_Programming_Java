@@ -2,44 +2,56 @@ package iuh.fit.qlksfxapp.DAO;
 
 import iuh.fit.qlksfxapp.Entity.DonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiDonDatPhong;
-import iuh.fit.qlksfxapp.Entity.Phong;
-import jakarta.persistence.EntityManager;
 
 import java.time.LocalDateTime;
+import java.rmi.RemoteException;
 import java.util.List;
 
-public class DonDatPhongDAO {
-    private EntityManager em =null;
-    public DonDatPhongDAO() {
-        em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
-    }
-
-    public DonDatPhong getDonDatPhongNowByIdPhong(String idPhong){
-        LocalDateTime now = LocalDateTime.now();
-        String query = "SELECT d FROM DonDatPhong d JOIN ChiTietDonDatPhong c ON d.maDonDatPhong = c.donDatPhong.maDonDatPhong WHERE c.phong.maPhong = :idPhong AND d.ngayNhan <= :now AND d.ngayTra >= :now AND d.trangThai = :trangThai";
-        List<DonDatPhong> donDatPhongs = em.createQuery(query, DonDatPhong.class)
-                .setParameter("idPhong", idPhong)
-                .setParameter("now", now)
-                .setParameter("trangThai", TrangThaiDonDatPhong.DA_XAC_NHAN)
-                .getResultList();
-        if(!donDatPhongs.isEmpty()){
-            return donDatPhongs.getFirst();
-        }
-        return null;
-    }
-
-public static void main(String[] args) {
-    DonDatPhongDAO donDatPhongDAO = new DonDatPhongDAO();
-    GeneralDAO generalDAO = new GeneralDAO();
-    List<Phong> phongs = generalDAO.findAll(Phong.class);
-    for (Phong phong : phongs) {
-        System.out.println("Phong: " + phong.getMaPhong());
-        DonDatPhong donDatPhong = donDatPhongDAO.getDonDatPhongNowByIdPhong(phong.getMaPhong());
-        if (donDatPhong != null) {
-            System.out.println("Don Dat Phong: " + donDatPhong.getMaDonDatPhong());
-        } else {
-            System.out.println("Khong co don dat phong nao");
-        }
-    }
+/**
+ * Interface for DonDatPhong DAO operations
+ */
+public interface DonDatPhongDAO extends GeneralDAO {
+    
+    /**
+     * Get all bookings
+     * @return A list of all bookings
+     */
+    List<DonDatPhong> getAllDonDatPhong() throws RemoteException;
+    
+    /**
+     * Find booking by ID
+     * @param maDonDatPhong The ID of the booking
+     * @return The found booking or null if not found
+     */
+    DonDatPhong findByMaDonDatPhong(String maDonDatPhong) throws RemoteException;
+    
+    /**
+     * Find bookings by customer ID
+     * @param maKhachHang The customer ID
+     * @return A list of bookings for the specified customer
+     */
+    List<DonDatPhong> findByMaKhachHang(String maKhachHang) throws RemoteException;
+    
+    /**
+     * Find bookings by status
+     * @param trangThai The status to search for
+     * @return A list of bookings with the specified status
+     */
+    List<DonDatPhong> findByTrangThai(TrangThaiDonDatPhong trangThai) throws RemoteException;
+    
+    /**
+     * Find bookings by date range
+     * @param startDate The start date
+     * @param endDate The end date
+     * @return A list of bookings within the date range
+     */
+    List<DonDatPhong> findByDateRange(LocalDateTime startDate, LocalDateTime endDate) throws RemoteException;
+    
+    /**
+     * Get current booking for a specific room
+     * @param maPhong The room ID
+     * @return The current booking for the specified room or null if not found
+     */
+    DonDatPhong getDonDatPhongNowByIdPhong(String maPhong) throws RemoteException;
 }
-}
+

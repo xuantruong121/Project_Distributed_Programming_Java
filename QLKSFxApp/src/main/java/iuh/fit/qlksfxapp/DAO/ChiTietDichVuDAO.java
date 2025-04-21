@@ -1,10 +1,40 @@
 package iuh.fit.qlksfxapp.DAO;
 
-import jakarta.persistence.EntityManager;
+import iuh.fit.qlksfxapp.Entity.ChiTietDichVu;
 
-public class ChiTietDichVuDAO {
-    private EntityManager em =null;
-    public ChiTietDichVuDAO() {
-        em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
-    }
+import java.rmi.RemoteException;
+import java.util.List;
+
+/**
+ * Interface for ChiTietDichVu DAO operations
+ */
+public interface ChiTietDichVuDAO extends GeneralDAO {
+    
+    /**
+     * Get all service details
+     * @return A list of all service details
+     */
+    List<ChiTietDichVu> getAllChiTietDichVu() throws RemoteException;
+    
+    /**
+     * Find service detail by ID
+     * @param maChiTietDichVu The ID of the service detail
+     * @return The found service detail or null if not found
+     */
+    ChiTietDichVu findByMaChiTietDichVu(String maChiTietDichVu) throws RemoteException;
+    
+    /**
+     * Find service details by booking ID
+     * @param maDonDatPhong The booking ID
+     * @return A list of service details for the specified booking
+     */
+    List<ChiTietDichVu> findByMaDonDatPhong(String maDonDatPhong) throws RemoteException;
+    
+    /**
+     * Find service details by service ID
+     * @param maDichVu The service ID
+     * @return A list of service details for the specified service
+     */
+    List<ChiTietDichVu> findByMaDichVu(String maDichVu) throws RemoteException;
 }
+

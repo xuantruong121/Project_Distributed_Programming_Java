@@ -2,7 +2,7 @@ package iuh.fit.qlksfxapp.controller;
 
 import iuh.fit.qlksfxapp.Entity.NhanVien;
 import iuh.fit.qlksfxapp.Entity.TaiKhoan;
-import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -87,12 +87,12 @@ public class UserProfileController {
     private TableColumn<WorkSchedule, String> notesColumn;
 
     private NhanVien currentUser;
-    private GeneralDAO generalDAO;
+    private GeneralDAOImpl generalDAOImpl;
     private final ObservableList<WorkSchedule> scheduleList = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
-        generalDAO = new GeneralDAO();
+        generalDAOImpl = new GeneralDAOImpl();
 
         // Trong thực tế, bạn sẽ lấy thông tin người dùng hiện tại từ session hoặc service
         // Ở đây tôi sẽ giả lập bằng cách lấy một nhân viên từ database
@@ -302,7 +302,7 @@ public class UserProfileController {
                 currentUser.setHinhAnh(targetPath.toString());
 
                 // Cập nhật vào database
-                generalDAO.updateOb(currentUser);
+                generalDAOImpl.updateOb(currentUser);
 
                 // Hiển thị hình ảnh mới
                 Image newImage = new Image(targetPath.toUri().toString());
@@ -374,7 +374,7 @@ public class UserProfileController {
 
             try {
                 // Lấy tài khoản của người dùng
-                TaiKhoan taiKhoan = generalDAO.findOb(TaiKhoan.class, currentUser.getMaNhanVien());
+                TaiKhoan taiKhoan = generalDAOImpl.findOb(TaiKhoan.class, currentUser.getMaNhanVien());
 
                 if (taiKhoan != null) {
                     // Kiểm tra mật khẩu cũ
@@ -385,7 +385,7 @@ public class UserProfileController {
 
                     // Cập nhật mật khẩu mới
                     taiKhoan.setMatKhau(newPass);
-                    generalDAO.updateOb(taiKhoan);
+                    generalDAOImpl.updateOb(taiKhoan);
 
                     showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đổi mật khẩu", "Mật khẩu đã được cập nhật thành công.");
                 } else {

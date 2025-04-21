@@ -1,6 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.Entity.Constraints.DonDatPhongConstraints;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiDonDatPhong;
 import jakarta.persistence.*;
@@ -10,6 +10,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,7 +18,9 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @Setter
 @DonDatPhongConstraints
-public class DonDatPhong {
+public class DonDatPhong implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(9)")
     private String maDonDatPhong;
@@ -60,9 +63,10 @@ public class DonDatPhong {
     public String generateMaDonDatPhong(){
         String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyy"));
         String query = "SELECT COUNT(d) FROM DonDatPhong d where d.maDonDatPhong like '" + formatDate + "%'";
-        EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
         long count = (long)em.createQuery(query).getSingleResult();
         em.close();
         return formatDate + String.format("%03d",count + 1);
     }
 }
+

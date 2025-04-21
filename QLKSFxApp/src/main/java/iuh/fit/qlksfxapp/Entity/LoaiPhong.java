@@ -1,6 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,10 +9,14 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
-public class LoaiPhong {
+public class LoaiPhong implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(3)")
     @Pattern(regexp = "^LP\\d{1}$",message = "ma loai phong không hợp lệ (LPX)")
@@ -38,7 +42,8 @@ public class LoaiPhong {
     }
     public String generateMaLoaiPhong(){
         String query = "SELECT COUNT(l) FROM LoaiPhong l";
-        long count = (long) EntityManagerUtil.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
+        long count = (long) EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
         return "LP" + (count+1);
     }
 }
+

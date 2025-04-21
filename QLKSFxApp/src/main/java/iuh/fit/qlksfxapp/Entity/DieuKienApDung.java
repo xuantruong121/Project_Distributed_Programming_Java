@@ -1,6 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.Entity.Enum.LoaiDieuKien;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -9,10 +9,14 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
-public class DieuKienApDung {
+public class DieuKienApDung implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(10)")
     @Pattern(regexp = "^CT\\d{2}-\\d{3}-\\d{1}$",message = "Mã điều kiện không hợp lệ (CTYY-XXX-Z)")
@@ -35,9 +39,10 @@ public class DieuKienApDung {
     public String generateMaDieuKien(){
         String maDieuKien = this.chuongTrinhKhuyenMai.getMaChuongTrinhKhuyenMai()+ "-";
         String query = "SELECT COUNT(d) FROM DieuKienApDung d where d.maDieuKien like '" + maDieuKien + "%'";
-        EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
         long count = (long)em.createQuery(query).getSingleResult();
         em.close();
         return maDieuKien + String.format("%01d",count + 1);
     }
 }
+

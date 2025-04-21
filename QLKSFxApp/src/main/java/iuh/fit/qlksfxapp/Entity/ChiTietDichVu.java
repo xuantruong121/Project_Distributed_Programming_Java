@@ -1,6 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -8,13 +8,16 @@ import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter
 @Setter
-public class ChiTietDichVu {
+public class ChiTietDichVu implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(17)")
     @Pattern(regexp = "^\\d{6}-\\d{2}-\\d{6}$") // DDMMYY-XX-KKKKKK
@@ -51,7 +54,7 @@ public class ChiTietDichVu {
         EntityManager em = null;
         long count = 0;
         try {
-            em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+            em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
             Query query = em.createQuery(queryStr);
             query.setParameter("pattern", pattern + "%");
             count = (long) query.getSingleResult();
@@ -66,3 +69,4 @@ public class ChiTietDichVu {
     }
 
 }
+

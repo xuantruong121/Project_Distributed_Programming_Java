@@ -1,17 +1,20 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class LichSuVatTuTrongKho {
+public class LichSuVatTuTrongKho implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(12)")
     @Pattern(regexp = "^K\\d{1}-\\d{3}-\\d{5}$",message = "Mã lịch sử vật tư trong kho không hợp lệ (KX-ZZZ-YYYYY)")
@@ -37,7 +40,8 @@ public class LichSuVatTuTrongKho {
     public String generateMaLichSuVatTuTrongKho(){
         String pattern = this.vatTuTrongKho.getMaVatTuTrongKho()+"-";
         String query = "SELECT COUNT(l) FROM LichSuVatTuTrongKho l WHERE l.maLichSuVatTuTrongKho LIKE '" + pattern + "%'";
-        long count = (long) EntityManagerUtil.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
+        long count = (long) EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
         return pattern + String.format("%05d",count + 1);
     }
 }
+

@@ -1,6 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.Entity.Constraints.NhanVienConstraints;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -16,7 +17,9 @@ import java.time.format.DateTimeFormatter;
 @Setter
 @NhanVienConstraints
 @ToString
-public class NhanVien {
+public class NhanVien implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(10)")
     private String maNhanVien;
@@ -60,7 +63,8 @@ public class NhanVien {
         }
         String pattern= tenLoaiNV + "-" + LocalDate.now().format(DateTimeFormatter.ofPattern("yy"));
         String query = "SELECT COUNT(n) FROM NhanVien n where n.maNhanVien like '" + pattern + "%'";
-        long count = (long) EntityManagerUtil.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
+        long count = (long) EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
         return pattern + String.format("%04d",count + 1);
     }
 }
+

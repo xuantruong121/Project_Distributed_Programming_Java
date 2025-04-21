@@ -1,20 +1,15 @@
 package iuh.fit.qlksfxapp.controller;
 
-import iuh.fit.qlksfxapp.DAO.DonDatPhongDAO;
-import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.DonDatPhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import iuh.fit.qlksfxapp.Entity.DonDatPhong;
-import iuh.fit.qlksfxapp.Entity.LoaiPhong;
 import iuh.fit.qlksfxapp.Entity.Phong;
 import iuh.fit.qlksfxapp.controller.ItemController.RoomItemController;
-import iuh.fit.qlksfxapp.controller.ItemController.TypeOfRoomItemController;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 
@@ -29,14 +24,14 @@ public class MapOfRoomController {
     private List<Phong> allPhong;
     private int currentPage = 0;
     private final int ITEMS_PER_PAGE = 9; // 3x3 grid
-    private GeneralDAO generalDAO;
+    private GeneralDAOImpl generalDAOImpl;
     private boolean isLoading = false;
 
     @FXML
     public void initialize() {
         // Initialize the grid pane with room items
-        generalDAO = new GeneralDAO();
-        allPhong= generalDAO.findAll(Phong.class);
+        generalDAOImpl = new GeneralDAOImpl();
+        allPhong= generalDAOImpl.findAll(Phong.class);
         loadRoomItems();
         scrollPane.vvalueProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue.doubleValue() == 1.0) { // Cuộn đến cuối
@@ -85,8 +80,8 @@ public class MapOfRoomController {
                 Node item = loader.load();
                 RoomItemController itemController = loader.getController();
 
-                DonDatPhongDAO donDatPhongDAO = new DonDatPhongDAO();
-                DonDatPhong donDatPhong = donDatPhongDAO.getDonDatPhongNowByIdPhong(phong.getMaPhong());
+                DonDatPhongDAOImpl donDatPhongDAOImpl = new DonDatPhongDAOImpl();
+                DonDatPhong donDatPhong = donDatPhongDAOImpl.getDonDatPhongNowByIdPhong(phong.getMaPhong());
                 itemController.setData(phong, donDatPhong);
 
                 item.setOnMouseClicked(event -> {
