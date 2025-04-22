@@ -16,7 +16,7 @@
             style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21.0.6"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.MainController">
     <stylesheets>
-        <URL value="@../css/styles.css"/>
+        <URL value="@../fxml/css/styles.css"/>
     </stylesheets>
     <BorderPane AnchorPane.bottomAnchor="0"
                 AnchorPane.leftAnchor="0"
