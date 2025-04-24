@@ -43,6 +43,20 @@ public interface ChiTietDonDatPhongDAO extends GeneralDAO {
      * @return A list of booking details for the specified room
      */
     List<ChiTietDonDatPhong> findByMaPhong(String maPhong) throws RemoteException;
+     ChiTietDonDatPhong findChiTietWithKhachHang(String maChiTiet);
+
+     ChiTietDonDatPhong findChiTietDonDatPhongByMaDonDatPhongAndMaPhong(String maDonDatPhong, String maPhong);
+     List<ChiTietDonDatPhong> findChiTietDonDatPhongTheoMaDonDatPhong(String maDonDatPhong);
+     Double getTongTienDichVuByMaChiTietDonDatPhong(String maChiTietDonDatPhong);
+     Double getTienPhongTheoMaChiTietDonDatPhong(String ma);
+     Double getTongTienPhuThuByMaChiTietDonDatPhong(String maChiTietDonDatPhong);
+
+     double getTongTienDichVuByMaDonDatPhong(String ma);
+     double getTongTienPhuThuByMaDonDatPhong(String ma);
+     double getTongTienPhongByMaDonDatPhong(String ma);
+     double getTongTienByNgay(LocalDate startDate, LocalDate endDate);
+
+
 }
 
 //import java.util.Set;

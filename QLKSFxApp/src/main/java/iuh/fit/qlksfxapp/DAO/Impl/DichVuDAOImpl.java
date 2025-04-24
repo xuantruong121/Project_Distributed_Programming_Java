@@ -4,6 +4,7 @@ import iuh.fit.qlksfxapp.DAO.DichVuDAO;
 import iuh.fit.qlksfxapp.Entity.DichVu;
 import jakarta.persistence.EntityManager;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 public class DichVuDAOImpl extends GeneralDAOImpl implements DichVuDAO {
@@ -29,6 +30,20 @@ public class DichVuDAOImpl extends GeneralDAOImpl implements DichVuDAO {
     // Find services by name (partial match)
     @Override
     public List<DichVu> searchByName(String tenDichVu) {
+        EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
+        try {
+            return em.createQuery(
+                            "SELECT dv FROM DichVu dv WHERE dv.tenDichVu LIKE :tenDichVu",
+                            DichVu.class)
+                    .setParameter("tenDichVu", "%" + tenDichVu + "%")
+                    .getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<DichVu> findByTenDichVu(String tenDichVu) throws RemoteException {
         EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
         try {
             return em.createQuery(

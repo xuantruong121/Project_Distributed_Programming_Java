@@ -2,6 +2,8 @@ package iuh.fit.qlksfxapp.controller.ItemController;
 
 import iuh.fit.qlksfxapp.DAO.ChiTietDonDatPhongDAO;
 import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.ChiTietDonDatPhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import iuh.fit.qlksfxapp.DAO.PhongDAO;
 import iuh.fit.qlksfxapp.Entity.ChiTietDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.DonDatPhong;
@@ -27,6 +29,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -53,13 +56,13 @@ public class RoomItemController implements MainController.DataReceivable {
     private ManageTrangThaiPhong manageTrangThaiPhong;
     private GeneralDAO generalDAO;
     private MapOfRoomController mapOfRoomController;
-    private ChiTietDonDatPhongDAO chiTietDonDatPhongDAO;
+    private ChiTietDonDatPhongDAOImpl chiTietDonDatPhongDAO;
     private  PhongDAO phongDAO;
     public  void setManageTrangThaiPhong(ManageTrangThaiPhong manageTrangThaiPhong) {
         this.manageTrangThaiPhong = manageTrangThaiPhong;
     }
     public  void setData(Phong phong, DonDatPhong donDatPhong, Consumer<Node> callback) {
-        this.generalDAO = new GeneralDAO();
+        this.generalDAO = new GeneralDAOImpl();
         this.onItemClickedCallback = callback;
         this.phong = phong;
         this.donDatPhong = donDatPhong;
@@ -261,7 +264,7 @@ public class RoomItemController implements MainController.DataReceivable {
             // DAT_TRUOC
             case "Nhận phòng": {
                 if (chiTietDonDatPhongDAO == null)
-                    chiTietDonDatPhongDAO = new ChiTietDonDatPhongDAO();
+                    chiTietDonDatPhongDAO = new ChiTietDonDatPhongDAOImpl();
                 ChiTietDonDatPhong chiTietDonDatPhong = chiTietDonDatPhongDAO.findChiTietDonDatPhongByMaDonDatPhongAndMaPhong(donDatPhong.getMaDonDatPhong(), phong.getMaPhong());
                 EventBusManager.post(new ConfirmDialogEvent(
                         "Bạn có chắc muốn nhận phòng?",
@@ -270,7 +273,12 @@ public class RoomItemController implements MainController.DataReceivable {
                             chiTietDonDatPhong.setNgayNhan(LocalDateTime.now());
                             chiTietDonDatPhong.setTrangThaiChiTietDonDatPhong(TrangThaiChiTietDonDatPhong.DA_NHAN_PHONG);
 
-                            boolean r= generalDAO.updateOb(chiTietDonDatPhong);
+                            boolean r= false;
+                            try {
+                                r = generalDAO.updateOb(chiTietDonDatPhong);
+                            } catch (RemoteException e) {
+                                throw new RuntimeException(e);
+                            }
                             if(r){
                                 setData(phong, donDatPhong, onItemClickedCallback);
                                 manageTrangThaiPhong.updatePhongDangSuDungVaDatTruoc();
@@ -286,13 +294,18 @@ public class RoomItemController implements MainController.DataReceivable {
             }
             case "Hủy đặt": {
                 if (chiTietDonDatPhongDAO == null)
-                    chiTietDonDatPhongDAO = new ChiTietDonDatPhongDAO();
+                    chiTietDonDatPhongDAO = new ChiTietDonDatPhongDAOImpl();
                 ChiTietDonDatPhong chiTietDonDatPhong = chiTietDonDatPhongDAO.findChiTietDonDatPhongByMaDonDatPhongAndMaPhong(donDatPhong.getMaDonDatPhong(), phong.getMaPhong());
                 EventBusManager.post(new ConfirmDialogEvent(
                         "Bạn có chắc muốn hủy đặt phòng?",
                         () -> {
                             chiTietDonDatPhong.setTrangThaiChiTietDonDatPhong(TrangThaiChiTietDonDatPhong.DA_HUY);
-                            boolean r= generalDAO.updateOb(chiTietDonDatPhong);
+                            boolean r= false;
+                            try {
+                                r = generalDAO.updateOb(chiTietDonDatPhong);
+                            } catch (RemoteException e) {
+                                throw new RuntimeException(e);
+                            }
                             if(r){
                                 setData(phong, null, onItemClickedCallback);
                                 manageTrangThaiPhong.updatePhongDangSuDungVaDatTruoc();
@@ -310,7 +323,7 @@ public class RoomItemController implements MainController.DataReceivable {
                 //DANG_SU_DUNG
             case "Trả phòng":{
                 if (chiTietDonDatPhongDAO == null)
-                    chiTietDonDatPhongDAO = new ChiTietDonDatPhongDAO();
+                    chiTietDonDatPhongDAO = new ChiTietDonDatPhongDAOImpl();
                 ChiTietDonDatPhong chiTietDonDatPhong = chiTietDonDatPhongDAO.findChiTietDonDatPhongByMaDonDatPhongAndMaPhong(donDatPhong.getMaDonDatPhong(), phong.getMaPhong());
                 EventBusManager.post(new ConfirmDialogEvent(
                         "Bạn có chắc muốn trả phòng?",
@@ -318,7 +331,12 @@ public class RoomItemController implements MainController.DataReceivable {
                             chiTietDonDatPhong.setNgayTra(LocalDateTime.now());
                             // cập nhật trạng thái phòng
                             chiTietDonDatPhong.setTrangThaiChiTietDonDatPhong(TrangThaiChiTietDonDatPhong.DA_TRA_PHONG);
-                            boolean r= generalDAO.updateOb(chiTietDonDatPhong);
+                            boolean r= false;
+                            try {
+                                r = generalDAO.updateOb(chiTietDonDatPhong);
+                            } catch (RemoteException e) {
+                                throw new RuntimeException(e);
+                            }
                             if(r) {
                                 setData(phong, null, onItemClickedCallback);
                                 manageTrangThaiPhong.updatePhongDangSuDungVaDatTruoc();
@@ -339,7 +357,12 @@ public class RoomItemController implements MainController.DataReceivable {
                         () -> {
                             // cập nhật trạng thái phòng
                             phong.setTrangThaiPhong(TrangThaiPhong.TRONG);
-                            boolean r= generalDAO.updateOb(phong);
+                            boolean r= false;
+                            try {
+                                r = generalDAO.updateOb(phong);
+                            } catch (RemoteException e) {
+                                throw new RuntimeException(e);
+                            }
                             if(r){
                                 setData(phong, donDatPhong, onItemClickedCallback);
                                 manageTrangThaiPhong.updatePhongConLai();
@@ -359,7 +382,12 @@ public class RoomItemController implements MainController.DataReceivable {
                         () -> {
                             // cập nhật trạng thái phòng
                             phong.setTrangThaiPhong(TrangThaiPhong.TRONG);
-                            boolean r= generalDAO.updateOb(phong);
+                            boolean r= false;
+                            try {
+                                r = generalDAO.updateOb(phong);
+                            } catch (RemoteException e) {
+                                throw new RuntimeException(e);
+                            }
                             if(r){
                                 setData(phong, donDatPhong, onItemClickedCallback);
                                 manageTrangThaiPhong.updatePhongConLai();

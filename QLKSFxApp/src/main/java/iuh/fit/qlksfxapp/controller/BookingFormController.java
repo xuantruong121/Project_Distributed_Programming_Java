@@ -5,6 +5,9 @@ import iuh.fit.qlksfxapp.DAO.ChiTietDonDatPhongDAO;
 import iuh.fit.qlksfxapp.DAO.DonDatPhongDAO;
 import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
 import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.ChiTietDonDatPhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.DonDatPhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import iuh.fit.qlksfxapp.Entity.*;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiDonDatPhong;
@@ -84,10 +87,10 @@ public class BookingFormController  implements MainController.DataReceivable {
     private Button xacNhanButton,editButton,cancelButton,themDonDatButton;
     private DonDatPhong donDatPhong;
     private List<ChiTietDonDatPhong> chiTietDonDatPhongList;
-    private ChiTietDonDatPhongDAO chiTietDonDatPhongDAO;
+    private ChiTietDonDatPhongDAOImpl chiTietDonDatPhongDAO;
     private MemoTienChiTietDonDatPhong firstMemoTienChiTietDonDatPhong;
-    private GeneralDAO generalDAO;
-    private DonDatPhongDAO donDatPhongDAO;
+    private GeneralDAOImpl generalDAO;
+    private DonDatPhongDAOImpl donDatPhongDAO;
     private AnchorPane selectedDetailBookingShort;
     private boolean isEditMode = false;
     private DetailBookingFormController detailBookingFormController;
@@ -97,9 +100,9 @@ public class BookingFormController  implements MainController.DataReceivable {
     public void initialize() {
         EventBusManager.register(this);
         chiTietDonDatPhongList = new ArrayList<>();
-        chiTietDonDatPhongDAO = new ChiTietDonDatPhongDAO();
-        generalDAO = new GeneralDAO();
-        donDatPhongDAO=new DonDatPhongDAO();
+        chiTietDonDatPhongDAO = new ChiTietDonDatPhongDAOImpl();
+        generalDAO = new GeneralDAOImpl();
+        donDatPhongDAO=new DonDatPhongDAOImpl();
 //        if (donDatPhong == null) {
 //            GeneralDAO generalDAO = new GeneralDAO();
 //            donDatPhong = generalDAO.findOb(DonDatPhong.class, "200425001");
@@ -233,7 +236,7 @@ public class BookingFormController  implements MainController.DataReceivable {
     public void initDetailBookingShort() {
         roomItemsContainer.getChildren().clear();
         chiTietDonDatPhongDAO.closeEntityManager();
-        chiTietDonDatPhongDAO = new ChiTietDonDatPhongDAO();
+        chiTietDonDatPhongDAO = new ChiTietDonDatPhongDAOImpl();
         chiTietDonDatPhongList = chiTietDonDatPhongDAO.findChiTietDonDatPhongTheoMaDonDatPhong(donDatPhong.getMaDonDatPhong());
         for (ChiTietDonDatPhong c : chiTietDonDatPhongList) {
             if(c.getTrangThaiChiTietDonDatPhong().equals(TrangThaiChiTietDonDatPhong.DA_HUY))
@@ -274,7 +277,7 @@ public class BookingFormController  implements MainController.DataReceivable {
             return;
         }
         chiTietDonDatPhongDAO.closeEntityManager();
-        chiTietDonDatPhongDAO= new ChiTietDonDatPhongDAO();
+        chiTietDonDatPhongDAO= new ChiTietDonDatPhongDAOImpl();
         double tienPhongValue = chiTietDonDatPhongDAO.getTongTienPhongByMaDonDatPhong(donDatPhong.getMaDonDatPhong());
         double tienDichVuValue = chiTietDonDatPhongDAO.getTongTienDichVuByMaDonDatPhong(donDatPhong.getMaDonDatPhong());
         double tongTienPhuThuValue = chiTietDonDatPhongDAO.getTongTienPhuThuByMaDonDatPhong(donDatPhong.getMaDonDatPhong());
@@ -331,7 +334,7 @@ public class BookingFormController  implements MainController.DataReceivable {
                 "Bạn có chắc chắn muốn hủy đơn đặt phòng này không?",
                 () -> {
                     donDatPhong.setTrangThai(TrangThaiDonDatPhong.DA_HUY);
-                    generalDAO= Objects.requireNonNullElse(generalDAO, new GeneralDAO());
+                    generalDAO= Objects.requireNonNullElse(generalDAO, new GeneralDAOImpl());
                     boolean r = generalDAO.updateOb(donDatPhong);
                     if (r) {
                         EventBusManager.post(new ToastEvent("Hủy đơn đặt phòng thành công", ToastEvent.ToastType.SUCCESS));
@@ -374,7 +377,7 @@ public class BookingFormController  implements MainController.DataReceivable {
                             "Bạn có chắc chắn muốn cập nhật đơn đặt phòng này không?",
                             () -> {
                                 // Xử lý cập nhật đơn đặt phòng
-                                generalDAO= Objects.requireNonNullElse(generalDAO, new GeneralDAO());
+                                generalDAO= Objects.requireNonNullElse(generalDAO, new GeneralDAOImpl());
                                 boolean r = generalDAO.updateOb(donDatPhong);
                                 if (r) {
                                     isEditMode = false;
@@ -497,7 +500,7 @@ public class BookingFormController  implements MainController.DataReceivable {
             }
             if(khachHang != null){
                 donDatPhong.setKhachHang(khachHang);
-                generalDAO= Objects.requireNonNullElse(generalDAO, new GeneralDAO());
+                generalDAO= Objects.requireNonNullElse(generalDAO, new GeneralDAOImpl());
                 boolean r = generalDAO.updateOb(donDatPhong);
                 if (r) {
                     thongTinKhachDatVBox.setVisible(true);
@@ -563,7 +566,7 @@ public class BookingFormController  implements MainController.DataReceivable {
                                    return false;
                                }
                                 chiTietDonDatPhong.setTrangThaiChiTietDonDatPhong(TrangThaiChiTietDonDatPhong.DA_HUY);
-                                generalDAO= Objects.requireNonNullElse(generalDAO, new GeneralDAO());
+                                generalDAO= Objects.requireNonNullElse(generalDAO, new GeneralDAOImpl());
                                 boolean r=  generalDAO.updateOb(chiTietDonDatPhong);
                                 if (r)
                                     initDetailBookingShort();
@@ -579,10 +582,10 @@ public class BookingFormController  implements MainController.DataReceivable {
     public List<Phong> getPhongTrongKhongTrungLich(DonDatPhong donDatPhong) {
         // Khởi tạo DAO nếu chưa có (sử dụng toán tử null-safe)
         donDatPhongDAO.closeEntityManager();
-        donDatPhongDAO =new DonDatPhongDAO();
+        donDatPhongDAO =new DonDatPhongDAOImpl();
         chiTietDonDatPhongDAO.closeEntityManager();
-        chiTietDonDatPhongDAO=new ChiTietDonDatPhongDAO();
-        generalDAO = Objects.requireNonNullElseGet(generalDAO, GeneralDAO::new);
+        chiTietDonDatPhongDAO=new ChiTietDonDatPhongDAOImpl();
+        generalDAO = Objects.requireNonNullElseGet(generalDAO, GeneralDAOImpl::new);
 
         // Lấy danh sách đơn đặt phòng trùng khung ngày
         List<DonDatPhong> donDatPhongTrungNgay = donDatPhongDAO.getListDonDatPhongTheoNgayDenVaNgayDi(
@@ -611,7 +614,7 @@ public class BookingFormController  implements MainController.DataReceivable {
             List<String> selectedRooms = event.getSelectedRooms();
             if(selectedRooms != null){
                 for (String room : selectedRooms) {
-                    generalDAO= Objects.requireNonNullElse(generalDAO, new GeneralDAO());
+                    generalDAO= Objects.requireNonNullElse(generalDAO, new GeneralDAOImpl());
                     ChiTietDonDatPhong chiTietDonDatPhong = new ChiTietDonDatPhong();
                     chiTietDonDatPhong.setPhong(generalDAO.findOb(Phong.class, room));
                     chiTietDonDatPhong.setTrangThaiChiTietDonDatPhong(TrangThaiChiTietDonDatPhong.DAT_TRUOC);
@@ -655,7 +658,7 @@ public class BookingFormController  implements MainController.DataReceivable {
             donDatPhong.setNgayDat( LocalDateTime.of(bookingDatePicker.getValue(), LocalTime.now()));
             donDatPhong.setNgayNhan(checkinDatePicker.getValue().atStartOfDay());
             donDatPhong.setNgayTra(checkoutDatePicker.getValue().atStartOfDay());
-            generalDAO = Objects.requireNonNullElseGet(generalDAO, GeneralDAO::new);
+            generalDAO = Objects.requireNonNullElseGet(generalDAO, GeneralDAOImpl::new);
            donDatPhong.setNhanVien(generalDAO.findOb(NhanVien.class,"RAT-250001"));// ------------------------------------------------------------------------------------------
             donDatPhong.setMaDonDatPhong(donDatPhong.generateMaDonDatPhong());
             ValidatorFactory factory = Validation.byDefaultProvider()

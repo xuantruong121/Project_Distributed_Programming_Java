@@ -1,6 +1,8 @@
 package iuh.fit.qlksfxapp.controller.ItemController;
 
 import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.KhachHangDAOImpl;
 import iuh.fit.qlksfxapp.DAO.KhachHangDAO;
 import iuh.fit.qlksfxapp.Entity.KhachHang;
 import iuh.fit.qlksfxapp.controller.EventBus.DialogAddKhachHangEvent;
@@ -14,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;
 
+import java.rmi.RemoteException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -38,7 +41,7 @@ public class DialogAddKhachHangController {
         quocTichComboBox.getItems().addAll("Việt Nam", "Mỹ", "Nhật Bản", "Hàn Quốc");
         quocTichComboBox.setValue("Việt Nam"); // Chọn giá trị mặc định là "Việt Nam"
     }
-    @FXML public void handleConfirm(ActionEvent event) {
+    @FXML public void handleConfirm(ActionEvent event) throws RemoteException {
         if(!checkValid()){
             return;
         }
@@ -52,12 +55,12 @@ public class DialogAddKhachHangController {
             khachHang.setQuocTich(quocTichComboBox.getValue());
             khachHang.setNgaySinh(ngaySinhPicker.getValue());
         }
-        khachHangDAO = Objects.requireNonNullElseGet(khachHangDAO, KhachHangDAO::new);
+        khachHangDAO = Objects.requireNonNullElseGet(khachHangDAO, KhachHangDAOImpl::new);
         if(khachHangDAO.findKhachHangByCccd(cccd.getText())!=null){
             EventBusManager.post(new DialogAddKhachHangEvent(khachHang));
             Optional.ofNullable(cccd.getScene().getWindow()).ifPresent(Window::hide);
         }else{
-            generalDAO = Objects.requireNonNullElseGet(generalDAO, GeneralDAO::new);
+            generalDAO = Objects.requireNonNullElseGet(generalDAO, GeneralDAOImpl::new);
             boolean result = generalDAO.addOb(khachHang);
             EventBusManager.post(new ToastEvent(result?"Thêm mới khách hàng thành công!":" Thêm mới khách hàng thất bại!", result? ToastEvent.ToastType.SUCCESS:ToastEvent.ToastType.ERROR));
             EventBusManager.post(new DialogAddKhachHangEvent(khachHang));
@@ -79,12 +82,12 @@ public class DialogAddKhachHangController {
         // Đóng cửa sổ
         Optional.ofNullable(cccd.getScene().getWindow()).ifPresent(Window::hide);
     }
-    @FXML public void handleSearchCccd(MouseEvent mouseEvent) {
+    @FXML public void handleSearchCccd(MouseEvent mouseEvent) throws RemoteException {
         if(cccd.getText().isEmpty()){
             EventBusManager.post(new ToastEvent("Vui lòng nhập căn cước công dân!", ToastEvent.ToastType.ERROR));
             return;
         }
-        khachHangDAO= Objects.requireNonNullElseGet(khachHangDAO, KhachHangDAO::new);
+        khachHangDAO= Objects.requireNonNullElseGet(khachHangDAO, KhachHangDAOImpl::new);
         KhachHang khachHang = khachHangDAO.findKhachHangByCccd(cccd.getText());
         if(khachHang==null){
             EventBusManager.post(new ToastEvent("Không tìm thấy khách hàng!", ToastEvent.ToastType.ERROR));

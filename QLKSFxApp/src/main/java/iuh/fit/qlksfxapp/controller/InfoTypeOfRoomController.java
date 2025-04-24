@@ -1,6 +1,7 @@
 package iuh.fit.qlksfxapp.controller;
 
 import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import iuh.fit.qlksfxapp.Entity.LoaiPhong;
 import iuh.fit.qlksfxapp.controller.ItemController.TypeOfRoomItemController;
 import iuh.fit.qlksfxapp.util.StyleUtil;
@@ -18,6 +19,7 @@ import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.List;
 
 public class InfoTypeOfRoomController {
@@ -37,8 +39,13 @@ public class InfoTypeOfRoomController {
 
     @FXML
     public void initialize() {
-        GeneralDAO generalDAO = new GeneralDAO();
-        List<LoaiPhong> loaiPhongList = generalDAO.findAll(LoaiPhong.class);
+        GeneralDAO generalDAO = new GeneralDAOImpl();
+        List<LoaiPhong> loaiPhongList = null;
+        try {
+            loaiPhongList = generalDAO.findAll(LoaiPhong.class);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
 
         // Đưa dữ liệu gốc vào ListView (không phải HBox)
         listView.getItems().addAll(loaiPhongList);

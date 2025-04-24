@@ -2,6 +2,9 @@ package iuh.fit.qlksfxapp.controller;
 
 import iuh.fit.qlksfxapp.DAO.ChiTietDonDatPhongDAO;
 import iuh.fit.qlksfxapp.DAO.DonDatPhongDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.ChiTietDonDatPhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.DonDatPhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.PhongDAOImpl;
 import iuh.fit.qlksfxapp.DAO.PhongDAO;
 import iuh.fit.qlksfxapp.Entity.ChiTietDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.DonDatPhong;
@@ -42,11 +45,11 @@ public class MapOfRoomController {
     private List<Phong> allPhong;
     private int currentPage = 0;
     private final int ITEMS_PER_PAGE = 9; // 3x3 grid
-    private DonDatPhongDAO donDatPhongDAO;
+    private DonDatPhongDAOImpl donDatPhongDAO;
     private boolean isSearchFailed = false;
     private Popup popup;
-    private ChiTietDonDatPhongDAO chiTietDonDatPhongDAO;
-    private PhongDAO phongDAO;
+    private ChiTietDonDatPhongDAOImpl chiTietDonDatPhongDAO;
+    private PhongDAOImpl phongDAO;
     @FXML private DatePicker ngayDenInp,ngayDiInp;
     @FXML private TextField soNguoiLonInp,soTreEmInp,tenDoanInp,gioDenInp,gioDiInp;
     @FXML private ComboBox<String> loaiPhongCmb,viTriCmb;
@@ -57,9 +60,9 @@ public class MapOfRoomController {
     @FXML
     public void initialize() {
         // Initialize the grid pane with room items
-        donDatPhongDAO = new DonDatPhongDAO();
-        chiTietDonDatPhongDAO=new ChiTietDonDatPhongDAO();
-        phongDAO = new PhongDAO();
+        donDatPhongDAO = new DonDatPhongDAOImpl();
+        chiTietDonDatPhongDAO=new ChiTietDonDatPhongDAOImpl();
+        phongDAO = new PhongDAOImpl();
         popup  = new Popup();
         popup.setAutoHide(true);
         allPhong=new ArrayList<>();

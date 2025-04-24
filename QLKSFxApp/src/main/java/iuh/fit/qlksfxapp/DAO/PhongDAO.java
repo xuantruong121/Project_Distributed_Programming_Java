@@ -46,6 +46,9 @@ public interface PhongDAO extends GeneralDAO {
      * @return A list of rooms with the specified room type
      */
     List<Phong> findByLoaiPhong(String maLoaiPhong) throws RemoteException;
+     List<Phong> getPhongTheoViTri(String viTri) throws RemoteException;;
+     List<Phong> getPhongTheoMaDonDatPhong(String maDonDatPhong) throws RemoteException;;
+      List<Phong> getListPhongTheoTrangThaiPhongDANG_DON_DEP_DANG_SUA_CHUA_KHONG_SU_DUNG(TrangThaiPhong trangThaiPhong)  throws RemoteException;
 }
 //
 //package iuh.fit.qlksfxapp.DAO;

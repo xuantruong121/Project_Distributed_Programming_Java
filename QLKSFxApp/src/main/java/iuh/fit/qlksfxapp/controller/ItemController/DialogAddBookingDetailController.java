@@ -1,6 +1,7 @@
 package iuh.fit.qlksfxapp.controller.ItemController;
 
 import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import iuh.fit.qlksfxapp.Entity.LoaiPhong;
 import iuh.fit.qlksfxapp.Entity.Phong;
 import iuh.fit.qlksfxapp.controller.EventBus.DialogAddBookingDetailEvent;
@@ -12,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,10 +40,14 @@ public class DialogAddBookingDetailController {
     public void initialize(List<Phong> phong) {
         this.data = phong;
         if (generalDAO == null)
-            generalDAO = new GeneralDAO();
+            generalDAO = new GeneralDAOImpl();
 
         // Lấy tất cả loại phòng từ DB
-        roomTypes = generalDAO.findAll(LoaiPhong.class);
+        try {
+            roomTypes = generalDAO.findAll(LoaiPhong.class);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
         List<String> roomTypeNames = roomTypes.stream()
                 .map(LoaiPhong::getTenLoaiPhong)
                 .toList();

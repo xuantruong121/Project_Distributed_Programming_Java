@@ -1,6 +1,7 @@
 package iuh.fit.qlksfxapp.DAO;
 
 import iuh.fit.qlksfxapp.Entity.DonDatPhong;
+import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiDonDatPhong;
 
 import java.time.LocalDateTime;
@@ -53,6 +54,14 @@ public interface DonDatPhongDAO extends GeneralDAO {
      * @return The current booking for the specified room or null if not found
      */
     DonDatPhong getDonDatPhongNowByIdPhong(String maPhong) throws RemoteException;
+     List<DonDatPhong> getDatPhongNow();
+     List<DonDatPhong> getListDonDatPhongTheoNgayDenVaNgayDi(LocalDateTime ngayDen, LocalDateTime ngayDi) throws RemoteException;
+     List<DonDatPhong> getListDonDatPhongTheoSoNguoiLon(int soNguoiLon) throws RemoteException;
+     List<DonDatPhong> getListDonDatPhongTheoSoTreEm(int soTreEm) throws RemoteException;
+     List<DonDatPhong> getListDonDatPhongTheoSoNguoiLonVaTreEm(int soNguoiLon, int soTreEm) throws RemoteException;
+     List<DonDatPhong> getListDonDatPhongTheoTenDoan(String tenDoan) throws RemoteException;
+     List<DonDatPhong> getListDonDatPhongTheoTrangThaiPhongDAT_TRUOC() throws RemoteException;
+     List<DonDatPhong> getListDonDatPhongTheoTrangThaiPhongDANG_SU_DUNG() throws RemoteException;
 }
 //package iuh.fit.qlksfxapp.DAO;
 //

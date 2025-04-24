@@ -4,6 +4,7 @@ import iuh.fit.qlksfxapp.Entity.KhachHang;
 
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Interface for KhachHang DAO operations
@@ -43,6 +44,8 @@ public interface KhachHangDAO extends GeneralDAO {
      * @return A list of customers matching the search criteria
      */
     List<KhachHang> searchByName(String tenKhachHang) throws RemoteException;
+     KhachHang findKhachHangByCccd(String cccd)throws RemoteException;
+     Set<KhachHang> findKhachHangByMaChiTietDonDatPhong(String maChiTiet) throws RemoteException;
 }
 //package iuh.fit.qlksfxapp.DAO;
 

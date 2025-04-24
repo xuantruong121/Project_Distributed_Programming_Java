@@ -2,6 +2,8 @@ package iuh.fit.qlksfxapp.controller;
 
 import com.google.common.eventbus.Subscribe;
 import iuh.fit.qlksfxapp.DAO.*;
+import iuh.fit.qlksfxapp.DAO.Impl.ChiTietDonDatPhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import iuh.fit.qlksfxapp.Entity.*;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiDonDatPhong;
@@ -100,8 +102,8 @@ public class DetailBookingFormController {
 ////        ChiTietDonDatPhong chiTietDonDatPhong = generalDAO.findOb(ChiTietDonDatPhong.class, "200425001-001");
 ////        setData(chiTietDonDatPhong);
 //    }
-    private GeneralDAO generalDAO;
-    private ChiTietDonDatPhongDAO chiTietDonDatPhongDAO;
+    private GeneralDAOImpl generalDAO;
+    private ChiTietDonDatPhongDAOImpl chiTietDonDatPhongDAO;
     private BookingFormController mainController;
     private boolean isHuy= false;
     private boolean isDaThanhToan= false;
@@ -476,7 +478,7 @@ public class DetailBookingFormController {
     private void calMonney(){
 //        chiTietDonDatPhongDAO = Objects.requireNonNullElseGet(chiTietDonDatPhongDAO, ChiTietDonDatPhongDAO::new);
         chiTietDonDatPhongDAO.closeEntityManager();
-        chiTietDonDatPhongDAO= new ChiTietDonDatPhongDAO();
+        chiTietDonDatPhongDAO= new ChiTietDonDatPhongDAOImpl();
         memoTienChiTietDonDatPhong.setTienDichVu(chiTietDonDatPhongDAO.getTongTienDichVuByMaChiTietDonDatPhong(memoTienChiTietDonDatPhong.getChiTietDonDatPhong().getMaChiTietDonDatPhong()));
         memoTienChiTietDonDatPhong.setTongTien(memoTienChiTietDonDatPhong.getTienPhong() + memoTienChiTietDonDatPhong.getTienDichVu() + memoTienChiTietDonDatPhong.getTienPhuThu());
     }
@@ -494,7 +496,7 @@ public class DetailBookingFormController {
         switch (source.getId()) {
             case "nhanPhongBtn":{
                 if(generalDAO == null)
-                    generalDAO = new GeneralDAO();
+                    generalDAO = new GeneralDAOImpl();
                 ChiTietDonDatPhong chiTietDonDatPhong = memoTienChiTietDonDatPhong.getChiTietDonDatPhong();
                 chiTietDonDatPhong.setTrangThaiChiTietDonDatPhong(TrangThaiChiTietDonDatPhong.DA_NHAN_PHONG);
                 chiTietDonDatPhong.setNgayNhan(LocalDateTime.now());
@@ -509,7 +511,7 @@ public class DetailBookingFormController {
             }
             case "traPhongBtn":{
                 if(generalDAO == null)
-                    generalDAO = new GeneralDAO();
+                    generalDAO = new GeneralDAOImpl();
                 ChiTietDonDatPhong chiTietDonDatPhong = memoTienChiTietDonDatPhong.getChiTietDonDatPhong();
                 chiTietDonDatPhong.setTrangThaiChiTietDonDatPhong(TrangThaiChiTietDonDatPhong.DA_TRA_PHONG);
                 chiTietDonDatPhong.setNgayTra(LocalDateTime.now());

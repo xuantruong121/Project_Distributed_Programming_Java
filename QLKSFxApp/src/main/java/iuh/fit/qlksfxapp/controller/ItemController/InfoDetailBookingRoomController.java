@@ -1,6 +1,7 @@
 package iuh.fit.qlksfxapp.controller.ItemController;
 
 import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import iuh.fit.qlksfxapp.Entity.DonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Phong;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,11 +48,11 @@ public class InfoDetailBookingRoomController {
         trangThaiDon.setText(donDatPhong.getTrangThai().s);
     }
     @FXML
-    private void handleXemThem(){
+    private void handleXemThem() throws RemoteException {
         if(donDatPhong==null)
             return;
         Map<Phong,DonDatPhong> map =new HashMap<>();
-        GeneralDAO generalDAO= new GeneralDAO();
+        GeneralDAO generalDAO= new GeneralDAOImpl();
         map.put(new Phong(),generalDAO.findOb(DonDatPhong.class,donDatPhong.getMaDonDatPhong()));
         EventBusManager.post(new NavigationEvent(
                 "/fxml/BookingForm.fxml",

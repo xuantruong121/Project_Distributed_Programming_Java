@@ -1,6 +1,7 @@
 package iuh.fit.qlksfxapp.DAO;
 
 import iuh.fit.qlksfxapp.Entity.DichVu;
+import jakarta.persistence.EntityManager;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -36,6 +37,11 @@ public interface DichVuDAO extends GeneralDAO {
      * @return A list of services matching the search criteria
      */
     List<DichVu> searchByName(String tenDichVu) throws RemoteException;
+
+    // Find services by name (partial match)
+    public List<DichVu> findByTenDichVu(String tenDichVu) throws RemoteException;
+
+
 }
 
 

@@ -1,6 +1,7 @@
 package iuh.fit.qlksfxapp.controller;
 
 import iuh.fit.qlksfxapp.DAO.ChiTietDonDatPhongDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.ChiTietDonDatPhongDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,7 +28,7 @@ public class RevenueChartController {
     private boolean isChangeComboBox = false;
     private ChiTietDonDatPhongDAO chiTietDonDatPhongDAO;
     public void initialize() {
-        chiTietDonDatPhongDAO= new ChiTietDonDatPhongDAO();
+        chiTietDonDatPhongDAO= new ChiTietDonDatPhongDAOImpl();
         // Thiết lập các tùy chọn cho ComboBox
         ObservableList<String> timeRanges = FXCollections.observableArrayList(
                 "Không","Tuần nay", "Tháng nay", "Năm nay"

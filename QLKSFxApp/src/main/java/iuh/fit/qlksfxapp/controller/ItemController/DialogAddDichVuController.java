@@ -1,6 +1,7 @@
 package iuh.fit.qlksfxapp.controller.ItemController;
 
 import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import iuh.fit.qlksfxapp.Entity.DichVu;
 import iuh.fit.qlksfxapp.Entity.LoaiPhong;
 import iuh.fit.qlksfxapp.Entity.Phong;
@@ -11,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,10 +47,14 @@ public class DialogAddDichVuController {
     }
     private void loadData() {
         if (generalDAO == null)
-            generalDAO = new GeneralDAO();
+            generalDAO = new GeneralDAOImpl();
 
         // Lấy tất cả loại phòng từ DB
-        data = generalDAO.findAll(DichVu.class);
+        try {
+            data = generalDAO.findAll(DichVu.class);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
 
         // Clear grid và checkbox cũ
         dichVuSelectionGrid.getChildren().clear();

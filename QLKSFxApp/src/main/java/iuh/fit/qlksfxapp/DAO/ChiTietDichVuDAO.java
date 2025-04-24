@@ -37,6 +37,8 @@ public interface ChiTietDichVuDAO extends GeneralDAO {
      * @return A list of service details for the specified service
      */
     List<ChiTietDichVu> findByMaDichVu(String maDichVu) throws RemoteException;
+     List<ChiTietDichVu> getListChiTietDichVuByMaChiTietDonDatPhong(String maChiTietDonDatPhong) throws RemoteException;
+
 }
 //public class ChiTietDichVuDAO {
 //    private EntityManager em =null;

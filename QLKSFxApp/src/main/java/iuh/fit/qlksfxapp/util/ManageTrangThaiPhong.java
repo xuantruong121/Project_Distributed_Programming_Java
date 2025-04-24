@@ -1,6 +1,10 @@
 package iuh.fit.qlksfxapp.util;
 
 import iuh.fit.qlksfxapp.DAO.*;
+import iuh.fit.qlksfxapp.DAO.Impl.ChiTietDonDatPhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.DonDatPhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.PhongDAOImpl;
 import iuh.fit.qlksfxapp.Entity.ChiTietDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.DonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
@@ -13,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.rmi.RemoteException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,15 +28,19 @@ public class ManageTrangThaiPhong {
     public static List<Phong> listPhongTrong = new ArrayList<>();
     public static List<Phong> listPhong = new ArrayList<>();
 
-    private  DonDatPhongDAO donDatPhongDAO;
-    private  PhongDAO phongDAO;
-    private  ChiTietDonDatPhongDAO chiTietDonDatPhongDAO;
+    private DonDatPhongDAOImpl donDatPhongDAO;
+    private PhongDAOImpl phongDAO;
+    private ChiTietDonDatPhongDAOImpl chiTietDonDatPhongDAO;
     private MapOfRoomController mapOfRoomController;
     public ManageTrangThaiPhong(MapOfRoomController mapOfRoomController) {
         setMapOfRoomController(mapOfRoomController);
         if(legendPhongTheoTrangThai.isEmpty()) {
-            GeneralDAO generalDAO = new GeneralDAO();
-            listPhong= generalDAO.findAll(Phong.class);
+            GeneralDAO generalDAO = new GeneralDAOImpl();
+            try {
+                listPhong= generalDAO.findAll(Phong.class);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
             loadData();
         }
     }
@@ -137,7 +146,7 @@ public class ManageTrangThaiPhong {
     }
     public void updatePhongDangSuDungVaDatTruoc(){
         donDatPhongDAO.closeEntityManager();
-        donDatPhongDAO= new DonDatPhongDAO();
+        donDatPhongDAO= new DonDatPhongDAOImpl();
         List<DonDatPhong> dangSuDung = donDatPhongDAO.getListDonDatPhongTheoTrangThaiPhongDANG_SU_DUNG();
         List<DonDatPhong> datTruoc = donDatPhongDAO.getListDonDatPhongTheoTrangThaiPhongDAT_TRUOC();
 

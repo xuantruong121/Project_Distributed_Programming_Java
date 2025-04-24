@@ -1,15 +1,17 @@
 package iuh.fit.qlksfxapp.DAO.Impl;
 
+import iuh.fit.qlksfxapp.DAO.CloseEntityManager;
 import iuh.fit.qlksfxapp.DAO.PhongDAO;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiPhong;
 import iuh.fit.qlksfxapp.Entity.Phong;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-public class PhongDAOImpl extends GeneralDAOImpl implements PhongDAO {
+@Getter
+public class PhongDAOImpl extends GeneralDAOImpl implements PhongDAO, CloseEntityManager {
     private EntityManager em = null;
 
     public PhongDAOImpl() {
@@ -80,6 +82,31 @@ public class PhongDAOImpl extends GeneralDAOImpl implements PhongDAO {
             if (em != null && em.isOpen()) {
                 em.close();
             }
+        }
+    }
+    public List<Phong> getPhongTheoViTri(String viTri){
+        String query = "SELECT p FROM Phong p WHERE p.viTri = :viTri";
+        return em.createQuery(query, Phong.class)
+                .setParameter("viTri", viTri)
+                .getResultList();
+    }
+    public List<Phong> getPhongTheoMaDonDatPhong(String maDonDatPhong){
+        String query = "SELECT p FROM Phong p JOIN ChiTietDonDatPhong c ON p.maPhong = c.phong.maPhong WHERE c.donDatPhong.maDonDatPhong = :maDonDatPhong";
+        return em.createQuery(query, Phong.class)
+                .setParameter("maDonDatPhong", maDonDatPhong)
+                .getResultList();
+    }
+    public  List<Phong> getListPhongTheoTrangThaiPhongDANG_DON_DEP_DANG_SUA_CHUA_KHONG_SU_DUNG(TrangThaiPhong trangThaiPhong){
+        String query = "SELECT p FROM Phong p WHERE p.trangThaiPhong = :trangThaiPhong";
+        return em.createQuery(query, Phong.class)
+                .setParameter("trangThaiPhong", trangThaiPhong)
+                .getResultList();
+    }
+
+    @Override
+    public void closeEntityManager() {
+        if (em != null && em.isOpen()) {
+            em.close();
         }
     }
 }

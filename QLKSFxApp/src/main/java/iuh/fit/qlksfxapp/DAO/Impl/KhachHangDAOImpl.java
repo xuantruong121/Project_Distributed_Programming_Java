@@ -1,5 +1,6 @@
 package iuh.fit.qlksfxapp.DAO.Impl;
 
+import iuh.fit.qlksfxapp.DAO.CloseEntityManager;
 import iuh.fit.qlksfxapp.DAO.KhachHangDAO;
 import iuh.fit.qlksfxapp.Entity.KhachHang;
 import jakarta.persistence.EntityManager;
@@ -7,8 +8,9 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
+import java.util.Set;
 
-public class KhachHangDAOImpl extends GeneralDAOImpl implements KhachHangDAO {
+public class KhachHangDAOImpl extends GeneralDAOImpl implements KhachHangDAO, CloseEntityManager {
     private EntityManager em = null;
 
     public KhachHangDAOImpl() {
@@ -78,6 +80,31 @@ public class KhachHangDAOImpl extends GeneralDAOImpl implements KhachHangDAO {
             if (em != null && em.isOpen()) {
                 em.close();
             }
+        }
+    }
+    public KhachHang findKhachHangByCccd(String cccd) {
+        String query = "SELECT k FROM KhachHang k WHERE k.canCuocCongDan = :cccd";
+        try {
+            return em.createQuery(query, KhachHang.class)
+                    .setParameter("cccd", cccd)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    public Set<KhachHang> findKhachHangByMaChiTietDonDatPhong(String maChiTiet) {
+        String query = "SELECT  k FROM ChiTietDonDatPhong c " +
+                "JOIN c.khachHang k " +
+                "WHERE c.maChiTietDonDatPhong = :ma";
+        return Set.copyOf(em.createQuery(query, KhachHang.class)
+                .setParameter("ma", maChiTiet)
+                .getResultList());
+    }
+
+    @Override
+    public void closeEntityManager() {
+        if (em != null && em.isOpen()) {
+            em.close();
         }
     }
 }
