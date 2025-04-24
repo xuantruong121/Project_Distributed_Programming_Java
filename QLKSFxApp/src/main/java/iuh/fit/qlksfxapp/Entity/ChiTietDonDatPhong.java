@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -38,9 +39,9 @@ public class ChiTietDonDatPhong implements Serializable {
     @Enumerated(EnumType.STRING)
     private TrangThaiChiTietDonDatPhong trangThaiChiTietDonDatPhong;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "maChiTietDonDatPhong")
-    private Set<ChiTietDichVu> chiTietDichVu;
+    private List<ChiTietDichVu> chiTietDichVu;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -49,7 +50,7 @@ public class ChiTietDonDatPhong implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "maPhuThu",nullable = false)
     )
     private Set<PhuThu> phuThu;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "khachHangTrongPhong",
             joinColumns = @JoinColumn(name = "maChiTietDonDatPhong",nullable = false),
@@ -74,7 +75,6 @@ public class ChiTietDonDatPhong implements Serializable {
         EntityManager em = null;
         long numbersOfMaChiTietDonDatPhong = 0;
         try {
-            em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
             Query query = em.createQuery(queryStr);
             query.setParameter("pattern", pattern + "%");
             numbersOfMaChiTietDonDatPhong = (long) query.getSingleResult();

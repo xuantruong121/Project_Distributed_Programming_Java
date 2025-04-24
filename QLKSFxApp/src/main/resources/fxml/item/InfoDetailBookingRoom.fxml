@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="popupContainer" alignment="TOP_LEFT" spacing="10" style="-fx-background-color: white; -fx-border-color: #777777; -fx-border-width: 2; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 15;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.ItemController.InfoDetailBookingRoomController">
+    <effect>
+        <DropShadow color="#269EB622" radius="5" />
+    </effect>
+    <StackPane>
+        <!-- Tiêu đề -->
+        <VBox fx:id="contentPane" alignment="TOP_LEFT" >
+            <Label style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #777777;" text="Đơn đặt phòng" />
+            <!-- Thông tin khách hàng -->
+            <GridPane hgap="10" vgap="5">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="NEVER" minWidth="100" />
+                    <ColumnConstraints hgrow="ALWAYS" />
+                </columnConstraints>
+
+                <Label style="-fx-font-weight: bold;" text="Khách hàng:" />
+                <Label fx:id="tenKhacHang" text="Mai Đức Chi" GridPane.columnIndex="1" />
+
+                <Label style="-fx-font-weight: bold;" text="Nhân viên:" GridPane.rowIndex="1" />
+                <Label fx:id="tenNhanVien" text="Nguyễn Văn A" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label style="-fx-font-weight: bold;" text="Tên đoàn:" GridPane.rowIndex="2" />
+                <Label fx:id="tenDoan" text="Không" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                </rowConstraints>
+            </GridPane>
+            <Separator prefWidth="200.0" />
+            <!-- Thông tin ngày tháng -->
+            <VBox spacing="5" style="-fx-border-color: #eee; -fx-border-width: 0 0 1 0; -fx-padding: 0 0 10 0;">
+                <Label fx:id="treEmVaNguoiLon" style="-fx-font-weight: bold; -fx-text-fill: #777777;" text="Trẻ em :1     Người lớn 2" />
+                <Separator prefWidth="200.0" />
+
+                <GridPane hgap="10" vgap="5">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="NEVER" minWidth="80" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+
+                    <Label text="Ngày đặt:" />
+                    <Label fx:id="ngayDat" text="28/1/2025" GridPane.columnIndex="1" />
+
+                    <Label text="Ngày nhận:" GridPane.rowIndex="1" />
+                    <Label fx:id="ngayNhan" text="28/1/2025" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <Label text="Ngày trả:" GridPane.rowIndex="2" />
+                    <Label fx:id="ngayTra" text="2/2/2025" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                    </rowConstraints>
+                </GridPane>
+            </VBox>
+            <!-- Trạng thái -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label fx:id="trangThaiDon" style="-fx-text-fill: #FF9800; -fx-font-weight: bold;" text="Tạm hoãn">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Label>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button onAction="#handleXemThem" style="-fx-text-fill: #269EB6; -fx-background-color: transparent; -fx-underline: true; -fx-cursor: hand;" text="Xem thêm &gt;" />
+            </HBox>
+        </VBox>
+        <VBox fx:id="emptyPane" alignment="TOP_LEFT" visible="false">
+            <Label style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #777777;" text="Đơn đặt phòng" />
+            <HBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+            <children>
+                  <Label style=" -fx-font-weight: bold;" text="Không có dữ liệu" textAlignment="CENTER">
+                  <HBox.margin>
+                     <Insets top="20.0" />
+                  </HBox.margin>
+               </Label>
+            </children>
+         </HBox>
+        </VBox>
+    </StackPane>
+
+    <padding>
+        <Insets bottom="5" left="5" right="5" top="5" />
+    </padding>
+</VBox>

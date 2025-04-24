@@ -78,6 +78,11 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.36'
     testCompileOnly 'org.projectlombok:lombok:1.18.36'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+    // EventBus
+    implementation("com.google.guava:guava:33.4.8-jre")
+
+
 }
 
 test {

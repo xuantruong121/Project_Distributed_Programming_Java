@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.DetailBookingFormController">
+    <!-- Phần 4: Kích thước cố định -->
+    <BorderPane style="-fx-border-color: black;">
+        <center>
+            <VBox fx:id="roomItem" maxHeight="250" spacing="10" style="-fx-background-color: white;">
+                <BorderPane>
+                    <left>
+                        <ImageView fx:id="imageRoom" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                    </left>
+                    <center>
+                        <!-- Info row -->
+                        <VBox spacing="5">
+                         <!-- Top row - Room type/ID and status -->
+                         <HBox alignment="CENTER_LEFT" spacing="10">
+                             <Label fx:id="typeRoomAndId" style="-fx-font-size: 18; -fx-font-weight: bold;" text="Standard / STA-1001" />
+                             <Region HBox.hgrow="ALWAYS" />
+                             <!--        style="-fx-background-color: #4CAF50; -fx-background-radius: 10; -fx-padding: 2 8; -fx-text-fill: white; -fx-font-size: 12;"-->
+                             <Label fx:id="status" style="-fx-font-size: 18; " text="Trống" />
+                        <VBox.margin>
+                           <Insets bottom="10.0" />
+                        </VBox.margin>
+                         </HBox>
+                                <HBox spacing="5">
+                                    <ImageView fitHeight="16" fitWidth="16" preserveRatio="true">
+                                        <image>
+                                            <Image url="@/images/icon/adult.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Label fx:id="soLuongNguoiLon" text="0 người" />
+                                </HBox>
+                            <Label fx:id="ngayNhanLabel" text="Ngày nhận: 11/1/1111 11:11" />
+                            <Label fx:id="ngayTraLabel" text="Ngày trả: 11/1/1111 11:11" />
+                         <!-- Button row -->
+                         <HBox alignment="BOTTOM_CENTER" spacing="15" VBox.vgrow="ALWAYS">
+                             <Button fx:id="nhanPhongBtn" onAction="#handleClickButton" style="-fx-background-color:  #007BFF; -fx-background-radius: 10; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 10" text="Nhận phòng" />
+                            <Button fx:id="traPhongBtn" onAction="#handleClickButton" style="-fx-background-color:  #28A745; -fx-background-radius: 10;-fx-text-fill: white; -fx-font-weight: bold;-fx-padding: 5 10" text="Trả phòng" />
+                            <Button fx:id="thanhToanBtn" onAction="#handleClickButton" style="-fx-background-color: #6610F2; -fx-background-radius: 10; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 10;" text="Thanh toán" />
+                             <Button fx:id="huyDatBtn" onAction="#handleClickButton" style="-fx-background-color:  #DC3545; -fx-background-radius: 10;-fx-text-fill: white; -fx-font-weight: bold;-fx-padding: 5 10" text="Hủy đặt" />
+                         </HBox>
+                            <padding>
+                                <Insets left="10.0" right="10.0" />
+                            </padding>
+                        </VBox>
+                    </center>
+                </BorderPane>
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+            </VBox>
+        </center>
+        <right>
+            <VBox style="-fx-padding: 10; -fx-border-color: transparent transparent transparent black; -fx-border-width: 2;">
+                <prefWidth>250</prefWidth>
+
+                <!-- Price Details -->
+                <VBox spacing="5" style="-fx-padding: 0 0 10 0;">
+                    <Label fx:id="tienPhuThuChiTietDonDat" style="-fx-font-size: 14;" text="Tiền phụ thu: 0 VND" />
+                    <Label fx:id="tienDichVuChiTietDonDat" style="-fx-font-size: 14;" text="Tiền dịch vụ: 0 VND" />
+                    <Label fx:id="tienPhongChiTietDonDat" style="-fx-font-size: 14;" text="Tiền phòng: 1.600.000 VND" />
+                    <Label style="-fx-font-size: 14;" text="VAT: 8%" />
+                </VBox>
+                <!-- Separator -->
+                <Separator orientation="HORIZONTAL" style="-fx-background-color: black;" />
+
+                <!-- Total -->
+                <HBox alignment="CENTER_LEFT" style="-fx-padding: 10 0 0 0; ">
+                    <Label fx:id="tongTienChiTietDonDat" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Tổng tiền: 1.728.000 VND" />
+                </HBox>
+            </VBox>
+        </right>
+    </BorderPane>
+    <!-- Phần 5, 6, 7: Có thể mở rộng -->
+<!--    khach hang trong phong-->
+    <BorderPane fx:id="khachHangTrongPhong" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" VBox.vgrow="ALWAYS">
+        <center>
+            <VBox>
+                <children>
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                        <children>
+                            <Label fx:id="khachHangTitle" style="-fx-font-size: 16px; -fx-font-weight: bold;" styleClass="header-label" text="Khách hàng trong phòng STA-1002">
+                                <HBox.margin>
+                                    <Insets left="10.0" />
+                                </HBox.margin>
+                            </Label>
+                            <Pane HBox.hgrow="ALWAYS" />
+                            <ImageView fx:id="removeButton" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#handleRemoveClick" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@/images/icon/remove.png" />
+                                </image>
+                                <HBox.margin>
+                                    <Insets right="5.0" />
+                                </HBox.margin>
+                            </ImageView>
+                            <ImageView fx:id="addButton" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#handleAddClick" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@/images/icon/add.png" />
+                                </image>
+                                <HBox.margin>
+                                    <Insets right="10.0" />
+                                </HBox.margin>
+                            </ImageView>
+                        </children>
+                        <padding>
+                            <Insets bottom="10.0" top="10.0" />
+                        </padding>
+                    </HBox>
+                    <ScrollPane fitToHeight="true" fitToWidth="true">
+                        <content>
+                            <TableView fx:id="guestTable" prefHeight="200.0">
+                                <columns>
+                                    <TableColumn fx:id="maKhachHangColumn" prefWidth="120.0" text="Mã" />
+                                    <TableColumn fx:id="tenKhachHangColumn" prefWidth="150.0" text="Tên" />
+                                    <TableColumn fx:id="soDienThoaiColumn" prefWidth="120.0" text="Số điện thoại" />
+                                    <TableColumn fx:id="canCuocCongDanColumn" prefWidth="120.0" text="Căn cước công dân" />
+                                    <TableColumn fx:id="emailColumn" prefWidth="150.0" text="Email" />
+                                    <TableColumn fx:id="gioiTinhColumn" prefWidth="100.0" text="Giới tính" />
+                                    <TableColumn fx:id="ngaySinhColumn" prefWidth="100.0" text="Ngày sinh" />
+                                    <TableColumn fx:id="quocTichColumn" prefWidth="100.0" text="Quốc tịch" />
+                                </columns>
+                            </TableView>
+                        </content>
+                    </ScrollPane>
+                </children>
+            </VBox>
+        </center>
+    </BorderPane>
+<!--    dich vu-->
+    <BorderPane style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" VBox.vgrow="ALWAYS">
+        <center>
+            <VBox>
+                <children>
+                    <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-border-color: #E0E0E0; -fx-border-width: 0 0 1 0;">
+                        <children>
+                            <Label fx:id="dichVuTitle" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Dịch vụ phòng STA-1002">
+                                <HBox.margin>
+                                    <Insets left="10.0" />
+                                </HBox.margin>
+                            </Label>
+                            <Pane HBox.hgrow="ALWAYS" />
+                            <ImageView fx:id="removeDichVuButton" fitHeight="28.0" fitWidth="28.0" onMouseClicked="#handleRemoveClick" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@/images/icon/remove.png" />
+                                </image>
+                                <HBox.margin>
+                                    <Insets right="5.0" />
+                                </HBox.margin>
+                            </ImageView>
+                            <ImageView fx:id="addDichVuButton" fitHeight="28.0" fitWidth="28.0" onMouseClicked="#handleAddClick" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@/images/icon/add.png" />
+                                </image>
+                                <HBox.margin>
+                                    <Insets right="10.0" />
+                                </HBox.margin>
+                            </ImageView>
+                        </children>
+                        <padding>
+                            <Insets bottom="10.0" top="10.0" />
+                        </padding>
+                    </HBox>
+                    <TableView fx:id="serviceTable" prefHeight="200.0" style="-fx-border-color: #E0E0E0; -fx-border-width: 1;">
+                        <columns>
+                            <TableColumn fx:id="anhDichVuColumn" prefWidth="150.0" text="Ảnh dịch vụ" />
+                            <TableColumn fx:id="tenDichVuColumn" prefWidth="180.0" text="Tên dịch vụ" />
+                            <TableColumn fx:id="ngaySuDungColumn" prefWidth="180.0" text="Ngày sử dụng" />
+                            <TableColumn fx:id="giaDichVuColumn" prefWidth="150.0" text="Giá dịch vụ" />
+                            <TableColumn fx:id="soLuongColumn" prefWidth="150.0" text="Số lượng" />
+                            <TableColumn fx:id="tongTienColumn" prefWidth="180.0" text="Tổng tiền" />
+                        </columns>
+                        <placeholder>
+                            <Label text="Không có dịch vụ nào" />
+                        </placeholder>
+                    </TableView>
+                </children>
+            </VBox>
+        </center>
+    </BorderPane>
+<!--    phu thu-->
+    <BorderPane VBox.vgrow="ALWAYS">
+        <center>
+            <VBox>
+                <children>
+                    <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-border-color: #E0E0E0; -fx-border-width: 0 0 1 0;">
+                        <children>
+                            <Label fx:id="phuThuTitle" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Phụ thu phòng STA-1002">
+                                <HBox.margin>
+                                    <Insets left="10.0" />
+                                </HBox.margin>
+                            </Label>
+                        </children>
+                        <padding>
+                            <Insets bottom="10.0" top="10.0" />
+                        </padding>
+                    </HBox>
+                    <TableView fx:id="phuThuTable" prefHeight="200.0" style="-fx-border-color: #E0E0E0; -fx-border-width: 1;">
+                        <columns>
+                            <TableColumn fx:id="anhPhuThuColumn" prefWidth="150.0" text="Ảnh phụ thu " />
+                            <TableColumn fx:id="tenPhuThuColumn" prefWidth="180.0" text="Tên phụ thu" />
+                            <TableColumn fx:id="giaPhuThuColumn" prefWidth="150.0" text="Giá phụ thu" />
+                            <TableColumn fx:id="tongTienPhuThuColumn" prefWidth="180.0" text="Tổng tiền" />
+                        </columns>
+                        <placeholder>
+                            <Label text="Không có dịch vụ nào" />
+                        </placeholder>
+                    </TableView>
+                </children>
+            </VBox>
+        </center>
+    </BorderPane>
+</VBox>

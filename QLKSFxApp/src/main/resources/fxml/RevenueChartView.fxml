@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" spacing="10" style="-fx-padding: 10;"
+fx:controller="iuh.fit.qlksfxapp.controller.RevenueChartController">
+<Label text="Biểu đồ Doanh thu" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+<HBox spacing="10" alignment="CENTER_LEFT">
+    <Label text="Chọn khoảng thời gian:"/>
+    <ComboBox fx:id="timeRangeComboBox" prefWidth="150"/>
+    <Label text="hoặc"/>
+    <Label text="Từ:"/>
+    <DatePicker fx:id="startDatePicker" prefWidth="150"/>
+    <Label text="Đến:"/>
+    <DatePicker fx:id="endDatePicker" prefWidth="150"/>
+    <Button text="Xem" onAction="#handleViewButton"/>
+</HBox>
+
+<BarChart fx:id="revenueBarChart" title="Doanh thu theo thời gian" legendVisible="false" animated="false">
+    <xAxis>
+        <CategoryAxis fx:id="xAxis" label="Thời gian"/>
+    </xAxis>
+    <yAxis>
+        <NumberAxis fx:id="yAxis" label="Doanh thu (VND)"/>
+    </yAxis>
+</BarChart>
+</VBox>

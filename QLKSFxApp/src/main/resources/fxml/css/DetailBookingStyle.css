@@ -1,0 +1,55 @@
+br-datTruoc{
+    -fx-border-color: #FFC107;
+}
+br-daNhanPhong{
+    -fx-border-color: #007BFF;
+}
+br-daTraPhong{
+    -fx-border-color: #28A745;
+}
+br-daHuy{
+    -fx-border-color: #DC3545;
+}
+br-daThanhToan{
+    -fx-border-color: #6610F2;
+}
+bg-datTruoc{
+    -fx-background-color: #FFC107;
+}
+bg-daNhanPhong{
+    -fx-background-color: #007BFF;
+}
+bg-daTraPhong{
+    -fx-background-color: #28A745;
+}
+bg-daHuy{
+    -fx-background-color: #DC3545;
+}
+bg-daThanhToan{
+    -fx-background-color: #6610F2;
+}
+txfill-datTruoc{
+    -fx-text-fill: #FFC107;
+}
+txfill-daNhanPhong{
+    -fx-text-fill: #007BFF;
+}
+txfill-daTraPhong{
+    -fx-text-fill: #28A745;
+}
+txfill-daHuy{
+    -fx-text-fill: #DC3545;
+}
+txfill-daThanhToan{
+    -fx-text-fill: #6610F2;
+}
+
+.detailBookingShort {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-background-radius: 5;
+}
+
+.detailBookingShort:selected, .detailBookingShort.selected {
+    -fx-border-color: #0078D7;
+}

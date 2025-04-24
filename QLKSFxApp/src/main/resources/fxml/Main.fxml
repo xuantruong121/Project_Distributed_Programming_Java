@@ -92,18 +92,18 @@
                                     <String fx:value="submenu-button"/>
                                 </styleClass>
                             </Button>
-                            <Button onAction="#showInventoryStatsPane" prefHeight="35.0" prefWidth="225.0"
-                                    text="Thống kê kho">
-                                <styleClass>
-                                    <String fx:value="submenu-button"/>
-                                </styleClass>
-                            </Button>
-                            <Button onAction="#showCustomerStatsPane" prefHeight="35.0" prefWidth="225.0"
-                                    text="Thống kê khách">
-                                <styleClass>
-                                    <String fx:value="submenu-button"/>
-                                </styleClass>
-                            </Button>
+<!--                            <Button onAction="#showInventoryStatsPane" prefHeight="35.0" prefWidth="225.0"-->
+<!--                                    text="Thống kê kho">-->
+<!--                                <styleClass>-->
+<!--                                    <String fx:value="submenu-button"/>-->
+<!--                                </styleClass>-->
+<!--                            </Button>-->
+<!--                            <Button onAction="#showCustomerStatsPane" prefHeight="35.0" prefWidth="225.0"-->
+<!--                                    text="Thống kê khách">-->
+<!--                                <styleClass>-->
+<!--                                    <String fx:value="submenu-button"/>-->
+<!--                                </styleClass>-->
+<!--                            </Button>-->
                         </VBox>
                     </VBox>
 

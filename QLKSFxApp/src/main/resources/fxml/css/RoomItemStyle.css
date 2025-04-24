@@ -1,31 +1,89 @@
 
 /* room-status.css */
 /* TRONG - Trống */
-.room-status-trong {
+.txfill-trong {
     -fx-text-fill: #17A2B8;
 }
-
 /* DANG_SU_DUNG - Đang sử dụng */
-.room-status-dang-su-dung {
+.txfill-dangsudung {
     -fx-text-fill: #DC3545;
 }
-
 /* DANG_DON_DEP - Đang dọn dẹp */
-.room-status-dang-don-dep {
+.txfill-dangdondep {
     -fx-text-fill: #6C757D;
 }
-
 /* DAT_TRUOC - Đặt trước */
-.room-status-dat-truoc {
+.txfill-dattruoc {
     -fx-text-fill: #FFC107;
 }
-
 /* DANG_SUA_CHUA - Đang sửa chữa */
-.room-status-dang-sua-chua {
+.txfill-dangsuachua {
     -fx-text-fill: #FD7E14;
 }
-
 /* KHONG_SU_DUNG - Không sử dụng */
-.room-status-khong-su-dung {
+.txfill-khongsudung {
     -fx-text-fill: #343A40;
+}
+.bg-trong{
+    -fx-background-color: #17A2B8;
+}
+.bg-dangsudung{
+    -fx-background-color: #DC3545;
+}
+.bg-dangdondep{
+    -fx-background-color: #6C757D;
+}
+.bg-dattruoc{
+    -fx-background-color: #FFC107;
+}
+.bg-dangsuachua{
+    -fx-background-color: #FD7E14;
+}
+.bg-khongsudung{
+    -fx-background-color: #343A40;
+}
+.br-trong{
+    -fx-border-color: #17A2B8;
+}
+.br-dangsudung{
+    -fx-border-color: #DC3545;
+}
+.br-dangdondep{
+    -fx-border-color: #6C757D;
+}
+.br-dattruoc{
+    -fx-border-color: #FFC107;
+}
+.br-dangsuachua{
+    -fx-border-color: #FD7E14;
+}
+.br-khongsudung{
+    -fx-border-color: #343A40;
+}
+.bg-green-button{
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+.bg-disable-button{
+    -fx-background-color: #D9D9D9;
+    -fx-text-fill: black;
+}
+.bg-blue-button{
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}
+.button-item{
+    -fx-padding: 5 15;
+}
+.lable-status{
+    -fx-background-radius: 10;
+    -fx-padding: 2 8;
+    -fx-text-fill: white;
+    -fx-font-size: 12;
+}
+.room-item{
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
 }

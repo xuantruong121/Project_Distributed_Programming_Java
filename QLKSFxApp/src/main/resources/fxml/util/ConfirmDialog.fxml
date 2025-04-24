@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="100" prefWidth="360" style=" -fx-padding: 20;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="iuh.fit.qlksfxapp.controller.ItemController.ConfirmDialogController">
+        <!-- Nội dung thông báo -->
+        <Label fx:id="messageLabel" alignment="CENTER" maxWidth="320" style="-fx-font-size: 14px; -fx-text-alignment: center;" text="Bạn có chắc chắn muốn thực hiện hành động này?" wrapText="true" />
+        <!-- Hàng nút -->
+        <HBox alignment="BOTTOM_CENTER" spacing="40" VBox.vgrow="ALWAYS">
+            <Button fx:id="confirmButton" onAction="#handleConfirm" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand; -fx-pref-width: 100px;" text="Xác nhận" />
+            <Button fx:id="cancelButton" onAction="#handleCancel" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-cursor: hand; -fx-pref-width: 100px;" text="Hủy" />
+        </HBox>
+</VBox>

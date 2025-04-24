@@ -1,5 +1,12 @@
 package iuh.fit.qlksfxapp.controller;
 
+import com.google.common.eventbus.Subscribe;
+import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.Entity.DonDatPhong;
+import iuh.fit.qlksfxapp.Entity.Phong;
+import iuh.fit.qlksfxapp.controller.EventBus.*;
+import iuh.fit.qlksfxapp.util.ConfirmDialog;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,12 +23,15 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainController {
     @FXML
     private Pane menuPane;
     @FXML
-    private Pane contentPane;
+    private AnchorPane contentPane;
     @FXML
     private VBox menuVBox;
     @FXML
@@ -30,8 +40,10 @@ public class MainController {
     private Button homeButton;
     @FXML
     private Button bookingManagementButton;
+//    private Button roomManagementButton;
     @FXML
     private VBox bookingManagementSubMenu;
+    private VBox roomManagementSubMenu;
     @FXML
     private Button statisticsButton;
     @FXML
@@ -74,7 +86,8 @@ public class MainController {
 
     // Track the active menu button for highlighting
     private Button activeMenuButton;
-
+    private String currentFxml;
+    private Object currentController;
     @FXML
     private void initialize() {
         // Initialize default content pane
@@ -88,6 +101,7 @@ public class MainController {
 
         // Update greeting based on time of day
         updateGreeting();
+        EventBusManager.register(this);
     }
 
     private void setupSidebarMenu() {
@@ -289,6 +303,29 @@ public class MainController {
     @FXML
     private void showRevenueStatsPane() {
         updateContent("Thống kê doanh thu");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RevenueChartView.fxml"));
+        Parent view = null;
+        try {
+            view = loader.load();
+            // Truyền dữ liệu nếu controller có phương thức setData
+//            Object controller = loader.getController();
+//            if (controller instanceof BookingFormController) {
+//                ((DataReceivable) controller).setData(event.getData());
+//                currentController = controller;
+//                currentFxml = "/fxml/BookingForm.fxml";
+//            }
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(view);
+            AnchorPane.setTopAnchor(view, 0.0);
+            AnchorPane.setBottomAnchor(view, 0.0);
+            AnchorPane.setLeftAnchor(view, 0.0);
+            AnchorPane.setRightAnchor(view, 0.0);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
     }
 
     @FXML
@@ -490,16 +527,26 @@ public class MainController {
 
     @FXML
     public void showMainPane() {
-        updateContent("Trang chủ");
         loadDashboardContent();
     }
 
     private void loadDashboardContent() {
         // Here you would implement loading the dashboard components
         // such as room statistics, booking information, etc.
-        System.out.println("Loading dashboard content");
+        Parent newContent = null;
+        try {
+            URL resource = getClass().getResource("/fxml/TrangChu.fxml");
+            FXMLLoader loader = new FXMLLoader(resource);
+            newContent = loader.load();
+            contentPane.getChildren().setAll(newContent);
+            AnchorPane.setTopAnchor(newContent, 0.0);
+            AnchorPane.setBottomAnchor(newContent, 0.0);
+            AnchorPane.setLeftAnchor(newContent, 0.0);
+            AnchorPane.setRightAnchor(newContent, 0.0);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
     private void updateContent(String title) {
         // Update content pane
         contentPane.getChildren().clear();
@@ -515,6 +562,34 @@ public class MainController {
         AnchorPane.setLeftAnchor(pane, 0.0);
         AnchorPane.setRightAnchor(pane, 0.0);
     }
+//    @FXML
+//    public void showUserProfile() {
+//        try {
+//            // Tạo FXMLLoader để tải UserProfile.fxml
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserProfile.fxml"));
+//            Parent userProfileView = loader.load();
+//
+//            // Clear previous content and add new interface to content pane
+//            contentPane.getChildren().clear();
+//            contentPane.getChildren().add(userProfileView);
+//
+//            // Set anchor properties to fill the content pane
+//            AnchorPane.setTopAnchor(userProfileView, 0.0);
+//            AnchorPane.setBottomAnchor(userProfileView, 0.0);
+//            AnchorPane.setLeftAnchor(userProfileView, 0.0);
+//            AnchorPane.setRightAnchor(userProfileView, 0.0);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//
+//            // Hiển thị thông báo lỗi
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Lỗi");
+//            alert.setHeaderText("Không thể mở thông tin người dùng");
+//            alert.setContentText("Lỗi: " + e.getMessage());
+//            alert.showAndWait();
+//        }
+//    }
 
     @FXML
     public void showUserProfile() {
@@ -557,17 +632,28 @@ public class MainController {
                 case "TYPE_INFO" -> "/fxml/InfoTypeOfRoom.fxml";
                 default -> null;
             };
+
             if (fxmlFile != null) {
+                // cleanup nếu trang hiện tại là BookingForm
+                if (currentFxml != null && currentFxml.equals("/fxml/BookingForm.fxml") && currentController instanceof BookingFormController cc) {
+                    cc.closePage();
+                } else if (currentFxml != null && currentFxml.equals("/fxml/MapOfRoom.fxml") && currentController instanceof MapOfRoomController cc) {
+                    cc.closePage();
+                }
                 URL resource = getClass().getResource(fxmlFile);
-                System.out.println("Resource URL: " + resource);
                 if (resource == null) {
-                    throw new IOException("Cannot find resource: " + fxmlFile);
+                    throw new IOException("Không tìm thấy file: " + fxmlFile);
                 }
 
                 FXMLLoader loader = new FXMLLoader(resource);
                 Parent newContent = loader.load();
-                contentPane.getChildren().setAll(newContent); // Better than clear+add
-                //
+                currentController = loader.getController();
+                if(currentController instanceof  BookingFormController){
+                    ((BookingFormController) currentController).setData(null);
+                }
+                currentFxml = fxmlFile;
+
+                contentPane.getChildren().setAll(newContent);
                 AnchorPane.setTopAnchor(newContent, 0.0);
                 AnchorPane.setBottomAnchor(newContent, 0.0);
                 AnchorPane.setLeftAnchor(newContent, 0.0);
@@ -575,7 +661,89 @@ public class MainController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            // Consider showing an alert to the user
         }
     }
+
+//    @FXML
+//    public void handleSubRoomManager(ActionEvent event) {
+//        Button clickedButton = (Button) event.getSource();
+//        String buttonType = (String) clickedButton.getUserData();
+//        try {
+//            // Giả sử bạn có các FXML tương ứng với từng buttonText
+//            String fxmlFile = switch (buttonType) {
+//                case "BOOKING" -> "/fxml/BookingForm.fxml";
+//                case "MAP" -> "/fxml/MapOfRoom.fxml";
+//                case "TYPE_INFO" -> "/fxml/InfoTypeOfRoom.fxml";
+//                default -> null;
+//            };
+//            if (fxmlFile != null) {
+//                URL resource = getClass().getResource(fxmlFile);
+//                System.out.println("Resource URL: " + resource);
+//                if (resource == null) {
+//                    throw new IOException("Cannot find resource: " + fxmlFile);
+//                }
+//
+//                FXMLLoader loader = new FXMLLoader(resource);
+//                Parent newContent = loader.load();
+//                contentPane.getChildren().setAll(newContent); // Better than clear+add
+//                //
+//                AnchorPane.setTopAnchor(newContent, 0.0);
+//                AnchorPane.setBottomAnchor(newContent, 0.0);
+//                AnchorPane.setLeftAnchor(newContent, 0.0);
+//                AnchorPane.setRightAnchor(newContent, 0.0);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            // Consider showing an alert to the user
+//        }
+//    }
+    @Subscribe
+    public void handleNavigationEvent(NavigationEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(event.getFxmlPath()));
+            Parent view = loader.load();
+
+            // Truyền dữ liệu nếu controller có phương thức setData
+            Object controller = loader.getController();
+            if (controller instanceof BookingFormController) {
+                ((DataReceivable) controller).setData(event.getData());
+                currentController = controller;
+                currentFxml = "/fxml/BookingForm.fxml";
+            }
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(view);
+            AnchorPane.setTopAnchor(view, 0.0);
+            AnchorPane.setBottomAnchor(view, 0.0);
+            AnchorPane.setLeftAnchor(view, 0.0);
+            AnchorPane.setRightAnchor(view, 0.0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Interface để nhận dữ liệu
+    public interface DataReceivable {
+        void setData(Object data);
+    }
+
+    @Subscribe
+    public void handleConfirmDialog(ConfirmDialogEvent event) {
+        Platform.runLater(() -> ConfirmDialog.show(
+                event.getMessage(),
+                event.getOnConfirm(),
+                event.getOnCancel(),
+                contentPane,
+                event.getMessSucAndFail()
+        ));
+    }
+
+    @Subscribe
+    public void handleToastEvent(ToastEvent event) {
+        Platform.runLater(() -> ConfirmDialog.showToast(contentPane,event.getMessage(), event.getType()));
+    }
+    // Hủy đăng ký khi controller bị hủy
+    public void shutdown() {
+        EventBusManager.unregister(this);
+    }
+
 }
