@@ -83,7 +83,7 @@ public class NhanVienDAOImpl extends GeneralDAOImpl implements NhanVienDAO {
         try {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
             return em.createQuery(
-                    "SELECT nv FROM NhanVien nv WHERE nv.cccd = :cccd",
+                    "SELECT nv FROM NhanVien nv WHERE nv.canCuocCongDan = :cccd",
                     NhanVien.class)
                     .setParameter("cccd", cccd)
                     .getSingleResult();

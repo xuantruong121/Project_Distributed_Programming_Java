@@ -51,7 +51,7 @@ public class KhachHangDAOImpl extends GeneralDAOImpl implements KhachHangDAO {
         try {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
             TypedQuery<KhachHang> query = em.createQuery(
-                    "SELECT k FROM KhachHang k WHERE k.cccd = :cccd",
+                    "SELECT k FROM KhachHang k WHERE k.canCuocCongDan = :cccd",
                     KhachHang.class);
             query.setParameter("cccd", cccd);
             return query.getSingleResult();
