@@ -47,6 +47,14 @@ dependencies {
     // Add MariaDB JDBC driver
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.4'
 
+    // Add Google Guava for EventBus
+    implementation 'com.google.guava:guava:33.0.0-jre'
+
+    // Add Jakarta Bean Validation
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+    implementation 'org.glassfish:jakarta.el:5.0.0-M1'
+
     // Add all JAR files in the libs directory to the runtime classpath
     runtimeOnly fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -158,8 +166,8 @@ tasks.register('listJarContents') {
     doLast {
         fileTree(dir: 'libs', include: '*.jar').each { jarFile ->
             println "\nContents of ${jarFile.name}:"
-            // Use execOperations instead of exec to avoid deprecation warning
-            execOperations.exec {
+            // Use exec directly since execOperations is not available
+            exec {
                 commandLine 'jar', '-tf', jarFile
             }
         }
