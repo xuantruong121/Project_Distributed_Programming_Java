@@ -19,7 +19,8 @@ public class Main extends Application {
             initializeRMIService();
 
             // Tải SplashScreen trước
-            Parent splashRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/SplashScreen.fxml")));
+            Parent splashRoot = FXMLLoader.load(Objects.requireNonNull(getClass()
+                    .getResource("/fxml/SplashScreen.fxml")));
             Scene splashScene = new Scene(splashRoot);
 
             primaryStage.setTitle("Đang khởi động...");

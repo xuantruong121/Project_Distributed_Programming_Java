@@ -101,3 +101,9 @@ task runRMIClient(type: JavaExec) {
     standardInput = System.in
 }
 
+task cleanAndRun(type: GradleBuild) {
+    group = "application"
+    description = "Clean build and run the application"
+    tasks = ['clean', 'run']
+}
+

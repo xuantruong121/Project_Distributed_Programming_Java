@@ -40,7 +40,7 @@ public class RMIClientMenu {
             System.setProperty("java.security.policy", projectDir + "/rmi.policy");
 
             // Get the registry
-            registry = LocateRegistry.getRegistry("localhost", 9090);
+            registry = LocateRegistry.getRegistry("192.168.99.238", 9090);
 
             // Look up the DAO services from the registry
             taiKhoanDAO = (TaiKhoanDAO) registry.lookup("taiKhoanDAO");

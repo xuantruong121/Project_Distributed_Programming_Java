@@ -3,6 +3,7 @@ package iuh.fit.qlksfxapp.controller;
 import iuh.fit.qlksfxapp.Entity.NhanVien;
 import iuh.fit.qlksfxapp.Entity.TaiKhoan;
 import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
+import iuh.fit.qlksfxapp.util.PasswordHasher;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -94,12 +95,18 @@ public class UserProfileController {
     private void initialize() {
         generalDAOImpl = new GeneralDAOImpl();
 
-        // Trong thực tế, bạn sẽ lấy thông tin người dùng hiện tại từ session hoặc service
-        // Ở đây tôi sẽ giả lập bằng cách lấy một nhân viên từ database
-        // Trong ứng dụng thực tế, bạn sẽ cần triển khai một UserSession để lưu thông tin người dùng đăng nhập
+        // Lấy thông tin người dùng hiện tại từ SessionManager
+        TaiKhoan taiKhoan = SessionManager.getInstance().getCurrentUser();
+        if (taiKhoan != null && taiKhoan.getNhanVien() != null) {
+            currentUser = taiKhoan.getNhanVien();
 
-        // Ví dụ: currentUser = UserSession.getInstance().getCurrentUser();
-        // Hoặc truyền thông tin người dùng từ MainController
+            // Cập nhật giao diện với thông tin người dùng
+            updateUserInterface();
+        } else {
+            // Hiển thị thông báo lỗi nếu không tìm thấy thông tin người dùng
+            showAlert(Alert.AlertType.ERROR, "Lỗi", "Không tìm thấy thông tin người dùng",
+                    "Không thể hiển thị thông tin người dùng. Vui lòng đăng nhập lại.");
+        }
 
         // Thiết lập các cột cho bảng ca làm việc
         setupScheduleTable();
@@ -209,9 +216,10 @@ public class UserProfileController {
                 "Nghỉ phép đã được duyệt"));
     }
 
-    public void setUserData(NhanVien nhanVien) {
-        this.currentUser = nhanVien;
-
+    /**
+     * Cập nhật giao diện người dùng với thông tin từ currentUser
+     */
+    private void updateUserInterface() {
         if (currentUser != null) {
             // Cập nhật thông tin hiển thị
             nameLabel.setText(currentUser.getTenNhanVien());
@@ -241,20 +249,24 @@ public class UserProfileController {
 
             statusLabel.setText(currentUser.getTrangThai());
 
+            // Hiển thị hình ảnh người dùng nếu có
+            loadUserImage();
+        }
+    }
+
+    /**
+     * Tải hình ảnh người dùng
+     */
+    private void loadUserImage() {
+        try {
             // Nếu có hình ảnh, bạn có thể cập nhật profileImageView
             if (currentUser.getHinhAnh() != null && !currentUser.getHinhAnh().isEmpty()) {
-                try {
-                    File imageFile = new File(currentUser.getHinhAnh());
-                    if (imageFile.exists()) {
-                        Image image = new Image(imageFile.toURI().toString());
-                        profileImageView.setImage(image);
-                    } else {
-                        // Sử dụng hình ảnh mặc định nếu không tìm thấy file
-                        Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/placeHolder.jpg")));
-                        profileImageView.setImage(defaultImage);
-                    }
-                } catch (Exception e) {
-                    // Sử dụng hình ảnh mặc định nếu có lỗi
+                File imageFile = new File(currentUser.getHinhAnh());
+                if (imageFile.exists()) {
+                    Image image = new Image(imageFile.toURI().toString());
+                    profileImageView.setImage(image);
+                } else {
+                    // Sử dụng hình ảnh mặc định nếu không tìm thấy file
                     Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/placeHolder.jpg")));
                     profileImageView.setImage(defaultImage);
                 }
@@ -263,7 +275,25 @@ public class UserProfileController {
                 Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/placeHolder.jpg")));
                 profileImageView.setImage(defaultImage);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Sử dụng hình ảnh mặc định nếu có lỗi
+            try {
+                Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/placeHolder.jpg")));
+                profileImageView.setImage(defaultImage);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
+    }
+
+    /**
+     * Phương thức để các controller khác có thể truyền dữ liệu người dùng
+     * @param nhanVien Thông tin nhân viên
+     */
+    public void setUserData(NhanVien nhanVien) {
+        this.currentUser = nhanVien;
+        updateUserInterface();
     }
 
     @FXML
@@ -377,14 +407,21 @@ public class UserProfileController {
                 TaiKhoan taiKhoan = generalDAOImpl.findOb(TaiKhoan.class, currentUser.getMaNhanVien());
 
                 if (taiKhoan != null) {
-                    // Kiểm tra mật khẩu cũ
-                    if (!taiKhoan.getMatKhau().equals(oldPass)) {
+                    // Kiểm tra mật khẩu cũ sử dụng PasswordHasher
+                    if (!PasswordHasher.verifyPassword(oldPass, taiKhoan.getMatKhau())) {
                         showAlert(Alert.AlertType.ERROR, "Lỗi", "Đổi mật khẩu", "Mật khẩu hiện tại không đúng.");
                         return;
                     }
 
-                    // Cập nhật mật khẩu mới
-                    taiKhoan.setMatKhau(newPass);
+                    // Kiểm tra độ mạnh của mật khẩu mới
+                    if (!TaiKhoan.checkPassW(newPass)) {
+                        showAlert(Alert.AlertType.ERROR, "Lỗi", "Đổi mật khẩu",
+                                "Mật khẩu mới không đủ mạnh. Mật khẩu phải có ít nhất 6 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt.");
+                        return;
+                    }
+
+                    // Cập nhật mật khẩu mới sử dụng PasswordHasher
+                    taiKhoan.setMatKhau(PasswordHasher.hashPassword(newPass, PasswordHasher.generateSalt()));
                     generalDAOImpl.updateOb(taiKhoan);
 
                     showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đổi mật khẩu", "Mật khẩu đã được cập nhật thành công.");

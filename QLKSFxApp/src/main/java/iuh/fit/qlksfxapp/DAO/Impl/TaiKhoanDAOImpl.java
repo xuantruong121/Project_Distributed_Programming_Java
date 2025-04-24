@@ -2,6 +2,7 @@ package iuh.fit.qlksfxapp.DAO.Impl;
 
 import iuh.fit.qlksfxapp.DAO.TaiKhoanDAO;
 import iuh.fit.qlksfxapp.Entity.TaiKhoan;
+import iuh.fit.qlksfxapp.util.PasswordHasher;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
@@ -50,12 +51,20 @@ public class TaiKhoanDAOImpl extends GeneralDAOImpl implements TaiKhoanDAO {
         EntityManager em = null;
         try {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
+            // Lấy tài khoản dựa trên username (mã nhân viên)
             TypedQuery<TaiKhoan> query = em.createQuery(
-                    "SELECT t FROM TaiKhoan t WHERE t.nhanVien.maNhanVien = :username AND t.matKhau = :password",
+                    "SELECT t FROM TaiKhoan t WHERE t.nhanVien.maNhanVien = :username",
                     TaiKhoan.class);
             query.setParameter("username", username);
-            query.setParameter("password", password);
-            return query.getSingleResult();
+
+            TaiKhoan taiKhoan = query.getSingleResult();
+
+            // Kiểm tra mật khẩu trực tiếp (không băm)
+            if (taiKhoan != null && password.equals(taiKhoan.getMatKhau())) {
+                return taiKhoan;
+            } else {
+                return null;
+            }
         } catch (NoResultException e) {
             return null;
         } finally {

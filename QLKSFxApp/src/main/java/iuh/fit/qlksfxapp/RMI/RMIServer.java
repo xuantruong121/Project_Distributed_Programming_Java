@@ -13,7 +13,7 @@ public class RMIServer {
         // Set system properties for RMI
         String projectDir = System.getProperty("user.dir");
         System.setProperty("java.security.policy", projectDir + "/rmi.policy");
-        System.setProperty("java.rmi.server.hostname", "192.168.0.223");
+        System.setProperty("java.rmi.server.hostname", "192.168.99.238");
 
         // Create and initialize the registry
         Registry registry = LocateRegistry.createRegistry(9090);
