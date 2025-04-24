@@ -105,10 +105,3 @@ task runRMIClient(type: JavaExec) {
     jvmArgs = ["-Djava.security.policy=${projectDir}/rmi.policy"]
     standardInput = System.in
 }
-
-task cleanAndRun(type: GradleBuild) {
-    group = "application"
-    description = "Clean build and run the application"
-    tasks = ['clean', 'run']
-}
-

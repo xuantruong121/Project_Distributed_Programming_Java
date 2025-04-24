@@ -173,9 +173,3 @@ tasks.register('listJarContents') {
         }
     }
 }
-
-task cleanAndRun(type: GradleBuild) {
-    group = "application"
-    description = "Clean build and run the application"
-    tasks = ['clean', 'run']
-}

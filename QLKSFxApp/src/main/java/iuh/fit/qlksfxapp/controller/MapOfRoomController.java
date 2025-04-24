@@ -68,13 +68,7 @@ public class MapOfRoomController {
         popup  = new Popup();
         popup.setAutoHide(true);
         allPhong=new ArrayList<>();
-        restartPage(null);
-        loadRoomItems();
-        scrollPane.vvalueProperty().addListener((obs, oldValue, newValue) -> {
-            if (newValue.doubleValue() == 1.0) { // Cuộn đến cuối
-                loadMoreItems();
-            }
-        });
+
         // them view empty
         Node emptyView = EmptyViewManager.getEmptyView();
         EmptyViewManager.setMessage("Không có phòng nào");
@@ -84,31 +78,66 @@ public class MapOfRoomController {
             emptyView.setVisible(false); // Ẩn view khi có dữ liệu
         }
 
-        initComboBox();
+        // Initialize formatters
         initFormater();
+
+        // Load tất cả các phòng và khởi tạo giao diện
+        showAllRooms();
+
+        // Initialize comboboxes after loading all rooms
+        initComboBox();
+
+        // Initialize legend
         initLegend();
-        // them 9 room
+
+        // Load room items
+        loadRoomItems();
+
+        // Add scroll listener
+        scrollPane.vvalueProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue.doubleValue() == 1.0) { // Cuộn đến cuối
+                loadMoreItems();
+            }
+        });
+
+        // Load initial items
         loadMoreItems();
     }
 
     private void initComboBox(){
-        List<String> loaiPhong = allPhong.stream().filter(phong -> phong.getLoaiPhong() != null)
-                .map(phong -> phong.getLoaiPhong().getTenLoaiPhong())
-                .distinct()
-                .toList();
-        List<String> viTri = allPhong.stream().map(Phong::getViTri)
-                .distinct()
-                .toList();
-        loaiPhongCmb.getItems().clear();
-        loaiPhongCmb.getItems().add("--- Tất cả ---");
-        loaiPhongCmb.getItems().addAll(loaiPhong);
-        loaiPhongCmb.setValue("--- Tất cả ---");
+        // Load room types directly from the database
+        try {
+            // Create a new LoaiPhongDAOImpl to get all room types
+            iuh.fit.qlksfxapp.DAO.Impl.LoaiPhongDAOImpl loaiPhongDAO = new iuh.fit.qlksfxapp.DAO.Impl.LoaiPhongDAOImpl();
+            List<String> loaiPhong = loaiPhongDAO.getAllLoaiPhong().stream()
+                    .map(lp -> lp.getTenLoaiPhong())
+                    .distinct()
+                    .toList();
 
-        viTriCmb.getItems().clear();
-        viTriCmb.getItems().add("--- Tất cả ---");
-        viTriCmb.getItems().addAll(viTri);
-        viTriCmb.setValue("--- Tất cả ---");
+            // Lấy danh sách vị trí từ tất cả các phòng trong cơ sở dữ liệu
+            iuh.fit.qlksfxapp.DAO.Impl.PhongDAOImpl phongDAOForViTri = new iuh.fit.qlksfxapp.DAO.Impl.PhongDAOImpl();
+            List<String> viTri = phongDAOForViTri.getAllPhong().stream()
+                    .map(Phong::getViTri)
+                    .distinct()
+                    .toList();
+            // Đóng kết nối sau khi sử dụng
+            phongDAOForViTri.closeEntityManager();
 
+            // Populate room type combobox
+            loaiPhongCmb.getItems().clear();
+            loaiPhongCmb.getItems().add("--- Tất cả ---");
+            loaiPhongCmb.getItems().addAll(loaiPhong);
+            loaiPhongCmb.setValue("--- Tất cả ---");
+
+            // Populate location combobox
+            viTriCmb.getItems().clear();
+            viTriCmb.getItems().add("--- Tất cả ---");
+            viTriCmb.getItems().addAll(viTri);
+            viTriCmb.setValue("--- Tất cả ---");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể tải danh sách loại phòng: " + e.getMessage());
+        }
     }
     private void initFormater(){
         // Định dạng cho các TextField
@@ -228,6 +257,7 @@ public class MapOfRoomController {
     // Xử lý sự kiện khi nhấn nút "restart"
     @FXML
     private void restartPage(ActionEvent actionEvent){
+        // Reset các trường nhập liệu
         ngayDenInp.setValue(null);
         ngayDiInp.setValue(null);
         gioDenInp.setText("");
@@ -239,19 +269,8 @@ public class MapOfRoomController {
         tenDoanInp.setText("");
         isSearchFailed = false;
 
-
-
-        if(manageTrangThaiPhong==null){
-            manageTrangThaiPhong = new ManageTrangThaiPhong(this);
-//            manageTrangThaiPhong.setMapOfRoomController(this);
-        }else{
-            manageTrangThaiPhong.refreshData();
-        }
-        allPhong.clear();
-        allPhong.addAll(manageTrangThaiPhong.getPhongByTrangThai(TrangThaiPhong.DANG_SU_DUNG));
-        allPhong.addAll(manageTrangThaiPhong.getPhongByTrangThai(TrangThaiPhong.DAT_TRUOC));
-        loadRoomItems();
-        updateEmptyState();
+        // Sử dụng phương thức mới để hiển thị tất cả các phòng
+        showAllRooms();
     }
     // xử lý loọc
     private void handleFilter(){
@@ -517,6 +536,30 @@ public class MapOfRoomController {
             loadRoomItems();
 //        }
     }
+    /**
+     * Phương thức để hiển thị tất cả các phòng của mọi trạng thái
+     */
+    @FXML
+    public void showAllRooms() {
+        // Đảm bảo dữ liệu được cập nhật
+        if(manageTrangThaiPhong != null) {
+            manageTrangThaiPhong.refreshData();
+        } else {
+            manageTrangThaiPhong = new ManageTrangThaiPhong(this);
+        }
+
+        // Xóa danh sách phòng hiện tại và thêm tất cả các phòng của mọi trạng thái
+        allPhong.clear();
+        for (TrangThaiPhong trangThai : TrangThaiPhong.values()) {
+            allPhong.addAll(manageTrangThaiPhong.getPhongByTrangThai(trangThai));
+        }
+
+        // Cập nhật giao diện
+        loadRoomItems();
+        updateEmptyState();
+        initLegend();
+    }
+
     public void closePage(){
         EventBusManager.unregister(this);
         donDatPhongDAO.getEm().close();
