@@ -14,9 +14,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../QLKSFxAppClient/libs/QLKSFxApp-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QLKSFxApp/src/main/java/iuh/fit/qlksfxapp/DAO/DonDatPhongDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QLKSFxApp/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/DonDatPhongDAOImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/BookingFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/BookingFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MapOfRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MapOfRoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/ManageTrangThaiPhong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/ManageTrangThaiPhong.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/AugmentWebviewStateStore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLKSFxAppClient/libs/QLKSFxApp-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../QLKSFxAppClient/libs/QLKSFxApp-1.0-SNAPSHOT.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,39 +117,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.util.PasswordChecker.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QLKSFxApp [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QLKSFxApp [cleanAndRun].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QLKSFxApp [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QLKSFxApp [jar].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QLKSFxApp [runRMIClient].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QLKSFxApp [runRMIServer].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QLKSFxApp [run].executor&quot;: &quot;Run&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-Database detector&quot;: &quot;Database detector&quot;,
-    &quot;Notification.DoNotAsk-Database detector&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Study/Java phan tan/Project/Project_Distributed_Programming_Java/QLKSFxApp/src/main/java/iuh/fit/qlksfxapp/util&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.Main.main()].executor": "Run",
+    "Gradle.QLKSFxApp [:iuh.fit.qlksfxapp.util.PasswordChecker.main()].executor": "Run",
+    "Gradle.QLKSFxApp [build].executor": "Run",
+    "Gradle.QLKSFxApp [cleanAndRun].executor": "Run",
+    "Gradle.QLKSFxApp [clean].executor": "Run",
+    "Gradle.QLKSFxApp [jar].executor": "Run",
+    "Gradle.QLKSFxApp [runRMIClient].executor": "Run",
+    "Gradle.QLKSFxApp [runRMIServer].executor": "Run",
+    "Gradle.QLKSFxApp [run].executor": "Run",
+    "Notification.DisplayName-DoNotAsk-Database detector": "Database detector",
+    "Notification.DoNotAsk-Database detector": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Study/Java phan tan/Project/Project_Distributed_Programming_Java/QLKSFxApp/src/main/java/iuh/fit/qlksfxapp/util",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Study\Java phan tan\Project\Project_Distributed_Programming_Java\QLKSFxApp\src\main\java\iuh\fit\qlksfxapp\util" />
@@ -163,7 +167,20 @@
       <recent name="iuh.fit.qlksfxapp.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.QLKSFxApp [runRMIServer]">
+  <component name="RunManager" selected="Gradle.QLKSFxApp [cleanAndRun]">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="iuh.fit.qlksfxapp.Main" />
+      <module name="QLKSFxApp.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="iuh.fit.qlksfxapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="QLKSFxApp [cleanAndRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -256,42 +273,19 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="QLKSFxApp [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--scan" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="run" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <EXTENSION ID="com.haulmont.jmixstudio.runconfiguration.JmixRunConfigurationExtension" isNew="true" />
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
     <list>
+      <item itemvalue="Application.Main" />
       <item itemvalue="Gradle.QLKSFxApp [jar]" />
       <item itemvalue="Gradle.QLKSFxApp [cleanAndRun]" />
       <item itemvalue="Gradle.QLKSFxApp [clean]" />
       <item itemvalue="Gradle.QLKSFxApp [runRMIServer]" />
-      <item itemvalue="Gradle.QLKSFxApp [run]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.QLKSFxApp [runRMIServer]" />
-        <item itemvalue="Gradle.QLKSFxApp [jar]" />
         <item itemvalue="Gradle.QLKSFxApp [cleanAndRun]" />
-        <item itemvalue="Gradle.QLKSFxApp [run]" />
+        <item itemvalue="Gradle.QLKSFxApp [runRMIServer]" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.QLKSFxApp [jar]" />
         <item itemvalue="Gradle.QLKSFxApp [clean]" />
       </list>
     </recent_temporary>
@@ -405,6 +399,40 @@
           <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/StyleUtil.java</url>
           <line>20</line>
           <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/ManageTrangThaiPhong.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/ManageTrangThaiPhong.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MapOfRoomController.java</url>
+          <line>186</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MapOfRoomController.java</url>
+          <line>183</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/ItemController/RoomItemController.java</url>
+          <line>100</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/BookingFormController.java</url>
+          <line>387</line>
+          <properties class="iuh.fit.qlksfxapp.controller.BookingFormController" method="handleHuyDatDonDatPhong">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

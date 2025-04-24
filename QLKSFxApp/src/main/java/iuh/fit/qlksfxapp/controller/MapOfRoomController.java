@@ -245,7 +245,7 @@ public class MapOfRoomController {
             manageTrangThaiPhong = new ManageTrangThaiPhong(this);
 //            manageTrangThaiPhong.setMapOfRoomController(this);
         }else{
-            manageTrangThaiPhong.loadData();
+            manageTrangThaiPhong.refreshData();
         }
         allPhong.clear();
         allPhong.addAll(manageTrangThaiPhong.getPhongByTrangThai(TrangThaiPhong.DANG_SU_DUNG));

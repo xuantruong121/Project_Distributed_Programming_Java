@@ -107,15 +107,38 @@ public class ManageTrangThaiPhong {
                 .map(PhongDonDatWrapper::getPhong)
                 .collect(Collectors.toList());
     }
+    // Cải tiến phương thức getDonDatPhongByMaPhong để luôn trả về dữ liệu mới nhất
     public DonDatPhong getDonDatPhongByMaPhong(String maPhong) {
+        // Tìm trong dữ liệu đã load
         for (List<PhongDonDatWrapper> wrappers : legendPhongTheoTrangThai.values()) {
             for (PhongDonDatWrapper wrapper : wrappers) {
-                if (wrapper.getPhong().getMaPhong().equals(maPhong)) {
+                if (wrapper.getPhong().getMaPhong().equals(maPhong) && wrapper.getDonDatPhong() != null) {
                     return wrapper.getDonDatPhong();
                 }
             }
         }
         return null;
+    }
+
+    // Thêm phương thức refreshData để cập nhật toàn bộ dữ liệu
+    public void refreshData() {
+        // Xóa dữ liệu cũ
+        legendPhongTheoTrangThai.clear();
+        listPhongTrong.clear();
+
+        // Cập nhật danh sách phòng
+        GeneralDAO generalDAO = new GeneralDAOImpl();
+        try {
+            listPhong = generalDAO.findAll(Phong.class);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Load lại dữ liệu
+        loadData();
+
+        // Cập nhật UI
+        callInitLegendAtMapOfRoomController();
     }
     public Integer getNumberOfPhongByTrangThai(TrangThaiPhong trangThai) {
         return legendPhongTheoTrangThai.getOrDefault(trangThai, List.of()).size();

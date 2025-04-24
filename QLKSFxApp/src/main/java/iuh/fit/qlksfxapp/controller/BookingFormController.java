@@ -52,7 +52,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -337,9 +339,36 @@ public class BookingFormController  implements MainController.DataReceivable {
         anchorPane.getStyleClass().add("selected");
         selectedDetailBookingShort = anchorPane;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DetailBookingForm.fxml"));
+            // Đảm bảo URL không bị null
+            URL fxmlUrl = getClass().getResource("/fxml/DetailBookingform.fxml");
+            if (fxmlUrl == null) {
+                System.err.println("Không tìm thấy file FXML: /fxml/DetailBookingForm.fxml");
+                // Thử đường dẫn khác
+                fxmlUrl = getClass().getResource("/DetailBookingForm.fxml");
+                if (fxmlUrl == null) {
+                    System.err.println("Không tìm thấy file FXML: /DetailBookingForm.fxml");
+                    // Thử đường dẫn tuyệt đối
+                    File file = new File("src/main/resources/fxml/DetailBookingForm.fxml");
+                    if (file.exists()) {
+                        fxmlUrl = file.toURI().toURL();
+                        System.out.println("Tìm thấy file FXML tại: " + file.getAbsolutePath());
+                    } else {
+                        System.err.println("Không tìm thấy file FXML tại: " + file.getAbsolutePath());
+                        EventBusManager.post(new ToastEvent("Không tìm thấy file giao diện", ToastEvent.ToastType.ERROR));
+                        return;
+                    }
+                }
+            }
+
+            // Tạo FXMLLoader với URL đã xác định
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DetailBookingform.fxml"));
+//            loader.setLocation(fxmlUrl);
+
+            // Load FXML
             Node bookingForm = loader.load();
             DetailBookingFormController controller = loader.getController();
+
+            // Xử lý dữ liệu
             Object data = anchorPane.getUserData();
             if (data instanceof MemoTienChiTietDonDatPhong) {
                 firstMemoTienChiTietDonDatPhong = (MemoTienChiTietDonDatPhong) data;
@@ -813,6 +842,17 @@ public class BookingFormController  implements MainController.DataReceivable {
                         chiTietDonDatPhong.setPhong(phong);
                         chiTietDonDatPhong.setTrangThaiChiTietDonDatPhong(TrangThaiChiTietDonDatPhong.DAT_TRUOC);
                         chiTietDonDatPhong.setDonDatPhong(donDatPhong);
+
+                        // Thêm các trường bắt buộc
+                        chiTietDonDatPhong.setNgayNhan(donDatPhong.getNgayNhan());
+                        chiTietDonDatPhong.setNgayTra(donDatPhong.getNgayTra());
+
+                        // In ra thông tin debug
+                        System.out.println("Thêm chi tiết đơn đặt phòng: " +
+                                           "Phòng=" + phong.getMaPhong() +
+                                           ", Ngày nhận=" + chiTietDonDatPhong.getNgayNhan() +
+                                           ", Ngày trả=" + chiTietDonDatPhong.getNgayTra());
+
                         em.persist(chiTietDonDatPhong);
                     }
 
