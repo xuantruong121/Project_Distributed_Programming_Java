@@ -753,8 +753,29 @@ public class MainController {
 
             // Ví dụ: Chỉ quản lý mới có quyền truy cập vào quản lý nhân viên
             boolean isManager = "Nhân viên quản lý".equals(loaiNhanVien);
-            staffManagementButton.setVisible(isManager);
+//            staffManagementButton.setVisible(isManager);
             staffManagementButton.setManaged(isManager);
+            staffManagementButton.setDisable(isManager);
+
+//            serviceManagementButton.setVisible(isManager);
+            serviceManagementButton.setManaged(isManager);
+            serviceManagementButton.setDisable(isManager);
+
+//            customerManagementButton.setVisible(isManager);
+            customerManagementButton.setManaged(isManager);
+            customerManagementButton.setDisable(isManager);
+
+            roomManagementButton.setDisable(isManager);
+            roomManagementButton.setManaged(isManager);
+
+            inventoryManagementButton.setManaged(isManager);
+            inventoryManagementButton.setDisable(isManager);
+
+            discountManagementButton.setManaged(isManager);
+            discountManagementButton.setDisable(isManager);
+
+            reportsButton.setManaged(isManager);
+            reportsButton.setDisable(isManager);
 
             // Các quyền khác có thể được cấu hình tương tự
         }

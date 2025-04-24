@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,12 +15,14 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Phong implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @Column(columnDefinition = "nvarchar(7)")
     @Pattern(regexp = "^(STA|SUP|DEL)-\\d\\d{2}$", message = "ma phong không hợp lệ (PPP-YXX)")
+    @EqualsAndHashCode.Include
     private String maPhong;
     @Column(columnDefinition = "nvarchar(30)")
     @NotBlank(message = "vi tri không được để trống")

@@ -159,7 +159,6 @@ public class ManageTrangThaiPhong {
                 .flatMap(List::stream)
                 .map(PhongDonDatWrapper::getPhong)
                 .collect(Collectors.toSet());
-
         for (Phong p : listPhong) {
             if (!usedPhongs.contains(p)) {
                 listPhongTrong.add(p);

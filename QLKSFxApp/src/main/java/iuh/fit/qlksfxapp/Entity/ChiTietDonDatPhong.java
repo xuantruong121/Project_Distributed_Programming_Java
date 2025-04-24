@@ -5,6 +5,7 @@ import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,12 +18,14 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ChiTietDonDatPhong implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @Column(columnDefinition = "nvarchar(13)")
     @Pattern(regexp = "^\\d{9}-\\d{3}$") //DDMMYYAAA-YYY
+    @EqualsAndHashCode.Include
     private String maChiTietDonDatPhong;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "maDonDatPhong")

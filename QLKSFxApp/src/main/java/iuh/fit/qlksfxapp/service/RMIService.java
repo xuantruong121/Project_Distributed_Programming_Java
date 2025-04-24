@@ -41,7 +41,7 @@ public class RMIService {
             System.out.println("Attempting to connect to RMI registry on 192.168.99.223:9090...");
 
             // Get the registry
-            Registry registry = LocateRegistry.getRegistry("192.168.99.223", 9090);
+            Registry registry = LocateRegistry.getRegistry("192.168.99.105", 9090);
 
             // Check if registry is available by listing entries
             String[] services = registry.list();

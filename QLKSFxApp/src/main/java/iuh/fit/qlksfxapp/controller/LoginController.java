@@ -122,7 +122,6 @@ public class LoginController {
             // Lấy controller của giao diện chính
             MainController mainController = loader.getController();
             mainController.initData(taiKhoan);
-
             // Tạo scene mới
             Scene scene = new Scene(root);
 
