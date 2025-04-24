@@ -188,7 +188,7 @@
                         <HBox alignment="CENTER_RIGHT" spacing="15" HBox.hgrow="NEVER">
                             <Label fx:id="greetingLabel" style="-fx-font-size: 14px;"
                                    text="Chúc Hồ Sinh Tăng có một ngày tuyệt vời!"/>
-                            <Label style="-fx-font-size: 14px; -fx-text-fill: #6c757d;" text="Quản lý"/>
+                            <Label fx:id="userRoleLabel" style="-fx-font-size: 14px; -fx-text-fill: #6c757d;" text="Quản lý"/>
                             <Label fx:id="userNameLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;"
                                    text="Hồ Sinh Tăng"/>
                             <Button fx:id="userProfileButton" onAction="#showUserProfile" prefHeight="40.0"

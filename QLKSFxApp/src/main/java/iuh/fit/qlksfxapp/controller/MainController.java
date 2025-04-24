@@ -81,6 +81,8 @@ public class MainController {
     private Label greetingLabel;
     @FXML
     private Label userNameLabel;
+    @FXML
+    private Label userRoleLabel;
 
     private boolean isSidebarExpanded = true;
     private boolean isRoomManagementMenuOpen = false;
@@ -731,6 +733,15 @@ public class MainController {
         // Cập nhật giao diện với thông tin người dùng
         if (taiKhoan != null && taiKhoan.getNhanVien() != null) {
             userNameLabel.setText(taiKhoan.getNhanVien().getTenNhanVien());
+
+            // Cập nhật tên loại nhân viên
+            if (taiKhoan.getNhanVien().getLoaiNhanVien() != null) {
+                String tenLoaiNhanVien = taiKhoan.getNhanVien().getLoaiNhanVien().getTenLoaiNhanVien();
+                userRoleLabel.setText(tenLoaiNhanVien);
+                System.out.println("Đã cập nhật tên loại nhân viên: " + tenLoaiNhanVien);
+            } else {
+                userRoleLabel.setText("Chưa xác định");
+            }
 
             // Cập nhật avatar nếu có
             // TODO: Implement avatar loading if needed
