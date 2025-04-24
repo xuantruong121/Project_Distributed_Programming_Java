@@ -147,11 +147,16 @@ public class ManageTrangThaiPhong {
     public void updatePhongDangSuDungVaDatTruoc(){
         donDatPhongDAO.closeEntityManager();
         donDatPhongDAO= new DonDatPhongDAOImpl();
-        List<DonDatPhong> dangSuDung = donDatPhongDAO.getListDonDatPhongTheoTrangThaiPhongDANG_SU_DUNG();
-        List<DonDatPhong> datTruoc = donDatPhongDAO.getListDonDatPhongTheoTrangThaiPhongDAT_TRUOC();
+        try {
+            List<DonDatPhong> dangSuDung = donDatPhongDAO.getListDonDatPhongTheoTrangThaiPhongDANG_SU_DUNG();
+            List<DonDatPhong> datTruoc = donDatPhongDAO.getListDonDatPhongTheoTrangThaiPhongDAT_TRUOC();
 
-        putPhongDonDatPhong(dangSuDung, TrangThaiPhong.DANG_SU_DUNG);
-        putPhongDonDatPhong(datTruoc, TrangThaiPhong.DAT_TRUOC);
+            putPhongDonDatPhong(dangSuDung, TrangThaiPhong.DANG_SU_DUNG);
+            putPhongDonDatPhong(datTruoc, TrangThaiPhong.DAT_TRUOC);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            System.err.println("Error updating room status: " + e.getMessage());
+        }
     }
     public void updatePhongTrong(){
         // Xác định các phòng "trống"

@@ -9,6 +9,7 @@ import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
 import jakarta.persistence.EntityManager;
 import lombok.Getter;
 
+import java.rmi.RemoteException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,17 +24,17 @@ public class ChiTietDonDatPhongDAOImpl extends GeneralDAOImpl implements ChiTiet
     }
 
     @Override
-    public List<ChiTietDonDatPhong> getAllChiTietDonDatPhong() {
+    public List<ChiTietDonDatPhong> getAllChiTietDonDatPhong() throws RemoteException {
         return findAll(ChiTietDonDatPhong.class);
     }
 
     @Override
-    public ChiTietDonDatPhong findByMaChiTietDonDatPhong(String maChiTietDonDatPhong) {
+    public ChiTietDonDatPhong findByMaChiTietDonDatPhong(String maChiTietDonDatPhong) throws RemoteException {
         return findOb(ChiTietDonDatPhong.class, maChiTietDonDatPhong);
     }
 
     @Override
-    public List<ChiTietDonDatPhong> findByMaDonDatPhong(String maDonDatPhong) {
+    public List<ChiTietDonDatPhong> findByMaDonDatPhong(String maDonDatPhong) throws RemoteException {
         EntityManager em = null;
         try {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
@@ -50,7 +51,7 @@ public class ChiTietDonDatPhongDAOImpl extends GeneralDAOImpl implements ChiTiet
     }
 
     @Override
-    public List<ChiTietDonDatPhong> findByMaPhong(String maPhong) {
+    public List<ChiTietDonDatPhong> findByMaPhong(String maPhong) throws RemoteException {
         EntityManager em = null;
         try {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
@@ -65,7 +66,8 @@ public class ChiTietDonDatPhongDAOImpl extends GeneralDAOImpl implements ChiTiet
             }
         }
     }
-    public ChiTietDonDatPhong findChiTietWithKhachHang(String maChiTiet) {
+    @Override
+    public ChiTietDonDatPhong findChiTietWithKhachHang(String maChiTiet) throws RemoteException {
         return em.createQuery(
                         "SELECT c FROM ChiTietDonDatPhong c LEFT JOIN FETCH c.khachHang WHERE c.maChiTietDonDatPhong = :ma",
                         ChiTietDonDatPhong.class)
@@ -73,19 +75,22 @@ public class ChiTietDonDatPhongDAOImpl extends GeneralDAOImpl implements ChiTiet
                 .getSingleResult();
     }
 
-    public ChiTietDonDatPhong findChiTietDonDatPhongByMaDonDatPhongAndMaPhong(String maDonDatPhong, String maPhong) {
+    @Override
+    public ChiTietDonDatPhong findChiTietDonDatPhongByMaDonDatPhongAndMaPhong(String maDonDatPhong, String maPhong) throws RemoteException {
         return em.createQuery("SELECT c FROM ChiTietDonDatPhong c WHERE c.donDatPhong.maDonDatPhong = :maDonDatPhong AND c.phong.maPhong = :maPhong", ChiTietDonDatPhong.class)
                 .setParameter("maDonDatPhong", maDonDatPhong)
                 .setParameter("maPhong", maPhong)
                 .getSingleResult();
 
     }
-    public List<ChiTietDonDatPhong> findChiTietDonDatPhongTheoMaDonDatPhong(String maDonDatPhong){
+    @Override
+    public List<ChiTietDonDatPhong> findChiTietDonDatPhongTheoMaDonDatPhong(String maDonDatPhong) throws RemoteException {
         return em.createQuery("SELECT c FROM ChiTietDonDatPhong c WHERE c.donDatPhong.maDonDatPhong = :maDonDatPhong", ChiTietDonDatPhong.class)
                 .setParameter("maDonDatPhong", maDonDatPhong)
                 .getResultList();
     }
-    public  Double getTongTienDichVuByMaChiTietDonDatPhong(String maChiTietDonDatPhong){
+    @Override
+    public Double getTongTienDichVuByMaChiTietDonDatPhong(String maChiTietDonDatPhong) throws RemoteException {
         Double result=  em.createQuery("SELECT SUM(c.dichVu.giaDichVu * c.soLuong) FROM ChiTietDichVu c WHERE c.chiTietDonDatPhong.maChiTietDonDatPhong = :maChiTietDonDatPhong AND c.trangThai = false", Double.class)
                 .setParameter("maChiTietDonDatPhong", maChiTietDonDatPhong)
                 .getSingleResult();
@@ -94,7 +99,8 @@ public class ChiTietDonDatPhongDAOImpl extends GeneralDAOImpl implements ChiTiet
         }
         return result;
     }
-    public Double getTienPhongTheoMaChiTietDonDatPhong(String ma) {
+    @Override
+    public Double getTienPhongTheoMaChiTietDonDatPhong(String ma) throws RemoteException {
         Object[] result = em.createQuery(
                         "SELECT c.phong.loaiPhong.gia, d.ngayNhan, d.ngayTra " +
                                 "FROM ChiTietDonDatPhong c JOIN c.donDatPhong d " +
@@ -107,7 +113,8 @@ public class ChiTietDonDatPhongDAOImpl extends GeneralDAOImpl implements ChiTiet
         long days = Duration.between(ngayNhan, ngayTra).toDays() + 1; // +1 nếu tính ngày ở lại đầu và cuối
         return gia * days;
     }
-    public Double getTongTienPhuThuByMaChiTietDonDatPhong(String maChiTietDonDatPhong) {
+    @Override
+    public Double getTongTienPhuThuByMaChiTietDonDatPhong(String maChiTietDonDatPhong) throws RemoteException {
         Double result= em.createQuery("SELECT SUM(p.giaPhuThu*c.phong.loaiPhong.gia) FROM ChiTietDonDatPhong c JOIN c.phuThu p WHERE c.maChiTietDonDatPhong = :maChiTietDonDatPhong", Double.class)
                 .setParameter("maChiTietDonDatPhong", maChiTietDonDatPhong)
                 .getSingleResult();
@@ -117,7 +124,8 @@ public class ChiTietDonDatPhongDAOImpl extends GeneralDAOImpl implements ChiTiet
         return result;
     }
 
-    public double getTongTienDichVuByMaDonDatPhong(String ma){
+    @Override
+    public double getTongTienDichVuByMaDonDatPhong(String ma) throws RemoteException {
         List<ChiTietDonDatPhong> chiTietDonDatPhongs= findChiTietDonDatPhongTheoMaDonDatPhong(ma);
         double tongTien =0;
 
@@ -128,7 +136,8 @@ public class ChiTietDonDatPhongDAOImpl extends GeneralDAOImpl implements ChiTiet
         }
         return tongTien;
     }
-    public double getTongTienPhuThuByMaDonDatPhong(String ma){
+    @Override
+    public double getTongTienPhuThuByMaDonDatPhong(String ma) throws RemoteException {
         List<ChiTietDonDatPhong> chiTietDonDatPhongs = findChiTietDonDatPhongTheoMaDonDatPhong(ma);
         double tongTien =0;
         for(ChiTietDonDatPhong c: chiTietDonDatPhongs){
@@ -138,7 +147,8 @@ public class ChiTietDonDatPhongDAOImpl extends GeneralDAOImpl implements ChiTiet
         }
         return tongTien;
     }
-    public double getTongTienPhongByMaDonDatPhong(String ma){
+    @Override
+    public double getTongTienPhongByMaDonDatPhong(String ma) throws RemoteException {
         List<ChiTietDonDatPhong> chiTietDonDatPhongs = findChiTietDonDatPhongTheoMaDonDatPhong(ma);
         double tongTien =0;
         for(ChiTietDonDatPhong c: chiTietDonDatPhongs){
@@ -148,7 +158,8 @@ public class ChiTietDonDatPhongDAOImpl extends GeneralDAOImpl implements ChiTiet
         }
         return tongTien;
     }
-    public double getTongTienByNgay(LocalDate startDate, LocalDate endDate){
+    @Override
+    public double getTongTienByNgay(LocalDate startDate, LocalDate endDate) throws RemoteException {
         List<ChiTietDonDatPhong> chiTietDonDatPhongs = em.createQuery("SELECT c FROM ChiTietDonDatPhong c WHERE c.ngayTra BETWEEN :startDate AND :endDate AND c.trangThaiChiTietDonDatPhong = :trangThai"  , ChiTietDonDatPhong.class)
                 .setParameter("startDate", startDate.atStartOfDay())
                 .setParameter("endDate", endDate.atTime(23, 59, 59))

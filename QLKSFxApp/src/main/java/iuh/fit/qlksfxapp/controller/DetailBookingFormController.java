@@ -18,6 +18,9 @@ import iuh.fit.qlksfxapp.util.FormatUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import java.rmi.RemoteException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -475,12 +478,18 @@ public class DetailBookingFormController {
 //        } else
 //            EventBusManager.post(new ToastEvent("Thêm khách hàng thất bại", ToastEvent.ToastType.ERROR));
 //    }
-    private void calMonney(){
+    private void calMonney() throws RemoteException {
 //        chiTietDonDatPhongDAO = Objects.requireNonNullElseGet(chiTietDonDatPhongDAO, ChiTietDonDatPhongDAO::new);
         chiTietDonDatPhongDAO.closeEntityManager();
         chiTietDonDatPhongDAO= new ChiTietDonDatPhongDAOImpl();
-        memoTienChiTietDonDatPhong.setTienDichVu(chiTietDonDatPhongDAO.getTongTienDichVuByMaChiTietDonDatPhong(memoTienChiTietDonDatPhong.getChiTietDonDatPhong().getMaChiTietDonDatPhong()));
-        memoTienChiTietDonDatPhong.setTongTien(memoTienChiTietDonDatPhong.getTienPhong() + memoTienChiTietDonDatPhong.getTienDichVu() + memoTienChiTietDonDatPhong.getTienPhuThu());
+        try {
+            memoTienChiTietDonDatPhong.setTienDichVu(chiTietDonDatPhongDAO.getTongTienDichVuByMaChiTietDonDatPhong(memoTienChiTietDonDatPhong.getChiTietDonDatPhong().getMaChiTietDonDatPhong()));
+            memoTienChiTietDonDatPhong.setTongTien(memoTienChiTietDonDatPhong.getTienPhong() + memoTienChiTietDonDatPhong.getTienDichVu() + memoTienChiTietDonDatPhong.getTienPhuThu());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể tính tổng tiền: " + e.getMessage());
+            throw e; // Re-throw to handle in calling methods
+        }
     }
     public void setMainController(BookingFormController controller) {
         this.mainController = controller;
@@ -538,7 +547,12 @@ public class DetailBookingFormController {
                 if(generalDAO.updateOb(chiTietDonDatPhong)){
                     EventBusManager.post(new ToastEvent("Thanh toán thành công", ToastEvent.ToastType.SUCCESS));
                     setData(memoTienChiTietDonDatPhong);
-                    mainController.initTongTienCuaBookingDetail();
+                    try {
+                        mainController.initTongTienCuaBookingDetail();
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                        showErrorAlert("Lỗi", "Không thể tính tổng tiền: " + e.getMessage());
+                    }
                     mainController.initDetailBookingShort();
                     mainController.loadThongTinDonDatPhong();
                 }
@@ -556,7 +570,12 @@ public class DetailBookingFormController {
                             if(suc) {
                                 setData(memoTienChiTietDonDatPhong);
                                 // update tong tien
-                                mainController.initTongTienCuaBookingDetail();
+                                try {
+                                    mainController.initTongTienCuaBookingDetail();
+                                } catch (RemoteException e) {
+                                    e.printStackTrace();
+                                    showErrorAlert("Lỗi", "Không thể tính tổng tiền: " + e.getMessage());
+                                }
                                 mainController.initDetailBookingShort();
                             }
                             return suc;
@@ -689,9 +708,18 @@ public class DetailBookingFormController {
                                 em.getTransaction().commit();
                                 memoTienChiTietDonDatPhong.setChiTietDonDatPhong(chiTietDonDatPhong);
                                 setDichVu();
-                                calMonney();
+                                try {
+                                    calMonney();
+                                } catch (RemoteException e) {
+                                    // Already handled in calMonney method
+                                }
                                 setThongTinDonDatPhong();
-                                mainController.initTongTienCuaBookingDetail();
+                                try {
+                                    mainController.initTongTienCuaBookingDetail();
+                                } catch (RemoteException e) {
+                                    e.printStackTrace();
+                                    showErrorAlert("Lỗi", "Không thể tính tổng tiền: " + e.getMessage());
+                                }
                                 mainController.initDetailBookingShort();
                                 return true;
                             } catch (Exception e) {
@@ -825,9 +853,18 @@ public class DetailBookingFormController {
                     // 7. Cập nhật UI trước khi commit
                     memoTienChiTietDonDatPhong.setChiTietDonDatPhong(chiTietDonDatPhong);
                     setDichVu();
-                    calMonney();
+                    try {
+                        calMonney();
+                    } catch (RemoteException e) {
+                        // Already handled in calMonney method
+                    }
                     setThongTinDonDatPhong();
-                    mainController.initTongTienCuaBookingDetail();
+                    try {
+                        mainController.initTongTienCuaBookingDetail();
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                        showErrorAlert("Lỗi", "Không thể tính tổng tiền: " + e.getMessage());
+                    }
                     mainController.initDetailBookingShort();
 
                 } catch (Exception e) {
@@ -848,5 +885,13 @@ public class DetailBookingFormController {
     }
     public void cleanup() {
         EventBusManager.unregister(this);
+    }
+
+    private void showErrorAlert(String title, String content) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

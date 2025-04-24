@@ -9,6 +9,7 @@ import iuh.fit.qlksfxapp.Entity.Phong;
 import jakarta.persistence.EntityManager;
 import lombok.Getter;
 
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.List;
 @Getter
@@ -20,7 +21,7 @@ public class DonDatPhongDAOImpl extends GeneralDAOImpl implements DonDatPhongDAO
     }
 
     @Override
-    public DonDatPhong getDonDatPhongNowByIdPhong(String idPhong){
+    public DonDatPhong getDonDatPhongNowByIdPhong(String idPhong) throws RemoteException {
         LocalDateTime now = LocalDateTime.now();
         String query = "SELECT d FROM DonDatPhong d JOIN ChiTietDonDatPhong c ON d.maDonDatPhong = c.donDatPhong.maDonDatPhong WHERE c.phong.maPhong = :idPhong AND d.ngayNhan <= :now AND d.ngayTra >= :now AND d.trangThai = :trangThai";
         List<DonDatPhong> donDatPhongs = em.createQuery(query, DonDatPhong.class)
@@ -35,17 +36,17 @@ public class DonDatPhongDAOImpl extends GeneralDAOImpl implements DonDatPhongDAO
     }
 
     @Override
-    public List<DonDatPhong> getAllDonDatPhong() {
+    public List<DonDatPhong> getAllDonDatPhong() throws RemoteException {
         return findAll(DonDatPhong.class);
     }
 
     @Override
-    public DonDatPhong findByMaDonDatPhong(String maDonDatPhong) {
+    public DonDatPhong findByMaDonDatPhong(String maDonDatPhong) throws RemoteException {
         return findOb(DonDatPhong.class, maDonDatPhong);
     }
 
     @Override
-    public List<DonDatPhong> findByMaKhachHang(String maKhachHang) {
+    public List<DonDatPhong> findByMaKhachHang(String maKhachHang) throws RemoteException {
         EntityManager em = null;
         try {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
@@ -62,7 +63,7 @@ public class DonDatPhongDAOImpl extends GeneralDAOImpl implements DonDatPhongDAO
     }
 
     @Override
-    public List<DonDatPhong> findByTrangThai(TrangThaiDonDatPhong trangThai) {
+    public List<DonDatPhong> findByTrangThai(TrangThaiDonDatPhong trangThai) throws RemoteException {
         EntityManager em = null;
         try {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
@@ -79,7 +80,7 @@ public class DonDatPhongDAOImpl extends GeneralDAOImpl implements DonDatPhongDAO
     }
 
     @Override
-    public List<DonDatPhong> findByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
+    public List<DonDatPhong> findByDateRange(LocalDateTime startDate, LocalDateTime endDate) throws RemoteException {
         EntityManager em = null;
         try {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
@@ -98,17 +99,21 @@ public class DonDatPhongDAOImpl extends GeneralDAOImpl implements DonDatPhongDAO
 
     // For testing purposes
     public static void main(String[] args) {
-        DonDatPhongDAOImpl donDatPhongDAOImpl = new DonDatPhongDAOImpl();
-        GeneralDAOImpl generalDAOImpl = new GeneralDAOImpl();
-        List<Phong> phongs = generalDAOImpl.findAll(Phong.class);
-        for (Phong phong : phongs) {
-            System.out.println("Phong: " + phong.getMaPhong());
-            DonDatPhong donDatPhong = donDatPhongDAOImpl.getDonDatPhongNowByIdPhong(phong.getMaPhong());
-            if (donDatPhong != null) {
-                System.out.println("Don Dat Phong: " + donDatPhong.getMaDonDatPhong());
-            } else {
-                System.out.println("Khong co don dat phong nao");
+        try {
+            DonDatPhongDAOImpl donDatPhongDAOImpl = new DonDatPhongDAOImpl();
+            GeneralDAOImpl generalDAOImpl = new GeneralDAOImpl();
+            List<Phong> phongs = generalDAOImpl.findAll(Phong.class);
+            for (Phong phong : phongs) {
+                System.out.println("Phong: " + phong.getMaPhong());
+                DonDatPhong donDatPhong = donDatPhongDAOImpl.getDonDatPhongNowByIdPhong(phong.getMaPhong());
+                if (donDatPhong != null) {
+                    System.out.println("Don Dat Phong: " + donDatPhong.getMaDonDatPhong());
+                } else {
+                    System.out.println("Khong co don dat phong nao");
+                }
             }
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
     }
 //    public DonDatPhong getDonDatPhongNowByIdPhong(String idPhong){
@@ -124,7 +129,8 @@ public class DonDatPhongDAOImpl extends GeneralDAOImpl implements DonDatPhongDAO
 //        }
 //        return null;
 //    }
-    public List<DonDatPhong> getDatPhongNow(){
+    @Override
+    public List<DonDatPhong> getDatPhongNow() throws RemoteException {
         LocalDateTime now = LocalDateTime.now();
         String query = "SELECT d FROM DonDatPhong d WHERE d.ngayNhan <= :now AND d.ngayTra >= :now AND d.trangThai = :trangThai";
         return em.createQuery(query, DonDatPhong.class)
@@ -132,7 +138,8 @@ public class DonDatPhongDAOImpl extends GeneralDAOImpl implements DonDatPhongDAO
                 .setParameter("trangThai", TrangThaiDonDatPhong.DA_XAC_NHAN)
                 .getResultList();
     }
-    public List<DonDatPhong> getListDonDatPhongTheoNgayDenVaNgayDi(LocalDateTime ngayDen, LocalDateTime ngayDi) {
+    @Override
+    public List<DonDatPhong> getListDonDatPhongTheoNgayDenVaNgayDi(LocalDateTime ngayDen, LocalDateTime ngayDi) throws RemoteException {
         String query = "SELECT d FROM DonDatPhong d WHERE d.ngayNhan >= :ngayDen AND d.ngayTra <= :ngayDi AND d.trangThai = :trangThai"; // ngay den <- ngay nhan <-  ngay tra<- ngay di
         return em.createQuery(query, DonDatPhong.class)
                 .setParameter("ngayDen", ngayDen)
@@ -140,21 +147,24 @@ public class DonDatPhongDAOImpl extends GeneralDAOImpl implements DonDatPhongDAO
                 .setParameter("trangThai", TrangThaiDonDatPhong.DA_XAC_NHAN)
                 .getResultList();
     }
-    public List<DonDatPhong> getListDonDatPhongTheoSoNguoiLon(int soNguoiLon) {
+    @Override
+    public List<DonDatPhong> getListDonDatPhongTheoSoNguoiLon(int soNguoiLon) throws RemoteException {
         String query = "SELECT d FROM DonDatPhong d WHERE d.soLuongNguoiLon = :soNguoiLon AND d.trangThai = :trangThai";
         return em.createQuery(query, DonDatPhong.class)
                 .setParameter("soNguoiLon", soNguoiLon)
                 .setParameter("trangThai", TrangThaiDonDatPhong.DA_XAC_NHAN)
                 .getResultList();
     }
-    public List<DonDatPhong> getListDonDatPhongTheoSoTreEm(int soTreEm) {
+    @Override
+    public List<DonDatPhong> getListDonDatPhongTheoSoTreEm(int soTreEm) throws RemoteException {
         String query = "SELECT d FROM DonDatPhong d WHERE d.soLuongTreEm = :soTreEm AND d.trangThai = :trangThai";
         return em.createQuery(query, DonDatPhong.class)
                 .setParameter("soTreEm", soTreEm)
                 .setParameter("trangThai", TrangThaiDonDatPhong.DA_XAC_NHAN)
                 .getResultList();
     }
-    public List<DonDatPhong> getListDonDatPhongTheoSoNguoiLonVaTreEm(int soNguoiLon, int soTreEm) {
+    @Override
+    public List<DonDatPhong> getListDonDatPhongTheoSoNguoiLonVaTreEm(int soNguoiLon, int soTreEm) throws RemoteException {
         String query = "SELECT d FROM DonDatPhong d  WHERE d.soLuongNguoiLon = :soNguoiLon AND d.soLuongTreEm = :soTreEm AND d.trangThai = :trangThai";
         return em.createQuery(query, DonDatPhong.class)
                 .setParameter("soNguoiLon", soNguoiLon)
@@ -162,21 +172,24 @@ public class DonDatPhongDAOImpl extends GeneralDAOImpl implements DonDatPhongDAO
                 .setParameter("trangThai", TrangThaiDonDatPhong.DA_XAC_NHAN)
                 .getResultList();
     }
-    public List<DonDatPhong> getListDonDatPhongTheoTenDoan(String tenDoan) {
+    @Override
+    public List<DonDatPhong> getListDonDatPhongTheoTenDoan(String tenDoan) throws RemoteException {
         String query = "SELECT d FROM DonDatPhong d WHERE d.tenDoan LIKE :tenDoan AND d.trangThai = :trangThai";
         return em.createQuery(query, DonDatPhong.class)
                 .setParameter("tenDoan", "%" + tenDoan + "%")
                 .setParameter("trangThai", TrangThaiDonDatPhong.DA_XAC_NHAN)
                 .getResultList();
     }
-    public List<DonDatPhong> getListDonDatPhongTheoTrangThaiPhongDAT_TRUOC() {
+    @Override
+    public List<DonDatPhong> getListDonDatPhongTheoTrangThaiPhongDAT_TRUOC() throws RemoteException {
         String query = "SELECT d FROM DonDatPhong d JOIN ChiTietDonDatPhong c ON d.maDonDatPhong = c.donDatPhong.maDonDatPhong WHERE d.trangThai=:trangThai AND c.trangThaiChiTietDonDatPhong = :trangThaiChiTiet";
         return em.createQuery(query, DonDatPhong.class)
                 .setParameter("trangThai", TrangThaiDonDatPhong.DA_XAC_NHAN)
                 .setParameter("trangThaiChiTiet", TrangThaiChiTietDonDatPhong.DAT_TRUOC)
                 .getResultList();
     }
-    public List<DonDatPhong> getListDonDatPhongTheoTrangThaiPhongDANG_SU_DUNG() {
+    @Override
+    public List<DonDatPhong> getListDonDatPhongTheoTrangThaiPhongDANG_SU_DUNG() throws RemoteException {
         LocalDateTime now = LocalDateTime.now();
         String query = "SELECT d FROM DonDatPhong d JOIN ChiTietDonDatPhong c ON d.maDonDatPhong = c.donDatPhong.maDonDatPhong WHERE d.trangThai=:trangThai AND c.trangThaiChiTietDonDatPhong = :trangThaiChiTiet";
         return em.createQuery(query, DonDatPhong.class)

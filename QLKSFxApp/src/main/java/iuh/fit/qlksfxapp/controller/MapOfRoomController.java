@@ -18,6 +18,8 @@ import iuh.fit.qlksfxapp.util.ManageTrangThaiPhong;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -264,7 +266,14 @@ public class MapOfRoomController {
             List<DonDatPhong> donDatPhongDangSuDung = new ArrayList<>();
             List<DonDatPhong> donDatPhongDatTruoc = new ArrayList<>();
             for (DonDatPhong d: filteredList){
-               List <ChiTietDonDatPhong>  ct= chiTietDonDatPhongDAO.findChiTietDonDatPhongTheoMaDonDatPhong(d.getMaDonDatPhong());
+               List <ChiTietDonDatPhong> ct = new ArrayList<>();
+               try {
+                   ct = chiTietDonDatPhongDAO.findChiTietDonDatPhongTheoMaDonDatPhong(d.getMaDonDatPhong());
+               } catch (RemoteException e) {
+                   e.printStackTrace();
+                   showErrorAlert("Lỗi", "Không thể lấy danh sách chi tiết đơn đặt phòng: " + e.getMessage());
+                   continue;
+               }
                 filteredPhong.addAll(ct.stream().map(ChiTietDonDatPhong::getPhong).toList());
                if(ct.getFirst().getNgayNhan()==null){
                     donDatPhongDatTruoc.add(d);
@@ -329,7 +338,13 @@ public class MapOfRoomController {
             isSearchFailed = true;
             return null;
         }
-       return donDatPhongDAO.getListDonDatPhongTheoNgayDenVaNgayDi(ngayDen, ngayDi);
+       try {
+           return donDatPhongDAO.getListDonDatPhongTheoNgayDenVaNgayDi(ngayDen, ngayDi);
+       } catch (RemoteException e) {
+           e.printStackTrace();
+           showErrorAlert("Lỗi", "Không thể lấy danh sách đơn đặt phòng: " + e.getMessage());
+           return new ArrayList<>();
+       }
 
     }
     private List<DonDatPhong> filterDonDatPhongTheoSoNguoiLonVaTreEm( List<DonDatPhong> filtered){
@@ -358,13 +373,31 @@ public class MapOfRoomController {
         if(soNguoiLon ==0 && soTreEm ==0){
             return filtered;
         } else if(soNguoiLon >0 && soTreEm ==0){
-            return donDatPhongDAO.getListDonDatPhongTheoSoNguoiLon(soNguoiLon);
+            try {
+                return donDatPhongDAO.getListDonDatPhongTheoSoNguoiLon(soNguoiLon);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                showErrorAlert("Lỗi", "Không thể lấy danh sách đơn đặt phòng: " + e.getMessage());
+                return new ArrayList<>();
+            }
         }
         else if(soNguoiLon ==0 && soTreEm >0){
-            return donDatPhongDAO.getListDonDatPhongTheoSoTreEm(soTreEm);
+            try {
+                return donDatPhongDAO.getListDonDatPhongTheoSoTreEm(soTreEm);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                showErrorAlert("Lỗi", "Không thể lấy danh sách đơn đặt phòng: " + e.getMessage());
+                return new ArrayList<>();
+            }
         }
         else
-            return donDatPhongDAO.getListDonDatPhongTheoSoNguoiLonVaTreEm(soNguoiLon,soTreEm);
+            try {
+                return donDatPhongDAO.getListDonDatPhongTheoSoNguoiLonVaTreEm(soNguoiLon,soTreEm);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                showErrorAlert("Lỗi", "Không thể lấy danh sách đơn đặt phòng: " + e.getMessage());
+                return new ArrayList<>();
+            }
     }
     private List<DonDatPhong> filterDonDatPhongTheoTenDoan(List<DonDatPhong> filtered){
         String tenDoan = tenDoanInp.getText();
@@ -378,7 +411,13 @@ public class MapOfRoomController {
         // Nếu không có bộ lọc nào được áp dụng trước đó
         if(tenDoan == null || tenDoan.isEmpty())
             return filtered;
-        return donDatPhongDAO.getListDonDatPhongTheoTenDoan(tenDoan);
+        try {
+            return donDatPhongDAO.getListDonDatPhongTheoTenDoan(tenDoan);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể lấy danh sách đơn đặt phòng: " + e.getMessage());
+            return new ArrayList<>();
+        }
     }
     private boolean filterDonDatPhongTheoLoaiPhong(){
         String loaiPhong = loaiPhongCmb.getValue();
@@ -482,6 +521,14 @@ public class MapOfRoomController {
         donDatPhongDAO.getEm().close();
         chiTietDonDatPhongDAO.getEm().close();
         phongDAO.closeEntityManager();
+    }
+
+    private void showErrorAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
 }

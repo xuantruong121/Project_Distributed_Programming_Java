@@ -54,7 +54,7 @@ public interface DonDatPhongDAO extends GeneralDAO {
      * @return The current booking for the specified room or null if not found
      */
     DonDatPhong getDonDatPhongNowByIdPhong(String maPhong) throws RemoteException;
-     List<DonDatPhong> getDatPhongNow();
+     List<DonDatPhong> getDatPhongNow() throws RemoteException;
      List<DonDatPhong> getListDonDatPhongTheoNgayDenVaNgayDi(LocalDateTime ngayDen, LocalDateTime ngayDi) throws RemoteException;
      List<DonDatPhong> getListDonDatPhongTheoSoNguoiLon(int soNguoiLon) throws RemoteException;
      List<DonDatPhong> getListDonDatPhongTheoSoTreEm(int soTreEm) throws RemoteException;

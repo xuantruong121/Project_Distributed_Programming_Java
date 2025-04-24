@@ -18,6 +18,9 @@ import iuh.fit.qlksfxapp.util.ManageTrangThaiPhong;
 import iuh.fit.qlksfxapp.controller.EventBus.NavigationEvent;
 import iuh.fit.qlksfxapp.controller.MainController;
 import iuh.fit.qlksfxapp.util.*;
+import java.rmi.RemoteException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -109,7 +112,14 @@ public class RoomItemController implements MainController.DataReceivable {
         tenDoan.setText(donDatPhong.getTenDoan());
         getNgayO(donDatPhong.getNgayNhan(), donDatPhong.getNgayTra());
         // Chưa có ảnh
-        ChiTietDonDatPhong chiTietDonDatPhong = chiTietDonDatPhongDAO.findChiTietDonDatPhongByMaDonDatPhongAndMaPhong(donDatPhong.getMaDonDatPhong(), phong.getMaPhong());
+        ChiTietDonDatPhong chiTietDonDatPhong = null;
+        try {
+            chiTietDonDatPhong = chiTietDonDatPhongDAO.findChiTietDonDatPhongByMaDonDatPhongAndMaPhong(donDatPhong.getMaDonDatPhong(), phong.getMaPhong());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể lấy thông tin chi tiết đơn đặt phòng: " + e.getMessage());
+            return;
+        }
         if(chiTietDonDatPhong.getTrangThaiChiTietDonDatPhong().equals(TrangThaiChiTietDonDatPhong.DAT_TRUOC)){
             setStyle(TrangThaiPhong.DAT_TRUOC);
         } else if (chiTietDonDatPhong.getTrangThaiChiTietDonDatPhong().equals(TrangThaiChiTietDonDatPhong.DA_NHAN_PHONG)){
@@ -408,5 +418,11 @@ public class RoomItemController implements MainController.DataReceivable {
 
     }
 
-
+    private void showErrorAlert(String title, String content) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }

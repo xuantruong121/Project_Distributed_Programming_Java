@@ -17,6 +17,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
+import java.rmi.RemoteException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class RevenueChartController {
     @FXML private ComboBox<String> timeRangeComboBox;
@@ -162,7 +165,13 @@ public class RevenueChartController {
     // Các hàm giả lập lấy dữ liệu từ CSDL
     private double getRevenueForDate(LocalDate date) {
         // Thực tế sẽ query từ CSDL
-        return chiTietDonDatPhongDAO.getTongTienByNgay(date, date);
+        try {
+            return chiTietDonDatPhongDAO.getTongTienByNgay(date, date);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể lấy doanh thu: " + e.getMessage());
+            return 0;
+        }
     }
 
     private double getRevenueForWeek(int month, int year, int week) {
@@ -170,14 +179,26 @@ public class RevenueChartController {
         LocalDate startDate = LocalDate.of(year, month, 1)
                 .with(WeekFields.of(Locale.getDefault()).dayOfWeek(), week);
         LocalDate endDate = startDate.plusDays(6);
-        return chiTietDonDatPhongDAO.getTongTienByNgay(startDate, endDate);
+        try {
+            return chiTietDonDatPhongDAO.getTongTienByNgay(startDate, endDate);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể lấy doanh thu: " + e.getMessage());
+            return 0;
+        }
     }
 
     private double getRevenueForMonth(int month, int year) {
         // Thực tế sẽ query từ CSDL
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate = startDate.plusMonths(1).minusDays(1);
-        return chiTietDonDatPhongDAO.getTongTienByNgay(startDate, endDate);
+        try {
+            return chiTietDonDatPhongDAO.getTongTienByNgay(startDate, endDate);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể lấy doanh thu: " + e.getMessage());
+            return 0;
+        }
     }
 
     private double getRevenueForWeekRange(LocalDate startDate, LocalDate endDate, int week) {
@@ -187,6 +208,20 @@ public class RevenueChartController {
         if (endOfWeek.isAfter(endDate)) {
             endOfWeek = endDate;
         }
-        return chiTietDonDatPhongDAO.getTongTienByNgay(startOfWeek, endOfWeek);
+        try {
+            return chiTietDonDatPhongDAO.getTongTienByNgay(startOfWeek, endOfWeek);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể lấy doanh thu: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    private void showErrorAlert(String title, String content) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

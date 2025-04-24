@@ -17,7 +17,13 @@ import iuh.fit.qlksfxapp.controller.ItemController.DetailBookingShortController;
 import iuh.fit.qlksfxapp.controller.ItemController.DialogAddBookingDetailController;
 import iuh.fit.qlksfxapp.util.ConfirmDialog;
 import iuh.fit.qlksfxapp.util.FormatUtil;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import jakarta.persistence.EntityManager;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.stream.Stream;
 import jakarta.persistence.EntityTransaction;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -237,7 +243,13 @@ public class BookingFormController  implements MainController.DataReceivable {
         roomItemsContainer.getChildren().clear();
         chiTietDonDatPhongDAO.closeEntityManager();
         chiTietDonDatPhongDAO = new ChiTietDonDatPhongDAOImpl();
-        chiTietDonDatPhongList = chiTietDonDatPhongDAO.findChiTietDonDatPhongTheoMaDonDatPhong(donDatPhong.getMaDonDatPhong());
+        try {
+            chiTietDonDatPhongList = chiTietDonDatPhongDAO.findChiTietDonDatPhongTheoMaDonDatPhong(donDatPhong.getMaDonDatPhong());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể lấy danh sách chi tiết đơn đặt phòng: " + e.getMessage());
+            chiTietDonDatPhongList = new ArrayList<>();
+        }
         for (ChiTietDonDatPhong c : chiTietDonDatPhongList) {
             if(c.getTrangThaiChiTietDonDatPhong().equals(TrangThaiChiTietDonDatPhong.DA_HUY))
                 continue;
@@ -267,9 +279,14 @@ public class BookingFormController  implements MainController.DataReceivable {
                 e.printStackTrace();
             }
         }
-        initTongTienCuaBookingDetail();
+        try {
+            initTongTienCuaBookingDetail();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể tính tổng tiền: " + e.getMessage());
+        }
     }
-    public void initTongTienCuaBookingDetail(){
+    public void initTongTienCuaBookingDetail() throws RemoteException {
         if(chiTietDonDatPhongList== null || chiTietDonDatPhongList.isEmpty()){
             tienDichVuLabel.setText("Tiền dịch vụ: 0 VND");
             tienPhuThuLabel.setText("Tiền phụ thu: 0 VND");
@@ -278,9 +295,17 @@ public class BookingFormController  implements MainController.DataReceivable {
         }
         chiTietDonDatPhongDAO.closeEntityManager();
         chiTietDonDatPhongDAO= new ChiTietDonDatPhongDAOImpl();
-        double tienPhongValue = chiTietDonDatPhongDAO.getTongTienPhongByMaDonDatPhong(donDatPhong.getMaDonDatPhong());
-        double tienDichVuValue = chiTietDonDatPhongDAO.getTongTienDichVuByMaDonDatPhong(donDatPhong.getMaDonDatPhong());
-        double tongTienPhuThuValue = chiTietDonDatPhongDAO.getTongTienPhuThuByMaDonDatPhong(donDatPhong.getMaDonDatPhong());
+        double tienPhongValue = 0;
+        double tienDichVuValue = 0;
+        double tongTienPhuThuValue = 0;
+        try {
+            tienPhongValue = chiTietDonDatPhongDAO.getTongTienPhongByMaDonDatPhong(donDatPhong.getMaDonDatPhong());
+            tienDichVuValue = chiTietDonDatPhongDAO.getTongTienDichVuByMaDonDatPhong(donDatPhong.getMaDonDatPhong());
+            tongTienPhuThuValue = chiTietDonDatPhongDAO.getTongTienPhuThuByMaDonDatPhong(donDatPhong.getMaDonDatPhong());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể tính tổng tiền: " + e.getMessage());
+        }
         tienDichVuLabel.setText("Tiền dịch vụ: " + FormatUtil.formatMoney(tienDichVuValue) + " VND");
         tienPhuThuLabel.setText("Tiền phụ thu: " + FormatUtil.formatMoney(tongTienPhuThuValue) + " VND");
         tongTienLabel.setText("Tổng tiền: " + FormatUtil.formatMoney(tienPhongValue+tienDichVuValue+tongTienPhuThuValue) + " VND");
@@ -446,6 +471,14 @@ public class BookingFormController  implements MainController.DataReceivable {
         bookingDatePicker.setDisable(idDisable);
         notesTextArea.setDisable(idDisable);
     }
+
+    private void showErrorAlert(String title, String content) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
     private void cleanThongTinDonDatPhong(){
         maDonDatPhong.setText("");
         ngayTaoDonLabel.setText("");
@@ -588,10 +621,16 @@ public class BookingFormController  implements MainController.DataReceivable {
         generalDAO = Objects.requireNonNullElseGet(generalDAO, GeneralDAOImpl::new);
 
         // Lấy danh sách đơn đặt phòng trùng khung ngày
-        List<DonDatPhong> donDatPhongTrungNgay = donDatPhongDAO.getListDonDatPhongTheoNgayDenVaNgayDi(
-                donDatPhong.getNgayNhan(),
-                donDatPhong.getNgayTra()
-        );
+        List<DonDatPhong> donDatPhongTrungNgay = new ArrayList<>();
+        try {
+            donDatPhongTrungNgay = donDatPhongDAO.getListDonDatPhongTheoNgayDenVaNgayDi(
+                    donDatPhong.getNgayNhan(),
+                    donDatPhong.getNgayTra()
+            );
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể lấy danh sách đơn đặt phòng: " + e.getMessage());
+        }
 
         // Lấy tất cả phòng trống
         List<Phong> phongTrong = generalDAO.findAll(Phong.class).stream()
@@ -599,10 +638,24 @@ public class BookingFormController  implements MainController.DataReceivable {
                 .collect(Collectors.toCollection(ArrayList::new)); // Dùng ArrayList để có thể remove
 
         // Lấy tất cả phòng đã đặt trong các đơn trùng ngày
-        Set<Phong> phongDaDat = donDatPhongTrungNgay.stream()
-                .flatMap(ddp -> chiTietDonDatPhongDAO.findChiTietDonDatPhongTheoMaDonDatPhong(ddp.getMaDonDatPhong()).stream())
-                .map(ChiTietDonDatPhong::getPhong)
-                .collect(Collectors.toSet());
+        Set<Phong> phongDaDat = new HashSet<>();
+        try {
+            phongDaDat = donDatPhongTrungNgay.stream()
+                    .flatMap(ddp -> {
+                        try {
+                            return chiTietDonDatPhongDAO.findChiTietDonDatPhongTheoMaDonDatPhong(ddp.getMaDonDatPhong()).stream();
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                            showErrorAlert("Lỗi", "Không thể lấy danh sách chi tiết đơn đặt phòng: " + e.getMessage());
+                            return Stream.empty();
+                        }
+                    })
+                    .map(ChiTietDonDatPhong::getPhong)
+                    .collect(Collectors.toSet());
+        } catch (Exception e) {
+            e.printStackTrace();
+            showErrorAlert("Lỗi", "Không thể lấy danh sách phòng đã đặt: " + e.getMessage());
+        }
 
         // Loại bỏ các phòng đã đặt khỏi danh sách phòng trống
         phongTrong.removeAll(phongDaDat);
