@@ -562,34 +562,34 @@ public class MainController {
         AnchorPane.setLeftAnchor(pane, 0.0);
         AnchorPane.setRightAnchor(pane, 0.0);
     }
-    @FXML
-    public void showUserProfile() {
-        try {
-            // Tạo FXMLLoader để tải UserProfile.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserProfile.fxml"));
-            Parent userProfileView = loader.load();
-
-            // Clear previous content and add new interface to content pane
-            contentPane.getChildren().clear();
-            contentPane.getChildren().add(userProfileView);
-
-            // Set anchor properties to fill the content pane
-            AnchorPane.setTopAnchor(userProfileView, 0.0);
-            AnchorPane.setBottomAnchor(userProfileView, 0.0);
-            AnchorPane.setLeftAnchor(userProfileView, 0.0);
-            AnchorPane.setRightAnchor(userProfileView, 0.0);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-            // Hiển thị thông báo lỗi
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Lỗi");
-            alert.setHeaderText("Không thể mở thông tin người dùng");
-            alert.setContentText("Lỗi: " + e.getMessage());
-            alert.showAndWait();
-        }
-    }
+//    @FXML
+//    public void showUserProfile() {
+//        try {
+//            // Tạo FXMLLoader để tải UserProfile.fxml
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserProfile.fxml"));
+//            Parent userProfileView = loader.load();
+//
+//            // Clear previous content and add new interface to content pane
+//            contentPane.getChildren().clear();
+//            contentPane.getChildren().add(userProfileView);
+//
+//            // Set anchor properties to fill the content pane
+//            AnchorPane.setTopAnchor(userProfileView, 0.0);
+//            AnchorPane.setBottomAnchor(userProfileView, 0.0);
+//            AnchorPane.setLeftAnchor(userProfileView, 0.0);
+//            AnchorPane.setRightAnchor(userProfileView, 0.0);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//
+//            // Hiển thị thông báo lỗi
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Lỗi");
+//            alert.setHeaderText("Không thể mở thông tin người dùng");
+//            alert.setContentText("Lỗi: " + e.getMessage());
+//            alert.showAndWait();
+//        }
+//    }
 
     @FXML
     public void showUserProfile() {
