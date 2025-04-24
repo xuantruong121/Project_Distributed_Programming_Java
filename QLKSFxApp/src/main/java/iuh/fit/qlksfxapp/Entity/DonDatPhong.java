@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,10 +19,12 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @Setter
 @DonDatPhongConstraints
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class DonDatPhong implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @EqualsAndHashCode.Include
     @Column(columnDefinition = "nvarchar(9)")
     private String maDonDatPhong;
 

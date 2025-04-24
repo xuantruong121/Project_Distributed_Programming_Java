@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,10 +23,12 @@ import java.time.format.DateTimeFormatter;
 @Setter
 @KhachHangConstraints
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class KhachHang implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @EqualsAndHashCode.Include
     @Column(columnDefinition = "nvarchar(12)")
     private String maKhachHang;
     @NotBlank(message = "Tên khách hàng không được để trống")

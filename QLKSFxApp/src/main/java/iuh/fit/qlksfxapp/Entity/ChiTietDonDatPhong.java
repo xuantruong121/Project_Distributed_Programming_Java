@@ -3,11 +3,14 @@ package iuh.fit.qlksfxapp.Entity;
 import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
 import jakarta.persistence.*;
+import jakarta.persistence.Query;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,10 +20,13 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ChiTietDonDatPhong implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
+    @EqualsAndHashCode.Include
     @Column(columnDefinition = "nvarchar(13)")
     @Pattern(regexp = "^\\d{9}-\\d{3}$") //DDMMYYAAA-YYY
     private String maChiTietDonDatPhong;
@@ -75,11 +81,15 @@ public class ChiTietDonDatPhong implements Serializable {
         EntityManager em = null;
         long numbersOfMaChiTietDonDatPhong = 0;
         try {
+            // Khởi tạo EntityManager
+            em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
             Query query = em.createQuery(queryStr);
             query.setParameter("pattern", pattern + "%");
             numbersOfMaChiTietDonDatPhong = (long) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
+            // Nếu có lỗi, sử dụng số mặc định là 1
+            numbersOfMaChiTietDonDatPhong = 0;
         } finally {
             if (em != null && em.isOpen()) {
                 em.close();

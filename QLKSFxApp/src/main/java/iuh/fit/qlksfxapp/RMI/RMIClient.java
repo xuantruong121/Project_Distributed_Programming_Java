@@ -17,7 +17,7 @@ public class RMIClient {
             System.setProperty("java.security.policy", "rmi.policy");
 
             // Get the registry
-            Registry registry = LocateRegistry.getRegistry("192.168.99.105", 9090);
+            Registry registry = LocateRegistry.getRegistry("192.168.99.223", 9090);
 
             // Look up the remote object
             PhongDAO phongDAO = (PhongDAO) registry.lookup("phongDAO");

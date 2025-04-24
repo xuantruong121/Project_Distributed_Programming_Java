@@ -38,7 +38,7 @@ public class EntityManagerUtilImpl {
             dbHost = "localhost"; // Server luôn kết nối đến localhost
         } else {
             // Lấy địa chỉ server từ cấu hình RMI client nếu có, nếu không sử dụng giá trị mặc định
-            String rmiServer = System.getProperty("rmi.server.host", "192.168.99.105");
+            String rmiServer = System.getProperty("rmi.server.host", "192.168.99.223");
             dbHost = rmiServer;
         }
 
