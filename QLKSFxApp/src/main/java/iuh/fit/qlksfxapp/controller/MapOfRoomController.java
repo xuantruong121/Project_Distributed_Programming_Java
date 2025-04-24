@@ -43,7 +43,7 @@ public class MapOfRoomController {
 
     @FXML private ScrollPane scrollPane;
     @FXML private GridPane gridPane;
-    private static ManageTrangThaiPhong  manageTrangThaiPhong;
+    private ManageTrangThaiPhong manageTrangThaiPhong;
     private List<Phong> allPhong;
     private int currentPage = 0;
     private final int ITEMS_PER_PAGE = 9; // 3x3 grid
@@ -69,12 +69,12 @@ public class MapOfRoomController {
         popup.setAutoHide(true);
         allPhong=new ArrayList<>();
         restartPage(null);
-        loadRoomItems();
-        scrollPane.vvalueProperty().addListener((obs, oldValue, newValue) -> {
-            if (newValue.doubleValue() == 1.0) { // Cuộn đến cuối
-                loadMoreItems();
-            }
-        });
+//        loadRoomItems();
+//        scrollPane.vvalueProperty().addListener((obs, oldValue, newValue) -> {
+//            if (newValue.doubleValue() == 1.0) { // Cuộn đến cuối
+//                loadMoreItems();
+//            }
+//        });
         // them view empty
         Node emptyView = EmptyViewManager.getEmptyView();
         EmptyViewManager.setMessage("Không có phòng nào");
@@ -87,7 +87,18 @@ public class MapOfRoomController {
         initComboBox();
         initFormater();
         initLegend();
-        // them 9 room
+
+        // Load room items
+//        loadRoomItems();
+
+        // Add scroll listener
+        scrollPane.vvalueProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue.doubleValue() == 1.0) { // Cuộn đến cuối
+                loadMoreItems();
+            }
+        });
+
+        // Load initial items
         loadMoreItems();
     }
 
@@ -519,6 +530,30 @@ public class MapOfRoomController {
             loadRoomItems();
 //        }
     }
+    /**
+     * Phương thức để hiển thị tất cả các phòng của mọi trạng thái
+     */
+    @FXML
+    public void showAllRooms() {
+        // Đảm bảo dữ liệu được cập nhật
+        if(manageTrangThaiPhong != null) {
+            manageTrangThaiPhong.refreshData();
+        } else {
+            manageTrangThaiPhong = new ManageTrangThaiPhong(this);
+        }
+
+        // Xóa danh sách phòng hiện tại và thêm tất cả các phòng của mọi trạng thái
+        allPhong.clear();
+        for (TrangThaiPhong trangThai : TrangThaiPhong.values()) {
+            allPhong.addAll(manageTrangThaiPhong.getPhongByTrangThai(trangThai));
+        }
+
+        // Cập nhật giao diện
+        loadRoomItems();
+        updateEmptyState();
+        initLegend();
+    }
+
     public void closePage(){
         EventBusManager.unregister(this);
         donDatPhongDAO.getEm().close();

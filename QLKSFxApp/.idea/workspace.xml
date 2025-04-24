@@ -10,17 +10,20 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.12/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QLKSFxApp/src/main/java/iuh/fit/qlksfxapp/DAO/DonDatPhongDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QLKSFxApp/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/DonDatPhongDAOImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/BookingFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/BookingFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MapOfRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MapOfRoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/ManageTrangThaiPhong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/ManageTrangThaiPhong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/AugmentWebviewStateStore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../QLKSFxAppClient/libs/QLKSFxApp-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../QLKSFxAppClient/libs/QLKSFxApp-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLKSFxAppClient/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../QLKSFxAppClient/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLKSFxAppClient/libs/QLKSFxApp-1.0-SNAPSHOT.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,20 +170,7 @@
       <recent name="iuh.fit.qlksfxapp.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.QLKSFxApp [cleanAndRun]">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="iuh.fit.qlksfxapp.Main" />
-      <module name="QLKSFxApp.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="iuh.fit.qlksfxapp.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Gradle.QLKSFxApp [runRMIServer]">
     <configuration name="QLKSFxApp [cleanAndRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -273,20 +263,43 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="QLKSFxApp [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <EXTENSION ID="com.haulmont.jmixstudio.runconfiguration.JmixRunConfigurationExtension" isNew="true" />
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Application.Main" />
       <item itemvalue="Gradle.QLKSFxApp [jar]" />
       <item itemvalue="Gradle.QLKSFxApp [cleanAndRun]" />
       <item itemvalue="Gradle.QLKSFxApp [clean]" />
       <item itemvalue="Gradle.QLKSFxApp [runRMIServer]" />
+      <item itemvalue="Gradle.QLKSFxApp [run]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.QLKSFxApp [cleanAndRun]" />
         <item itemvalue="Gradle.QLKSFxApp [runRMIServer]" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.QLKSFxApp [jar]" />
+        <item itemvalue="Gradle.QLKSFxApp [run]" />
         <item itemvalue="Gradle.QLKSFxApp [clean]" />
+        <item itemvalue="Gradle.QLKSFxApp [cleanAndRun]" />
       </list>
     </recent_temporary>
   </component>
@@ -412,12 +425,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MapOfRoomController.java</url>
-          <line>186</line>
+          <line>215</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MapOfRoomController.java</url>
-          <line>183</line>
+          <line>212</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
