@@ -1,6 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,6 +9,8 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Admin
@@ -16,7 +18,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class DichVu {
+public class DichVu implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(4)")
     @Pattern(regexp = "^DV\\d{2}$",message = "Mã dịch vụ không hợp lệ (DVXX)")
@@ -45,9 +49,10 @@ public class DichVu {
     }
     public String generateMaDichVu(){
         String query = "SELECT COUNT(v) FROM DichVu v";
-        EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
         long count = (long)em.createQuery(query).getSingleResult();
         em.close();
         return "DV" + String.format("%02d",count + 1);
     }
 }
+

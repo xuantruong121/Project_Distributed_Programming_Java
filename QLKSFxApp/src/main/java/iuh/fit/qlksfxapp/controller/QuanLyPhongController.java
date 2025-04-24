@@ -3,7 +3,7 @@ package iuh.fit.qlksfxapp.controller;
 import iuh.fit.qlksfxapp.Entity.LoaiPhong;
 import iuh.fit.qlksfxapp.Entity.Phong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiPhong;
-import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class QuanLyPhongController {
@@ -82,7 +83,7 @@ public class QuanLyPhongController {
     private final ObservableList<LoaiPhong> loaiPhongList = FXCollections.observableArrayList();
 
     // DAO object
-    private final GeneralDAO generalDAO = new GeneralDAO();
+    private final GeneralDAOImpl generalDAOImpl = new GeneralDAOImpl();
 
     @FXML
     private void initialize() {
@@ -223,7 +224,7 @@ public class QuanLyPhongController {
             Thread thread = new Thread(() -> {
                 try {
                     // Sử dụng GeneralDAO để lấy danh sách loại phòng
-                    List<LoaiPhong> result = generalDAO.findAll(LoaiPhong.class);
+                    List<LoaiPhong> result = generalDAOImpl.findAll(LoaiPhong.class);
 
                     // Cập nhật UI trên thread chính
                     javafx.application.Platform.runLater(() -> {
@@ -278,7 +279,7 @@ public class QuanLyPhongController {
             Thread thread = new Thread(() -> {
                 try {
                     // Sử dụng GeneralDAO để lấy danh sách phòng
-                    List<Phong> result = generalDAO.findAll(Phong.class);
+                    List<Phong> result = generalDAOImpl.findAll(Phong.class);
 
                     // Cập nhật UI trên thread chính
                     javafx.application.Platform.runLater(() -> {
@@ -315,28 +316,52 @@ public class QuanLyPhongController {
             }
         }
 
-        // Hiển thị hình ảnh nếu có
-        if (phong.getHinhAnh() != null && !phong.getHinhAnh().isEmpty()) {
-            try {
+        // Hiển thị hình ảnh dựa trên mã phòng
+        String maPhong = phong.getMaPhong();
+        try {
+            // Tìm hình ảnh trong thư mục resources/images/room
+            // Kiểm tra các định dạng hình ảnh phổ biến
+            String[] extensions = {".jpg", ".jpeg", ".png", ".gif"};
+            boolean imageFound = false;
+
+            // Kiểm tra trong thư mục resources/images/room
+            for (String ext : extensions) {
+                String imagePath = "/images/room/" + maPhong + ext;
+                try {
+                    // Kiểm tra xem file có tồn tại trong resources không
+                    if (getClass().getResource(imagePath) != null) {
+                        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
+                        hinhAnhImageView.setImage(image);
+                        selectedImagePath = imagePath;
+                        imageFound = true;
+                        System.out.println("Đã tìm thấy hình ảnh: " + imagePath);
+                        break;
+                    }
+                } catch (Exception e) {
+                    // Bỏ qua và tiếp tục kiểm tra định dạng khác
+                }
+            }
+
+            // Nếu không tìm thấy hình ảnh trong resources, kiểm tra đường dẫn cũ (nếu có)
+            if (!imageFound && phong.getHinhAnh() != null && !phong.getHinhAnh().isEmpty()) {
                 File imageFile = new File(phong.getHinhAnh());
                 if (imageFile.exists()) {
                     Image image = new Image(imageFile.toURI().toString());
                     hinhAnhImageView.setImage(image);
                     selectedImagePath = phong.getHinhAnh();
-                } else {
-                    // Nếu file không tồn tại, hiển thị ảnh placeHolder
-                    hinhAnhImageView.setImage(new Image(getClass().getResourceAsStream("/images/placeHolder.jpg")));
-                    selectedImagePath = null;
+                    imageFound = true;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                // Nếu có lỗi, hiển thị ảnh placeHolder
-                hinhAnhImageView.setImage(new Image(getClass().getResourceAsStream("/images/placeHolder.jpg")));
+            }
+
+            // Nếu vẫn không tìm thấy hình ảnh, hiển thị ảnh placeHolder
+            if (!imageFound) {
+                hinhAnhImageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/placeHolder.jpg"))));
                 selectedImagePath = null;
             }
-        } else {
-            // Nếu không có hình ảnh, hiển thị ảnh placeHolder
-            hinhAnhImageView.setImage(new Image(getClass().getResourceAsStream("/images/placeHolder.jpg")));
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Nếu có lỗi, hiển thị ảnh placeHolder
+            hinhAnhImageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/placeHolder.jpg"))));
             selectedImagePath = null;
         }
     }
@@ -351,7 +376,7 @@ public class QuanLyPhongController {
         if (!loaiPhongComboBox.getItems().isEmpty()) {
             loaiPhongComboBox.setValue(loaiPhongComboBox.getItems().get(0));
         }
-        hinhAnhImageView.setImage(new Image(getClass().getResourceAsStream("/images/placeHolder.jpg")));
+        hinhAnhImageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/placeHolder.jpg"))));
         selectedImagePath = null;
     }
 
@@ -366,22 +391,33 @@ public class QuanLyPhongController {
         File selectedFile = fileChooser.showOpenDialog(chonAnhButton.getScene().getWindow());
         if (selectedFile != null) {
             try {
-                // Tạo thư mục images nếu chưa tồn tại
-                Path imagesDir = Paths.get("src/main/resources/images");
-                if (!Files.exists(imagesDir)) {
-                    Files.createDirectories(imagesDir);
+                // Tạo thư mục images/room nếu chưa tồn tại
+                Path roomImagesDir = Paths.get("src/main/resources/images/room");
+                if (!Files.exists(roomImagesDir)) {
+                    Files.createDirectories(roomImagesDir);
                 }
 
-                // Tạo tên file mới dựa trên thời gian hiện tại để tránh trùng lặp
-                String fileName = System.currentTimeMillis() + "_" + selectedFile.getName();
-                Path targetPath = imagesDir.resolve(fileName);
+                // Lấy mã phòng từ trường nhập liệu
+                String maPhong = maPhongField.getText().trim();
+                if (maPhong.isEmpty()) {
+                    showAlert(Alert.AlertType.WARNING, "Cảnh báo", "Vui lòng nhập mã phòng trước khi chọn hình ảnh.");
+                    return;
+                }
 
-                // Copy file hình ảnh vào thư mục resources/images
-                Files.copy(selectedFile.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
+                // Lấy phần mở rộng của file
+                String extension = selectedFile.getName().substring(selectedFile.getName().lastIndexOf("."));
+                // Tạo tên file mới dựa trên mã phòng
+                String fileName = maPhong + extension;
+
+
+                // Copy file hình ảnh vào thư mục resources/images/room
+                Path roomTargetPath = roomImagesDir.resolve(fileName);
+                Files.copy(selectedFile.toPath(), roomTargetPath, StandardCopyOption.REPLACE_EXISTING);
 
                 // Cập nhật đường dẫn hình ảnh và hiển thị
-                selectedImagePath = targetPath.toString();
-                Image image = new Image(targetPath.toUri().toString());
+                // Sử dụng đường dẫn tương đối cho resources
+                selectedImagePath = "/images/room/" + fileName;
+                Image image = new Image(roomTargetPath.toUri().toString());
                 hinhAnhImageView.setImage(image);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -439,7 +475,7 @@ public class QuanLyPhongController {
             setRoomInfo(newRoom);
 
             // Lưu vào database sử dụng GeneralDAO
-            generalDAO.addOb(newRoom);
+            generalDAOImpl.addOb(newRoom);
 
             // Cập nhật danh sách và làm mới form
             loadPhongData();
@@ -468,14 +504,14 @@ public class QuanLyPhongController {
 
         try {
             // Tìm phòng trong database sử dụng GeneralDAO
-            Phong roomToUpdate = generalDAO.findOb(Phong.class, selectedRoom.getMaPhong());
+            Phong roomToUpdate = generalDAOImpl.findOb(Phong.class, selectedRoom.getMaPhong());
 
             if (roomToUpdate != null) {
                 // Cập nhật thông tin
                 setRoomInfo(roomToUpdate);
 
                 // Sử dụng DAO để cập nhật phòng
-                generalDAO.updateOb(roomToUpdate);
+                generalDAOImpl.updateOb(roomToUpdate);
 
                 // Cập nhật danh sách
                 loadPhongData();
@@ -509,11 +545,11 @@ public class QuanLyPhongController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 // Tìm phòng trong database sử dụng GeneralDAO
-                Phong roomToDelete = generalDAO.findOb(Phong.class, selectedRoom.getMaPhong());
+                Phong roomToDelete = generalDAOImpl.findOb(Phong.class, selectedRoom.getMaPhong());
 
                 if (roomToDelete != null) {
                     // Sử dụng DAO để xóa phòng
-                    generalDAO.deleteOb(roomToDelete);
+                    generalDAOImpl.deleteOb(roomToDelete);
 
                     // Cập nhật danh sách và làm mới form
                     loadPhongData();
@@ -549,7 +585,7 @@ public class QuanLyPhongController {
             errorMessage.append("Loại phòng không được để trống!\n");
         }
 
-        if (errorMessage.length() > 0) {
+        if (!errorMessage.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Lỗi nhập liệu", errorMessage.toString());
             return false;
         }
@@ -558,11 +594,14 @@ public class QuanLyPhongController {
     }
 
     private void setRoomInfo(Phong phong) {
+        String maPhong = maPhongField.getText().trim();
+        phong.setMaPhong(maPhong);
         phong.setViTri(viTriField.getText().trim());
         phong.setMoTa(moTaField.getText().trim());
         phong.setTrangThaiPhong(trangThaiPhongComboBox.getValue());
         phong.setLoaiPhong(loaiPhongComboBox.getValue());
-        phong.setHinhAnh(selectedImagePath);
+
+        phong.setHinhAnh(Objects.requireNonNullElseGet(selectedImagePath, () -> "/images/room/" + maPhong + ".jpg"));
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String content) {

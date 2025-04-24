@@ -88,3 +88,21 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task runRMIServer(type: JavaExec) {
+    group = "application"
+    description = "Run RMI Server"
+    mainClass = "iuh.fit.qlksfxapp.RMI.RMIServer"
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs = ["-Djava.security.policy=${projectDir}/rmi.policy", "-Djava.rmi.server.hostname=localhost"]
+}
+
+task runRMIClient(type: JavaExec) {
+    group = "application"
+    description = "Run RMI Client Menu"
+    mainClass = "iuh.fit.qlksfxapp.RMI.RMIClientMenu"
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs = ["-Djava.security.policy=${projectDir}/rmi.policy"]
+    standardInput = System.in
+}
+

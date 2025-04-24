@@ -1,6 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.Entity.Enum.LoaiKhuyenMai;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -10,12 +10,15 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
-public class ChuongTrinhKhuyenMai {
+public class ChuongTrinhKhuyenMai implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(8)")
     @Pattern(regexp = "^CT\\d{2}-\\d{3}$",message = "Mã chương trình khuyến mãi không hợp lệ (CTYY-XXX)")
@@ -47,9 +50,10 @@ public class ChuongTrinhKhuyenMai {
         int year = LocalDateTime.now().getYear() % 100;
         String maChuongTrinhKhuyenMai = "CT" + String.format("%02d",year) + "-";
         String query = "SELECT COUNT(c) FROM ChuongTrinhKhuyenMai c where c.maChuongTrinhKhuyenMai like '" + maChuongTrinhKhuyenMai + "%'";
-        EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
         long count = (long)em.createQuery(query).getSingleResult();
         em.close();
         return maChuongTrinhKhuyenMai + String.format("%03d",count + 1);
     }
 }
+
