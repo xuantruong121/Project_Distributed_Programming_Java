@@ -55,20 +55,20 @@
                             </styleClass>
                         </Button>
                         <VBox fx:id="bookingManagementSubMenu" managed="false" spacing="2" visible="false">
-                            <Button onAction="#handleSubBookingManager" userData="BOOKING" prefHeight="35.0"
+                            <Button onAction="#handleSubRoomManager" userData="BOOKING" prefHeight="35.0"
                                     prefWidth="225.0"
                                     text="Đơn đặt phòng">
                                 <styleClass>
                                     <String fx:value="submenu-button"/>
                                 </styleClass>
                             </Button>
-                            <Button onAction="#handleSubBookingManager" userData="MAP" prefHeight="35.0" prefWidth="225.0"
+                            <Button onAction="#handleSubRoomManager" userData="MAP" prefHeight="35.0" prefWidth="225.0"
                                     text="Bản đồ phòng">
                                 <styleClass>
                                     <String fx:value="submenu-button"/>
                                 </styleClass>
                             </Button>
-                            <Button onAction="#handleSubBookingManager" userData="TYPE_INFO" prefHeight="35.0"
+                            <Button onAction="#handleSubRoomManager" userData="TYPE_INFO" prefHeight="35.0"
                                     prefWidth="225.0"
                                     text="Thông tin loại phòng">
                                 <styleClass>
@@ -149,7 +149,7 @@
                     </Button>
 
                     <!-- Discount Management -->
-                    <Button fx:id="discountManagementButton" onAction="#showDiscountManagementPane" prefHeight="40.0"
+                    <Button fx:id="discountManagementButton" onAction="#showDiscountManagementPane" prefHeight="40.0"></Button>
 
                     <!-- Reports -->
                     <Button fx:id="reportsButton" onAction="#showReportsPane" prefHeight="40.0" prefWidth="225.0"

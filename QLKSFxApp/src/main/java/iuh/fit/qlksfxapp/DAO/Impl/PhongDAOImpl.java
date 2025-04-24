@@ -33,7 +33,7 @@ public class PhongDAOImpl extends GeneralDAOImpl implements PhongDAO {
         try {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
             TypedQuery<Phong> query = em.createQuery(
-                    "SELECT p FROM Phong p WHERE p.trangThai = :trangThai",
+                    "SELECT p FROM Phong p WHERE p.trangThaiPhong = :trangThai",
                     Phong.class);
             query.setParameter("trangThai", trangThaiPhong);
             return query.getResultList();
@@ -51,9 +51,9 @@ public class PhongDAOImpl extends GeneralDAOImpl implements PhongDAO {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
             // Phòng có trạng thái TRONG hoặc không có trong bất kỳ đơn đặt phòng nào trong khoảng thời gian này
             TypedQuery<Phong> query = em.createQuery(
-                    "SELECT p FROM Phong p WHERE p.trangThai = :trangThai OR p.maPhong NOT IN " +
+                    "SELECT p FROM Phong p WHERE p.trangThaiPhong = :trangThai OR p.maPhong NOT IN " +
                             "(SELECT ctdp.phong.maPhong FROM ChiTietDonDatPhong ctdp " +
-                            "WHERE ctdp.donDatPhong.checkIn <= :checkOut AND ctdp.donDatPhong.checkOut >= :checkIn)",
+                            "WHERE ctdp.donDatPhong.ngayNhan <= :checkOut AND ctdp.donDatPhong.ngayTra >= :checkIn)",
                     Phong.class);
             query.setParameter("trangThai", TrangThaiPhong.TRONG);
             query.setParameter("checkIn", checkIn);

@@ -1,4 +1,5 @@
 module iuh.fit.qlksfxapp {
+    requires java.rmi;
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;

@@ -30,7 +30,7 @@ public class ChiTietDichVuDAOImpl extends GeneralDAOImpl implements ChiTietDichV
         try {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
             return em.createQuery(
-                    "SELECT c FROM ChiTietDichVu c WHERE c.donDatPhong.maDonDatPhong = :maDonDatPhong",
+                    "SELECT c FROM ChiTietDichVu c WHERE c.chiTietDonDatPhong.maChiTietDonDatPhong = :maDonDatPhong",
                     ChiTietDichVu.class)
                     .setParameter("maDonDatPhong", maDonDatPhong)
                     .getResultList();

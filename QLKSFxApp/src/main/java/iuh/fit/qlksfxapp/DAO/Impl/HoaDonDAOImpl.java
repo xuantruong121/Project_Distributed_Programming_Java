@@ -32,7 +32,7 @@ public class HoaDonDAOImpl extends GeneralDAOImpl implements HoaDonDAO {
         try {
             em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
             TypedQuery<HoaDon> query = em.createQuery(
-                    "SELECT h FROM HoaDon h WHERE h.ngayLap BETWEEN :startDate AND :endDate",
+                    "SELECT h FROM HoaDon h WHERE h.ngayTao BETWEEN :startDate AND :endDate",
                     HoaDon.class);
             query.setParameter("startDate", startDate);
             query.setParameter("endDate", endDate);
