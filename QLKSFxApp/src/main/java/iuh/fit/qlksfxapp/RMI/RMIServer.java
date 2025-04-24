@@ -11,10 +11,12 @@ public class RMIServer {
 
     public static void main(String[] args) throws Exception {
         // Set system properties for RMI
+        System.setProperty("app.isServer", "true");
+
+        // Set system properties for RMI
         String projectDir = System.getProperty("user.dir");
         System.setProperty("java.security.policy", projectDir + "/rmi.policy");
-        System.setProperty("java.rmi.server.hostname", "192.168.99.238");
-
+        System.setProperty("java.rmi.server.hostname", "172.20.86.158");
         // Create and initialize the registry
         Registry registry = LocateRegistry.createRegistry(9090);
 

@@ -17,6 +17,7 @@ import iuh.fit.qlksfxapp.controller.ItemController.DetailBookingShortController;
 import iuh.fit.qlksfxapp.controller.ItemController.DialogAddBookingDetailController;
 import iuh.fit.qlksfxapp.util.ConfirmDialog;
 import iuh.fit.qlksfxapp.util.FormatUtil;
+import jakarta.persistence.LockModeType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import jakarta.persistence.EntityManager;
@@ -48,6 +49,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.PessimisticLockException;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 
 import java.io.IOException;
@@ -666,18 +668,84 @@ public class BookingFormController  implements MainController.DataReceivable {
         Platform.runLater(() -> {
             List<String> selectedRooms = event.getSelectedRooms();
             if(selectedRooms != null){
-                for (String room : selectedRooms) {
-                    generalDAO= Objects.requireNonNullElse(generalDAO, new GeneralDAOImpl());
-                    ChiTietDonDatPhong chiTietDonDatPhong = new ChiTietDonDatPhong();
-                    chiTietDonDatPhong.setPhong(generalDAO.findOb(Phong.class, room));
-                    chiTietDonDatPhong.setTrangThaiChiTietDonDatPhong(TrangThaiChiTietDonDatPhong.DAT_TRUOC);
-                    chiTietDonDatPhong.setDonDatPhong(donDatPhong);
-                    generalDAO.addOb(chiTietDonDatPhong);
+                EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+                EntityTransaction transaction = em.getTransaction();
+                
+                try {
+                    transaction.begin();
+                    
+                    // Khóa các phòng được chọn trước khi kiểm tra
+                    List<Phong> lockedRooms = new ArrayList<>();
+                    for (String roomId : selectedRooms) {
+                        Phong phong = em.find(Phong.class, roomId, LockModeType.PESSIMISTIC_WRITE);
+                        if (phong != null) {
+                            lockedRooms.add(phong);
+                        }
+                    }
+
+                    // Kiểm tra trùng lịch với khóa pessimistic
+                    for (Phong phong : lockedRooms) {
+                        String query = """
+                            SELECT ctdp FROM ChiTietDonDatPhong ctdp 
+                            WHERE ctdp.phong.maPhong = :roomId 
+                            AND ctdp.donDatPhong.ngayTra > :ngayNhan 
+                            AND ctdp.donDatPhong.ngayNhan < :ngayTra
+                            AND ctdp.trangThaiChiTietDonDatPhong IN :trangThaiHopLe
+                            """;
+                        List<ChiTietDonDatPhong> conflictBookings = em.createQuery(query, ChiTietDonDatPhong.class)
+                            .setLockMode(LockModeType.PESSIMISTIC_READ)
+                            .setParameter("roomId", phong.getMaPhong())
+                            .setParameter("ngayNhan", donDatPhong.getNgayNhan())
+                            .setParameter("ngayTra", donDatPhong.getNgayTra())
+                            .setParameter("trangThaiHopLe", Arrays.asList(
+                                TrangThaiChiTietDonDatPhong.DAT_TRUOC,
+                                TrangThaiChiTietDonDatPhong.DA_NHAN_PHONG,
+                                TrangThaiChiTietDonDatPhong.DA_TRA_PHONG
+                            ))
+                            .getResultList();
+
+                        if (!conflictBookings.isEmpty()) {
+                            transaction.rollback();
+                            EventBusManager.post(new ToastEvent(
+                                "Phòng " + phong.getMaPhong() + " đã được đặt trong khoảng thời gian này", 
+                                ToastEvent.ToastType.ERROR
+                            ));
+                            return;
+                        }
+                    }
+                    
+                    // Thêm chi tiết đơn đặt phòng khi đã có khóa
+                    for (Phong phong : lockedRooms) {
+                        ChiTietDonDatPhong chiTietDonDatPhong = new ChiTietDonDatPhong();
+                        chiTietDonDatPhong.setPhong(phong);
+                        chiTietDonDatPhong.setTrangThaiChiTietDonDatPhong(TrangThaiChiTietDonDatPhong.DAT_TRUOC);
+                        chiTietDonDatPhong.setDonDatPhong(donDatPhong);
+                        em.persist(chiTietDonDatPhong);
+                    }
+                    
+                    transaction.commit();
+                    
+                    // Cập nhật UI
+                    roomItemsContainer.getChildren().clear();
+                    initDetailBookingShort();
+                    EventBusManager.post(new ToastEvent("Thêm phòng thành công", ToastEvent.ToastType.SUCCESS));
+                    
+                } catch (PessimisticLockException e) {
+                    if (transaction.isActive()) {
+                        transaction.rollback();
+                    }
+                    EventBusManager.post(new ToastEvent(
+                        "Phòng đang được người khác đặt, vui lòng thử lại sau", 
+                        ToastEvent.ToastType.ERROR
+                    ));
+                } catch (Exception e) {
+                    if (transaction.isActive()) {
+                        transaction.rollback();
+                    }
+                    EventBusManager.post(new ToastEvent("Thêm phòng thất bại: " + e.getMessage(), ToastEvent.ToastType.ERROR));
+                } finally {
+                    em.close();
                 }
-                // xoa DetailBookingShort truoc do
-                roomItemsContainer.getChildren().clear();
-                initDetailBookingShort();
-                EventBusManager.post(new ToastEvent("Thêm phòng thành công", ToastEvent.ToastType.SUCCESS));
             } else {
                 EventBusManager.post(new ToastEvent("Không có phòng nào được chọn", ToastEvent.ToastType.ERROR));
             }

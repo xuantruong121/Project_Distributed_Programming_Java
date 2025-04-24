@@ -77,19 +77,16 @@ public class ManageTrangThaiPhong {
                 for (ChiTietDonDatPhong c : chiTietDonDatPhongs) {
                     if (c.getTrangThaiChiTietDonDatPhong().equals(TrangThaiChiTietDonDatPhong.DA_NHAN_PHONG) ||
                             c.getTrangThaiChiTietDonDatPhong().equals(TrangThaiChiTietDonDatPhong.DAT_TRUOC)) {
-
                         // Sử dụng EntityManager để load phong nếu cần
                         Phong p = c.getPhong();
                         if (p != null) {
                             // Đảm bảo phong là managed entity
                             Phong managedPhong = em.find(Phong.class, p.getMaPhong());
-                            DonDatPhong managedDDP = em.find(DonDatPhong.class, ddp.getMaDonDatPhong());
-                            wrappers.add(new PhongDonDatWrapper(managedPhong, managedDDP));
+                           wrappers.add(new PhongDonDatWrapper(managedPhong, ddp));
                         }
                     }
                 }
             }
-
             transaction.commit();
             legendPhongTheoTrangThai.put(trangThai, wrappers);
 
