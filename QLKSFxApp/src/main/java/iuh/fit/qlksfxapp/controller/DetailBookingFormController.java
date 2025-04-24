@@ -3,6 +3,7 @@ package iuh.fit.qlksfxapp.controller;
 import com.google.common.eventbus.Subscribe;
 import iuh.fit.qlksfxapp.DAO.*;
 import iuh.fit.qlksfxapp.DAO.Impl.ChiTietDonDatPhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import iuh.fit.qlksfxapp.Entity.*;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
@@ -246,7 +247,7 @@ public class DetailBookingFormController {
         }
     }
     private void setThongTinDonDatPhong(){
-        EntityManagerFactory emf = EntityManagerUtil.getEntityManagerFactory();
+        EntityManagerFactory emf = EntityManagerUtilImpl.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
             // 2. Tải ChiTietDonDatPhong với các quan hệ cần thiết
         ChiTietDonDatPhong chiTietDonDatPhong;
@@ -324,7 +325,7 @@ public class DetailBookingFormController {
         }
     }
     private void setDichVu() {
-        EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
@@ -356,7 +357,7 @@ public class DetailBookingFormController {
         }
     }
     private void setPhuThu() {
-        EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
         try {
             // Truy vấn với JOIN FETCH để load luôn collection phuThu và phong
             ChiTietDonDatPhong managedChiTiet = em.createQuery(
@@ -405,7 +406,7 @@ public class DetailBookingFormController {
         status.getStyleClass().add(bgfillClass);
     }
     private void addKhachHang(KhachHang kh) {
-        EntityManagerFactory emf = EntityManagerUtil.getEntityManagerFactory();
+        EntityManagerFactory emf = EntityManagerUtilImpl.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -589,7 +590,7 @@ public class DetailBookingFormController {
                             EntityManager em = null;
                             boolean success = false;
                             try {
-                                em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+                                em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
                                 em.getTransaction().begin();
 
                                 // 1. Tải ChiTietDonDatPhong với các quan hệ cần thiết
@@ -652,7 +653,7 @@ public class DetailBookingFormController {
                         "Bạn có chắc muốn xóa dịch vụ này?",
                         () -> {
 
-                            EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+                            EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
                             em.getTransaction().begin();
                             try {
                                 // Fetch ChiTietDonDatPhong với các quan hệ cần thiết
@@ -777,7 +778,7 @@ public class DetailBookingFormController {
     public void DialogAddDichVuEvent(DialogAddDichVuEvent event){
         Platform.runLater(() -> {
             if(event.getSelectedDichVu() != null) {
-                EntityManagerFactory emf = EntityManagerUtil.getEntityManagerFactory();
+                EntityManagerFactory emf = EntityManagerUtilImpl.getEntityManagerFactory();
                 EntityManager em = emf.createEntityManager();
                 EntityTransaction transaction = em.getTransaction();
 

@@ -2,7 +2,7 @@ package iuh.fit.qlksfxapp.DAO.Impl;
 
 import iuh.fit.qlksfxapp.DAO.ChiTietDonDatPhongDAO;
 import iuh.fit.qlksfxapp.DAO.CloseEntityManager;
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+
 import iuh.fit.qlksfxapp.DAO.GeneralDAO;
 import iuh.fit.qlksfxapp.Entity.ChiTietDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;

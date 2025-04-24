@@ -1,7 +1,8 @@
 package iuh.fit.qlksfxapp.nhap;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+//import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
 import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.Entity.*;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiDonDatPhong;
@@ -34,7 +35,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class nhap1 extends Application {
     private final Locale vietnam = new Locale("vi", "VN");
     private final Faker faker = new Faker(vietnam);
-    private   EntityManager em = EntityManagerUtil.createEntityManagerFactory().createEntityManager();
+    private   EntityManager em = EntityManagerUtilImpl.createEntityManagerFactory().createEntityManager();
      private List<Phong> listPhong;
     private List<KhachHang> listKhachHang;
     private  List<NhanVien> listNhanVien;
