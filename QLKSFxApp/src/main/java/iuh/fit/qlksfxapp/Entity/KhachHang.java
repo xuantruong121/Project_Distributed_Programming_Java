@@ -1,6 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.Entity.Constraints.KhachHangConstraints;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,7 +24,10 @@ import java.time.format.DateTimeFormatter;
 @KhachHangConstraints
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class KhachHang {
+
+public class KhachHang implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(12)")
     @EqualsAndHashCode.Include
@@ -58,7 +62,7 @@ public class KhachHang {
     public String generateMaKhachHang() {
         String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyy"));
         String query = "SELECT COUNT(k) FROM KhachHang k where k.maKhachHang like '" + formatDate + "%'";
-        long count = (long) EntityManagerUtil.getEntityManagerFactory().createEntityManager()
+        long count = (long) EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager()
                 .createQuery(query).getSingleResult();
         System.out.println(formatDate + String.format("%06d", count + 1));
         return formatDate + String.format("%06d", count + 1);

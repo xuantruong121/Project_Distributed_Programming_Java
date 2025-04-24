@@ -19,7 +19,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.QuanLyDichVuController"
-            prefHeight="800.0" prefWidth="1700.0" stylesheets="@../css/styles.css">
+            prefHeight="800.0" prefWidth="1700.0" stylesheets="@css/styles.css">
     <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <padding>
@@ -32,7 +32,7 @@
             </padding>
             <Label text="QUẢN LÝ DỊCH VỤ" textFill="#1a56db">
                 <font>
-                    <Font name="System Bold" size="18.0"/>
+                    <Font name="System Bold" size="16.0"/>
                 </font>
             </Label>
         </HBox>
@@ -45,18 +45,18 @@
             </padding>
             <Label text="Tìm kiếm:">
                 <font>
-                    <Font size="14.0"/>
+                    <Font size="13.0"/>
                 </font>
             </Label>
             <TextField fx:id="searchField" prefHeight="35.0" prefWidth="300.0"
                        promptText="Nhập mã hoặc tên dịch vụ...">
                 <font>
-                    <Font size="15.0"/>
+                    <Font size="13.0"/>
                 </font>
             </TextField>
             <ComboBox fx:id="searchTypeComboBox" prefHeight="35.0" prefWidth="150.0" promptText="Loại dịch vụ">
                 <style>
-                    -fx-font-size: 15px;
+                    -fx-font-size: 13px;
                 </style>
             </ComboBox>
             <Button fx:id="searchButton" mnemonicParsing="false"
@@ -67,7 +67,7 @@
                 </style>
 
                 <font>
-                    <Font size="15.0"/>
+                    <Font size="13.0"/>
                 </font>
             </Button>
             <Separator orientation="VERTICAL" prefHeight="40.0"/>
@@ -101,51 +101,51 @@
 
                 <Label text="Mã dịch vụ:">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </Label>
                 <TextField fx:id="maDichVuField" editable="false" prefHeight="25.0" prefWidth="550.0">
                     <font>
-                        <Font size="15.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </TextField>
 
                 <Label text="Tên dịch vụ:">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </Label>
                 <TextField fx:id="tenDichVuField" prefHeight="25.0" prefWidth="550.0">
                     <font>
-                        <Font size="15.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </TextField>
 
                 <Label text="Đơn vị tính:">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </Label>
                 <TextField fx:id="donViTinhField" prefHeight="25.0" prefWidth="550.0">
                     <font>
-                        <Font size="15.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </TextField>
 
                 <Label text="Giá dịch vụ:">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </Label>
                 <TextField fx:id="giaDichVuField" prefHeight="25.0" prefWidth="550.0">
                     <font>
-                        <Font size="15.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </TextField>
 
                 <Label text="Hình ảnh:">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </Label>
                 <HBox spacing="15.0" alignment="CENTER" prefHeight="140.0">
@@ -173,34 +173,34 @@
 
                 <Label text="Mô tả:">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </Label>
                 <TextArea fx:id="moTaField" prefHeight="50.0" prefWidth="550.0" wrapText="true">
                     <font>
-                        <Font size="15.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </TextArea>
 
                 <Label text="Trạng thái:">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </Label>
                 <ComboBox fx:id="trangThaiComboBox" prefHeight="25.0" prefWidth="550.0">
                     <style>
-                        -fx-font-size: 15px;
+                        -fx-font-size: 12px;
                     </style>
                 </ComboBox>
 
                 <Label text="Loại dịch vụ:">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </Label>
                 <ComboBox fx:id="loaiDichVuComboBox" prefHeight="25.0" prefWidth="550.0">
                     <style>
-                        -fx-font-size: 15px;
+                        -fx-font-size: 12px;
                     </style>
                 </ComboBox>
 
@@ -216,7 +216,7 @@
                             -fx-background-radius: 5;
                         </style>
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="13.0"/>
                         </font>
                     </Button>
                     <Button fx:id="updateButton" mnemonicParsing="false"
@@ -228,7 +228,7 @@
                         </style>
 
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="13.0"/>
                         </font>
                     </Button>
                     <Button fx:id="deleteButton" mnemonicParsing="false"
@@ -240,7 +240,7 @@
                         </style>
 
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="13.0"/>
                         </font>
                     </Button>
                 </HBox>
@@ -255,7 +255,7 @@
                 </padding>
                 <Label text="DANH SÁCH DỊCH VỤ" textFill="#1a56db">
                     <font>
-                        <Font name="System Bold" size="18.0"/>
+                        <Font name="System Bold" size="16.0"/>
                     </font>
                 </Label>
                 <Separator prefWidth="200.0"/>
@@ -274,7 +274,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                     </columnResizePolicy>
                     <style>
-                        -fx-font-size: 15px;
+                        -fx-font-size: 12px;
                     </style>
                 </TableView>
             </VBox>

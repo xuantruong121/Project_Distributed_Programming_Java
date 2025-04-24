@@ -1,5 +1,6 @@
 package iuh.fit.qlksfxapp.controller;
 
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import iuh.fit.qlksfxapp.DAO.GeneralDAO;
 import iuh.fit.qlksfxapp.Entity.LoaiPhong;
 import iuh.fit.qlksfxapp.controller.ItemController.TypeOfRoomItemController;
@@ -37,8 +38,8 @@ public class InfoTypeOfRoomController {
 
     @FXML
     public void initialize() {
-        GeneralDAO generalDAO = new GeneralDAO();
-        List<LoaiPhong> loaiPhongList = generalDAO.findAll(LoaiPhong.class);
+        GeneralDAOImpl generalDAOImpl = new GeneralDAOImpl();
+        List<LoaiPhong> loaiPhongList = generalDAOImpl.findAll(LoaiPhong.class);
 
         // Đưa dữ liệu gốc vào ListView (không phải HBox)
         listView.getItems().addAll(loaiPhongList);

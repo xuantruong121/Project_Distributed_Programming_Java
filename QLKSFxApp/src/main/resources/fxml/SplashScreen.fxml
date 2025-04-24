@@ -8,27 +8,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.SplashScreenController">
-   <children>
-      <VBox alignment="CENTER" layoutX="200.0" layoutY="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label text="PHẦN MỀM QUẢN LÝ KHÁCH SẠN" textFill="#1a56db">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="loadingImageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/loading.gif" />
-               </image>
-            </ImageView>
-            <Label fx:id="statusLabel" text="Đang khởi động..." textFill="#6c757d">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <ProgressBar fx:id="progressBar" prefWidth="400.0" progress="0.0" />
-         </children>
-      </VBox>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="iuh.fit.qlksfxapp.controller.SplashScreenController">
+   <VBox alignment="CENTER" layoutX="200.0" layoutY="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0"
+         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label text="PHẦN MỀM QUẢN LÝ KHÁCH SẠN" textFill="#1a56db">
+         <font>
+            <Font name="System Bold" size="24.0"/>
+         </font>
+      </Label>
+      <ImageView fx:id="loadingImageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true"
+                 preserveRatio="true">
+         <Image url="@../images/loading.gif"/>
+      </ImageView>
+      <Label fx:id="statusLabel" text="Đang khởi động..." textFill="#6c757d">
+         <font>
+            <Font size="14.0"/>
+         </font>
+      </Label>
+      <ProgressBar fx:id="progressBar" prefWidth="400.0" progress="0.0"/>
+   </VBox>
 </AnchorPane>

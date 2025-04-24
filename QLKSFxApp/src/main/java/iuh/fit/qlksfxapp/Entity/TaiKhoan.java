@@ -11,6 +11,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class TaiKhoan implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Column(nullable = false)
 //    @Pattern(regexp = "^(?=(.*[a-z]))(?=(.*[A-Z]))(?=(.*\\d))(?=(.*[!@#$%^&*(),.?\":{}|<>])).{6,}$",message =
 //    "matKhau không hợp lệ (Độ dài hớn 6 kí tự và có chứa kí tự in hoa, kí tự thường, số và kí tự đặc biệt)")
@@ -40,3 +42,4 @@ public class TaiKhoan implements Serializable {
         return nhanVien != null ? nhanVien.hashCode() : 0;
     }
 }
+

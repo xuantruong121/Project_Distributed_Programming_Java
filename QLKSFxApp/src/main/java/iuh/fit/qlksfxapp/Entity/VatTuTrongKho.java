@@ -1,6 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,10 +9,14 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
-public class VatTuTrongKho {
+public class VatTuTrongKho implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(6)")
     @Pattern(regexp = "^K\\d{1}-\\d{3}$",message = "Mã vật tư trong kho không hợp lệ (KX-ZZZ)")
@@ -42,7 +46,8 @@ public class VatTuTrongKho {
     public String generateMaVatTuTrongKho(){
         String kho = this.kho.getMaKho()+"-";
         String query = "SELECT COUNT(v) FROM VatTuTrongKho v WHERE v.maVatTuTrongKho LIKE '" + kho + "%'";
-        long count = (long) EntityManagerUtil.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
+        long count = (long) EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
         return kho + String.format("%03d", count + 1);
     }
 }
+

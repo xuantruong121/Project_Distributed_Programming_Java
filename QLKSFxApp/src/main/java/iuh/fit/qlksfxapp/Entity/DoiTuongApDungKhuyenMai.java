@@ -1,15 +1,19 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
-public class DoiTuongApDungKhuyenMai {
+public class DoiTuongApDungKhuyenMai implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(15)")
     @Pattern(regexp = "^CT\\d{2}-\\d{3}-DT\\d{4}$",message = "Mã đối tượng không hợp lệ (CTYY-XXX-DTZZZZ)")
@@ -47,9 +51,10 @@ public class DoiTuongApDungKhuyenMai {
     public String generateMaDoiTuongApDung(){
         String pattern = this.chuongTrinhKhuyenMai.getMaChuongTrinhKhuyenMai()+"-DT";
         String query = "SELECT COUNT(d) FROM DoiTuongApDungKhuyenMai d where d.maDoiTuongApDung like '" + pattern + "%'";
-        EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
         long count = (long)em.createQuery(query).getSingleResult();
         em.close();
         return pattern+ String.format("%04d",count + 1);
     }
 }
+

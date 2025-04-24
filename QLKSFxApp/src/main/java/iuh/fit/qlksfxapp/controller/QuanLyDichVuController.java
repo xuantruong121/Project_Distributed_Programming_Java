@@ -2,9 +2,9 @@ package iuh.fit.qlksfxapp.controller;
 
 import iuh.fit.qlksfxapp.Entity.DichVu;
 import iuh.fit.qlksfxapp.Entity.LoaiDichVu;
-import iuh.fit.qlksfxapp.DAO.DichVuDAO;
-import iuh.fit.qlksfxapp.DAO.LoaiDichVuDAO;
-import iuh.fit.qlksfxapp.DAO.GeneralDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.DichVuDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.LoaiDichVuDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -86,9 +86,9 @@ public class QuanLyDichVuController {
     private final ObservableList<LoaiDichVu> loaiDichVuList = FXCollections.observableArrayList();
 
     // DAO objects
-    private final DichVuDAO dichVuDAO = new DichVuDAO();
-    private final LoaiDichVuDAO loaiDichVuDAO = new LoaiDichVuDAO();
-    private final GeneralDAO generalDAO = new GeneralDAO();
+    private final DichVuDAOImpl dichVuDAO = new DichVuDAOImpl();
+    private final LoaiDichVuDAOImpl loaiDichVuDAO = new LoaiDichVuDAOImpl();
+    private final GeneralDAOImpl generalDAOImpl = new GeneralDAOImpl();
 
     // Biến lưu đường dẫn hình ảnh
     private String selectedImagePath = null;
@@ -157,7 +157,7 @@ public class QuanLyDichVuController {
             Thread thread = new Thread(() -> {
                 try {
                     // Sử dụng GeneralDAO để lấy danh sách loại dịch vụ
-                    List<LoaiDichVu> result = generalDAO.findAll(LoaiDichVu.class);
+                    List<LoaiDichVu> result = generalDAOImpl.findAll(LoaiDichVu.class);
 
                     // Cập nhật UI trên thread chính
                     javafx.application.Platform.runLater(() -> {
@@ -253,7 +253,7 @@ public class QuanLyDichVuController {
             Thread thread = new Thread(() -> {
                 try {
                     // Sử dụng GeneralDAO để lấy danh sách dịch vụ
-                    List<DichVu> result = generalDAO.findAll(DichVu.class);
+                    List<DichVu> result = generalDAOImpl.findAll(DichVu.class);
 
                     // Đảm bảo tất cả các trường dữ liệu được tải đầy đủ
                     for (DichVu dv : result) {
@@ -468,7 +468,7 @@ public class QuanLyDichVuController {
             setServiceInfo(newService);
 
             // Lưu vào database sử dụng GeneralDAO
-            generalDAO.addOb(newService);
+            generalDAOImpl.addOb(newService);
 
             // Cập nhật danh sách và làm mới form
             loadDichVuData();
@@ -501,7 +501,7 @@ public class QuanLyDichVuController {
             setServiceInfo(selectedService);
 
             // Lưu vào database sử dụng GeneralDAO
-            generalDAO.updateOb(selectedService);
+            generalDAOImpl.updateOb(selectedService);
 
             // Cập nhật danh sách và làm mới form
             loadDichVuData();
@@ -534,7 +534,7 @@ public class QuanLyDichVuController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 // Xóa dịch vụ khỏi database
-                generalDAO.deleteOb(selectedService);
+                generalDAOImpl.deleteOb(selectedService);
 
                 // Cập nhật danh sách và làm mới form
                 loadDichVuData();

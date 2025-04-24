@@ -22,7 +22,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.MapOfRoomController">
    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <top>
-         <HBox alignment="CENTER">
+         <HBox alignment="CENTER" >
             <children>
                  <!-- Phần 1: Ngày đến/đi và số lượng người -->
                 <GridPane hgap="15" vgap="10">
@@ -65,7 +65,6 @@
                            <!-- Loại phòng -->
                            <VBox spacing="5">
                                <Label style="-fx-font-weight: bold;" text="Loại phòng" />
-                               <ComboBox fx:id="loaiPhongCmb" prefWidth="150" promptText="Standard">
                                    <items>
                                        <FXCollections fx:factory="observableArrayList">
                                            <String fx:value="Standard" />
@@ -79,7 +78,6 @@
                            <!-- Vị trí -->
                            <VBox spacing="5">
                                <Label style="-fx-font-weight: bold;" text="Vị trí" />
-                               <ComboBox fx:id="viTriCmb" prefWidth="120" promptText="Tầng 1">
                                    <items>
                                        <FXCollections fx:factory="observableArrayList">
                                            <String fx:value="Tầng 1" />

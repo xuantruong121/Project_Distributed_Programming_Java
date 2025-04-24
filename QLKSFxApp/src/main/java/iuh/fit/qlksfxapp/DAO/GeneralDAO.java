@@ -1,103 +1,51 @@
 package iuh.fit.qlksfxapp.DAO;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.TypedQuery;
-
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
-public class GeneralDAO {
-    private static final EntityManagerFactory emf = EntityManagerUtil.getEntityManagerFactory();
+/**
+ * Base interface for all DAO operations
+ */
+public interface GeneralDAO extends Remote {
+    /**
+     * Add a new object to the database
+     * @param ob The object to add
+     * @param <T> The type of the object
+     * @return true if successful, false otherwise
+     */
+    <T> boolean addOb(T ob) throws RemoteException;
 
-    public GeneralDAO() {
-        // Không tạo EntityManager trong constructor
-    }
+    /**
+     * Update an existing object in the database
+     * @param ob The object to update
+     * @param <T> The type of the object
+     * @return true if successful, false otherwise
+     */
+    <T> boolean updateOb(T ob) throws RemoteException;
 
-    public <T> boolean addOb(T ob) {
-        EntityManager em = null;
-        try {
-            em = emf.createEntityManager();
-            em.getTransaction().begin();
-            em.persist(ob);
-            em.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            if (em != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
-        }
-    }
+    /**
+     * Delete an object from the database
+     * @param ob The object to delete
+     * @param <T> The type of the object
+     * @return true if successful, false otherwise
+     */
+    <T> boolean deleteOb(T ob) throws RemoteException;
 
-    public <T> boolean updateOb(T ob) {
-        EntityManager em = null;
-        try {
-            em = emf.createEntityManager();
-            em.getTransaction().begin();
-            em.merge(ob);
-            em.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            if (em != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
-        }
-    }
+    /**
+     * Find an object by its ID
+     * @param entityClass The class of the entity
+     * @param id The ID of the entity
+     * @param <T> The type of the entity
+     * @return The found entity or null if not found
+     */
+    <T> T findOb(Class<T> entityClass, Object id) throws RemoteException;
 
-    public <T> boolean deleteOb(T ob) {
-        EntityManager em = null;
-        try {
-            em = emf.createEntityManager();
-            em.getTransaction().begin();
-            // Nếu đối tượng là detached, cần merge trước khi xóa
-            T managedEntity = (T) em.merge(ob);
-            em.remove(managedEntity);
-            em.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            if (em != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
-        }
-    }
-
-    public <T> T findOb(Class<T> entityClass, Object id) {
-        EntityManager em = null;
-        try {
-            em = emf.createEntityManager();
-            return em.find(entityClass, id);
-        } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
-        }
-    }
-
-    // Add a method to get a list of all entities of a type
-    public <T> List<T> findAll(Class<T> entityClass) {
-        EntityManager em = null;
-        try {
-            em = emf.createEntityManager();
-            return em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e", entityClass)
-                    .getResultList();
-        } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
-        }
-    }
+    /**
+     * Find all objects of a specific type
+     * @param entityClass The class of the entities to find
+     * @param <T> The type of the entities
+     * @return A list of all entities of the specified type
+     */
+    <T> List<T> findAll(Class<T> entityClass) throws RemoteException;
 }

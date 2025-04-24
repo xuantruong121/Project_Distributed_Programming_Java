@@ -1,0 +1,167 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'iuh.fit'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation files('libs/QLKSFxApp-1.0-SNAPSHOT.jar')
+
+    // JavaFX dependencies - use implementation instead of compileOnly
+    // This ensures JavaFX is available at both compile time and runtime
+    implementation 'org.openjfx:javafx-controls:17.0.2:win'
+    implementation 'org.openjfx:javafx-fxml:17.0.2:win'
+    implementation 'org.openjfx:javafx-graphics:21.0.2:win'
+    implementation 'org.openjfx:javafx-base:17.0.2:win'
+
+    // Other dependencies
+    implementation 'com.jfoenix:jfoenix:9.0.10'
+
+    // Add server JAR for RMI interfaces
+    // Make sure to copy the server JAR to the libs directory
+    implementation files('libs/QLKSFxApp-1.0-SNAPSHOT.jar')
+
+    // Hibernate dependencies - using Hibernate 6.x which supports Jakarta Persistence API
+    implementation 'org.hibernate.orm:hibernate-core:6.2.13.Final'
+    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+    // Add a newer, non-vulnerable version of protobuf-java
+    implementation 'com.google.protobuf:protobuf-java:4.28.2'
+
+    // Add SLF4J implementation
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
+
+    // Add Reflections library
+    implementation 'org.reflections:reflections:0.10.2'
+
+    // Add MariaDB JDBC driver
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.4'
+
+    // Add all JAR files in the libs directory to the runtime classpath
+    runtimeOnly fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+javafx {
+    version = '23.0.1'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.base']
+    // Cấu hình để không sử dụng module system
+    configuration = 'implementation'
+}
+
+application {
+    mainClass = 'iuh.fit.qlksfxappclient.Main'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// Add run task configuration to ensure JavaFX works properly
+run {
+    // Set this to true to enable debug mode
+    debug = false
+
+    // Pass JVM options to the application
+    jvmArgs = [
+        '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+        '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+        '-Djava.security.policy=rmi.policy',
+        '-Djava.rmi.server.codebase=file:${projectDir}/build/classes/java/main/',
+        '-Djava.rmi.server.hostname=localhost'
+    ]
+
+    // In ra classpath khi chạy ứng dụng để debug
+    doFirst {
+        println "\nRunning with classpath:"
+        classpath.each { println it }
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'iuh.fit.qlksfxappclient.Main',
+            'Class-Path': configurations.runtimeClasspath.files.collect { 'lib/' + it.name }.join(' ')
+        )
+    }
+}
+
+
+
+tasks.register('createClientJar', Jar) {
+    archiveBaseName = 'qlks-client'
+    archiveVersion = '1.0.0'
+
+    from sourceSets.main.output
+
+    manifest {
+        attributes(
+                'Main-Class': 'iuh.fit.qlksfxappclient.Main',
+                'Class-Path': configurations.runtimeClasspath.files.collect { 'lib/' + it.name }.join(' ')
+        )
+    }
+}
+
+tasks.register('createDistribution', Copy) {
+    from createClientJar
+    from configurations.runtimeClasspath
+    into 'build/distribution'
+
+    doLast {
+        copy {
+            from configurations.runtimeClasspath
+            into 'build/distribution/lib'
+        }
+
+        copy {
+            from 'rmi.policy'
+            into 'build/distribution'
+        }
+
+        copy {
+            from 'run_client.bat'
+            into 'build/distribution'
+        }
+
+        copy {
+            from 'start_client.bat'
+            into 'build/distribution'
+        }
+    }
+}
+
+// Add a convenient task to build the distribution
+tasks.register('buildClient') {
+    dependsOn 'clean', 'createClientJar', 'createDistribution'
+
+    doLast {
+        println "\n\nClient distribution created in build/distribution"
+        println "Run the application using run_client.bat"
+    }
+}
+
+// Task to list contents of JAR files in the libs directory
+tasks.register('listJarContents') {
+    doLast {
+        fileTree(dir: 'libs', include: '*.jar').each { jarFile ->
+            println "\nContents of ${jarFile.name}:"
+            // Use execOperations instead of exec to avoid deprecation warning
+            execOperations.exec {
+                commandLine 'jar', '-tf', jarFile
+            }
+        }
+    }
+}

@@ -61,10 +61,8 @@ dependencies {
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
     implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
     implementation 'jakarta.transaction:jakarta.transaction-api:2.0.1'
-
     // Database
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.4.1'
-
     // Logging
     implementation 'org.slf4j:slf4j-api:2.0.9'
     implementation 'org.slf4j:slf4j-simple:2.0.9'
@@ -78,13 +76,28 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.36'
     testCompileOnly 'org.projectlombok:lombok:1.18.36'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
-
     // EventBus
     implementation("com.google.guava:guava:33.4.8-jre")
-
-
 }
 
 test {
     useJUnitPlatform()
 }
+
+task runRMIServer(type: JavaExec) {
+    group = "application"
+    description = "Run RMI Server"
+    mainClass = "iuh.fit.qlksfxapp.RMI.RMIServer"
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs = ["-Djava.security.policy=${projectDir}/rmi.policy", "-Djava.rmi.server.hostname=localhost"]
+}
+
+task runRMIClient(type: JavaExec) {
+    group = "application"
+    description = "Run RMI Client Menu"
+    mainClass = "iuh.fit.qlksfxapp.RMI.RMIClientMenu"
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs = ["-Djava.security.policy=${projectDir}/rmi.policy"]
+    standardInput = System.in
+}
+

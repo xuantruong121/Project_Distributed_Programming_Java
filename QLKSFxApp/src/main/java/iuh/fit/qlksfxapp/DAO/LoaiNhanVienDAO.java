@@ -3,14 +3,36 @@ package iuh.fit.qlksfxapp.DAO;
 import iuh.fit.qlksfxapp.Entity.LoaiNhanVien;
 import jakarta.persistence.EntityManager;
 
-public class LoaiNhanVienDAO extends GeneralDAO {
-    private EntityManager em = null;
+import java.rmi.RemoteException;
+import java.util.List;
 
-    public LoaiNhanVienDAO() {
-        super();
-    }
+/**
+ * Interface for LoaiNhanVien DAO operations
+ */
+public interface LoaiNhanVienDAO extends GeneralDAO {
 
-    public LoaiNhanVien getLoaiNhanVienByMaNV(String maNV) {
-        return findOb(LoaiNhanVien.class, maNV);
-    }
+    /**
+     * Get all employee types
+     * @return A list of all employee types
+     */
+    List<LoaiNhanVien> getAllLoaiNhanVien() throws RemoteException;
+
+    /**
+     * Find employee type by ID
+     * @param maLoaiNhanVien The ID of the employee type
+     * @return The found employee type or null if not found
+     */
+    LoaiNhanVien findByMaLoaiNhanVien(String maLoaiNhanVien) throws RemoteException;
+
+    /**
+     * Find employee type by name
+     * @param tenLoaiNhanVien The name to search for
+     * @return The found employee type or null if not found
+     */
+    LoaiNhanVien findByTenLoaiNhanVien(String tenLoaiNhanVien) throws RemoteException;
 }
+
+//
+//public LoaiNhanVien getLoaiNhanVienByMaNV(String maNV) {
+//    return findOb(LoaiNhanVien.class, maNV);
+//}

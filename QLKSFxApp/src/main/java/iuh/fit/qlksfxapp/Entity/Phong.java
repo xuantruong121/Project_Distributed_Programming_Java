@@ -1,6 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
-import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiPhong;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -10,11 +10,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Phong {
+
+public class Phong implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @EqualsAndHashCode.Include
     @Column(columnDefinition = "nvarchar(7)")
@@ -59,7 +64,7 @@ public class Phong {
         }
         String maPhong = tenLoaiPhong + "-" + soTang;
         String query = "SELECT COUNT(p) FROM Phong p WHERE p.maPhong LIKE '" + maPhong + "%'";
-        long count = (long) EntityManagerUtil.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
+        long count = (long) EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
         return maPhong + String.format("%02d", count + 1);
     }
 //    @OneToMany(mappedBy = "phong")
@@ -68,3 +73,4 @@ public class Phong {
 //        return "P"+(int)(Math.random()*10000);
 //    }
 }
+

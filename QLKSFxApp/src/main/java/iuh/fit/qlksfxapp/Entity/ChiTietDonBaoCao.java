@@ -1,5 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
 import iuh.fit.qlksfxapp.Entity.Enum.MucDoThietHai;
 import jakarta.persistence.*;
@@ -9,12 +10,15 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-public class ChiTietDonBaoCao {
+public class ChiTietDonBaoCao implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(12)")
     @Pattern(regexp = "^\\d{4}-\\d{3}-\\d{3}$",message = "Mã chi tiết đơn báo cáo không hợp lệ (MMYY-XXX-ZZZ)")
@@ -43,7 +47,8 @@ public class ChiTietDonBaoCao {
     public String generateMaChiTiet(){
         String maChiTiet = this.donBaoCao.getMaDonBaoCao() + "-";
         String query = "SELECT COUNT(c) FROM ChiTietDonBaoCao c WHERE c.maChiTiet LIKE '" + maChiTiet + "%'";
-        long count = (long) EntityManagerUtil.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
+        long count = (long) EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager().createQuery(query).getSingleResult();
         return maChiTiet + String.format("%03d",count + 1);
     }
 }
+

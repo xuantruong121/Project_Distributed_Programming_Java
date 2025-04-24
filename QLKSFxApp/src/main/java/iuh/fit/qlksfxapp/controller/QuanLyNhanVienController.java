@@ -7,8 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import iuh.fit.qlksfxapp.DAO.NhanVienDAO;
-import iuh.fit.qlksfxapp.DAO.LoaiNhanVienDAO;
+import iuh.fit.qlksfxapp.DAO.Impl.NhanVienDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.LoaiNhanVienDAOImpl;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -80,8 +80,8 @@ public class QuanLyNhanVienController {
     private final ObservableList<LoaiNhanVien> loaiNhanVienList = FXCollections.observableArrayList();
 
     // DAO objects
-    private final NhanVienDAO nhanVienDAO = new NhanVienDAO();
-    private final LoaiNhanVienDAO loaiNhanVienDAO = new LoaiNhanVienDAO();
+    private final NhanVienDAOImpl nhanVienDAO = new NhanVienDAOImpl();
+    private final LoaiNhanVienDAOImpl loaiNhanVienDAO = new LoaiNhanVienDAOImpl();
 
     @FXML
     private void initialize() {

@@ -1,5 +1,6 @@
 package iuh.fit.qlksfxapp.Entity;
 
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -8,11 +9,14 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 @Entity
 @Getter
 @Setter
-public class CaLamViec {
+public class CaLamViec implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(columnDefinition = "nvarchar(4)")
     @Pattern(regexp = "^CL\\d{2}$",message = "Mã ca làm không hợp lệ (CLXX)")
@@ -33,9 +37,10 @@ public class CaLamViec {
     }
     public String generateMaCaLam(){
         String getNumbersOfMaCaLam = "SELECT COUNT(c) FROM CaLamViec c";
-        EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
         long numbersOfMaCaLam = (long)em.createQuery(getNumbersOfMaCaLam).getSingleResult();
         em.close();
         return "CL" + String.format("%02d",numbersOfMaCaLam + 1);
     }
 }
+
