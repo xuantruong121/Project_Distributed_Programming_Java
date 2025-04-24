@@ -43,7 +43,7 @@ public class MapOfRoomController {
 
     @FXML private ScrollPane scrollPane;
     @FXML private GridPane gridPane;
-    private ManageTrangThaiPhong manageTrangThaiPhong;
+    private static ManageTrangThaiPhong  manageTrangThaiPhong;
     private List<Phong> allPhong;
     private int currentPage = 0;
     private final int ITEMS_PER_PAGE = 9; // 3x3 grid
@@ -239,17 +239,18 @@ public class MapOfRoomController {
         tenDoanInp.setText("");
         isSearchFailed = false;
 
-
-
-        if(manageTrangThaiPhong==null){
+//        if(manageTrangThaiPhong==null){
             manageTrangThaiPhong = new ManageTrangThaiPhong(this);
 //            manageTrangThaiPhong.setMapOfRoomController(this);
-        }else{
-            manageTrangThaiPhong.refreshData();
-        }
+//        }else{
+//            manageTrangThaiPhong.refreshData();
+//        }
         allPhong.clear();
         allPhong.addAll(manageTrangThaiPhong.getPhongByTrangThai(TrangThaiPhong.DANG_SU_DUNG));
         allPhong.addAll(manageTrangThaiPhong.getPhongByTrangThai(TrangThaiPhong.DAT_TRUOC));
+        initComboBox();
+//        initFormater();
+        initLegend();
         loadRoomItems();
         updateEmptyState();
     }
@@ -514,6 +515,7 @@ public class MapOfRoomController {
                     allPhong = manageTrangThaiPhong.getPhongByTrangThai(TrangThaiPhong.KHONG_SU_DUNG);
                     break;
             }
+            initComboBox();
             loadRoomItems();
 //        }
     }

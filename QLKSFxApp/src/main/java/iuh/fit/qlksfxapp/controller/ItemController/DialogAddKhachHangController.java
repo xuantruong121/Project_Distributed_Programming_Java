@@ -15,11 +15,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;
+import lombok.Setter;
 
 import java.rmi.RemoteException;
 import java.util.Objects;
 import java.util.Optional;
-
+@Setter
 public class DialogAddKhachHangController {
     @FXML
      private TextField cccd,tenKhachHangField,soDienThoaiField,emailField;
@@ -29,6 +30,7 @@ public class DialogAddKhachHangController {
     private KhachHang khachHang;
     private GeneralDAO generalDAO;
     private    KhachHangDAO khachHangDAO;
+    private  DialogAddKhachHangEvent.Context context;
     @FXML public  void initialize() {
         // Khởi tạo các ComboBox
         initComboBox();
@@ -57,15 +59,16 @@ public class DialogAddKhachHangController {
         }
         khachHangDAO = Objects.requireNonNullElseGet(khachHangDAO, KhachHangDAOImpl::new);
         if(khachHangDAO.findKhachHangByCccd(cccd.getText())!=null){
-            EventBusManager.post(new DialogAddKhachHangEvent(khachHang));
+            EventBusManager.post(new DialogAddKhachHangEvent(khachHang,context));
             Optional.ofNullable(cccd.getScene().getWindow()).ifPresent(Window::hide);
         }else{
             generalDAO = Objects.requireNonNullElseGet(generalDAO, GeneralDAOImpl::new);
             boolean result = generalDAO.addOb(khachHang);
-            EventBusManager.post(new ToastEvent(result?"Thêm mới khách hàng thành công!":" Thêm mới khách hàng thất bại!", result? ToastEvent.ToastType.SUCCESS:ToastEvent.ToastType.ERROR));
-            EventBusManager.post(new DialogAddKhachHangEvent(khachHang));
+//            EventBusManager.post(new ToastEvent(result?"Thêm mới khách hàng thành công!":" Thêm mới khách hàng thất bại!", result? ToastEvent.ToastType.SUCCESS:ToastEvent.ToastType.ERROR));
+//            EventBusManager.post(new DialogAddKhachHangEvent(khachHang));
             if(result){
                 // Đóng cửa sổ
+                EventBusManager.post(new DialogAddKhachHangEvent(khachHang,context));
                 Optional.ofNullable(cccd.getScene().getWindow()).ifPresent(Window::hide);
             }
         }

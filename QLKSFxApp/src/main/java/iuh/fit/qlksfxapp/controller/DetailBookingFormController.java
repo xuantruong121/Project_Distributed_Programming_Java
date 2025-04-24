@@ -10,10 +10,7 @@ import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiPhong;
 import iuh.fit.qlksfxapp.controller.EventBus.*;
-import iuh.fit.qlksfxapp.controller.ItemController.ConfirmDialogController;
-import iuh.fit.qlksfxapp.controller.ItemController.DialogAddBookingDetailController;
-import iuh.fit.qlksfxapp.controller.ItemController.DialogAddDichVuController;
-import iuh.fit.qlksfxapp.controller.ItemController.DialogAddKhachHangController;
+import iuh.fit.qlksfxapp.controller.ItemController.*;
 import iuh.fit.qlksfxapp.util.ConfirmDialog;
 import iuh.fit.qlksfxapp.util.FormatUtil;
 import jakarta.persistence.EntityManager;
@@ -526,11 +523,13 @@ public class DetailBookingFormController {
 //                setData(memoTienChiTietDonDatPhong);
 //                mainController.initTongTienCuaBookingDetail();
 //                mainController.initDetailBookingShort();
-                if(generalDAO.updateOb(chiTietDonDatPhong)){
+                boolean suc =showPaymentDialog(memoTienChiTietDonDatPhong.getTongTien());
+                if(suc && generalDAO.updateOb(chiTietDonDatPhong)){
                     EventBusManager.post(new ToastEvent("Thanh toán thành công", ToastEvent.ToastType.SUCCESS));
                     setData(memoTienChiTietDonDatPhong);
                     try {
                         mainController.initTongTienCuaBookingDetail();
+
                     } catch (RemoteException e) {
                         e.printStackTrace();
                         showErrorAlert("Lỗi", "Không thể tính tổng tiền: " + e.getMessage());
@@ -571,6 +570,60 @@ public class DetailBookingFormController {
                 System.out.println("Unknown button clicked");
         }
     }
+    public boolean showPaymentDialog(double amountDue) {
+        try {
+            // Tải FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/util/PaymentDialog.fxml"));
+            Parent root = loader.load();
+
+            // Lấy controller
+            PaymentDialogController controller = loader.getController();
+            controller.setAmountDue(amountDue);
+
+            // Tạo scene và stage modal
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Thanh toán");
+//            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setResizable(false);
+            dialogStage.setScene(new Scene(root));
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            if (khachHangTrongPhong != null && khachHangTrongPhong.getScene() != null) {
+                Stage parentStage = (Stage) khachHangTrongPhong.getScene().getWindow();
+                dialogStage.setOnShown(e -> {
+                    double centerX = parentStage.getX() + (parentStage.getWidth() - dialogStage.getWidth()) / 2;
+                    double centerY = parentStage.getY() + (parentStage.getHeight() - dialogStage.getHeight()) / 2;
+                    dialogStage.setX(centerX);
+                    dialogStage.setY(centerY);
+                });
+            }
+            // Hiển thị dialog và đợi kết quả
+            dialogStage.showAndWait();
+
+            // Trả về kết quả xác nhận thanh toán
+            return controller.isPaymentConfirmed();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Ví dụ sử dụng
+//    public  processPayment() {
+////        double amountToPay = 500000.0; // 500,000 VNĐ
+//
+//        boolean paymentSuccess =  showPaymentDialog(memoTienChiTietDonDatPhong.getTongTien());
+//
+//        if (paymentSuccess) {
+////            System.out.println("Thanh toán thành công!");
+//            // Xử lý tiếp sau khi thanh toán thành công
+//            EventBusManager.post(new ToastEvent("Thanh toán thành công", ToastEvent.ToastType.SUCCESS));
+//        } else {
+////            System.out.println("Thanh toán không thành công hoặc đã hủy.");
+//            // Xử lý khi thanh toán thất bại hoặc hủy
+//            EventBusManager.post(new ToastEvent("Thanh toán không thành công", ToastEvent.ToastType.ERROR));
+//        }
+//    }
     @FXML private void handleRemoveClick(MouseEvent event) {
         if(isHuy || isDaThanhToan){
             EventBusManager.post(new ToastEvent("Đơn đặt phòng đã bị huỷ  or thanh toán", ToastEvent.ToastType.ERROR));
@@ -746,6 +799,10 @@ public class DetailBookingFormController {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             Parent root = loader.load();
+            if(loader.getController() instanceof DialogAddKhachHangController){
+                DialogAddKhachHangController controller = loader.getController();
+                controller.setContext(DialogAddKhachHangEvent.Context.DETAIL_BOOKING_FORM);
+            }
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -766,6 +823,9 @@ public class DetailBookingFormController {
     }
     @Subscribe
     public void DialogAddKhachHangEvent(DialogAddKhachHangEvent event){
+        if(event.getContext() != DialogAddKhachHangEvent.Context.DETAIL_BOOKING_FORM) {
+            return;
+        }
         Platform.runLater(() -> {
             if(event.getKhachHang() != null){
                 addKhachHang(event.getKhachHang());

@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
 import iuh.fit.qlksfxapp.DAO.Impl.ChiTietDonDatPhongDAOImpl;
 import iuh.fit.qlksfxapp.DAO.Impl.DonDatPhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.EntityManagerUtilImpl;
 import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
 import iuh.fit.qlksfxapp.Entity.*;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
@@ -12,6 +13,7 @@ import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiPhong;
 import iuh.fit.qlksfxapp.controller.EventBus.*;
 import iuh.fit.qlksfxapp.controller.ItemController.DetailBookingShortController;
 import iuh.fit.qlksfxapp.controller.ItemController.DialogAddBookingDetailController;
+import iuh.fit.qlksfxapp.controller.ItemController.DialogAddKhachHangController;
 import iuh.fit.qlksfxapp.util.FormatUtil;
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.PessimisticLockException;
@@ -532,6 +534,8 @@ public class BookingFormController  implements MainController.DataReceivable {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/util/DialogAddKhachHang.fxml"));
             Parent root = loader.load();
+            DialogAddKhachHangController controller = loader.getController();
+            controller.setContext(DialogAddKhachHangEvent.Context.BOOKING_FORM);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -552,6 +556,9 @@ public class BookingFormController  implements MainController.DataReceivable {
     }
     @Subscribe
     public void DialogAddKhachHangEvent(DialogAddKhachHangEvent event){
+        if(event.getContext() != DialogAddKhachHangEvent.Context.BOOKING_FORM) {
+            return;
+        }
         Platform.runLater(() -> {
             KhachHang khachHang = event.getKhachHang();
             if(donDatPhong==null|| donDatPhong.getMaDonDatPhong()==null){
@@ -759,7 +766,7 @@ public class BookingFormController  implements MainController.DataReceivable {
         Platform.runLater(() -> {
             List<String> selectedRooms = event.getSelectedRooms();
             if(selectedRooms != null){
-                EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+                EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
                 EntityTransaction transaction = em.getTransaction();
 
                 try {

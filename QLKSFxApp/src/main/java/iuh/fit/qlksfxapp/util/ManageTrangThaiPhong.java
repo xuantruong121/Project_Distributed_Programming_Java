@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 public class ManageTrangThaiPhong {
 
     // Chứa thông tin trạng thái, phòng, và đơn đặt phòng nếu có
-    public static Map<TrangThaiPhong, List<PhongDonDatWrapper>> legendPhongTheoTrangThai = new HashMap<>();
-    public static List<Phong> listPhongTrong = new ArrayList<>();
-    public static List<Phong> listPhong = new ArrayList<>();
+    public  Map<TrangThaiPhong, List<PhongDonDatWrapper>> legendPhongTheoTrangThai = new HashMap<>();
+    public  List<Phong> listPhongTrong = new ArrayList<>();
+    public  List<Phong> listPhong = new ArrayList<>();
 
     private DonDatPhongDAOImpl donDatPhongDAO;
     private PhongDAOImpl phongDAO;
@@ -31,15 +31,19 @@ public class ManageTrangThaiPhong {
     private MapOfRoomController mapOfRoomController;
     public ManageTrangThaiPhong(MapOfRoomController mapOfRoomController) {
         setMapOfRoomController(mapOfRoomController);
-        if(legendPhongTheoTrangThai.isEmpty()) {
+//        if(legendPhongTheoTrangThai.isEmpty()) {
             GeneralDAO generalDAO = new GeneralDAOImpl();
             try {
                 listPhong= generalDAO.findAll(Phong.class);
+                legendPhongTheoTrangThai.clear();
+                listPhongTrong.clear();
+                loadData();
             } catch (RemoteException e) {
                 throw new RuntimeException(e);
             }
-            loadData();
-        }
+//        }else{
+//            refreshData();
+//        }
     }
     public void setMapOfRoomController(MapOfRoomController mapOfRoomController) {
         this.mapOfRoomController = mapOfRoomController;
@@ -133,10 +137,8 @@ public class ManageTrangThaiPhong {
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
-
         // Load lại dữ liệu
         loadData();
-
         // Cập nhật UI
         callInitLegendAtMapOfRoomController();
     }
@@ -155,6 +157,8 @@ public class ManageTrangThaiPhong {
                 TrangThaiPhong.DANG_SUA_CHUA,
                 TrangThaiPhong.KHONG_SU_DUNG
         )) {
+            phongDAO.closeEntityManager();
+            phongDAO = new PhongDAOImpl();
             List<Phong> phongs = phongDAO.getListPhongTheoTrangThaiPhongDANG_DON_DEP_DANG_SUA_CHUA_KHONG_SU_DUNG(ttp);
             List<PhongDonDatWrapper> wrappers = phongs.stream()
                     .map(p -> new PhongDonDatWrapper(p, null))
@@ -187,7 +191,6 @@ public class ManageTrangThaiPhong {
                 listPhongTrong.add(p);
             }
         }
-
         // Đưa vào map
         legendPhongTheoTrangThai.put(
                 TrangThaiPhong.TRONG,
@@ -210,14 +213,14 @@ public class ManageTrangThaiPhong {
         private final DonDatPhong donDatPhong;
     }
 
-    public static void main(String[] args) {
-//        ManageTrangThaiPhong manageTrangThaiPhong = new ManageTrangThaiPhong();
-        for (Map.Entry<TrangThaiPhong, List<PhongDonDatWrapper>> entry : legendPhongTheoTrangThai.entrySet()) {
-            System.out.println("Trạng thái: " + entry.getKey());
-            for (PhongDonDatWrapper wrapper : entry.getValue()) {
-                System.out.println("  Phòng: " + wrapper.getPhong().getMaPhong() +
-                        ", Đơn đặt phòng: " + (wrapper.getDonDatPhong() != null ? wrapper.getDonDatPhong().getMaDonDatPhong() : "Không có"));
-            }
-        }
-    }
+//    public static void main(String[] args) {
+////        ManageTrangThaiPhong manageTrangThaiPhong = new ManageTrangThaiPhong();
+//        for (Map.Entry<TrangThaiPhong, List<PhongDonDatWrapper>> entry : legendPhongTheoTrangThai.entrySet()) {
+//            System.out.println("Trạng thái: " + entry.getKey());
+//            for (PhongDonDatWrapper wrapper : entry.getValue()) {
+//                System.out.println("  Phòng: " + wrapper.getPhong().getMaPhong() +
+//                        ", Đơn đặt phòng: " + (wrapper.getDonDatPhong() != null ? wrapper.getDonDatPhong().getMaDonDatPhong() : "Không có"));
+//            }
+//        }
+//    }
 }

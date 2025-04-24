@@ -15,6 +15,7 @@ import javafx.scene.control.DatePicker;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
 import java.rmi.RemoteException;
@@ -49,7 +50,6 @@ public class RevenueChartController {
         // Tải dữ liệu mặc định
         updateChartForSelectedRange();
     }
-
     @FXML
     private void handleViewButton() {
         updateChartForSelectedRange();
@@ -62,7 +62,7 @@ public class RevenueChartController {
         LocalDate startDate = startDatePicker.getValue();
         LocalDate endDate = endDatePicker.getValue();
 
-        if (isChangeComboBox && selectedRange != null) {
+        if (isChangeComboBox && selectedRange != null && !selectedRange.equals("Không")) {
             switch (selectedRange) {
                 case "Tuần nay":
                     showWeeklyRevenue();
@@ -105,13 +105,34 @@ public class RevenueChartController {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
         LocalDate today = LocalDate.now();
-        int weeksInMonth = (int) Math.ceil(today.lengthOfMonth() / 7.0);
-
-        for (int week = 1; week <= weeksInMonth; week++) {
-            double revenue = getRevenueForWeek(today.getMonthValue(), today.getYear(), week);
-            series.getData().add(new XYChart.Data<>("Tuần " + week, revenue));
+        LocalDate firstDayOfMonth = today.withDayOfMonth(1);
+        LocalDate lastDayOfMonth = today.withDayOfMonth(today.lengthOfMonth());
+        
+        // Tìm ngày thứ 2 đầu tiên của tháng
+        LocalDate currentWeekStart = firstDayOfMonth;
+        if (firstDayOfMonth.getDayOfWeek() != DayOfWeek.MONDAY) {
+            currentWeekStart = firstDayOfMonth.with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
         }
-
+        
+        int weekNumber = 1;
+        while (!currentWeekStart.isAfter(lastDayOfMonth)) {
+            LocalDate weekEnd = currentWeekStart.plusDays(6);
+            if (weekEnd.isAfter(lastDayOfMonth)) {
+                weekEnd = lastDayOfMonth;
+            }
+            
+            try {
+                double revenue = chiTietDonDatPhongDAO.getTongTienByNgay(currentWeekStart, weekEnd);
+                series.getData().add(new XYChart.Data<>("Tuần " + weekNumber, revenue));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                showErrorAlert("Lỗi", "Không thể lấy doanh thu: " + e.getMessage());
+            }
+            
+            currentWeekStart = currentWeekStart.plusWeeks(1);
+            weekNumber++;
+        }
+        
         revenueBarChart.getData().add(series);
     }
 

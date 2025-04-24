@@ -44,7 +44,8 @@ public class EntityManagerUtilImpl {
 
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySetting("hibernate.connection.driver_class", "org.mariadb.jdbc.Driver")
-                .applySetting("hibernate.connection.url", "jdbc:mariadb://" + dbHost + ":3306/quanlykhachsan")
+//                .applySetting("hibernate.connection.url", "jdbc:mariadb://" + dbHost + ":3306/quanlykhachsan")
+                .applySetting("hibernate.connection.url", "jdbc:mariadb://localhost:3306/quanlykhachsan")
                 .applySetting("hibernate.connection.username", "root")
                 .applySetting("hibernate.connection.password", "root")
                 .applySetting("hibernate.hbm2ddl.auto", "update")
