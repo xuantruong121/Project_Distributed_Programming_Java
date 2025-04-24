@@ -134,8 +134,8 @@ public class SplashScreenController {
 
     private void openMainWindow() {
         try {
-            // Tải giao diện chính
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
+            // Tải giao diện đăng nhập thay vì giao diện chính
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
             Parent root = loader.load();
 
             // Tạo scene mới
@@ -146,30 +146,25 @@ public class SplashScreenController {
 
             // Đặt scene mới cho stage
             stage.setScene(scene);
-            stage.setTitle("Phần mềm Quản lý Khách sạn");
+            stage.setTitle("Đăng nhập - Quản lý khách sạn");
 
-            // Cho phép thay đổi kích thước và đặt maximized
-            stage.setResizable(true);
-            stage.setMaximized(true);
-
-            // Thêm phím tắt Alt+Enter để chuyển đổi giữa maximized và normal
-            scene.setOnKeyPressed(event -> {
-                if (event.isAltDown() && event.getCode() == javafx.scene.input.KeyCode.ENTER) {
-                    stage.setMaximized(!stage.isMaximized());
-                }
-            });
+            // Đặt kích thước cố định cho màn hình đăng nhập
+            stage.setWidth(800);
+            stage.setHeight(600);
+            stage.setResizable(false);
+            stage.centerOnScreen();
 
             // Hiển thị stage
             stage.show();
 
             // Ghi log
-            System.out.println("Giao diện chính đã được tải và hiển thị ở chế độ maximized");
+            System.out.println("Giao diện đăng nhập đã được tải và hiển thị");
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Lỗi khi mở giao diện chính: " + e.getMessage());
+            System.err.println("Lỗi khi mở giao diện đăng nhập: " + e.getMessage());
 
             // Hiển thị thông báo lỗi
-            showErrorAlert("Lỗi khởi động", "Không thể mở giao diện chính: " + e.getMessage());
+            showErrorAlert("Lỗi khởi động", "Không thể mở giao diện đăng nhập: " + e.getMessage());
         }
     }
 

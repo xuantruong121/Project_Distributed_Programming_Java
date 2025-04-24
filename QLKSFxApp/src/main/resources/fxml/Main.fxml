@@ -16,7 +16,7 @@
             style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21.0.6"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.MainController">
     <stylesheets>
-        <URL value="@../fxml/css/styles.css"/>
+        <URL value="@css/styles.css"/>
     </stylesheets>
     <BorderPane AnchorPane.bottomAnchor="0"
                 AnchorPane.leftAnchor="0"
@@ -162,6 +162,20 @@
                             <String fx:value="menu-button"/>
                         </styleClass>
                     </Button>
+
+                    <!-- Spacer to push logout button to bottom -->
+                    <Pane VBox.vgrow="ALWAYS" />
+
+                    <!-- Logout Button -->
+                    <Button fx:id="logoutButton" onAction="#logout" prefHeight="40.0" prefWidth="225.0"
+                            text="Đăng xuất" style="-fx-background-color: #dc3545; -fx-text-fill: white;">
+                        <styleClass>
+                            <String fx:value="menu-button"/>
+                        </styleClass>
+                    </Button>
+
+                    <!-- Add some space at the bottom -->
+                    <Pane prefHeight="20.0" />
                 </VBox>
             </Pane>
         </left>

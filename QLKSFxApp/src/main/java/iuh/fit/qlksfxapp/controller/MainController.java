@@ -7,6 +7,8 @@ import iuh.fit.qlksfxapp.Entity.Phong;
 import iuh.fit.qlksfxapp.controller.EventBus.*;
 import iuh.fit.qlksfxapp.util.ConfirmDialog;
 import javafx.application.Platform;
+import iuh.fit.qlksfxapp.Entity.TaiKhoan;
+import iuh.fit.qlksfxapp.controller.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
 
 import java.io.IOException;
 
@@ -40,7 +44,6 @@ public class MainController {
     private Button homeButton;
     @FXML
     private Button bookingManagementButton;
-//    private Button roomManagementButton;
     @FXML
     private VBox bookingManagementSubMenu;
     private VBox roomManagementSubMenu;
@@ -547,6 +550,7 @@ public class MainController {
             throw new RuntimeException(e);
         }
     }
+
     private void updateContent(String title) {
         // Update content pane
         contentPane.getChildren().clear();
@@ -562,34 +566,6 @@ public class MainController {
         AnchorPane.setLeftAnchor(pane, 0.0);
         AnchorPane.setRightAnchor(pane, 0.0);
     }
-//    @FXML
-//    public void showUserProfile() {
-//        try {
-//            // Tạo FXMLLoader để tải UserProfile.fxml
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserProfile.fxml"));
-//            Parent userProfileView = loader.load();
-//
-//            // Clear previous content and add new interface to content pane
-//            contentPane.getChildren().clear();
-//            contentPane.getChildren().add(userProfileView);
-//
-//            // Set anchor properties to fill the content pane
-//            AnchorPane.setTopAnchor(userProfileView, 0.0);
-//            AnchorPane.setBottomAnchor(userProfileView, 0.0);
-//            AnchorPane.setLeftAnchor(userProfileView, 0.0);
-//            AnchorPane.setRightAnchor(userProfileView, 0.0);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//
-//            // Hiển thị thông báo lỗi
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Lỗi");
-//            alert.setHeaderText("Không thể mở thông tin người dùng");
-//            alert.setContentText("Lỗi: " + e.getMessage());
-//            alert.showAndWait();
-//        }
-//    }
 
     @FXML
     public void showUserProfile() {
@@ -745,5 +721,96 @@ public class MainController {
     public void shutdown() {
         EventBusManager.unregister(this);
     }
+    /**
+     * Khởi tạo dữ liệu cho MainController sau khi đăng nhập thành công
+     * @param taiKhoan Thông tin tài khoản đã đăng nhập
+     */
+    public void initData(TaiKhoan taiKhoan) {
+        // Lưu thông tin người dùng vào SessionManager (đã được thực hiện trong LoginController)
 
+        // Cập nhật giao diện với thông tin người dùng
+        if (taiKhoan != null && taiKhoan.getNhanVien() != null) {
+            userNameLabel.setText(taiKhoan.getNhanVien().getTenNhanVien());
+
+            // Cập nhật avatar nếu có
+            // TODO: Implement avatar loading if needed
+
+            // Cập nhật quyền truy cập dựa trên loại nhân viên
+            updateAccessPermissions(taiKhoan);
+        }
+
+        System.out.println("Đã khởi tạo dữ liệu cho người dùng: " +
+                (taiKhoan != null ? taiKhoan.getNhanVien().getTenNhanVien() : "null"));
+    }
+
+    /**
+     * Cập nhật quyền truy cập dựa trên loại nhân viên
+     * @param taiKhoan Thông tin tài khoản đã đăng nhập
+     */
+    private void updateAccessPermissions(TaiKhoan taiKhoan) {
+        if (taiKhoan != null && taiKhoan.getNhanVien() != null && taiKhoan.getNhanVien().getLoaiNhanVien() != null) {
+            String loaiNhanVien = taiKhoan.getNhanVien().getLoaiNhanVien().getTenLoaiNhanVien();
+
+            // Ví dụ: Chỉ quản lý mới có quyền truy cập vào quản lý nhân viên
+            boolean isManager = "Nhân viên quản lý".equals(loaiNhanVien);
+            staffManagementButton.setVisible(isManager);
+            staffManagementButton.setManaged(isManager);
+
+            // Các quyền khác có thể được cấu hình tương tự
+        }
+    }
+
+    /**
+     * Xử lý đăng xuất khi người dùng nhấn nút đăng xuất
+     */
+    @FXML
+    public void logout() {
+        try {
+            // Hiển thị hộp thoại xác nhận
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Xác nhận đăng xuất");
+            confirmAlert.setHeaderText("Bạn có chắc chắn muốn đăng xuất?");
+            confirmAlert.setContentText("Tất cả các thay đổi chưa lưu sẽ bị mất.");
+
+            // Nếu người dùng xác nhận đăng xuất
+            if (confirmAlert.showAndWait().get().getButtonData().isDefaultButton()) {
+                // Xóa thông tin phiên đăng nhập
+                SessionManager.getInstance().clearSession();
+
+                // Tải giao diện đăng nhập
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+                Parent loginRoot = loader.load();
+                Scene loginScene = new Scene(loginRoot);
+
+                // Lấy stage hiện tại
+                Stage currentStage = (Stage) menuPane.getScene().getWindow();
+
+                // Tạo stage mới cho màn hình đăng nhập
+                Stage loginStage = new Stage();
+                loginStage.setScene(loginScene);
+                loginStage.setTitle("Đăng nhập - Quản lý khách sạn");
+
+                // Đặt kích thước cố định cho màn hình đăng nhập
+                loginStage.setWidth(800);
+                loginStage.setHeight(600);
+                loginStage.setResizable(false);
+                loginStage.centerOnScreen();
+
+                // Hiển thị màn hình đăng nhập
+                loginStage.show();
+
+                // Đóng màn hình hiện tại
+                currentStage.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            // Hiển thị thông báo lỗi
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Lỗi");
+            errorAlert.setHeaderText("Không thể đăng xuất");
+            errorAlert.setContentText("Có lỗi xảy ra khi đăng xuất: " + e.getMessage());
+            errorAlert.showAndWait();
+        }
+    }
 }
