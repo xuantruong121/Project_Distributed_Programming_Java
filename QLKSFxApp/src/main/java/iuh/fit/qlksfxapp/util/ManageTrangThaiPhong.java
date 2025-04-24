@@ -1,10 +1,7 @@
 package iuh.fit.qlksfxapp.util;
 
 import iuh.fit.qlksfxapp.DAO.*;
-import iuh.fit.qlksfxapp.DAO.Impl.ChiTietDonDatPhongDAOImpl;
-import iuh.fit.qlksfxapp.DAO.Impl.DonDatPhongDAOImpl;
-import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
-import iuh.fit.qlksfxapp.DAO.Impl.PhongDAOImpl;
+import iuh.fit.qlksfxapp.DAO.Impl.*;
 import iuh.fit.qlksfxapp.Entity.ChiTietDonDatPhong;
 import iuh.fit.qlksfxapp.Entity.DonDatPhong;
 import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiChiTietDonDatPhong;
@@ -61,7 +58,7 @@ public class ManageTrangThaiPhong {
         updatePhongTrong();
     }
     public void putPhongDonDatPhong(List<DonDatPhong> donDatPhongs, TrangThaiPhong trangThai) {
-        EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = EntityManagerUtilImpl.getEntityManagerFactory().createEntityManager();
         EntityTransaction transaction = null;
         List<PhongDonDatWrapper> wrappers = new ArrayList<>();
         try {
