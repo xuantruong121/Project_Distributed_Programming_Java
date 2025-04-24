@@ -4,169 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5b18c3d-bc0b-4d65-b489-23ac00908303" name="Changes" comment="rs cfl">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/4d1e5315-daf2-4366-9bc7-4e819c984348.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/4d1e5315-daf2-4366-9bc7-4e819c984348/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/4d1e5315-daf2-4366-9bc7-4e819c984348/storage_v2/_src_/schema/quanlykhachsan.1aGAUA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/QLKSFxApp.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RMI_README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rmi.policy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_rmi_client.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_rmi_server.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/GenericDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/BangPhanCongCaLamDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/CaLamViecDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/ChiTietDichVuDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/ChiTietDonBaoCaoDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/ChiTietDonDatPhongDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/ChiTietPhongDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/ChuongTrinhKhuyenMaiDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/DichVuDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/DieuKienApDungDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/DoiTuongApDungKhuyenMaiDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/DonBaoCaoDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/DonDatPhongDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/EntityManagerUtilImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/GeneralDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/GenericDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/HoaDonDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/KhachHangDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/KhoDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/LichSuVatTuTrongKhoDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/LoaiDichVuDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/LoaiNhanVienDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/LoaiPhongDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/LoaiPhuThuDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/LoaiVatTuDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/NhanVienDAOGeneric.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/NhanVienDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/PhongDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/PhuThuDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/TaiKhoanDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/TaiLieuChungCuDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/VatTuDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/VatTuTrongKhoDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/RMI/RMIClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/RMI/RMIClientMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/RMI/RMIServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/LoginExampleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/UserProfileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/model/WorkSchedule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/service/RMIService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/HibernateUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/RMIConnectionTester.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/SerializableChecker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/UserProfile.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/UserProfile_new.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/css/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/start_server.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/libs/QLKSFxApp-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/rmi.policy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/run_app.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/run_client.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/src/main/java/iuh/fit/qlksfxappclient/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../QLKSFxAppClient/src/main/java/iuh/fit/qlksfxappclient/service/RMIService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/BangPhanCongCaLamDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/BangPhanCongCaLamDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/CaLamViecDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/CaLamViecDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/ChiTietDichVuDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/ChiTietDichVuDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/ChiTietDonDatPhongDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/ChiTietDonDatPhongDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/DichVuDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/DichVuDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/DonDatPhongDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/DonDatPhongDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/GeneralDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/GeneralDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/HoaDonDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/HoaDonDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/KhachHangDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/KhachHangDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/LoaiDichVuDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/LoaiDichVuDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/LoaiNhanVienDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/LoaiNhanVienDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/LoaiPhongDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/LoaiPhongDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/NhanVienDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/NhanVienDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/PhongDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/PhongDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/TaiKhoanDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/TaiKhoanDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/BangPhanCongCaLam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/BangPhanCongCaLam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/CaLamViec.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/CaLamViec.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/ChiTietDichVu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/ChiTietDichVu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/ChiTietDonBaoCao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/ChiTietDonBaoCao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/ChiTietDonDatPhong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/ChiTietDonDatPhong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/ChiTietPhong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/ChiTietPhong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/ChuongTrinhKhuyenMai.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/ChuongTrinhKhuyenMai.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/DichVu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/DichVu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/DieuKienApDung.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/DieuKienApDung.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/DoiTuongApDungKhuyenMai.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/DoiTuongApDungKhuyenMai.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/DonBaoCao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/DonBaoCao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/DonDatPhong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/DonDatPhong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/HoaDon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/HoaDon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/KhachHang.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/KhachHang.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/Kho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/Kho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LichSuVatTuTrongKho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LichSuVatTuTrongKho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LoaiDichVu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LoaiDichVu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LoaiNhanVien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LoaiNhanVien.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LoaiPhong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LoaiPhong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LoaiPhuThu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LoaiPhuThu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LoaiVatTu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/LoaiVatTu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/NhanVien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/NhanVien.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/Phong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/Phong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/PhuThu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/PhuThu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/TaiKhoan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/TaiKhoan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/TaiLieuChungCu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/TaiLieuChungCu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/VatTu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/VatTu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/VatTuTrongKho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Entity/VatTuTrongKho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyDichVuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyDichVuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyKhachHangController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyKhachHangController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyNhanVienController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyNhanVienController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyPhongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/QuanLyPhongController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/SplashScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/controller/SplashScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/script/ts.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/script/ts.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyDichVu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyDichVu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyKhachHang.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyKhachHang.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyNhanVien.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyNhanVien.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyPhong.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/QuanLyPhong.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/SplashScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/SplashScreen.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="a5b18c3d-bc0b-4d65-b489-23ac00908303" name="Changes" comment="rs cfl" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -270,7 +108,7 @@
     "Notification.DoNotAsk-Database detector": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -513,7 +351,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744990433963</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="rs cfl">
+      <option name="closed" value="true" />
+      <created>1745475697380</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1745475697380</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,7 +389,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/util/StyleUtil.java</url>
-          <line>20</line>
+          <line>19</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
