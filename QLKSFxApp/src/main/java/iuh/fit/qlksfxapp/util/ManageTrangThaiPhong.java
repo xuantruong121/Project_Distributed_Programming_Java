@@ -85,6 +85,7 @@ public class ManageTrangThaiPhong {
                 }
             }
             transaction.commit();
+
             legendPhongTheoTrangThai.put(trangThai, wrappers);
 
         } catch (Exception e) {
