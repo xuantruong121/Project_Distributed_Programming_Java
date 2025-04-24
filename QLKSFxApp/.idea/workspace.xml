@@ -5,11 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5b18c3d-bc0b-4d65-b489-23ac00908303" name="Changes" comment="Merge branch 'XuanTruong'&#10;&#10;# Conflicts:&#10;#&#9;QLKSFxApp/.gradle/8.8/executionHistory/executionHistory.bin&#10;#&#9;QLKSFxApp/.gradle/8.8/executionHistory/executionHistory.lock&#10;#&#9;QLKSFxApp/.gradle/8.8/fileHashes/fileHashes.bin&#10;#&#9;QLKSFxApp/.gradle/8.8/fileHashes/fileHashes.lock&#10;#&#9;QLKSFxApp/.gradle/8.8/fileHashes/resourceHashesCache.bin&#10;#&#9;QLKSFxApp/.gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;#&#9;QLKSFxApp/.gradle/file-system.probe&#10;#&#9;QLKSFxApp/.idea/AugmentWebviewStateStore.xml&#10;#&#9;QLKSFxApp/.idea/workspace.xml&#10;#&#9;QLKSFxApp/src/main/java/iuh/fit/qlksfxapp/controller/MainController.java">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.12/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.12/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.12/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.12/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/model/WorkSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/model/WorkSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/service/DatPhongService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/service/PhongService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/AugmentWebviewStateStore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../QLKSFxAppClient/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/EntityManagerUtilImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/DAO/Impl/EntityManagerUtilImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/RMI/RMIServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/RMI/RMIServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/service/RMIService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iuh/fit/qlksfxapp/service/RMIService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLKSFxAppClient/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../QLKSFxAppClient/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLKSFxAppClient/libs/QLKSFxApp-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLKSFxAppClient/src/main/java/iuh/fit/qlksfxappclient/service/RMIService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../QLKSFxAppClient/src/main/java/iuh/fit/qlksfxappclient/service/RMIService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -348,7 +359,7 @@
       <workItem from="1745423413529" duration="71000" />
       <workItem from="1745425735794" duration="70000" />
       <workItem from="1745468855721" duration="436000" />
-      <workItem from="1745500766849" duration="490000" />
+      <workItem from="1745500766849" duration="1208000" />
     </task>
     <task id="LOCAL-00001" summary="rs cfl">
       <option name="closed" value="true" />

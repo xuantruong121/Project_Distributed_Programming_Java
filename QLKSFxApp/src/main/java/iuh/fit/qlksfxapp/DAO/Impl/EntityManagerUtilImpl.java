@@ -25,30 +25,41 @@ public class EntityManagerUtilImpl {
     }
 
     public static EntityManagerFactory createEntityManagerFactory() {
-//        Reflections reflections = new Reflections("Entity");
-//
-//        // Lấy danh sách các class được đánh dấu với @Entity
-//        Set<Class<?>> entityClasses = reflections.getTypesAnnotatedWith(jakarta.persistence.Entity.class);
-//        entityClasses.forEach(entity -> System.out.println("Found Entity: " + entity.getName()));
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb");
-//        return emf;
-        // Create StandardServiceRegistry
+        // Kiểm tra xem đây có phải là server dựa trên property đã được thiết lập trong RMIServer
+        boolean isServer = Boolean.parseBoolean(System.getProperty("app.isServer", "false"));
+
+        // Sử dụng hostname đã được cấu hình trong RMI
+        String serverHostname = System.getProperty("java.rmi.server.hostname");
+
+        // Nếu là server hoặc không tìm thấy cấu hình RMI server hostname thì dùng localhost
+        // Nếu là client thì dùng địa chỉ IP mà client đã cấu hình để kết nối đến server
+        String dbHost;
+        if (isServer) {
+            dbHost = "localhost"; // Server luôn kết nối đến localhost
+        } else {
+            // Lấy địa chỉ server từ cấu hình RMI client nếu có, nếu không sử dụng giá trị mặc định
+            String rmiServer = System.getProperty("rmi.server.host", "192.168.99.105");
+            dbHost = rmiServer;
+        }
+
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySetting("hibernate.connection.driver_class", "org.mariadb.jdbc.Driver")
-                .applySetting("hibernate.connection.url", "jdbc:mariadb://localhost:3306/quanlykhachsan")
+                .applySetting("hibernate.connection.url", "jdbc:mariadb://" + dbHost + ":3306/quanlykhachsan")
                 .applySetting("hibernate.connection.username", "root")
                 .applySetting("hibernate.connection.password", "root")
                 .applySetting("hibernate.hbm2ddl.auto", "update")
                 .applySetting("hibernate.show_sql", "true")
                 .applySetting("hibernate.format_sql", "true")
                 .build();
-//         Add package for entity scanning
+
+        // Add package for entity scanning
         MetadataSources metadataSources = new MetadataSources(registry);
         Reflections reflections = new Reflections("iuh.fit.qlksfxapp.Entity");
         Set<Class<?>> entityClasses = reflections.getTypesAnnotatedWith(jakarta.persistence.Entity.class);
         for (Class<?> entityClass : entityClasses) {
             metadataSources.addAnnotatedClass(entityClass);
         }
+
         // Build the EntityManagerFactory
         return metadataSources.buildMetadata().buildSessionFactory();
     }

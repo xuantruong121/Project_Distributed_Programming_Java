@@ -15,7 +15,7 @@ public class RMIService {
     private final Registry registry;
 
     // Default RMI server settings
-    private static final String DEFAULT_SERVER_IP = "192.168.99.238";
+    private static final String DEFAULT_SERVER_IP = "192.168.99.223";
     private static final int DEFAULT_SERVER_PORT = 9090;
 
     // User preferences for storing server settings

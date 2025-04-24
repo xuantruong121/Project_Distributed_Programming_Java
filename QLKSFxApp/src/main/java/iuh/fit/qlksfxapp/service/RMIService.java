@@ -38,10 +38,10 @@ public class RMIService {
             System.setProperty("sun.rmi.transport.tcp.responseTimeout", "30000"); // 30 seconds
             System.setProperty("sun.rmi.transport.tcp.readTimeout", "30000"); // 30 seconds
 
-            System.out.println("Attempting to connect to RMI registry on 192.168.99.238:9090...");
+            System.out.println("Attempting to connect to RMI registry on 192.168.99.223:9090...");
 
             // Get the registry
-            Registry registry = LocateRegistry.getRegistry("192.168.99.238", 9090);
+            Registry registry = LocateRegistry.getRegistry("192.168.99.223", 9090);
 
             // Check if registry is available by listing entries
             String[] services = registry.list();
