@@ -35,7 +35,6 @@ public class Main extends Application {
             showErrorAlert("Lỗi khởi động", "Không thể khởi động ứng dụng: " + e.getMessage());
         }
     }
-
     private void initializeRMIService() {
         try {
             // Khởi tạo RMIService
@@ -55,7 +54,6 @@ public class Main extends Application {
         alert.setContentText(content);
         alert.showAndWait();
     }
-
     public static void main(String[] args) {
         // Đặt thuộc tính bảo mật cho RMI
         String projectDir = System.getProperty("user.dir");

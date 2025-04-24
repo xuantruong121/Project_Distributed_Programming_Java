@@ -203,7 +203,7 @@ public class RevenueChartController {
 
     private double getRevenueForWeekRange(LocalDate startDate, LocalDate endDate, int week) {
         // Thực tế sẽ query từ CSDL
-        LocalDate startOfWeek = startDate.with(WeekFields.of(Locale.getDefault()).weekOfMonth(), week);
+        LocalDate startOfWeek = startDate.with(WeekFields.of(Locale.getDefault()).weekOfYear(), week);
         LocalDate endOfWeek = startOfWeek.plusDays(6);
         if (endOfWeek.isAfter(endDate)) {
             endOfWeek = endDate;

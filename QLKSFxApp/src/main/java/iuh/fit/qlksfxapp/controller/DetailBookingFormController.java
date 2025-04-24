@@ -459,25 +459,6 @@ public class DetailBookingFormController {
             }
         }
     }
-//    private void addKhachHang(KhachHang kh){
-//        ChiTietDonDatPhong chiTietDonDatPhong = chiTietDonDatPhongDAO.findChiTietWithKhachHang(memoTienChiTietDonDatPhong.getChiTietDonDatPhong().getMaChiTietDonDatPhong());
-//        if(chiTietDonDatPhong.getKhachHang().contains(kh)){
-//            EventBusManager.post(new ToastEvent("Khách hàng đã tồn tại trong danh sách", ToastEvent.ToastType.ERROR));
-//            return;
-//        }
-////        generalDAO = Objects.requireNonNullElseGet(generalDAO, GeneralDAO::new);
-//        KhachHang khachHangFromDatabase = generalDAO.findOb(KhachHang.class,kh.getMaKhachHang());
-//        chiTietDonDatPhong.getKhachHang().add(khachHangFromDatabase);
-//        boolean rs= generalDAO.updateOb(chiTietDonDatPhong);
-//        if(rs) {
-//            EventBusManager.post(new ToastEvent("Thêm khách hàng thành công", ToastEvent.ToastType.SUCCESS));
-//            guestTable.getItems().add(kh);
-//            // lấy lại chiTietdonDatPhong tư database de giu relationship voi khachHang
-////            ChiTietDonDatPhong chiTietDonDatPhong1 = generalDAO.findOb(ChiTietDonDatPhong.class, chiTietDonDatPhong.getMaChiTietDonDatPhong());
-////            memoTienChiTietDonDatPhong.setChiTietDonDatPhong(chiTietDonDatPhong1);
-//        } else
-//            EventBusManager.post(new ToastEvent("Thêm khách hàng thất bại", ToastEvent.ToastType.ERROR));
-//    }
     private void calMonney() throws RemoteException {
 //        chiTietDonDatPhongDAO = Objects.requireNonNullElseGet(chiTietDonDatPhongDAO, ChiTietDonDatPhongDAO::new);
         chiTietDonDatPhongDAO.closeEntityManager();

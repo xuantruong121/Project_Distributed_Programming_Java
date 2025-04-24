@@ -12,10 +12,12 @@ public class RMIClient {
     public static void main(String[] args) {
         try {
             // Set system properties for RMI
+            System.setProperty("app.isServer", "false");
+            System.setProperty("rmi.server.host", "192.168.99.105");
             System.setProperty("java.security.policy", "rmi.policy");
 
             // Get the registry
-            Registry registry = LocateRegistry.getRegistry("192.168.99.238", 9090);
+            Registry registry = LocateRegistry.getRegistry("192.168.99.105", 9090);
 
             // Look up the remote object
             PhongDAO phongDAO = (PhongDAO) registry.lookup("phongDAO");
