@@ -751,31 +751,84 @@ public class MainController {
         if (taiKhoan != null && taiKhoan.getNhanVien() != null && taiKhoan.getNhanVien().getLoaiNhanVien() != null) {
             String loaiNhanVien = taiKhoan.getNhanVien().getLoaiNhanVien().getTenLoaiNhanVien();
 
-            // Ví dụ: Chỉ quản lý mới có quyền truy cập vào quản lý nhân viên
-            boolean isManager = "Nhân viên quản lý".equals(loaiNhanVien);
-//            staffManagementButton.setVisible(isManager);
+            // Lấy mã loại nhân viên để so sánh chính xác
+            String maLoaiNhanVien = taiKhoan.getNhanVien().getLoaiNhanVien().getMaLoaiNhanVien();
+
+            // In ra thông tin chi tiết về loại nhân viên
+            System.out.println("Mã loại nhân viên: " + maLoaiNhanVien);
+            System.out.println("Tên loại nhân viên: " + loaiNhanVien);
+
+            // Mã loại nhân viên theo database:
+            // LNV01: Nhân viên quản lý
+            // LNV02: Nhân viên lễ tân
+            // LNV03: Nhân viên buồng phòng
+            boolean isManager = false;
+
+            // Kiểm tra dựa trên mã loại nhân viên (chính xác hơn)
+            if (maLoaiNhanVien != null) {
+                // Chỉ LNV01 (Nhân viên quản lý) mới có quyền quản lý
+                isManager = maLoaiNhanVien.equals("LNV01");
+            }
+
+            // Nếu không có mã loại nhân viên hoặc kiểm tra mã không thành công, thử kiểm tra bằng tên
+            if (!isManager && loaiNhanVien != null) {
+                // Chuẩn hóa chuỗi để tránh các vấn đề về ký tự đặc biệt
+                String normalizedName = loaiNhanVien.toLowerCase()
+                                                   .replace(" ", "")
+                                                   .replace("-", "")
+                                                   .replace("_", "");
+
+                // Kiểm tra xem tên có chứa "nhân viên quản lý" hay không
+                isManager = normalizedName.contains("nhânviênquảnlý") ||
+                           normalizedName.contains("nhanvienquanly") ||
+                           normalizedName.contains("quảnlý") ||
+                           normalizedName.contains("quanly");
+
+                System.out.println("Tên chuẩn hóa: '" + normalizedName + "', Kết quả kiểm tra: " + isManager);
+            }
+
+            // In ra kết quả cuối cùng
+            System.out.println("Kết quả kiểm tra là quản lý: " + isManager);
+            System.out.println("Phân quyền: " + (isManager ? "Có quyền quản lý" : "Không có quyền quản lý"));
+
+            // Cập nhật trạng thái các nút quản lý
+            // Nếu là quản lý: có quyền truy cập tất cả chức năng (không bị vô hiệu hóa)
+            // Nếu không phải quản lý: không có quyền truy cập các chức năng quản lý (bị vô hiệu hóa)
+
+            // Quản lý nhân viên - chỉ quản lý mới có quyền
+            staffManagementButton.setVisible(isManager);
             staffManagementButton.setManaged(isManager);
-            staffManagementButton.setDisable(isManager);
+            staffManagementButton.setDisable(!isManager);
 
-//            serviceManagementButton.setVisible(isManager);
+            // Quản lý dịch vụ - chỉ quản lý mới có quyền
+            serviceManagementButton.setVisible(isManager);
             serviceManagementButton.setManaged(isManager);
-            serviceManagementButton.setDisable(isManager);
+            serviceManagementButton.setDisable(!isManager);
 
-//            customerManagementButton.setVisible(isManager);
+            // Quản lý khách hàng - chỉ quản lý mới có quyền
+            customerManagementButton.setVisible(isManager);
             customerManagementButton.setManaged(isManager);
-            customerManagementButton.setDisable(isManager);
+            customerManagementButton.setDisable(!isManager);
 
-            roomManagementButton.setDisable(isManager);
+            // Quản lý phòng - chỉ quản lý mới có quyền
+            roomManagementButton.setVisible(isManager);
             roomManagementButton.setManaged(isManager);
+            roomManagementButton.setDisable(!isManager);
 
+            // Quản lý kho - chỉ quản lý mới có quyền
+            inventoryManagementButton.setVisible(isManager);
             inventoryManagementButton.setManaged(isManager);
-            inventoryManagementButton.setDisable(isManager);
+            inventoryManagementButton.setDisable(!isManager);
 
+            // Quản lý khuyến mãi - chỉ quản lý mới có quyền
+            discountManagementButton.setVisible(isManager);
             discountManagementButton.setManaged(isManager);
-            discountManagementButton.setDisable(isManager);
+            discountManagementButton.setDisable(!isManager);
 
+            // Báo cáo - chỉ quản lý mới có quyền
+            reportsButton.setVisible(isManager);
             reportsButton.setManaged(isManager);
-            reportsButton.setDisable(isManager);
+            reportsButton.setDisable(!isManager);
 
             // Các quyền khác có thể được cấu hình tương tự
         }
