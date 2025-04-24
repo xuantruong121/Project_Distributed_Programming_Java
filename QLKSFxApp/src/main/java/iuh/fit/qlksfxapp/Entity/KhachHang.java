@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,9 +22,11 @@ import java.time.format.DateTimeFormatter;
 @Setter
 @KhachHangConstraints
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class KhachHang {
     @Id
     @Column(columnDefinition = "nvarchar(12)")
+    @EqualsAndHashCode.Include
     private String maKhachHang;
     @NotBlank(message = "Tên khách hàng không được để trống")
     @Column(columnDefinition = "nvarchar(50)")
@@ -61,3 +64,4 @@ public class KhachHang {
         return formatDate + String.format("%06d", count + 1);
     }
 }
+

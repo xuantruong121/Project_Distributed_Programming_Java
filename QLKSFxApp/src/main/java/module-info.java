@@ -11,6 +11,10 @@ module iuh.fit.qlksfxapp {
     requires org.hibernate.orm.core;
     requires org.reflections;
     requires static lombok;
+    requires org.hibernate.validator;
+    requires net.datafaker;
+    requires com.google.common;
+    requires org.checkerframework.checker.qual;
 
 
     exports iuh.fit.qlksfxapp to javafx.graphics;

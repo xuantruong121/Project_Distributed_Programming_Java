@@ -62,14 +62,14 @@
                                     style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px;
                                     -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"
                                     text="Thống kê doanh thu"/>
-                            <Button onAction="#showInventoryStatsPane" prefHeight="35.0" prefWidth="225.0"
-                                    style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px;
-                                    -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"
-                                    text="Thống kê kho"/>
-                            <Button onAction="#showCustomerStatsPane" prefHeight="35.0" prefWidth="225.0"
-                                    style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px;
-                                    -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"
-                                    text="Thống kê khách"/>
+<!--                            <Button onAction="#showInventoryStatsPane" prefHeight="35.0" prefWidth="225.0"-->
+<!--                                    style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px;-->
+<!--                                    -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"-->
+<!--                                    text="Thống kê kho" visible="false"/>-->
+<!--                            <Button onAction="#showCustomerStatsPane" prefHeight="35.0" prefWidth="225.0"-->
+<!--                                    style="-fx-background-color: transparent; -fx-text-fill: #b2b9c8; -fx-font-size: 14px;-->
+<!--                                    -fx-alignment: BASELINE_LEFT; -fx-padding: 5 30 5 30;"-->
+<!--                                    text="Thống kê khách" visible="false"/>-->
                         </VBox>
                     </VBox>
 

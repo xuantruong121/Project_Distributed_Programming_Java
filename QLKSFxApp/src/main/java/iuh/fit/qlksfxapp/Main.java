@@ -1,5 +1,6 @@
 package iuh.fit.qlksfxapp;
 
+import iuh.fit.qlksfxapp.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +19,6 @@ public class Main extends Application {
         // Tải SplashScreen trước
         Parent splashRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/SplashScreen.fxml")));
         Scene splashScene = new Scene(splashRoot);
-
         primaryStage.setTitle("Đang khởi động...");
         primaryStage.setScene(splashScene);
         primaryStage.setResizable(false);

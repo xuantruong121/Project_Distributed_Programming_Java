@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,9 +15,11 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ChiTietDichVu {
     @Id
     @Column(columnDefinition = "nvarchar(17)")
+    @EqualsAndHashCode.Include
     @Pattern(regexp = "^\\d{6}-\\d{2}-\\d{6}$") // DDMMYY-XX-KKKKKK
     private String maChiTietDichVu;
     @ManyToOne

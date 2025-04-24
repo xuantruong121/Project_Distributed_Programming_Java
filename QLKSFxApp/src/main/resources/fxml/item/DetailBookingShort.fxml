@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane stylesheets="@/fxml/css/DetailBookingStyle.css" styleClass="detailBookingShort" fx:id="detailBookingShort" onMouseClicked="#handleClickItem" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iuh.fit.qlksfxapp.controller.ItemController.DetailBookingShortController">
+    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <top>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label fx:id="typeRoomAndId" text="Standard / STA-1001" />
+                <Region HBox.hgrow="ALWAYS" />
+                <!--        style="-fx-background-color: #4CAF50; -fx-background-radius: 10; -fx-padding: 2 8; -fx-text-fill: white; -fx-font-size: 12;"-->
+                <Label fx:id="status" text="Trống" />
+            </HBox>
+        </top>
+        <left>
+            <ImageView fx:id="imageRoom" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+        </left>
+        <center>
+            <!-- Info row -->
+            <VBox spacing="5">
+                <HBox spacing="5">
+                    <ImageView fitHeight="16" fitWidth="16" preserveRatio="true">
+                        <image>
+                            <Image url="@/images/icon/adult.png" />
+                        </image>
+                    </ImageView>
+                    <Label fx:id="soLuongNguoiLon" text="0 người" />
+                </HBox>
+                <Label text="Tiền dịch vụ" />
+                <Label fx:id="tienDichVu" text="0 VND" />
+                <Separator />
+                <HBox alignment="BOTTOM_RIGHT" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Label fx:id="tongTien" style="-fx-font-weight: bold;" text="Tổng tiền: 10000000 VND" />
+                    </children>
+                </HBox>
+                <padding>
+                    <Insets left="10.0" right="10.0" />
+                </padding>
+            </VBox>
+        </center>
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </padding>
+    </BorderPane>
+
+</AnchorPane>

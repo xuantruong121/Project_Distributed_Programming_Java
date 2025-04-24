@@ -123,7 +123,17 @@ public class SplashScreenController {
 
             // Lấy stage hiện tại
             Stage stage = (Stage) progressBar.getScene().getWindow();
+            // Lấy reference đến MainController trước khi thay đổi scene
+            MainController mainController = loader.getController();
 
+            // Thiết lập sự kiện đóng cửa sổ
+            stage.setOnCloseRequest(e -> {
+                if (mainController != null) {
+                    mainController.shutdown();
+                }else {
+                    Platform.exit(); // Fallback nếu controller không tồn tại
+                }
+            });
             // Đặt scene mới cho stage
             stage.setScene(scene);
             stage.setTitle("Phần mềm Quản lý Khách sạn");

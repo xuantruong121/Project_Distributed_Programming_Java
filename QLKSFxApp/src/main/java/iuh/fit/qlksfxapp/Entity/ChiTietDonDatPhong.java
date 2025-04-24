@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -35,9 +36,9 @@ public class ChiTietDonDatPhong {
     @Enumerated(EnumType.STRING)
     private TrangThaiChiTietDonDatPhong trangThaiChiTietDonDatPhong;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "maChiTietDonDatPhong")
-    private Set<ChiTietDichVu> chiTietDichVu;
+    private List<ChiTietDichVu> chiTietDichVu;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -46,7 +47,7 @@ public class ChiTietDonDatPhong {
             inverseJoinColumns = @JoinColumn(name = "maPhuThu",nullable = false)
     )
     private Set<PhuThu> phuThu;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "khachHangTrongPhong",
             joinColumns = @JoinColumn(name = "maChiTietDonDatPhong",nullable = false),
