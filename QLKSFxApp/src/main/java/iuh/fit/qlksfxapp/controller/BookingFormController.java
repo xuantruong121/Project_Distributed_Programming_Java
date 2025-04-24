@@ -1,10 +1,7 @@
 package iuh.fit.qlksfxapp.controller;
 
 import com.google.common.eventbus.Subscribe;
-import iuh.fit.qlksfxapp.DAO.ChiTietDonDatPhongDAO;
-import iuh.fit.qlksfxapp.DAO.DonDatPhongDAO;
 import iuh.fit.qlksfxapp.DAO.EntityManagerUtil;
-import iuh.fit.qlksfxapp.DAO.GeneralDAO;
 import iuh.fit.qlksfxapp.DAO.Impl.ChiTietDonDatPhongDAOImpl;
 import iuh.fit.qlksfxapp.DAO.Impl.DonDatPhongDAOImpl;
 import iuh.fit.qlksfxapp.DAO.Impl.GeneralDAOImpl;
@@ -15,15 +12,19 @@ import iuh.fit.qlksfxapp.Entity.Enum.TrangThaiPhong;
 import iuh.fit.qlksfxapp.controller.EventBus.*;
 import iuh.fit.qlksfxapp.controller.ItemController.DetailBookingShortController;
 import iuh.fit.qlksfxapp.controller.ItemController.DialogAddBookingDetailController;
-import iuh.fit.qlksfxapp.util.ConfirmDialog;
 import iuh.fit.qlksfxapp.util.FormatUtil;
 import jakarta.persistence.LockModeType;
+import jakarta.persistence.PessimisticLockException;
+import jakarta.persistence.TypedQuery;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import jakarta.persistence.EntityManager;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Stream;
 import jakarta.persistence.EntityTransaction;
 import jakarta.validation.ConstraintViolation;
@@ -49,7 +50,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.PessimisticLockException;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 
 import java.io.IOException;
@@ -567,7 +567,11 @@ public class BookingFormController  implements MainController.DataReceivable {
                     controller.initialize(getPhongTrongKhongTrungLich(donDatPhong)); // Gọi hàm initialize với dữ liệu phòng
 
                     Stage stage = new Stage();
-                    stage.setScene(new Scene(root));
+                    stage.setTitle("Thêm phòng");
+                    stage.setScene(new Scene(root, 800, 700));
+                    stage.setMinWidth(800);
+                    stage.setMinHeight(700);
+                    stage.setMaximized(false); // Đảm bảo không tự động phóng to
                     stage.initModality(Modality.APPLICATION_MODAL);
                     // Căn giữa Dialog trên màn hình cha
                     if (bookingForm != null && bookingForm.getScene() != null) {
@@ -625,27 +629,72 @@ public class BookingFormController  implements MainController.DataReceivable {
         // Lấy danh sách đơn đặt phòng trùng khung ngày
         List<DonDatPhong> donDatPhongTrungNgay = new ArrayList<>();
         try {
+            // Loại trừ đơn đặt phòng hiện tại khỏi danh sách trùng lịch
             donDatPhongTrungNgay = donDatPhongDAO.getListDonDatPhongTheoNgayDenVaNgayDi(
                     donDatPhong.getNgayNhan(),
                     donDatPhong.getNgayTra()
             );
+
+            // Loại bỏ đơn đặt phòng hiện tại khỏi danh sách trùng lịch (nếu có)
+            if (donDatPhong.getMaDonDatPhong() != null) {
+                donDatPhongTrungNgay = donDatPhongTrungNgay.stream()
+                    .filter(ddp -> !ddp.getMaDonDatPhong().equals(donDatPhong.getMaDonDatPhong()))
+                    .collect(Collectors.toList());
+            }
         } catch (RemoteException e) {
             e.printStackTrace();
             showErrorAlert("Lỗi", "Không thể lấy danh sách đơn đặt phòng: " + e.getMessage());
         }
 
-        // Lấy tất cả phòng trống
-        List<Phong> phongTrong = generalDAO.findAll(Phong.class).stream()
-                .filter(p -> p.getTrangThaiPhong() == TrangThaiPhong.TRONG)
-                .collect(Collectors.toCollection(ArrayList::new)); // Dùng ArrayList để có thể remove
+        // Lấy tất cả phòng
+        List<Phong> allPhong = generalDAO.findAll(Phong.class);
+        System.out.println("Tổng số phòng trong hệ thống: " + allPhong.size());
+
+        // Đếm số lượng phòng theo trạng thái
+        Map<TrangThaiPhong, Long> phongTheoTrangThai = allPhong.stream()
+                .collect(Collectors.groupingBy(Phong::getTrangThaiPhong, Collectors.counting()));
+
+        for (Map.Entry<TrangThaiPhong, Long> entry : phongTheoTrangThai.entrySet()) {
+            System.out.println("Số phòng trạng thái " + entry.getKey() + ": " + entry.getValue());
+        }
+
+        // Lấy tất cả phòng trống (bao gồm cả TRONG và DAT_TRUOC nếu đang chỉnh sửa đơn đặt phòng)
+        List<Phong> phongTrong;
+        if (donDatPhong.getMaDonDatPhong() != null) {
+            // Nếu đang chỉnh sửa đơn đặt phòng, lấy cả phòng TRONG và DAT_TRUOC
+            phongTrong = allPhong.stream()
+                    .filter(p -> p.getTrangThaiPhong() == TrangThaiPhong.TRONG || p.getTrangThaiPhong() == TrangThaiPhong.DAT_TRUOC)
+                    .collect(Collectors.toCollection(ArrayList::new));
+        } else {
+            // Nếu đang tạo đơn đặt phòng mới, chỉ lấy phòng TRONG
+            phongTrong = allPhong.stream()
+                    .filter(p -> p.getTrangThaiPhong() == TrangThaiPhong.TRONG)
+                    .collect(Collectors.toCollection(ArrayList::new));
+        }
+
+        System.out.println("Số phòng trống ban đầu: " + phongTrong.size());
 
         // Lấy tất cả phòng đã đặt trong các đơn trùng ngày
         Set<Phong> phongDaDat = new HashSet<>();
         try {
+            // In ra thông tin debug
+            System.out.println("Số đơn đặt phòng trùng ngày: " + donDatPhongTrungNgay.size());
+            for (DonDatPhong ddp : donDatPhongTrungNgay) {
+                System.out.println("Mã đơn đặt phòng trùng: " + ddp.getMaDonDatPhong() +
+                                   ", Ngày nhận: " + ddp.getNgayNhan() +
+                                   ", Ngày trả: " + ddp.getNgayTra());
+            }
+
             phongDaDat = donDatPhongTrungNgay.stream()
                     .flatMap(ddp -> {
                         try {
-                            return chiTietDonDatPhongDAO.findChiTietDonDatPhongTheoMaDonDatPhong(ddp.getMaDonDatPhong()).stream();
+                            List<ChiTietDonDatPhong> chiTietList = chiTietDonDatPhongDAO.findChiTietDonDatPhongTheoMaDonDatPhong(ddp.getMaDonDatPhong());
+                            // In ra thông tin debug
+                            System.out.println("Mã đơn: " + ddp.getMaDonDatPhong() + ", Số phòng đã đặt: " + chiTietList.size());
+                            for (ChiTietDonDatPhong ct : chiTietList) {
+                                System.out.println("  - Phòng: " + ct.getPhong().getMaPhong() + ", Trạng thái: " + ct.getTrangThaiChiTietDonDatPhong());
+                            }
+                            return chiTietList.stream();
                         } catch (RemoteException e) {
                             e.printStackTrace();
                             showErrorAlert("Lỗi", "Không thể lấy danh sách chi tiết đơn đặt phòng: " + e.getMessage());
@@ -654,6 +703,12 @@ public class BookingFormController  implements MainController.DataReceivable {
                     })
                     .map(ChiTietDonDatPhong::getPhong)
                     .collect(Collectors.toSet());
+
+            // In ra thông tin debug
+            System.out.println("Số phòng đã đặt: " + phongDaDat.size());
+            for (Phong p : phongDaDat) {
+                System.out.println("Phòng đã đặt: " + p.getMaPhong());
+            }
         } catch (Exception e) {
             e.printStackTrace();
             showErrorAlert("Lỗi", "Không thể lấy danh sách phòng đã đặt: " + e.getMessage());
@@ -661,6 +716,13 @@ public class BookingFormController  implements MainController.DataReceivable {
 
         // Loại bỏ các phòng đã đặt khỏi danh sách phòng trống
         phongTrong.removeAll(phongDaDat);
+
+        // In ra thông tin debug sau khi loại bỏ phòng đã đặt
+        System.out.println("Số phòng trống sau khi loại bỏ phòng đã đặt: " + phongTrong.size());
+        for (Phong p : phongTrong) {
+            System.out.println("Phòng trống cuối cùng: " + p.getMaPhong() + ", loại phòng: " + p.getLoaiPhong().getTenLoaiPhong());
+        }
+
         return phongTrong;
     }
     @Subscribe
@@ -670,10 +732,10 @@ public class BookingFormController  implements MainController.DataReceivable {
             if(selectedRooms != null){
                 EntityManager em = EntityManagerUtil.getEntityManagerFactory().createEntityManager();
                 EntityTransaction transaction = em.getTransaction();
-                
+
                 try {
                     transaction.begin();
-                    
+
                     // Khóa các phòng được chọn trước khi kiểm tra
                     List<Phong> lockedRooms = new ArrayList<>();
                     for (String roomId : selectedRooms) {
@@ -685,14 +747,31 @@ public class BookingFormController  implements MainController.DataReceivable {
 
                     // Kiểm tra trùng lịch với khóa pessimistic
                     for (Phong phong : lockedRooms) {
-                        String query = """
-                            SELECT ctdp FROM ChiTietDonDatPhong ctdp 
-                            WHERE ctdp.phong.maPhong = :roomId 
-                            AND ctdp.donDatPhong.ngayTra > :ngayNhan 
-                            AND ctdp.donDatPhong.ngayNhan < :ngayTra
-                            AND ctdp.trangThaiChiTietDonDatPhong IN :trangThaiHopLe
-                            """;
-                        List<ChiTietDonDatPhong> conflictBookings = em.createQuery(query, ChiTietDonDatPhong.class)
+                        // Kiểm tra xung đột lịch đặt phòng
+                        // Điều kiện: (ngày nhận cũ <= ngày trả mới) VÀ (ngày trả cũ >= ngày nhận mới)
+                        String query;
+                        if (donDatPhong.getMaDonDatPhong() != null) {
+                            // Nếu đơn đặt phòng đã có mã, loại trừ chính nó khỏi kết quả
+                            query = """
+                                SELECT ctdp FROM ChiTietDonDatPhong ctdp
+                                WHERE ctdp.phong.maPhong = :roomId
+                                AND ctdp.donDatPhong.ngayNhan <= :ngayTra
+                                AND ctdp.donDatPhong.ngayTra >= :ngayNhan
+                                AND ctdp.trangThaiChiTietDonDatPhong IN :trangThaiHopLe
+                                AND ctdp.donDatPhong.maDonDatPhong <> :maDonDatPhong
+                                """;
+                        } else {
+                            // Nếu đơn đặt phòng chưa có mã, không cần loại trừ
+                            query = """
+                                SELECT ctdp FROM ChiTietDonDatPhong ctdp
+                                WHERE ctdp.phong.maPhong = :roomId
+                                AND ctdp.donDatPhong.ngayNhan <= :ngayTra
+                                AND ctdp.donDatPhong.ngayTra >= :ngayNhan
+                                AND ctdp.trangThaiChiTietDonDatPhong IN :trangThaiHopLe
+                                """;
+                        }
+                        // Tạo câu truy vấn với các tham số cơ bản
+                        TypedQuery<ChiTietDonDatPhong> typedQuery = em.createQuery(query, ChiTietDonDatPhong.class)
                             .setLockMode(LockModeType.PESSIMISTIC_READ)
                             .setParameter("roomId", phong.getMaPhong())
                             .setParameter("ngayNhan", donDatPhong.getNgayNhan())
@@ -701,19 +780,33 @@ public class BookingFormController  implements MainController.DataReceivable {
                                 TrangThaiChiTietDonDatPhong.DAT_TRUOC,
                                 TrangThaiChiTietDonDatPhong.DA_NHAN_PHONG,
                                 TrangThaiChiTietDonDatPhong.DA_TRA_PHONG
-                            ))
-                            .getResultList();
+                            ));
+
+                        // Thêm tham số maDonDatPhong nếu cần
+                        if (donDatPhong.getMaDonDatPhong() != null) {
+                            typedQuery.setParameter("maDonDatPhong", donDatPhong.getMaDonDatPhong());
+                        }
+
+                        List<ChiTietDonDatPhong> conflictBookings = typedQuery.getResultList();
 
                         if (!conflictBookings.isEmpty()) {
                             transaction.rollback();
+                            String errorMessage = "Phòng " + phong.getMaPhong() + " đã được đặt trong khoảng thời gian từ " +
+                                FormatUtil.formatLocalDateTime(donDatPhong.getNgayNhan()) + " đến " +
+                                FormatUtil.formatLocalDateTime(donDatPhong.getNgayTra());
+
+                            // Hiển thị thông báo lỗi chi tiết hơn
+                            showErrorAlert("Phòng đã được đặt", errorMessage);
+
+                            // Cũng hiển thị toast nhưng ngắn gọn hơn
                             EventBusManager.post(new ToastEvent(
-                                "Phòng " + phong.getMaPhong() + " đã được đặt trong khoảng thời gian này", 
+                                "Phòng " + phong.getMaPhong() + " đã được đặt",
                                 ToastEvent.ToastType.ERROR
                             ));
                             return;
                         }
                     }
-                    
+
                     // Thêm chi tiết đơn đặt phòng khi đã có khóa
                     for (Phong phong : lockedRooms) {
                         ChiTietDonDatPhong chiTietDonDatPhong = new ChiTietDonDatPhong();
@@ -722,27 +815,39 @@ public class BookingFormController  implements MainController.DataReceivable {
                         chiTietDonDatPhong.setDonDatPhong(donDatPhong);
                         em.persist(chiTietDonDatPhong);
                     }
-                    
+
                     transaction.commit();
-                    
+
                     // Cập nhật UI
                     roomItemsContainer.getChildren().clear();
                     initDetailBookingShort();
                     EventBusManager.post(new ToastEvent("Thêm phòng thành công", ToastEvent.ToastType.SUCCESS));
-                    
+
                 } catch (PessimisticLockException e) {
                     if (transaction.isActive()) {
                         transaction.rollback();
                     }
+                    String errorMessage = "Phòng đang được người khác đặt, vui lòng thử lại sau";
+
+                    // Hiển thị thông báo lỗi chi tiết hơn
+                    showErrorAlert("Phòng đang bị khóa", errorMessage);
+
+                    // Cũng hiển thị toast
                     EventBusManager.post(new ToastEvent(
-                        "Phòng đang được người khác đặt, vui lòng thử lại sau", 
+                        errorMessage,
                         ToastEvent.ToastType.ERROR
                     ));
                 } catch (Exception e) {
                     if (transaction.isActive()) {
                         transaction.rollback();
                     }
-                    EventBusManager.post(new ToastEvent("Thêm phòng thất bại: " + e.getMessage(), ToastEvent.ToastType.ERROR));
+                    String errorMessage = "Thêm phòng thất bại: " + e.getMessage();
+
+                    // Hiển thị thông báo lỗi chi tiết hơn
+                    showErrorAlert("Lỗi khi thêm phòng", errorMessage);
+
+                    // Cũng hiển thị toast
+                    EventBusManager.post(new ToastEvent(errorMessage, ToastEvent.ToastType.ERROR));
                 } finally {
                     em.close();
                 }

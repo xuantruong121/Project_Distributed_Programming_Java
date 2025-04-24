@@ -140,7 +140,9 @@ public class DonDatPhongDAOImpl extends GeneralDAOImpl implements DonDatPhongDAO
     }
     @Override
     public List<DonDatPhong> getListDonDatPhongTheoNgayDenVaNgayDi(LocalDateTime ngayDen, LocalDateTime ngayDi) throws RemoteException {
-        String query = "SELECT d FROM DonDatPhong d WHERE d.ngayNhan >= :ngayDen AND d.ngayTra <= :ngayDi AND d.trangThai = :trangThai"; // ngay den <- ngay nhan <-  ngay tra<- ngay di
+        // Tìm các đơn đặt phòng có khoảng thời gian chồng chéo với khoảng thời gian mới
+        // Điều kiện: (ngày nhận cũ <= ngày trả mới) VÀ (ngày trả cũ >= ngày nhận mới)
+        String query = "SELECT d FROM DonDatPhong d WHERE d.ngayNhan <= :ngayDi AND d.ngayTra >= :ngayDen AND d.trangThai = :trangThai";
         return em.createQuery(query, DonDatPhong.class)
                 .setParameter("ngayDen", ngayDen)
                 .setParameter("ngayDi", ngayDi)
